@@ -1,0 +1,13 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
+*.swo
+
+# Claude Code (local session data, not skills)
+.claude/cache/
+.claude/history.jsonl
+.claude/todos/
