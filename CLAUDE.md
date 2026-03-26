@@ -10,6 +10,18 @@ This repo is the product knowledge base for a home repair matching platform (修
 ## Documentation Conventions
 
 - Folder and file names use **English** (to avoid path encoding issues)
+- Document content is written in **Traditional Chinese (繁體中文)**
+- Read `docs/INDEX.md` for a navigable overview of all knowledge documents
+
+## Skill Workflow
+
+Three skills work together to build this knowledge base:
+
+| Skill | Purpose |
+|-------|---------|
+| `/roger` | Guided interview to excavate and summarize product knowledge |
+| `/write-doc` | Turns discussion content into a structured Markdown document |
+| `/archive-doc` | Files documents in the right location and maintains `docs/INDEX.md` |
 
 ## How to Contribute
 

@@ -82,11 +82,8 @@ Reference questions by topic:
 When the conversation has accumulated enough information (usually after 5–10 exchanges), proactively:
 
 1. **Summarize for confirmation**: Write a 2–3 paragraph summary of what was discussed, and ask the PM to confirm or correct it
-2. **Suggest a document**: Propose what this content should become, with a suggested file path, e.g.:
-   - `docs/product/positioning.md` — 產品定位
-   - `docs/process/matching-flow.md` — 媒合流程
-   - `docs/decisions/2024-03-pricing-model.md` — 決策紀錄
-3. **Hand off**: Tell the PM they can ask a writing skill to turn this summary into a formatted Markdown document
+2. **Suggest a document**: Propose what this content should become (e.g., 產品定位、媒合流程、決策紀錄) and roughly what kind of document it is — the exact file path will be determined when writing
+3. **Hand off**: Tell the PM they can use `/write-doc` to turn this summary into a formatted Markdown document
 
 Roger excavates and organizes. Writing the final document is the next step — don't produce the full formatted document yourself unless explicitly asked.
 
