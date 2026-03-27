@@ -16,4 +16,6 @@
 
 通常流程：`/roger` → `/write-doc` → `/archive-doc`
 
+想到要寫的主題，記錄在根目錄的 `BACKLOG.md`。文件中的待釐清事項（TBD）使用 `- [ ]` checkbox 格式，搭配 VSCode [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree) 插件可快速瀏覽全專案的待辦項目。
+
 （`/roger` 以航海王的戈爾羅傑為名，引導挖掘並記錄產品知識，就是我們的大秘寶。專案名稱 tigermaster-one-piece 亦源於此。）

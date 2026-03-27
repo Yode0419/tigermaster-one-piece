@@ -77,7 +77,7 @@ For product descriptions, role explanations, feature overviews, or anything that
 
 ## 待釐清事項（TBD）
 
-- [Items that need follow-up or confirmation]
+- [ ] [Items that need follow-up or confirmation]
 ```
 
 ### Process / flow document
@@ -115,7 +115,7 @@ For step-by-step flows, SOPs, or anything describing how something works end-to-
 
 ## 待釐清事項（TBD）
 
-- [...]
+- [ ] [...]
 ```
 
 ### Decision record (ADR)
@@ -155,7 +155,7 @@ For decisions that have lasting impact and need to be traceable. All sections ar
 
 ## 待釐清事項（TBD）
 
-- [...]
+- [ ] [...]
 ```
 
 ---
