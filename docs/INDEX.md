@@ -4,7 +4,7 @@ _Last updated: 2026-03-30_
 
 ```
 docs/
-├── product/      — 平台是什麼、為誰服務
+├── product/      — 產品定位、功能架構與服務設計
 ├── process/      — 各流程的執行步驟與細節
 ├── operations/   — 平台各項運作規範
 └── _drafts/      — 草稿（架構已建立，內容待補）
@@ -15,6 +15,7 @@ docs/
 ## product/
 
 - [positioning.md](product/positioning.md) — 平台核心價值主張與信任機制 _(2026-03-26)_
+- [service-catalog.md](product/service-catalog.md) — 服務工項 L1-L2-L3 分類架構、欄位說明與技能媒合機制 _(2026-03-30)_
 
 ## process/
 
