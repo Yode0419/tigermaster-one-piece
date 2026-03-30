@@ -131,32 +131,34 @@ The index has one job: let a reader — human or AI — understand what's in the
 
 ### Format
 
-```markdown
-# Knowledge Base Index
+The index has two parts: a folder tree at the top for a quick overview, followed by per-section file lists.
 
-_Last updated: YYYY-MM-DD_
+**Part 1 — Folder tree** (folders only, no individual files):
 
-## [Group name, if subfolders exist — omit section headers if structure is flat]
+    docs/
+    ├── category-a/   — short description broad enough to cover future additions
+    ├── category-b/   — short description broad enough to cover future additions
+    └── _drafts/      — drafts (structure in place, content pending)
 
-| 檔案 | 內容摘要 | 建立日期 |
-|------|---------|---------|
-| [filename.md](filename.md) | 一句話說明這份文件的核心內容 | YYYY-MM-DD |
-| [filename.md](filename.md) | 一句話說明這份文件的核心內容 | YYYY-MM-DD |
+**Part 2 — Per-section file lists** (one `##` section per folder):
 
-## 草稿區（_drafts/）
+    ## category-a/
 
-| 檔案 | 內容摘要 | 建立日期 |
-|------|---------|---------|
-| [_drafts/filename.md](_drafts/filename.md) | 一句話說明草稿內容 | YYYY-MM-DD |
-```
+    - topic-one.md — one-sentence summary of what this doc contains (YYYY-MM-DD)
+    - topic-two.md — one-sentence summary of what this doc contains (YYYY-MM-DD)
+
+    ## 草稿區（_drafts/）
+
+    - draft-topic.md — one-sentence summary of draft content (YYYY-MM-DD)
+
+Each entry uses markdown link syntax in practice: `- [filename.md](relative/path) — summary _(YYYY-MM-DD)_`
 
 Rules:
-- One row per file — no sub-rows, no nesting within the table
-- The summary should tell you *what* the document contains, not just name the topic (e.g., "平台對客戶與師傅的核心價值主張，以及信任建立機制" is better than "產品定位")
-- If the structure uses subfolders, add a `##` section per folder
-- If the structure is flat, skip section headers entirely — but always keep the `## 草稿區` section at the bottom, even if empty (it signals to readers that a staging area exists)
-- All tables (including non-draft sections) include a creation date column — use the file's actual creation date if known, or today's date when first adding the entry
-- Update the date every time you touch this file
+- **Folder tree**: show folders only — no individual files. Each folder gets a short description broad enough to cover future additions to that category. Keep descriptions concise and general.
+- **File list entries**: one bullet per file. The summary should tell the reader *what* the document contains, not just name the topic. Keep it concise (under ~20 Chinese characters) so the list stays scannable.
+- If the structure uses subfolders, add a `##` section per folder in Part 2.
+- If the structure is flat (no subfolders), skip section headers — but always keep the `## 草稿區` section at the bottom, even if empty.
+- Update the `_Last updated_` date every time you touch this file.
 
 ---
 

@@ -2,27 +2,29 @@
 
 _Last updated: 2026-03-30_
 
+```
+docs/
+├── product/      — 平台是什麼、為誰服務
+├── process/      — 各流程的執行步驟與細節
+├── operations/   — 平台各項運作規範
+└── _drafts/      — 草稿（架構已建立，內容待補）
+```
+
+---
+
 ## product/
 
-| 檔案 | 內容摘要 | 建立日期 |
-|------|---------|---------|
-| [product/positioning.md](product/positioning.md) | 平台對客戶與師傅的核心價值主張，以及信任建立機制 | 2026-03-26 |
+- [positioning.md](product/positioning.md) — 平台核心價值主張與信任機制 _(2026-03-26)_
 
 ## process/
 
-| 檔案 | 內容摘要 | 建立日期 |
-|------|---------|---------|
-| [process/matching-flow.md](process/matching-flow.md) | 訂單從建立到場勘開始前的媒合流程，含師傅篩選機制、媒合時限、派遣費支付規則與常見客訴 | 2026-03-30 |
-| [process/site-inspection.md](process/site-inspection.md) | 師傅到場後的場勘流程，含到場證明、現場評估、當天完工情境、遲到與爽約處理機制 | 2026-03-30 |
+- [matching-flow.md](process/matching-flow.md) — 媒合流程、師傅篩選與派遣費規則 _(2026-03-30)_
+- [site-inspection.md](process/site-inspection.md) — 場勘流程與到場異常處理 _(2026-03-30)_
 
 ## operations/
 
-| 檔案 | 內容摘要 | 建立日期 |
-|------|---------|---------|
-| [operations/technician-onboarding.md](operations/technician-onboarding.md) | 師傅招募流程、加入動機、報價規則與平台收費邏輯、師傅管理與淘汰機制 | 2026-03-26 |
+- [technician-onboarding.md](operations/technician-onboarding.md) — 師傅招募、報價與淘汰機制 _(2026-03-26)_
 
 ## 草稿區（_drafts/）
 
-| 檔案 | 內容摘要 | 建立日期 |
-|------|---------|---------|
-| [_drafts/order-lifecycle.md](_drafts/order-lifecycle.md) | 訂單完整生命週期骨架，含全狀態碼對照表，各階段說明待後續補充 | 2026-03-30 |
+- [order-lifecycle.md](_drafts/order-lifecycle.md) — 訂單生命週期骨架（草稿） _(2026-03-30)_
