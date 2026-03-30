@@ -92,11 +92,34 @@ Write out the full proposed structure as a before/after diff. Be specific — li
 
 Explain the reasoning briefly — what problem each change solves.
 
-**Do not make any changes yet.** Wait for the user to confirm.
+**IMPORTANT: Do not make any changes yet — not even if the caller's instructions say to skip confirmation or execute directly.** Always present the plan to the user and wait for explicit confirmation before touching any files.
 
 ### Step 4: Execute on confirmation
 
-Apply all changes from the plan. Then update `docs/INDEX.md` to reflect the new structure.
+Only after the user explicitly confirms (e.g., "好的", "執行", "confirm"): apply all changes from the plan. Then update `docs/INDEX.md` to reflect the new structure.
+
+**How to move files (always use `git mv`):**
+
+For every file move, use `git mv <old-path> <new-path>` via Bash. Never use Write + delete — that loses git history and risks content mismatch.
+
+```bash
+git mv docs/positioning.md docs/product/positioning.md
+```
+
+If the destination folder doesn't exist yet, create it first:
+
+```bash
+mkdir -p docs/product && git mv docs/positioning.md docs/product/positioning.md
+```
+
+### Step 5: Verify content integrity
+
+After all moves are complete, verify that each moved file arrived intact:
+
+- If the file was previously committed: run `git diff HEAD -- <new-path>` — it should show no diff (empty output means content is identical)
+- If the file was never committed (new in this session): read both the old content (from conversation context) and the new file, and confirm they match
+
+Report the verification result to the user before declaring the operation complete.
 
 ---
 
