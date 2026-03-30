@@ -24,6 +24,7 @@ docs/
 ## operations/
 
 - [technician-onboarding.md](operations/technician-onboarding.md) — 師傅招募、報價與淘汰機制 _(2026-03-26)_
+- [master-management-policy.md](operations/master-management-policy.md) — 師傅管理辦法原文（接案、報價、保固、佣金等條款） _(2026-03-30)_
 
 ## 草稿區（_drafts/）
 
