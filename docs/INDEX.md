@@ -23,6 +23,7 @@ docs/
 - [matching-flow.md](process/matching-flow.md) — 媒合流程、師傅篩選與派遣費規則 _(2026-03-30)_
 - [site-inspection.md](process/site-inspection.md) — 場勘流程與到場異常處理 _(2026-03-30)_
 - [quotation-flow.md](process/quotation-flow.md) — 報價工具、金額計算機制、審核流程與追加報價規則 _(2026-03-31)_
+- [construction-flow.md](process/construction-flow.md) — 施工進行中的師傅操作、材料採購分工與客服專案管理師角色 _(2026-03-31)_
 
 ## operations/
 
@@ -36,3 +37,4 @@ docs/
 ## 草稿區（_drafts/）
 
 - [order-lifecycle.md](_drafts/order-lifecycle.md) — 訂單生命週期骨架（草稿） _(2026-03-30)_
+- [order-photo-management.md](_drafts/order-photo-management.md) — 訂單照片分類、上傳規則、可見範圍與後台管理功能 _(2026-03-31)_
