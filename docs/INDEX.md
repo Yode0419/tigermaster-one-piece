@@ -1,12 +1,13 @@
 # Knowledge Base Index
 
-_Last updated: 2026-03-30_
+_Last updated: 2026-03-31_
 
 ```
 docs/
 ├── product/      — 產品定位、功能架構與服務設計
 ├── process/      — 各流程的執行步驟與細節
 ├── operations/   — 平台各項運作規範
+├── business/     — 收費邏輯、金流規則與商業模式
 └── _drafts/      — 草稿（架構已建立，內容待補）
 ```
 
@@ -26,6 +27,10 @@ docs/
 
 - [technician-onboarding.md](operations/technician-onboarding.md) — 師傅招募、報價與淘汰機制 _(2026-03-26)_
 - [master-management-policy.md](operations/master-management-policy.md) — 師傅管理辦法原文（接案、報價、保固、佣金等條款） _(2026-03-30)_
+
+## business/
+
+- [customer-payment.md](business/customer-payment.md) — 派遣費費率、抵扣與退款規則，及施工款支付結構 _(2026-03-31)_
 
 ## 草稿區（_drafts/）
 
