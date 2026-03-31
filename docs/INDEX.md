@@ -22,6 +22,7 @@ docs/
 
 - [matching-flow.md](process/matching-flow.md) — 媒合流程、師傅篩選與派遣費規則 _(2026-03-30)_
 - [site-inspection.md](process/site-inspection.md) — 場勘流程與到場異常處理 _(2026-03-30)_
+- [quotation-flow.md](process/quotation-flow.md) — 報價工具、金額計算機制、審核流程與追加報價規則 _(2026-03-31)_
 
 ## operations/
 
