@@ -16,6 +16,7 @@ docs/
 ## product/
 
 - [positioning.md](product/positioning.md) — 平台核心價值主張與信任機制 _(2026-03-26)_
+- [role-map.md](product/role-map.md) — 客戶、師傅、平台各角色的介面與操作範圍 _(2026-04-01)_
 - [service-catalog.md](product/service-catalog.md) — 服務工項 L1-L2-L3 分類架構、欄位說明與技能媒合機制 _(2026-03-30)_
 
 ## process/
