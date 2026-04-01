@@ -37,6 +37,8 @@ docs/
 ## business/
 
 - [customer-payment.md](business/customer-payment.md) — 派遣費費率、抵扣與退款規則，及施工款支付結構 _(2026-03-31)_
+- [invoice.md](business/invoice.md) — 客戶側電子發票開立、載具設定與作廢規則，及師傅側開立發票給平台的規則 _(2026-04-01)_
+- [master-payout.md](business/master-payout.md) — 師傅結算週期、扣繳規則、拆單機制、帳外餘額查詢與提前撥款說明 _(2026-04-01)_
 
 ## 草稿區（_drafts/）
 
