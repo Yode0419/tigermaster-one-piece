@@ -21,6 +21,8 @@ docs/
   `role-map.md` — 客戶、師傅、平台各角色的介面與操作範圍 _(2026-04-01)_
 - **[服務工項架構](product/service-catalog.md)**
   `service-catalog.md` — 服務工項 L1-L2-L3 分類架構、欄位說明與技能媒合機制 _(2026-03-30)_
+- **[聊天室功能](product/chat.md)**
+  `chat.md` — 三種聊天室的種類、開啟條件、功能清單與防混淆／防私下交易設計機制 _(2026-04-02)_
 
 ## process/
 
