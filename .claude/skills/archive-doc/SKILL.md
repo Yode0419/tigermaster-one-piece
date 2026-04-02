@@ -144,18 +144,21 @@ The index has two parts: a folder tree at the top for a quick overview, followed
 
     ## category-a/
 
-    - topic-one.md — one-sentence summary of what this doc contains (YYYY-MM-DD)
-    - topic-two.md — one-sentence summary of what this doc contains (YYYY-MM-DD)
+    - **[H1 Title](category-a/topic-one.md)**
+      `topic-one.md` — one-sentence summary of what this doc contains _(YYYY-MM-DD)_
 
     ## 草稿區（_drafts/）
 
-    - draft-topic.md — one-sentence summary of draft content (YYYY-MM-DD)
+    - **[H1 Title](_drafts/draft-topic.md)**
+      `draft-topic.md` — one-sentence summary of draft content _(YYYY-MM-DD)_
 
-Each entry uses markdown link syntax in practice: `- [filename.md](relative/path) — summary _(YYYY-MM-DD)_`
+Each entry is two lines:
+1. `- **[H1 Title](relative/path)**` — read the document's first `# ` heading and use it verbatim as the link text, formatted bold
+2. `  \`filename.md\` — summary _(YYYY-MM-DD)_` — indented, filename in backticks, then a one-sentence summary and date
 
 Rules:
 - **Folder tree**: show folders only — no individual files. Each folder gets a short description broad enough to cover future additions to that category. Keep descriptions concise and general.
-- **File list entries**: one bullet per file. The summary should tell the reader *what* the document contains, not just name the topic. Keep it concise (under ~20 Chinese characters) so the list stays scannable.
+- **File list entries**: two lines per file as shown above. The summary should tell the reader *what* the document contains, not just name the topic.
 - If the structure uses subfolders, add a `##` section per folder in Part 2.
 - If the structure is flat (no subfolders), skip section headers — but always keep the `## 草稿區` section at the bottom, even if empty.
 - Update the `_Last updated_` date every time you touch this file.
