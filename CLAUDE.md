@@ -15,16 +15,17 @@ This repo is the product knowledge base for a home repair matching platform (修
 
 ## Skill Workflow
 
-Three skills work together to build this knowledge base:
+Four skills work together to build and evolve this knowledge base:
 
 | Skill | Purpose |
 |-------|---------|
 | `/roger` | Guided interview to excavate and summarize product knowledge |
-| `/write-doc` | Turns discussion content into a structured Markdown document |
+| `/luffy` | Guided design sessions to plan new features or optimize existing ones |
+| `/write-doc` | Turns discussion content into a structured Markdown document (supports: 一般知識文件, 流程文件, 決策記錄, 功能規劃文件) |
 | `/archive-doc` | Files documents in the right location and maintains `docs/INDEX.md` |
 
 ## How to Contribute
 
 This repo is initially maintained by a UIUX designer taking a PM perspective to build out the knowledge base. It will be opened to the broader team over time.
 
-Run `/roger` to start a guided knowledge-building session.
+Run `/roger` to document existing product knowledge, or `/luffy` to start a feature design session.
