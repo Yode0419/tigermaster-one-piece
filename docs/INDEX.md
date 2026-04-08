@@ -79,4 +79,5 @@ docs/
 
 ## 草稿區（_drafts/）
 
-（目前無草稿）
+- **[知識庫工作流擴展：Wireframe 生成能力](_drafts/knowledge-base-wireframe-workflow.md)**
+  `knowledge-base-wireframe-workflow.md` — 在知識庫內整合設計探索工作流的規劃構想，含 wireframe 生成技能的使用情境與待釐清事項 _(2026-04-08)_
