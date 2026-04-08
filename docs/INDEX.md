@@ -16,6 +16,8 @@ docs/
 
 ## product/
 
+- **[產品版圖總覽](product/product-map.md)**
+  `product-map.md` — 各產品的技術形式、定位與運作現況，含 App、後台、官網、師虎學院與師虎商城 _(2026-04-08)_
 - **[產品定位](product/positioning.md)**
   `positioning.md` — 平台核心價值主張與信任機制 _(2026-03-26)_
 - **[角色地圖](product/role-map.md)**
