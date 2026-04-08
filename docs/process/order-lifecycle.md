@@ -79,6 +79,7 @@ flowchart TD
 
 | 階段 | 狀態碼範圍 | 文件 |
 |------|-----------|------|
+| 訂單建立 | → 5 | [order-creation.md](order-creation.md) |
 | 媒合流程與派遣費 | 5 → 25 | [matching-flow.md](matching-flow.md) |
 | 場勘 | 25 → 30 | [site-inspection.md](site-inspection.md) |
 | 報價 | 30 → 55 | [quotation-flow.md](quotation-flow.md) |

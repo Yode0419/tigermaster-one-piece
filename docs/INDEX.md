@@ -26,13 +26,17 @@ docs/
   `chat.md` — 三種聊天室的種類、開啟條件、功能清單與防混淆／防私下交易設計機制 _(2026-04-02)_
 - **[訂單照片管理](product/order-photo-management.md)**
   `order-photo-management.md` — 三種照片類型的分類、上傳規則、各角色可見範圍與後台管理功能 _(2026-04-08)_
+- **[Pro 會員（師虎 Pro）](product/pro-membership.md)**
+  `pro-membership.md` — 一次性付費終身會員方案的權益說明、行銷訴求與實際情況對照、推廣歷程 _(2026-04-08)_
 
 ## process/
 
 - **[訂單生命週期](process/order-lifecycle.md)**
-  `order-lifecycle.md` — 訂單狀態碼完整對照、生命週期流程圖與各階段細節文件索引 _(2026-04-01)_
+  `order-lifecycle.md` — 訂單狀態碼完整對照、生命週期流程圖與各階段細節文件索引 _(2026-04-08)_
+- **[訂單建立流程](process/order-creation.md)**
+  `order-creation.md` — 客戶從選擇工項到進入媒合的完整步驟，含表單欄位設計、派遣費同意機制與送出前提醒邏輯 _(2026-04-08)_
 - **[媒合流程與派遣費機制](process/matching-flow.md)**
-  `matching-flow.md` — 媒合流程、師傅篩選與派遣費規則 _(2026-03-30)_
+  `matching-flow.md` — 媒合流程、師傅篩選與派遣費規則 _(2026-04-08)_
 - **[場勘流程](process/site-inspection.md)**
   `site-inspection.md` — 場勘流程與到場異常處理 _(2026-03-30)_
 - **[報價流程](process/quotation-flow.md)**
