@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-_Last updated: 2026-04-02_
+_Last updated: 2026-04-08_
 
 ```
 docs/
@@ -8,6 +8,7 @@ docs/
 ├── process/      — 各流程的執行步驟與細節
 ├── operations/   — 平台各項運作規範
 ├── business/     — 收費邏輯、金流規則與商業模式
+├── legal/        — 各項條款與政策原文歸檔
 └── _drafts/      — 草稿（架構已建立，內容待補）
 ```
 
@@ -47,8 +48,6 @@ docs/
 
 - **[師傅招募與管理機制](operations/technician-onboarding.md)**
   `technician-onboarding.md` — 師傅招募、報價與淘汰機制 _(2026-03-26)_
-- **[師傅管理辦法](operations/master-management-policy.md)**
-  `master-management-policy.md` — 師傅管理辦法原文（接案、報價、保固、佣金等條款） _(2026-03-30)_
 
 ## business/
 
@@ -58,6 +57,19 @@ docs/
   `invoice.md` — 客戶側電子發票開立、載具設定與作廢規則，及師傅側開立發票給平台的規則 _(2026-04-01)_
 - **[師傅收款與結算機制](business/master-payout.md)**
   `master-payout.md` — 師傅結算週期、扣繳規則、拆單機制、帳外餘額查詢與提前撥款說明 _(2026-04-01)_
+
+## legal/
+
+- **[師傅管理辦法](legal/master-management-policy.md)**
+  `master-management-policy.md` — 師傅管理辦法原文（接案、報價、保固、佣金等條款） _(2026-03-30)_
+- **[法律條款](legal/legal-terms.md)**
+  `legal-terms.md` — 平台法律條款原文 _(2026-04-08)_
+- **[Pro 會員服務條款](legal/pro-membership-terms.md)**
+  `pro-membership-terms.md` — 師虎來了 Pro 會員服務條款原文 _(2026-04-08)_
+- **[報價單條款](legal/quotation-terms.md)**
+  `quotation-terms.md` — 報價單上的條款原文 _(2026-04-08)_
+- **[派遣費說明條款](legal/dispatch-fee-terms.md)**
+  `dispatch-fee-terms.md` — 客戶叫修時同意的派遣費支付規則原文 _(2026-04-08)_
 
 ## 草稿區（_drafts/）
 

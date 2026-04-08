@@ -29,7 +29,7 @@
 3. **面談**：由總經理或招募專員進行，以經驗判斷為主，篩選標準較為彈性
 4. **資料審核**：師傅提交身分證明與相關執照資料
 5. **技能開通**：平台依提交資料開通對應技能類別（如水電、木工等）
-6. **簽署師傅管理辦法**：師傅須簽署合約，載明應負責任與禁止事項（→ 條款原文見 [master-management-policy.md](master-management-policy.md)）
+6. **簽署師傅管理辦法**：師傅須簽署合約，載明應負責任與禁止事項（→ 條款原文見 [master-management-policy.md](../legal/master-management-policy.md)）
 
 > **對外宣稱**：平台篩選嚴格，通過率約三成，並限制單一師傅同時承接案件數量。
 > **實際情況**：報名後實際出席說明會的比率約 3 成；出席者中約 8 成通過審核正式加入。
@@ -57,7 +57,7 @@
 - 接單後惡意棄單
 - 亂報價或現場口頭報價（平台最忌諱的行為）
 
-師傅管理辦法對上述行為的罰則與完整規範，見 [master-management-policy.md](master-management-policy.md)。
+師傅管理辦法對上述行為的罰則與完整規範，見 [master-management-policy.md](../legal/master-management-policy.md)。
 
 ---
 
