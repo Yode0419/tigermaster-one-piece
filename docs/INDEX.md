@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-_Last updated: 2026-04-08_
+_Last updated: 2026-04-09_
 
 ```
 docs/
@@ -56,6 +56,8 @@ docs/
 
 - **[師傅招募與管理機制](operations/technician-onboarding.md)**
   `technician-onboarding.md` — 師傅招募、報價與淘汰機制 _(2026-03-26)_
+- **[常見問題原文](operations/faq.md)**
+  `faq.md` — 官網 Q&A（有下定相關問題、帳號相關問題）與 App 常見下單問題原文 _(2026-04-09)_
 
 ## business/
 
