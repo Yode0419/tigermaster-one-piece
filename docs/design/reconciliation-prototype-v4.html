@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>撥款作業 — Prototype v4</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: sans-serif; font-size: 13px; background: #e8eaed; color: #333; min-height: 100vh; padding: 24px; }
+
+  .page-wrapper {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    overflow: hidden;
+  }
+
+  /* ── 頁首 ── */
+  .page-header {
+    background: #3b6bca;
+    color: white;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .page-header:first-child { border-radius: 8px 8px 0 0; }
+  .page-header h1 { font-size: 15px; font-weight: 600; }
+  .badge {
+    background: #f5a623;
+    color: white;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  /* ── 區塊分隔 ── */
+  .section-divider { height: 16px; background: #e8eaed; }
+
+  /* ── 工具列 ── */
+  .content-area { padding: 16px 20px; }
+
+  .period-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+  }
+  .period-selector {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .period-selector label { font-size: 13px; color: #333; white-space: nowrap; }
+  .period-selector select {
+    border: 1px solid #ccc;
+    background: white;
+    font-size: 13px;
+    color: #222;
+    padding: 4px 8px;
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    min-width: 160px;
+  }
+
+  .toolbar {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn { padding: 6px 14px; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; }
+  .btn-primary   { background: #3b6bca; color: white; }
+  .btn-secondary { background: white; color: #333; border: 1px solid #ccc; }
+  .btn-download  { background: #27ae60; color: white; border: none; border-radius: 4px; padding: 7px 20px; font-size: 13px; font-weight: 600; cursor: pointer; margin-left: auto; }
+
+  .btn-edit {
+    background: white;
+    border: 1px solid #ccc;
+    color: #333;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .btn-edit:hover { background: #f5f5f5; }
+
+  .btn-add-full   { background: #3b6bca; color: white; padding: 5px 12px; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; white-space: nowrap; }
+  .btn-add-custom { background: #f5a623; color: white; padding: 5px 12px; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; white-space: nowrap; }
+  .btn-cancel-add {
+    background: white;
+    border: 1px solid #999;
+    color: #555;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+  .btn-cancel-add:hover { background: #f5f5f5; }
+
+  /* 已加入狀態（第二區塊） */
+  tr.row-added td { background: #f5f5f5; color: #bbb; }
+  tr.row-added:hover td { background: #f5f5f5; }
+  tr.row-added a { color: #bbb; }
+  tr.row-added .chip { background: #eee; color: #ccc; }
+  .added-info { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+  .added-label { font-size: 11px; color: #27ae60; font-weight: 600; line-height: 1.5; white-space: nowrap; }
+
+  table { width: 100%; border-collapse: collapse; background: white; }
+  th {
+    background: #f5f7fa;
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 1px solid #e0e0e0;
+    white-space: nowrap;
+    font-size: 12px;
+  }
+  td { padding: 13px 10px; border-bottom: 1px solid #e8e8e8; white-space: nowrap; font-size: 12px; }
+  tr:hover td { background: #fafbff; }
+  .neg { color: #e74c3c; font-weight: 600; }
+  .status-unpaid { color: #555; }
+  a { color: #3b6bca; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .chip { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 3px; background: #eee; color: #555; }
+
+  /* 財務欄位黃色底色（僅限第二區塊） */
+  .income-table th:nth-child(5), .income-table th:nth-child(6) { background: #fff9d6; }
+  .income-table td:nth-child(5), .income-table td:nth-child(6) { background: #fffbe6; }
+  .income-table tr:hover td:nth-child(5), .income-table tr:hover td:nth-child(6) { background: #fff5c0; }
+  .income-table tr.row-added td:nth-child(5), .income-table tr.row-added td:nth-child(6) { background: #f5f5f5; }
+
+  /* 搜尋列 */
+  .search-row td { background: #fafafa; padding: 4px 6px; border-bottom: 2px solid #e0e0e0; }
+  .search-row input, .search-row select {
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 3px 6px;
+    font-size: 12px;
+    background: white;
+  }
+
+  /* ── 第三區塊：匯款清單 ── */
+  .payout-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+  }
+  .guide-text { font-size: 12px; color: #888; }
+  .btn-confirm-payout {
+    background: #3b6bca;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 7px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  .btn-confirm-payout:hover { background: #2f5ab0; }
+
+  .status-pending { color: #f5a623; font-weight: 600; }
+  .status-remitted { color: #27ae60; font-weight: 600; }
+
+  .btn-remove {
+    background: white;
+    border: 1px solid #e74c3c;
+    color: #e74c3c;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 4px 10px;
+    border-radius: 4px;
+  }
+  .btn-remove:hover { background: #fff5f5; }
+
+  .payout-empty { text-align: center; color: #bbb; padding: 30px; font-size: 13px; }
+
+  /* ── Modal ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .modal-overlay.show { display: flex; }
+  .modal {
+    background: white;
+    border-radius: 8px;
+    padding: 28px 32px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  }
+  .modal h3 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+  .modal p { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 8px; }
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+  }
+  .modal-actions .btn-cancel-modal {
+    background: white;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 7px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+  }
+  .modal-actions .btn-confirm-modal {
+    background: #3b6bca;
+    color: white;
+    border: none;
+    padding: 7px 18px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  /* 部分加入 Modal 輸入區 */
+  .input-group { margin-top: 14px; }
+  .input-group label { font-size: 12px; color: #666; display: block; margin-bottom: 6px; }
+  .input-group .amount-row { display: flex; align-items: center; gap: 6px; }
+  .input-group .currency-prefix { font-size: 13px; color: #333; }
+  .input-group input[type=number] {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 13px;
+    width: 180px;
+    outline: none;
+  }
+  .input-group input[type=number]:focus { border-color: #3b6bca; }
+  .input-group input[type=number].error { border-color: #e74c3c; }
+  .input-error { font-size: 12px; color: #e74c3c; margin-top: 5px; min-height: 16px; }
+  .btn-confirm-modal:disabled { background: #a0b4e0; cursor: not-allowed; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 6px;
+    font-size: 13px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    display: none;
+    z-index: 300;
+  }
+  .toast.show { display: block; animation: fadein 0.2s; }
+  @keyframes fadein { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+</style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ── 第二區塊：師傅收入明細 ── -->
+  <div class="page-header">
+    <h1>師傅收入明細</h1>
+  </div>
+
+  <div class="content-area">
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>結算週期</label>
+        <select id="period-select" onchange="onPeriodChange()">
+          <option value="202604-2">202604-2（本期）</option>
+          <option value="202604-1">202604-1</option>
+          <option value="202603-2">202603-2</option>
+          <option value="202603-1">202603-1</option>
+        </select>
+      </div>
+      <span class="badge" id="period-count">總數 10</span>
+      <button class="btn-download" onclick="showToast('✓ Excel 下載中…', '#27ae60')">下載</button>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="doSearch()">開始搜尋</button>
+      <button class="btn btn-secondary" style="color:#e74c3c; border-color:#e74c3c;" onclick="clearSearch()">清空搜尋列</button>
+    </div>
+
+    <table class="income-table">
+      <thead>
+        <tr>
+          <th>訂單編號</th>
+          <th>師傅名</th>
+          <th>師傅收入(餘)</th>
+          <th>已匯金額</th>
+          <th>營收(已扣稅)</th>
+          <th>獲利</th>
+          <th>付款狀態</th>
+          <th>回傳發票</th>
+          <th>類型</th>
+          <th>結算週期</th>
+          <th>建立日期</th>
+          <th>編輯</th>
+          <th>加入匯款清單</th>
+        </tr>
+        <tr class="search-row">
+          <td><input id="s-no"       type="text" /></td>
+          <td><input id="s-master"   type="text" /></td>
+          <td></td>
+          <td><input id="s-remitted" type="text" /></td>
+          <td></td>
+          <td></td>
+          <td>
+            <select id="s-status">
+              <option value="">全部</option>
+              <option>未匯款</option>
+              <option>已匯款</option>
+            </select>
+          </td>
+          <td></td>
+          <td>
+            <select id="s-type">
+              <option value="">全部</option>
+              <option>完成訂單</option>
+              <option>訂單取消</option>
+              <option>小費</option>
+            </select>
+          </td>
+          <td></td>
+          <td style="display:flex;gap:4px;align-items:center">
+            <input id="s-date" type="text" placeholder="N/A" style="flex:1" />
+            <button style="background:#6c757d;color:white;border:none;border-radius:3px;padding:3px 6px;cursor:pointer;font-size:12px;white-space:nowrap">&#128197;</button>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  <div class="section-divider"></div>
+
+  <!-- ── 第三區塊：匯款清單 ── -->
+  <div class="page-header">
+    <h1>匯款清單</h1>
+  </div>
+
+  <div class="content-area">
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select id="payout-period-select" onchange="renderBlock3()">
+          <option value="202604-2">202604-2（本期）</option>
+          <option value="202604-1">202604-1</option>
+          <option value="202603-2">202603-2</option>
+          <option value="202603-1">202603-1</option>
+        </select>
+      </div>
+      <button class="btn-download" onclick="showToast('✓ Excel 下載中…', '#27ae60')">下載</button>
+    </div>
+    <div class="payout-toolbar">
+      <span class="guide-text">請先完成銀行匯款，再點擊確認</span>
+      <button class="btn-confirm-payout" onclick="confirmPayout()">確認已匯款</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>訂單編號</th>
+          <th>收款人姓名</th>
+          <th>類型</th>
+          <th>匯出款項</th>
+          <th>狀態</th>
+          <th>實際匯款週期</th>
+          <th>建立日期</th>
+          <th>移除</th>
+        </tr>
+      </thead>
+      <tbody id="payout-tbody"></tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ── 確認彈窗 ── -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h3>請確認已在銀行完成匯款</h3>
+    <p>確認前，請確保已至銀行完成本次匯款。</p>
+    <p>確認後項目將標記為已匯款，無法再移除。</p>
+    <div class="modal-actions">
+      <button class="btn-cancel-modal" onclick="closeModal()">取消</button>
+      <button class="btn-confirm-modal" onclick="doConfirmPayout()">確認已匯款</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── 部分加入 Modal ── -->
+<div class="modal-overlay" id="partial-modal-overlay">
+  <div class="modal">
+    <h3>部分加入匯款清單</h3>
+    <p>請輸入本次匯款金額，剩餘收入將保留至下次撥款。</p>
+    <div class="input-group">
+      <div class="amount-row">
+        <span class="currency-prefix">NT$</span>
+        <input type="number" id="partial-amount-input" min="1" placeholder="請輸入金額" oninput="validatePartialAmount()" />
+      </div>
+      <div class="input-error" id="partial-error"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel-modal" onclick="closePartialModal()">取消</button>
+      <button class="btn-confirm-modal" id="partial-confirm-btn" onclick="doPartialAdd()" disabled>確認</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const periodData = {
+  '202604-2': [
+    { no:'RO2026040400008', master:'吳柏輝', income:200,   remitted:0,    revenue:0,      profit:-200,   status:'未匯款', type:'訂單取消', period:'202604-2', date:'2026-04-15' },
+    { no:'RO2026041300015', master:'林志亮', income:2200,  remitted:0,    revenue:285,    profit:-1914,  status:'未匯款', type:'完成訂單', period:'202604-2', date:'2026-04-15' },
+    { no:'RO2026022600008', master:'徐晨皓', income:75000, remitted:0,    revenue:85714,  profit:10714,  status:'未匯款', type:'完成訂單', period:'202604-2', date:'2026-04-15' },
+    { no:'RO2026041500006', master:'胡振釗', income:200,   remitted:0,    revenue:0,      profit:-200,   status:'未匯款', type:'訂單取消', period:'202604-2', date:'2026-04-15' },
+    { no:'RO2026041400016', master:'林志亮', income:1600,  remitted:0,    revenue:2116,   profit:516,    status:'未匯款', type:'完成訂單', period:'202604-2', date:'2026-04-14' },
+    { no:'RO2026041300003', master:'李思頡', income:4000,  remitted:0,    revenue:1385,   profit:-2614,  status:'未匯款', type:'完成訂單', period:'202604-2', date:'2026-04-13' },
+    { no:'RO2026041000008', master:'林志亮', income:1800,  remitted:0,    revenue:2380,   profit:580,    status:'未匯款', type:'完成訂單', period:'202604-2', date:'2026-04-14' },
+    { no:'RO2026041300009', master:'陳奕臣', income:3000,  remitted:0,    revenue:3967,   profit:967,    status:'未匯款', type:'完成訂單', period:'202604-2', date:'2026-04-14' },
+    { no:'RO2026040600003', master:'莊上暐', income:200,   remitted:0,    revenue:0,      profit:-200,   status:'未匯款', type:'訂單取消', period:'202604-2', date:'2026-04-14' },
+    { no:'RO2026041100012', master:'謝祐豪', income:200,   remitted:0,    revenue:285,    profit:85,     status:'未匯款', type:'訂單取消', period:'202604-2', date:'2026-04-14' },
+  ],
+  '202604-1': [
+    { no:'RO2026040100001', master:'陳達人', income:10960, remitted:0,    revenue:14487,  profit:3527,   status:'未匯款', type:'完成訂單', period:'202604-1', date:'2026-04-01' },
+    { no:'RO2026040200003', master:'寧佑昇', income:200,   remitted:0,    revenue:285,    profit:85,     status:'未匯款', type:'訂單取消', period:'202604-1', date:'2026-04-02' },
+  ],
+  '202603-2': [
+    { no:'RO2026031800005', master:'吳佳璘', income:2800,  remitted:2800, revenue:3702,   profit:902,    status:'已匯款', type:'完成訂單', period:'202603-2', date:'2026-03-18' },
+  ],
+  '202603-1': [],
+};
+
+// 狀態管理
+const addedOrders     = new Set();  // 已加入匯款清單的訂單編號
+const confirmedOrders = new Set();  // 已確認匯款的訂單編號
+const addedAmounts    = new Map();  // 訂單編號 → { amount, total }：記錄加入金額與原始總額
+let payoutList = []; // 匯款清單資料
+let partialTarget = null; // 當前部分加入的目標 { no, maxIncome }
+
+function currentRows() {
+  return periodData[document.getElementById('period-select').value] || [];
+}
+
+function findRow(no) {
+  for (const rows of Object.values(periodData)) {
+    const r = rows.find(r => r.no === no);
+    if (r) return r;
+  }
+  return null;
+}
+
+function onPeriodChange() { clearSearch(); }
+
+function doSearch() {
+  const no       = document.getElementById('s-no').value.trim();
+  const master   = document.getElementById('s-master').value.trim();
+  const remitted = document.getElementById('s-remitted').value.trim();
+  const status   = document.getElementById('s-status').value;
+  const type     = document.getElementById('s-type').value;
+  const date     = document.getElementById('s-date').value.trim();
+
+  const filtered = currentRows().filter(r => {
+    if (no       && !r.no.includes(no))                     return false;
+    if (master   && !r.master.includes(master))             return false;
+    if (remitted && !String(r.remitted).includes(remitted)) return false;
+    if (status   && r.status !== status)                    return false;
+    if (type     && r.type !== type)                        return false;
+    if (date     && !r.date.includes(date))                 return false;
+    return true;
+  });
+
+  renderBlock2(filtered);
+}
+
+function clearSearch() {
+  ['s-no','s-master','s-remitted','s-date'].forEach(id => document.getElementById(id).value = '');
+  ['s-status','s-type'].forEach(id => document.getElementById(id).value = '');
+  const rows = currentRows();
+  document.getElementById('period-count').textContent = '總數 ' + rows.length;
+  renderBlock2(rows);
+}
+
+function addOrder(no, amount, isFull) {
+  const row = currentRows().find(r => r.no === no);
+  if (!row) return;
+
+  addedOrders.add(no);
+  addedAmounts.set(no, { amount, total: row.income, isFull });
+  payoutList.push({
+    no:      row.no,
+    master:  row.master,
+    type:    row.type,
+    amount:  amount,
+    status:  '待匯款',
+    period:  '202604-2',
+    date:    new Date().toISOString().slice(0, 10),
+  });
+
+  const msg = isFull ? '✓ 已全額加入匯款清單' : '✓ 已部分加入匯款清單';
+  showToast(msg, '#27ae60');
+  doSearch();
+  renderBlock3();
+}
+
+function openPartialModal(no, maxIncome) {
+  partialTarget = { no, maxIncome };
+  const input = document.getElementById('partial-amount-input');
+  input.value = '';
+  input.classList.remove('error');
+  document.getElementById('partial-error').textContent = '';
+  document.getElementById('partial-confirm-btn').disabled = true;
+  document.getElementById('partial-modal-overlay').classList.add('show');
+  setTimeout(() => input.focus(), 50);
+}
+
+function closePartialModal() {
+  document.getElementById('partial-modal-overlay').classList.remove('show');
+  partialTarget = null;
+}
+
+function validatePartialAmount() {
+  const input  = document.getElementById('partial-amount-input');
+  const errEl  = document.getElementById('partial-error');
+  const btn    = document.getElementById('partial-confirm-btn');
+  const val    = Number(input.value);
+  const max    = partialTarget ? partialTarget.maxIncome : Infinity;
+
+  let error = '';
+  if (!input.value || val <= 0)     error = '請輸入大於 0 的金額';
+  else if (val > max)               error = `金額不可超過師傅剩餘收入 NT$ ${max.toLocaleString()}`;
+
+  input.classList.toggle('error', !!error);
+  errEl.textContent = error;
+  btn.disabled = !!error || !input.value;
+}
+
+function doPartialAdd() {
+  if (!partialTarget) return;
+  const val = Number(document.getElementById('partial-amount-input').value);
+  addOrder(partialTarget.no, val, false);
+  closePartialModal();
+}
+
+function cancelAdd(no) {
+  addedOrders.delete(no);
+  addedAmounts.delete(no);
+  payoutList = payoutList.filter(p => p.no !== no);
+  doSearch();
+  renderBlock3();
+}
+
+function removeFromPayout(no) {
+  addedOrders.delete(no);
+  addedAmounts.delete(no);
+  payoutList = payoutList.filter(p => p.no !== no);
+  doSearch();
+  renderBlock3();
+  showToast('已從匯款清單移除', '#888');
+}
+
+function renderBlock2(rows) {
+  const tbody = document.getElementById('tbody');
+  if (rows.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="13" style="text-align:center;color:#bbb;padding:30px">此週期無資料</td></tr>';
+    return;
+  }
+  tbody.innerHTML = rows.map(r => {
+    const neg         = v => v < 0 ? 'class="neg"' : '';
+    const isAdded    = addedOrders.has(r.no);
+    const isRemitted = r.status === '已匯款';
+    const rowClass   = isAdded ? ' class="row-added"' : '';
+
+    let actionCell;
+    if (isRemitted) {
+      actionCell = '';
+    } else if (isAdded) {
+      actionCell = `<div class="added-info">
+        <span class="added-label">已加入<br>匯款清單</span>
+        <button class="btn-cancel-add" onclick="cancelAdd('${r.no}')">取消加入</button>
+      </div>`;
+    } else {
+      actionCell = `<div style="display:flex;gap:4px">
+        <button class="btn-add-full"   onclick="addOrder('${r.no}', ${r.income}, true)">全額加入</button>
+        <button class="btn-add-custom" onclick="openPartialModal('${r.no}', ${r.income})">部分加入</button>
+      </div>`;
+    }
+
+    return `<tr${rowClass}>
+      <td><a href="#">${r.no}</a></td>
+      <td>${r.master}</td>
+      <td>${r.income.toLocaleString()}</td>
+      <td>${r.remitted.toLocaleString()}</td>
+      <td>${r.revenue.toLocaleString()}</td>
+      <td ${neg(r.profit)}>${r.profit.toLocaleString()}</td>
+      <td class="status-unpaid">${r.status}</td>
+      <td></td>
+      <td><span class="chip">${r.type}</span></td>
+      <td>${r.period}</td>
+      <td>${r.date}</td>
+      <td>
+        <button class="btn-edit"
+          title="非標準流程操作，建議使用加入匯款清單流程"
+          onclick="showToast('⚠ 建議改用「加入匯款清單」流程操作', '#e67e22')">編輯</button>
+      </td>
+      <td>${actionCell}</td>
+    </tr>`;
+  }).join('');
+}
+
+function renderBlock3() {
+  const tbody = document.getElementById('payout-tbody');
+  const selectedPeriod = document.getElementById('payout-period-select').value;
+  const filtered = payoutList.filter(p => p.period === selectedPeriod);
+  if (filtered.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" class="payout-empty">此週期無匯款清單資料</td></tr>';
+    return;
+  }
+  tbody.innerHTML = filtered.map(p => {
+    const isPending   = p.status === '待匯款';
+    const statusClass = isPending ? 'status-pending' : 'status-remitted';
+    const removeCell  = isPending
+      ? `<button class="btn-remove" onclick="removeFromPayout('${p.no}')">移除</button>`
+      : '';
+    return `<tr>
+      <td><a href="#">${p.no}</a></td>
+      <td>${p.master}</td>
+      <td><span class="chip">${p.type}</span></td>
+      <td>${p.amount.toLocaleString()}</td>
+      <td class="${statusClass}">${p.status}</td>
+      <td>${p.period}</td>
+      <td>${p.date}</td>
+      <td>${removeCell}</td>
+    </tr>`;
+  }).join('');
+}
+
+function confirmPayout() {
+  const pending = payoutList.filter(p => p.status === '待匯款');
+  if (pending.length === 0) {
+    showToast('目前沒有待匯款項目', '#888');
+    return;
+  }
+  document.getElementById('modal-overlay').classList.add('show');
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('show');
+}
+
+function doConfirmPayout() {
+  payoutList.forEach(p => {
+    if (p.status !== '待匯款') return;
+    p.status = '已匯款';
+
+    const row  = findRow(p.no);
+    const info = addedAmounts.get(p.no);
+    if (row) {
+      row.remitted += p.amount;
+      row.income   -= p.amount;
+      if (row.income <= 0) {
+        row.income = 0;
+        row.status = '已匯款';
+      } else {
+        row.status = '部分匯款';
+      }
+    }
+
+    confirmedOrders.delete(p.no);
+    addedOrders.delete(p.no);
+    addedAmounts.delete(p.no);
+  });
+  closeModal();
+  doSearch();
+  renderBlock3();
+  showToast('✓ 已確認匯款完成', '#27ae60');
+}
+
+function showToast(msg, color) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = color || '#27ae60';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// 初始化
+clearSearch();
+renderBlock3();
+</script>
+</body>
+</html>

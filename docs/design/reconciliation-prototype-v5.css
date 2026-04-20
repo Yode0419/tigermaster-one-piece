@@ -1,0 +1,362 @@
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; font-size: 13px; background: #e8eaed; color: #333; min-height: 100vh; padding: 24px; }
+
+.page-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.block-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+/* ── 流程導覽列 ── */
+.flow-banner {
+  background: #f0f4ff;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.flow-desc {
+  font-size: 13px;
+  color: #3b6bca;
+  font-weight: 500;
+}
+.btn-flow-info {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: white;
+  border: 1px solid #c0cef5;
+  color: #3b6bca;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 5px 12px;
+  border-radius: 20px;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-flow-info:hover { background: #e8eeff; }
+.flow-info-icon { font-size: 13px; line-height: 1; }
+
+/* ── 流程說明 Modal ── */
+.flow-modal { max-width: 480px; }
+.flow-modal-steps { margin-top: 6px; display: flex; flex-direction: column; gap: 14px; }
+.flow-modal-step { display: flex; gap: 14px; align-items: flex-start; }
+.step-num {
+  flex-shrink: 0;
+  width: 24px; height: 24px;
+  background: #3b6bca;
+  color: white;
+  border-radius: 50%;
+  font-size: 12px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  margin-top: 1px;
+}
+.step-body strong { font-size: 13px; color: #222; display: block; margin-bottom: 3px; }
+.step-body p { font-size: 12px; color: #666; line-height: 1.6; margin: 0; }
+
+/* ── 頁首 ── */
+.page-header {
+  background: #3b6bca;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.page-header h1 { font-size: 15px; font-weight: 600; }
+.badge {
+  background: #f5a623;
+  color: white;
+  border-radius: 4px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.badge-gray { background: #7a8faa; }
+
+
+/* ── 工具列 ── */
+.content-area { padding: 16px 20px; }
+
+.period-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+.period-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.period-selector label { font-size: 13px; color: #333; white-space: nowrap; }
+.period-selector select {
+  border: 1px solid #ccc;
+  background: white;
+  font-size: 13px;
+  color: #222;
+  padding: 4px 8px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  min-width: 160px;
+}
+
+.toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.btn { padding: 6px 14px; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; }
+.btn-primary   { background: #3b6bca; color: white; }
+.btn-secondary { background: white; color: #333; border: 1px solid #ccc; }
+.btn-download  { background: #27ae60; color: white; border: none; border-radius: 4px; padding: 7px 20px; font-size: 13px; font-weight: 600; cursor: pointer; margin-left: auto; }
+
+.btn-edit {
+  background: white;
+  border: 1px solid #ccc;
+  color: #333;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.btn-edit:hover { background: #f5f5f5; }
+
+.btn-add-full   { background: #3b6bca; color: white; padding: 5px 12px; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; white-space: nowrap; }
+.btn-add-custom { background: #f5a623; color: white; padding: 5px 12px; border-radius: 4px; border: none; cursor: pointer; font-size: 12px; white-space: nowrap; }
+.btn-cancel-add {
+  background: white;
+  border: 1px solid #999;
+  color: #555;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+.btn-cancel-add:hover { background: #f5f5f5; }
+
+/* 已加入狀態 */
+tr.row-added td { background: #f5f5f5; color: #bbb; }
+tr.row-added:hover td { background: #f5f5f5; }
+tr.row-added a { color: #bbb; }
+tr.row-added .chip { background: #eee; color: #ccc; }
+.added-info { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.added-label { font-size: 11px; color: #27ae60; font-weight: 600; line-height: 1.5; white-space: nowrap; }
+
+table { width: 100%; border-collapse: collapse; background: white; }
+th {
+  background: #f5f7fa;
+  padding: 8px 10px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap;
+  font-size: 12px;
+}
+td { padding: 13px 10px; border-bottom: 1px solid #e8e8e8; white-space: nowrap; font-size: 12px; }
+tr:hover td { background: #fafbff; }
+.neg { color: #e74c3c; font-weight: 600; }
+.status-unpaid  { color: #555; }
+.status-partial { color: #f5a623; font-weight: 600; }
+.status-remitted { color: #27ae60; font-weight: 600; }
+a { color: #3b6bca; text-decoration: none; }
+a:hover { text-decoration: underline; }
+.chip { display: inline-block; font-size: 11px; padding: 1px 6px; border-radius: 3px; background: #eee; color: #555; }
+
+/* 財務欄位黃色底色 */
+.income-table th:nth-child(5), .income-table th:nth-child(6) { background: #fff9d6; }
+.income-table td:nth-child(5), .income-table td:nth-child(6) { background: #fffbe6; }
+.income-table tr:hover td:nth-child(5), .income-table tr:hover td:nth-child(6) { background: #fff5c0; }
+.income-table tr.row-added td:nth-child(5), .income-table tr.row-added td:nth-child(6) { background: #f5f5f5; }
+
+/* 搜尋列 */
+.search-row td { background: #fafafa; padding: 4px 6px; border-bottom: 2px solid #e0e0e0; }
+.search-row input, .search-row select {
+  width: 100%;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 3px 6px;
+  font-size: 12px;
+  background: white;
+}
+
+/* ── Tooltip ── */
+.tooltip-wrap { position: relative; display: inline-block; vertical-align: middle; margin-left: 4px; }
+.tooltip-wrap .tooltip-box {
+  visibility: hidden;
+  background: #333;
+  color: white;
+  font-size: 11px;
+  border-radius: 4px;
+  padding: 8px 12px;
+  position: absolute;
+  z-index: 50;
+  bottom: 130%;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  line-height: 1.7;
+  font-weight: 400;
+  pointer-events: none;
+}
+.tooltip-wrap:hover .tooltip-box { visibility: visible; }
+.tooltip-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #9ab0d8;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  cursor: help;
+}
+
+/* ── 第三區塊：匯款清單 ── */
+.payout-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #eee;
+}
+.guide-text { font-size: 12px; color: #888; }
+.btn-confirm-payout {
+  background: #3b6bca;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 7px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-confirm-payout:hover { background: #2f5ab0; }
+
+.btn-remove {
+  background: white;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+}
+.btn-remove:hover { background: #fff5f5; }
+
+.payout-empty { text-align: center; color: #bbb; padding: 30px; font-size: 13px; }
+
+/* ── Modal ── */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+}
+.modal-overlay.show { display: flex; }
+.modal {
+  background: white;
+  border-radius: 8px;
+  padding: 28px 32px;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+}
+.modal h3 { font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+.modal p { font-size: 13px; color: #555; line-height: 1.6; margin-bottom: 8px; }
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+.modal-actions .btn-cancel-modal {
+  background: white;
+  border: 1px solid #ccc;
+  color: #333;
+  padding: 7px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+}
+.modal-actions .btn-confirm-modal {
+  background: #3b6bca;
+  color: white;
+  border: none;
+  padding: 7px 18px;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* 部分加入 Modal 輸入區 */
+.input-group { margin-top: 14px; }
+.input-group label { font-size: 12px; color: #666; display: block; margin-bottom: 6px; }
+.input-group .amount-row { display: flex; align-items: center; gap: 6px; }
+.input-group .currency-prefix { font-size: 13px; color: #333; }
+.input-group input[type=number] {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 6px 10px;
+  font-size: 13px;
+  width: 180px;
+  outline: none;
+}
+.input-group input[type=number]:focus { border-color: #3b6bca; }
+.input-group input[type=number].error { border-color: #e74c3c; }
+.input-error { font-size: 12px; color: #e74c3c; margin-top: 5px; min-height: 16px; }
+.btn-confirm-modal:disabled { background: #a0b4e0; cursor: not-allowed; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  top: 30px;
+  right: 30px;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  align-items: center;
+  gap: 10px;
+  display: none;
+  z-index: 300;
+}
+.toast.show { display: flex; animation: fadein 0.2s; }
+.toast-link {
+  color: rgba(255,255,255,0.85);
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.toast-link:hover { color: white; }
+@keyframes fadein { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }

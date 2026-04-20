@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>設計原型索引 — 撥款作業</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f5;
+      color: #1a1a1a;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 60px 24px;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    header .label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 12px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #111;
+    }
+
+    header p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      width: 100%;
+      max-width: 960px;
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e5e5e5;
+      border-radius: 12px;
+      padding: 28px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.15s, border-color 0.15s, transform 0.15s;
+    }
+
+    .card:hover {
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      border-color: #bbb;
+      transform: translateY(-2px);
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 20px;
+      background: #f0f0f0;
+      color: #555;
+    }
+
+    .badge.latest {
+      background: #e8f5e9;
+      color: #2e7d32;
+    }
+
+    .card-version {
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    .card h2 {
+      font-size: 18px;
+      font-weight: 600;
+      color: #111;
+    }
+
+    .card p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+    }
+
+    .card-arrow {
+      margin-top: auto;
+      font-size: 13px;
+      color: #999;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    footer {
+      margin-top: 60px;
+      font-size: 12px;
+      color: #bbb;
+      text-align: center;
+    }
+
+    footer a {
+      color: #bbb;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="label">Prototype Index</div>
+    <h1>撥款作業介面設計</h1>
+    <p>各版本原型連結，依迭代順序排列</p>
+  </header>
+
+  <div class="grid">
+
+    <a class="card" href="reconciliation-prototype.html">
+      <div class="card-meta">
+        <span class="badge">V1</span>
+        <span class="card-version">初版</span>
+      </div>
+      <h2>匯款資訊</h2>
+      <p>原始版本，以「匯款資訊」為主頁標題，含基本收入明細與匯款紀錄區塊。</p>
+      <div class="card-arrow">開啟原型 →</div>
+    </a>
+
+    <a class="card" href="reconciliation-prototype-v2.html">
+      <div class="card-meta">
+        <span class="badge">V2</span>
+        <span class="card-version">介面調整</span>
+      </div>
+      <h2>撥款作業（文案優化）</h2>
+      <p>調整區塊標題、欄位文案與按鈕語意，強化操作流程的自然引導。</p>
+      <div class="card-arrow">開啟原型 →</div>
+    </a>
+
+    <a class="card" href="reconciliation-prototype-v3.html">
+      <div class="card-meta">
+        <span class="badge">V3</span>
+        <span class="card-version">版面重構</span>
+      </div>
+      <h2>撥款作業（版面重構）</h2>
+      <p>依討論結果重構版面：badge 移至 dropdown 旁、下載靠右、加入後狀態回饋優化。</p>
+      <div class="card-arrow">開啟原型 →</div>
+    </a>
+
+    <a class="card" href="reconciliation-prototype-v4.html">
+      <div class="card-meta">
+        <span class="badge">V4</span>
+      </div>
+      <h2>撥款作業（第三區塊重構）</h2>
+      <p>新增確認彈窗、第三區塊匯款清單版面設計，完善整體撥款操作流程。</p>
+      <div class="card-arrow">開啟原型 →</div>
+    </a>
+
+    <a class="card" href="reconciliation-prototype-v5.html">
+      <div class="card-meta">
+        <span class="badge">V5</span>
+      </div>
+      <h2>撥款作業（三區塊完整版）</h2>
+      <p>新增流程導覽列、前期未匯區塊（跨期補漏），區塊順序調整為師傅收入明細 → 前期未匯 → 匯款清單。</p>
+      <div class="card-arrow">開啟原型 →</div>
+    </a>
+
+    <a class="card" href="reconciliation-prototype-v6.html">
+      <div class="card-meta">
+        <span class="badge latest">V6 最新</span>
+      </div>
+      <h2>撥款作業（Tab 佈局）</h2>
+      <p>師傅收入明細與前期未匯合併為 Tab 切換，匯款清單常駐下方，解決筆電寬度與垂直捲動問題。</p>
+      <div class="card-arrow">開啟原型 →</div>
+    </a>
+
+  </div>
+
+  <footer>
+    <p>設計討論紀錄 → <a href="plan.md">plan.md</a> ｜ 優化文件 → <a href="reconciliation-optimization.md">reconciliation-optimization.md</a></p>
+  </footer>
+
+</body>
+</html>

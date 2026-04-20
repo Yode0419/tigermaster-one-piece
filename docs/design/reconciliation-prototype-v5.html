@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>撥款作業 — Prototype v5</title>
+<link rel="stylesheet" href="reconciliation-prototype-v5.css">
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ── 流程導覽列 ── -->
+  <div class="block-card">
+    <div class="flow-banner">
+      <span class="flow-desc">撥款作業共 5 個步驟：查看收入 → 加入清單 → 銀行匯款 → 系統確認 → 完成</span>
+      <button class="btn-flow-info" onclick="openFlowModal()">
+        <span class="flow-info-icon">ℹ</span> 操作說明
+      </button>
+    </div>
+  </div>
+
+  <!-- ── 第一區塊：師傅收入明細 ── -->
+  <div class="block-card">
+  <div class="page-header">
+    <h1>師傅收入明細</h1>
+  </div>
+
+  <div class="content-area">
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>結算週期</label>
+        <select id="period-select" onchange="onPeriodChange()">
+          <option value="202604-2">202604-2（本期）</option>
+          <option value="202604-1">202604-1</option>
+          <option value="202603-2">202603-2</option>
+          <option value="202603-1">202603-1</option>
+        </select>
+      </div>
+      <span class="badge" id="period-count">總數 10</span>
+      <button class="btn-download" onclick="showToast('✓ Excel 下載中…', '#27ae60')">下載</button>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="doSearch()">開始搜尋</button>
+      <button class="btn btn-secondary" style="color:#e74c3c; border-color:#e74c3c;" onclick="clearSearch()">清空搜尋列</button>
+    </div>
+
+    <table class="income-table">
+      <thead>
+        <tr>
+          <th>訂單編號</th>
+          <th>師傅名</th>
+          <th>師傅收入(餘)</th>
+          <th>已匯金額</th>
+          <th>營收(已扣稅)</th>
+          <th>獲利</th>
+          <th>付款狀態</th>
+          <th>回傳發票</th>
+          <th>類型</th>
+          <th>結算週期</th>
+          <th>建立日期</th>
+          <th>編輯</th>
+          <th>
+            加入匯款清單
+            <span class="tooltip-wrap">
+              <span class="tooltip-icon">?</span>
+              <span class="tooltip-box">全額加入：將師傅收入(餘)全數加入匯款清單，不開視窗<br>部分加入：自訂本次匯款金額，剩餘收入保留至下次撥款</span>
+            </span>
+          </th>
+        </tr>
+        <tr class="search-row">
+          <td><input id="s-no"       type="text" /></td>
+          <td><input id="s-master"   type="text" /></td>
+          <td></td>
+          <td><input id="s-remitted" type="text" /></td>
+          <td></td>
+          <td></td>
+          <td>
+            <select id="s-status">
+              <option value="">全部</option>
+              <option>未匯款</option>
+              <option>部分匯款</option>
+              <option>已匯款</option>
+            </select>
+          </td>
+          <td></td>
+          <td>
+            <select id="s-type">
+              <option value="">全部</option>
+              <option>完成訂單</option>
+              <option>訂單取消</option>
+              <option>小費</option>
+            </select>
+          </td>
+          <td></td>
+          <td style="display:flex;gap:4px;align-items:center">
+            <input id="s-date" type="text" placeholder="N/A" style="flex:1" />
+            <button style="background:#6c757d;color:white;border:none;border-radius:3px;padding:3px 6px;cursor:pointer;font-size:12px;white-space:nowrap">&#128197;</button>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody id="tbody"></tbody>
+    </table>
+  </div>
+
+  </div><!-- /block-card 第一區塊 -->
+
+  <!-- ── 第二區塊：前期未匯 ── -->
+  <div class="block-card">
+  <div class="page-header">
+    <h1>前期未匯</h1>
+    <span class="badge badge-gray">跨期</span>
+  </div>
+
+  <div class="content-area">
+    <div class="period-bar">
+      <span class="badge" id="prev-count">總數 0</span>
+      <button class="btn-download" onclick="showToast('✓ Excel 下載中…', '#27ae60')">下載</button>
+    </div>
+
+    <div class="toolbar">
+      <button class="btn btn-primary" onclick="doPrevSearch()">開始搜尋</button>
+      <button class="btn btn-secondary" style="color:#e74c3c; border-color:#e74c3c;" onclick="clearPrevSearch()">清空搜尋列</button>
+    </div>
+
+    <table class="income-table">
+      <thead>
+        <tr>
+          <th>訂單編號</th>
+          <th>師傅名</th>
+          <th>師傅收入(餘)</th>
+          <th>已匯金額</th>
+          <th>營收(已扣稅)</th>
+          <th>獲利</th>
+          <th>付款狀態</th>
+          <th>回傳發票</th>
+          <th>類型</th>
+          <th>結算週期</th>
+          <th>建立日期</th>
+          <th>編輯</th>
+          <th>
+            加入匯款清單
+            <span class="tooltip-wrap">
+              <span class="tooltip-icon">?</span>
+              <span class="tooltip-box">全額加入：將師傅收入(餘)全數加入匯款清單，不開視窗<br>部分加入：自訂本次匯款金額，剩餘收入保留至下次撥款</span>
+            </span>
+          </th>
+        </tr>
+        <tr class="search-row">
+          <td><input id="p-no"       type="text" /></td>
+          <td><input id="p-master"   type="text" /></td>
+          <td></td>
+          <td><input id="p-remitted" type="text" /></td>
+          <td></td>
+          <td></td>
+          <td>
+            <select id="p-status">
+              <option value="">全部</option>
+              <option>未匯款</option>
+              <option>部分匯款</option>
+            </select>
+          </td>
+          <td></td>
+          <td>
+            <select id="p-type">
+              <option value="">全部</option>
+              <option>完成訂單</option>
+              <option>訂單取消</option>
+              <option>小費</option>
+            </select>
+          </td>
+          <td><input id="p-period" type="text" placeholder="e.g. 202603" /></td>
+          <td style="display:flex;gap:4px;align-items:center">
+            <input id="p-date" type="text" placeholder="N/A" style="flex:1" />
+            <button style="background:#6c757d;color:white;border:none;border-radius:3px;padding:3px 6px;cursor:pointer;font-size:12px;white-space:nowrap">&#128197;</button>
+          </td>
+          <td></td>
+          <td></td>
+        </tr>
+      </thead>
+      <tbody id="prev-tbody"></tbody>
+    </table>
+  </div>
+
+  </div><!-- /block-card 第二區塊 -->
+
+  <!-- ── 第三區塊：匯款清單 ── -->
+  <div class="block-card" id="payout-section">
+  <div class="page-header">
+    <h1>匯款清單</h1>
+  </div>
+
+  <div class="content-area">
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select id="payout-period-select" onchange="renderBlock3()">
+          <option value="202604-2">202604-2（本期）</option>
+          <option value="202604-1">202604-1</option>
+          <option value="202603-2">202603-2</option>
+          <option value="202603-1">202603-1</option>
+        </select>
+      </div>
+      <button class="btn-download" onclick="showToast('✓ Excel 下載中…', '#27ae60')">下載</button>
+    </div>
+    <div class="payout-toolbar">
+      <span class="guide-text">請先完成銀行匯款，再點擊確認</span>
+      <button class="btn-confirm-payout" onclick="confirmPayout()">確認已匯款</button>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>訂單編號</th>
+          <th>收款人姓名</th>
+          <th>類型</th>
+          <th>匯出款項</th>
+          <th>狀態</th>
+          <th>實際匯款週期</th>
+          <th>建立日期</th>
+          <th>移除</th>
+        </tr>
+      </thead>
+      <tbody id="payout-tbody"></tbody>
+    </table>
+  </div>
+
+  </div><!-- /block-card 第三區塊 -->
+
+</div>
+
+<!-- ── 流程說明 Modal ── -->
+<div class="modal-overlay" id="flow-modal-overlay">
+  <div class="modal flow-modal">
+    <h3>撥款作業流程說明</h3>
+    <div class="flow-modal-steps">
+      <div class="flow-modal-step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <strong>查看師傅收入明細</strong>
+          <p>確認本期各師傅的剩餘收入與付款狀態，並檢視前期尚未完成匯款的項目，決定本次要匯款的範圍。</p>
+        </div>
+      </div>
+      <div class="flow-modal-step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <strong>加入匯款清單</strong>
+          <p>點擊「全額加入」或「部分加入」，將要匯款的項目加入清單。</p>
+        </div>
+      </div>
+      <div class="flow-modal-step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <strong>去銀行匯款</strong>
+          <p>依照匯款清單，至銀行完成實際轉帳作業。</p>
+        </div>
+      </div>
+      <div class="flow-modal-step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <strong>回系統確認</strong>
+          <p>匯款完成後，回到匯款清單點擊「確認已匯款」，系統將記錄匯款結果並更新付款狀態。</p>
+        </div>
+      </div>
+      <div class="flow-modal-step">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <strong>完成撥款</strong>
+          <p>確認後項目標記為「已匯款」，本次撥款作業結束。</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-confirm-modal" onclick="closeFlowModal()">了解</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── 確認彈窗 ── -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h3>請確認已在銀行完成匯款</h3>
+    <p>確認前，請確保已至銀行完成本次匯款。</p>
+    <p>確認後項目將標記為已匯款，無法再移除。</p>
+    <div class="modal-actions">
+      <button class="btn-cancel-modal" onclick="closeModal()">取消</button>
+      <button class="btn-confirm-modal" onclick="doConfirmPayout()">確認已匯款</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── 部分加入 Modal ── -->
+<div class="modal-overlay" id="partial-modal-overlay">
+  <div class="modal">
+    <h3>部分加入匯款清單</h3>
+    <p>請輸入本次匯款金額，剩餘收入將保留至下次撥款。</p>
+    <div class="input-group">
+      <div class="amount-row">
+        <span class="currency-prefix">NT$</span>
+        <input type="number" id="partial-amount-input" min="1" placeholder="請輸入金額" oninput="validatePartialAmount()" />
+      </div>
+      <div class="input-error" id="partial-error"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel-modal" onclick="closePartialModal()">取消</button>
+      <button class="btn-confirm-modal" id="partial-confirm-btn" onclick="doPartialAdd()" disabled>確認</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="reconciliation-prototype-v5-data.js"></script>
+<script src="reconciliation-prototype-v5.js"></script>
+</body>
+</html>
