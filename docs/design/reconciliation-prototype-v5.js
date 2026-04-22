@@ -1,7 +1,7 @@
 // 狀態管理
 const addedOrders = new Set(); // 已加入匯款清單的訂單編號
 const addedAmounts = new Map(); // 訂單編號 → { amount, isFull }
-let payoutList = [];
+let payoutList = [...PAYOUT_LIST];
 let partialTarget = null;
 
 // ── 資料查詢 ── //
@@ -41,7 +41,6 @@ function onPeriodChange() {
 function doSearch() {
   const no = document.getElementById("s-no").value.trim();
   const master = document.getElementById("s-master").value.trim();
-  const remitted = document.getElementById("s-remitted").value.trim();
   const status = document.getElementById("s-status").value;
   const type = document.getElementById("s-type").value;
   const date = document.getElementById("s-date").value.trim();
@@ -49,7 +48,6 @@ function doSearch() {
   const filtered = currentRows().filter((r) => {
     if (no && !r.no.includes(no)) return false;
     if (master && !r.master.includes(master)) return false;
-    if (remitted && !String(r.remitted).includes(remitted)) return false;
     if (status && r.status !== status) return false;
     if (type && r.type !== type) return false;
     if (date && !r.date.includes(date)) return false;
@@ -60,7 +58,7 @@ function doSearch() {
 }
 
 function clearSearch() {
-  ["s-no", "s-master", "s-remitted", "s-date"].forEach(
+  ["s-no", "s-master", "s-invoice", "s-date"].forEach(
     (id) => (document.getElementById(id).value = ""),
   );
   ["s-status", "s-type"].forEach(
@@ -255,9 +253,7 @@ function renderIncomeRow(r) {
     <td>${r.period}</td>
     <td>${r.date}</td>
     <td>
-      <button class="btn-edit"
-        title="非標準流程操作，建議使用加入匯款清單流程"
-        onclick="showToast('⚠ 建議改用「加入匯款清單」流程操作', '#e67e22')">編輯</button>
+      <button class="btn-edit">編輯</button>
     </td>
     <td>${actionCell}</td>
   </tr>`;
@@ -276,19 +272,15 @@ function renderBlock1(rows) {
 function doPrevSearch() {
   const no = document.getElementById("p-no").value.trim();
   const master = document.getElementById("p-master").value.trim();
-  const remitted = document.getElementById("p-remitted").value.trim();
   const status = document.getElementById("p-status").value;
   const type = document.getElementById("p-type").value;
-  const period = document.getElementById("p-period").value.trim();
   const date = document.getElementById("p-date").value.trim();
 
   const filtered = getPrevUnpaidRows().filter((r) => {
     if (no && !r.no.includes(no)) return false;
     if (master && !r.master.includes(master)) return false;
-    if (remitted && !String(r.remitted).includes(remitted)) return false;
     if (status && r.status !== status) return false;
     if (type && r.type !== type) return false;
-    if (period && !r.period.includes(period)) return false;
     if (date && !r.date.includes(date)) return false;
     return true;
   });
@@ -297,7 +289,7 @@ function doPrevSearch() {
 }
 
 function clearPrevSearch() {
-  ["p-no", "p-master", "p-remitted", "p-period", "p-date"].forEach(
+  ["p-no", "p-master", "p-date"].forEach(
     (id) => (document.getElementById(id).value = ""),
   );
   ["p-status", "p-type"].forEach(
@@ -376,3 +368,89 @@ function scrollToPayoutSection() {
 clearSearch();
 clearPrevSearch();
 renderBlock3();
+
+// ── 導覽模式 ── //
+
+let tourIndex = 0;
+
+function startTour() {
+  tourIndex = 0;
+  document.getElementById('tour-overlay').style.display      = 'block';
+  document.getElementById('tour-highlight-box').style.display = 'block';
+  document.getElementById('tour-card').style.display          = 'block';
+  showTourStep(0);
+}
+
+function showTourStep(i) {
+  tourIndex = i;
+  const step   = TOUR_STEPS[i];
+  const target = document.querySelector(step.selector);
+  if (!target) return;
+
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+  setTimeout(() => {
+    const rect = target.getBoundingClientRect();
+    const pad  = 6;
+
+    const hbox = document.getElementById('tour-highlight-box');
+    hbox.style.top    = (rect.top    - pad) + 'px';
+    hbox.style.left   = (rect.left   - pad) + 'px';
+    hbox.style.width  = (rect.width  + pad * 2) + 'px';
+    hbox.style.height = (rect.height + pad * 2) + 'px';
+
+    document.getElementById('tour-card-title').textContent   = step.title;
+    document.getElementById('tour-card-body').innerHTML      = step.body;
+    document.getElementById('tour-step-count').textContent   = `${i + 1} / ${TOUR_STEPS.length}`;
+
+    const prevBtn   = document.getElementById('btn-tour-prev');
+    const nextBtn   = document.getElementById('btn-tour-next');
+    const finishBtn = document.getElementById('btn-tour-finish');
+
+    prevBtn.disabled        = i === 0;
+    nextBtn.style.display   = i < TOUR_STEPS.length - 1 ? '' : 'none';
+    finishBtn.style.display = i === TOUR_STEPS.length - 1 ? '' : 'none';
+
+    positionTourCard(rect);
+  }, 350);
+}
+
+function positionTourCard(rect) {
+  const card   = document.getElementById('tour-card');
+  const cardW  = 480;
+  const cardH  = card.offsetHeight || 180;
+  const margin = 16;
+  const vw     = window.innerWidth;
+  const vh     = window.innerHeight;
+
+  let left = rect.left;
+  if (left + cardW > vw - margin) left = vw - cardW - margin;
+  if (left < margin) left = margin;
+
+  let top = rect.bottom + 14;
+  if (top + cardH > vh - margin) top = rect.top - cardH - 14;
+  if (top < margin) top = margin;
+
+  card.style.left = left + 'px';
+  card.style.top  = top  + 'px';
+}
+
+function tourNext() {
+  if (tourIndex < TOUR_STEPS.length - 1) showTourStep(tourIndex + 1);
+}
+
+function tourPrev() {
+  if (tourIndex > 0) showTourStep(tourIndex - 1);
+}
+
+function closeTour() {
+  document.getElementById('tour-overlay').style.display       = 'none';
+  document.getElementById('tour-highlight-box').style.display = 'none';
+  document.getElementById('tour-card').style.display          = 'none';
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('tour-overlay').style.display === 'block') {
+    closeTour();
+  }
+});

@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>確認橫幅 Variants</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: sans-serif; font-size: 13px; background: #e8eaed; color: #333; min-height: 100vh; padding: 32px 24px; }
+
+h2 { font-size: 20px; font-weight: 700; color: #222; margin-bottom: 4px; }
+.page-title { margin-bottom: 32px; }
+.page-title p { font-size: 13px; color: #666; margin-top: 4px; }
+
+.variant-section { margin-bottom: 48px; }
+.variant-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 10px;
+}
+.variant-desc {
+  font-size: 13px;
+  color: #555;
+  margin-bottom: 14px;
+  line-height: 1.6;
+}
+
+/* ── 共用 block-card ── */
+.block-card {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  overflow: hidden;
+}
+
+.page-header {
+  background: #3b6bca;
+  color: white;
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.page-header h1 { font-size: 15px; font-weight: 600; }
+
+.period-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 20px;
+  border-bottom: 1px solid #eee;
+}
+.period-selector { display: flex; align-items: center; gap: 8px; }
+.period-selector label { font-size: 13px; color: #333; white-space: nowrap; }
+.period-selector select {
+  border: 1px solid #ccc;
+  background: white;
+  font-size: 13px;
+  color: #222;
+  padding: 4px 8px;
+  border-radius: 4px;
+  outline: none;
+  min-width: 160px;
+}
+.btn-download {
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 7px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+/* ── 表格 stub ── */
+.table-stub {
+  width: 100%;
+  border-collapse: collapse;
+}
+.table-stub th {
+  background: #f5f7fa;
+  padding: 8px 14px;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid #e0e0e0;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.table-stub td {
+  padding: 11px 14px;
+  border-bottom: 1px solid #e8e8e8;
+  font-size: 12px;
+}
+.tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.tag-pending { background: #fff3e0; color: #e65100; }
+.tag-partial { background: #fff8e1; color: #f5a623; }
+
+.pagination-stub {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+  padding: 10px 16px;
+  border-top: 1px solid #eee;
+}
+.pg-btn {
+  padding: 4px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background: white;
+  font-size: 12px;
+  cursor: pointer;
+  color: #555;
+}
+.pg-btn.active { background: #3b6bca; color: white; border-color: #3b6bca; }
+
+/* ── 確認按鈕共用 ── */
+.btn-confirm-payout {
+  background: #3b6bca;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.btn-confirm-payout:hover { background: #2f5ab0; }
+
+/* ════════════════════════════════
+   Variant A — 淡黃警示橫幅
+   ════════════════════════════════ */
+.confirm-banner-a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 20px;
+  background: #fffbf0;
+  border-top: 1px solid #ffe082;
+  border-bottom: 1px solid #ffe082;
+}
+.confirm-banner-a .banner-text { display: flex; flex-direction: column; gap: 3px; }
+.confirm-banner-a .banner-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #7a4f00;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.confirm-banner-a .banner-sub {
+  font-size: 12px;
+  color: #a07020;
+  line-height: 1.5;
+}
+
+/* ════════════════════════════════
+   Variant B — 藍色資訊橫幅
+   ════════════════════════════════ */
+.confirm-banner-b {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 20px;
+  background: #f0f4ff;
+  border-top: 1px solid #c0cef5;
+  border-bottom: 1px solid #c0cef5;
+}
+.confirm-banner-b .banner-text { display: flex; flex-direction: column; gap: 3px; }
+.confirm-banner-b .banner-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a3a7a;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.confirm-banner-b .banner-sub {
+  font-size: 12px;
+  color: #3b6bca;
+  line-height: 1.5;
+}
+
+/* ════════════════════════════════
+   Variant C — 灰底分隔帶（低調）
+   ════════════════════════════════ */
+.confirm-banner-c {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 14px 20px;
+  background: #f5f7fa;
+  border-top: 2px solid #3b6bca;
+}
+.confirm-banner-c .banner-text { display: flex; flex-direction: column; gap: 3px; }
+.confirm-banner-c .banner-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #222;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.confirm-banner-c .banner-sub {
+  font-size: 12px;
+  color: #666;
+  line-height: 1.5;
+}
+
+/* ════════════════════════════════
+   Variant D — 步驟提示 + 按鈕（垂直 2 行）
+   ════════════════════════════════ */
+.confirm-banner-d {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 20px;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+.confirm-banner-d .step-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 12px;
+  color: #555;
+}
+.step-circle {
+  width: 20px; height: 20px;
+  border-radius: 50%;
+  background: #3b6bca;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.step-circle.done { background: #27ae60; }
+.step-divider { flex: 1; height: 1px; background: #ddd; }
+.confirm-banner-d .action-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 8px;
+  border-top: 1px dashed #eee;
+}
+.confirm-banner-d .action-sub {
+  font-size: 12px;
+  color: #888;
+  line-height: 1.5;
+}
+</style>
+</head>
+<body>
+
+<div class="page-title">
+  <h2>匯款清單 — 確認橫幅 Variants</h2>
+  <p>比較四種「確認已匯款」橫幅的視覺方向。橫幅放在週期列之後、表格之前。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     Variant A — 淡黃警示橫幅
+     ══════════════════════════════════════ -->
+<div class="variant-section">
+  <div class="variant-label">Variant A — 黃色警示橫幅</div>
+  <div class="variant-desc">以暖黃底色傳達「需要注意」的語氣，適合強調這個步驟有前置條件（要先去銀行匯款）。視覺上最顯眼。</div>
+  <div class="block-card">
+    <div class="page-header"><h1>匯款清單</h1></div>
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select><option>202604-2（本期）</option></select>
+      </div>
+      <button class="btn-download">下載</button>
+    </div>
+    <div class="confirm-banner-a">
+      <div class="banner-text">
+        <span class="banner-title">⚠ 請先前往銀行完成本次匯款，再回此頁確認</span>
+        <span class="banner-sub">確認後項目將標記為「已匯款」，狀態無法撤回。</span>
+      </div>
+      <button class="btn-confirm-payout">確認已匯款</button>
+    </div>
+    <table class="table-stub">
+      <thead><tr>
+        <th>訂單編號</th><th>收款人姓名</th><th>類型</th><th>匯出款項</th><th>狀態</th><th>實際匯款週期</th><th>建立日期</th><th>移除</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><a href="#">ORD-2026-0401</a></td><td>王大明</td><td>水電</td><td>3,200</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-10</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0389</a></td><td>李小華</td><td>泥作</td><td>5,800</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-09</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0375</a></td><td>陳建國</td><td>油漆</td><td>2,100</td><td><span class="tag tag-partial">部分匯款</span></td><td>202604-2</td><td>2026-04-08</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="pagination-stub">
+      <button class="pg-btn active">1</button>
+      <button class="pg-btn">2</button>
+      <button class="pg-btn">3</button>
+      <button class="pg-btn">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     Variant B — 藍色資訊橫幅
+     ══════════════════════════════════════ -->
+<div class="variant-section">
+  <div class="variant-label">Variant B — 藍色資訊橫幅</div>
+  <div class="variant-desc">沿用介面主色藍，語氣偏「引導」而非「警告」，適合視覺上希望整體感較統一的方向。</div>
+  <div class="block-card">
+    <div class="page-header"><h1>匯款清單</h1></div>
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select><option>202604-2（本期）</option></select>
+      </div>
+      <button class="btn-download">下載</button>
+    </div>
+    <div class="confirm-banner-b">
+      <div class="banner-text">
+        <span class="banner-title">ℹ 請先前往銀行完成本次匯款，再回此頁確認</span>
+        <span class="banner-sub">確認後項目將標記為「已匯款」，狀態無法撤回。</span>
+      </div>
+      <button class="btn-confirm-payout">確認已匯款</button>
+    </div>
+    <table class="table-stub">
+      <thead><tr>
+        <th>訂單編號</th><th>收款人姓名</th><th>類型</th><th>匯出款項</th><th>狀態</th><th>實際匯款週期</th><th>建立日期</th><th>移除</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><a href="#">ORD-2026-0401</a></td><td>王大明</td><td>水電</td><td>3,200</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-10</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0389</a></td><td>李小華</td><td>泥作</td><td>5,800</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-09</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0375</a></td><td>陳建國</td><td>油漆</td><td>2,100</td><td><span class="tag tag-partial">部分匯款</span></td><td>202604-2</td><td>2026-04-08</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="pagination-stub">
+      <button class="pg-btn active">1</button>
+      <button class="pg-btn">2</button>
+      <button class="pg-btn">3</button>
+      <button class="pg-btn">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     Variant C — 灰底 + 藍色上邊線
+     ══════════════════════════════════════ -->
+<div class="variant-section">
+  <div class="variant-label">Variant C — 灰底 + 藍色上邊線</div>
+  <div class="variant-desc">低調底色搭配藍色邊線，視覺重量比 A/B 輕，但仍有清楚的分隔感。適合不想讓橫幅太搶眼、把重心留在表格的方向。</div>
+  <div class="block-card">
+    <div class="page-header"><h1>匯款清單</h1></div>
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select><option>202604-2（本期）</option></select>
+      </div>
+      <button class="btn-download">下載</button>
+    </div>
+    <div class="confirm-banner-c">
+      <div class="banner-text">
+        <span class="banner-title">請先前往銀行完成本次匯款，再回此頁確認</span>
+        <span class="banner-sub">確認後項目將標記為「已匯款」，狀態無法撤回。</span>
+      </div>
+      <button class="btn-confirm-payout">確認已匯款</button>
+    </div>
+    <table class="table-stub">
+      <thead><tr>
+        <th>訂單編號</th><th>收款人姓名</th><th>類型</th><th>匯出款項</th><th>狀態</th><th>實際匯款週期</th><th>建立日期</th><th>移除</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><a href="#">ORD-2026-0401</a></td><td>王大明</td><td>水電</td><td>3,200</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-10</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0389</a></td><td>李小華</td><td>泥作</td><td>5,800</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-09</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0375</a></td><td>陳建國</td><td>油漆</td><td>2,100</td><td><span class="tag tag-partial">部分匯款</span></td><td>202604-2</td><td>2026-04-08</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="pagination-stub">
+      <button class="pg-btn active">1</button>
+      <button class="pg-btn">2</button>
+      <button class="pg-btn">3</button>
+      <button class="pg-btn">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     Variant D — 步驟提示帶
+     ══════════════════════════════════════ -->
+<div class="variant-section">
+  <div class="variant-label">Variant D — 步驟提示帶</div>
+  <div class="variant-desc">把「你現在在哪個步驟」明確顯示出來，讓使用者不需要記憶操作流程。適合想強調「這個動作在整個作業中的位置」的方向。</div>
+  <div class="block-card">
+    <div class="page-header"><h1>匯款清單</h1></div>
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select><option>202604-2（本期）</option></select>
+      </div>
+      <button class="btn-download">下載</button>
+    </div>
+    <div class="confirm-banner-d">
+      <div class="step-row">
+        <span class="step-circle done">✓</span>
+        <span>加入匯款清單</span>
+        <span class="step-divider"></span>
+        <span class="step-circle done">✓</span>
+        <span>前往銀行匯款</span>
+        <span class="step-divider"></span>
+        <span class="step-circle">3</span>
+        <span style="font-weight:600; color:#3b6bca;">回系統確認</span>
+        <span class="step-divider"></span>
+        <span class="step-circle" style="background:#ccc;">4</span>
+        <span style="color:#bbb;">完成</span>
+      </div>
+      <div class="action-row">
+        <span class="action-sub">已完成銀行匯款後，點擊確認。<br>確認後項目將標記為「已匯款」，狀態無法撤回。</span>
+        <button class="btn-confirm-payout">確認已匯款</button>
+      </div>
+    </div>
+    <table class="table-stub">
+      <thead><tr>
+        <th>訂單編號</th><th>收款人姓名</th><th>類型</th><th>匯出款項</th><th>狀態</th><th>實際匯款週期</th><th>建立日期</th><th>移除</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><a href="#">ORD-2026-0401</a></td><td>王大明</td><td>水電</td><td>3,200</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-10</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0389</a></td><td>李小華</td><td>泥作</td><td>5,800</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-09</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0375</a></td><td>陳建國</td><td>油漆</td><td>2,100</td><td><span class="tag tag-partial">部分匯款</span></td><td>202604-2</td><td>2026-04-08</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="pagination-stub">
+      <button class="pg-btn active">1</button>
+      <button class="pg-btn">2</button>
+      <button class="pg-btn">3</button>
+      <button class="pg-btn">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     新方向：確認按鈕移入週期列
+     ══════════════════════════════════════ -->
+
+<div style="margin: 48px 0 16px; font-size: 18px; font-weight: 700; color: #222; border-top: 2px solid #3b6bca; padding-top: 24px;">
+  新方向 — 確認按鈕移入週期列
+</div>
+<p style="font-size: 13px; color: #555; margin-bottom: 32px; line-height: 1.6;">
+  確認已匯款是針對整期清單的區塊操作，與週期選擇同層。disabled 條件：該期清單內無待匯款資料。<br>
+  以下測試三種提示文案的呈現方式。
+</p>
+
+<!-- ── E1：tooltip icon button ── -->
+<div class="variant-section">
+  <div class="variant-label">Variant E1 — Tooltip Icon Button（更新）</div>
+  <div class="variant-desc">下載與確認用分隔線切開，ⓘ 移到確認按鈕右側，強調兩者是不同性質的操作。</div>
+  <div class="block-card">
+    <div class="page-header"><h1>匯款清單</h1></div>
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select><option>202604-2（本期）</option><option>202604-1</option></select>
+      </div>
+      <div class="confirm-inline">
+        <button class="btn-download">下載</button>
+        <div class="confirm-divider"></div>
+        <button class="btn-confirm-payout">確認已匯款</button>
+        <div class="confirm-info-wrap">
+          <button class="btn-info-icon" tabindex="0">ⓘ</button>
+          <div class="confirm-tooltip confirm-tooltip-left">
+            請先前往銀行完成本次匯款，再回此頁確認。<br>確認後狀態將標記為「已匯款」，無法撤回。
+          </div>
+        </div>
+      </div>
+    </div>
+    <table class="table-stub">
+      <thead><tr>
+        <th>訂單編號</th><th>收款人姓名</th><th>類型</th><th>匯出款項</th><th>狀態</th><th>實際匯款週期</th><th>建立日期</th><th>移除</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><a href="#">ORD-2026-0401</a></td><td>王大明</td><td>水電</td><td>3,200</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-10</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0389</a></td><td>李小華</td><td>泥作</td><td>5,800</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-09</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0375</a></td><td>陳建國</td><td>油漆</td><td>2,100</td><td><span class="tag tag-partial">部分匯款</span></td><td>202604-2</td><td>2026-04-08</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="pagination-stub">
+      <button class="pg-btn active">1</button><button class="pg-btn">2</button><button class="pg-btn">3</button><button class="pg-btn">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── E2：inline hint text ── -->
+<div class="variant-section">
+  <div class="variant-label">Variant E2 — Inline Hint Text</div>
+  <div class="variant-desc">按鈕左側放一行灰色提示文字，常駐顯示。比橫幅輕，但比 tooltip 更即時可見，適合擔心使用者不會 hover icon 的情況。</div>
+  <div class="block-card">
+    <div class="page-header"><h1>匯款清單</h1></div>
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select><option>202604-2（本期）</option><option>202604-1</option></select>
+      </div>
+      <div class="confirm-inline">
+        <span class="confirm-hint-text">請先完成銀行匯款再確認</span>
+        <button class="btn-confirm-payout">確認已匯款</button>
+        <button class="btn-download">下載</button>
+      </div>
+    </div>
+    <table class="table-stub">
+      <thead><tr>
+        <th>訂單編號</th><th>收款人姓名</th><th>類型</th><th>匯出款項</th><th>狀態</th><th>實際匯款週期</th><th>建立日期</th><th>移除</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><a href="#">ORD-2026-0401</a></td><td>王大明</td><td>水電</td><td>3,200</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-10</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0389</a></td><td>李小華</td><td>泥作</td><td>5,800</td><td><span class="tag tag-pending">待匯款</span></td><td>202604-2</td><td>2026-04-09</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0375</a></td><td>陳建國</td><td>油漆</td><td>2,100</td><td><span class="tag tag-partial">部分匯款</span></td><td>202604-2</td><td>2026-04-08</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="pagination-stub">
+      <button class="pg-btn active">1</button><button class="pg-btn">2</button><button class="pg-btn">3</button><button class="pg-btn">›</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── E3：disabled 狀態對照 ── -->
+<div class="variant-section">
+  <div class="variant-label">Variant E3 — Disabled 狀態（無待匯款資料）</div>
+  <div class="variant-desc">該期清單無待匯款資料時，按鈕 disabled，icon tooltip 說明原因。對照用。</div>
+  <div class="block-card">
+    <div class="page-header"><h1>匯款清單</h1></div>
+    <div class="period-bar">
+      <div class="period-selector">
+        <label>匯款週期</label>
+        <select><option>202604-1</option><option>202604-2（本期）</option></select>
+      </div>
+      <div class="confirm-inline">
+        <button class="btn-download">下載</button>
+        <div class="confirm-divider"></div>
+        <button class="btn-confirm-payout" disabled style="opacity:0.4; cursor:not-allowed;">確認已匯款</button>
+        <div class="confirm-info-wrap">
+          <button class="btn-info-icon" tabindex="0">ⓘ</button>
+          <div class="confirm-tooltip confirm-tooltip-left">此週期無待匯款項目，無需確認。</div>
+        </div>
+      </div>
+    </div>
+    <table class="table-stub">
+      <thead><tr>
+        <th>訂單編號</th><th>收款人姓名</th><th>類型</th><th>匯出款項</th><th>狀態</th><th>實際匯款週期</th><th>建立日期</th><th>移除</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><a href="#">ORD-2026-0210</a></td><td>黃志明</td><td>冷氣</td><td>4,500</td><td><span class="tag" style="background:#e8f5e9;color:#2e7d32;">已匯款</span></td><td>202604-1</td><td>2026-04-02</td><td>—</td></tr>
+        <tr><td><a href="#">ORD-2026-0198</a></td><td>林佳慧</td><td>水電</td><td>1,800</td><td><span class="tag" style="background:#e8f5e9;color:#2e7d32;">已匯款</span></td><td>202604-1</td><td>2026-04-01</td><td>—</td></tr>
+      </tbody>
+    </table>
+    <div class="pagination-stub">
+      <button class="pg-btn active">1</button>
+    </div>
+  </div>
+</div>
+
+<style>
+/* ── 新方向共用 ── */
+.confirm-inline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.confirm-hint-text {
+  font-size: 12px;
+  color: #999;
+  white-space: nowrap;
+}
+
+/* ── Tooltip icon ── */
+.confirm-info-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.btn-info-icon {
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 15px;
+  cursor: pointer;
+  padding: 2px 4px;
+  line-height: 1;
+  border-radius: 4px;
+}
+.btn-info-icon:hover { color: #3b6bca; }
+
+.confirm-tooltip {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 8px);
+  background: #222;
+  color: white;
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 8px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.confirm-tooltip::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  right: 10px;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #222;
+}
+.confirm-info-wrap:hover .confirm-tooltip { display: block; }
+
+.confirm-divider {
+  width: 1px;
+  height: 20px;
+  background: #ddd;
+  flex-shrink: 0;
+}
+
+.confirm-tooltip-left {
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.confirm-tooltip-left::before {
+  right: auto;
+  left: 50%;
+  transform: translateX(-50%);
+}
+</style>
+
+</body>
+</html>

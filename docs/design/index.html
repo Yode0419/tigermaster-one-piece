@@ -91,6 +91,16 @@
       color: #2e7d32;
     }
 
+    .badge.preferred {
+      background: #fff3e0;
+      color: #e65100;
+    }
+
+    .card.preferred-card {
+      border-color: #ffb74d;
+      box-shadow: 0 0 0 2px #ffe0b2;
+    }
+
     .card-version {
       font-size: 12px;
       color: #aaa;
@@ -115,6 +125,20 @@
       display: flex;
       align-items: center;
       gap: 4px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #bbb;
+      margin: 40px 0 14px;
+    }
+
+    .badge.variant {
+      background: #f3e8ff;
+      color: #6b21a8;
     }
 
     footer {
@@ -179,9 +203,9 @@
       <div class="card-arrow">開啟原型 →</div>
     </a>
 
-    <a class="card" href="reconciliation-prototype-v5.html">
+    <a class="card preferred-card" href="reconciliation-prototype-v5.html">
       <div class="card-meta">
-        <span class="badge">V5</span>
+        <span class="badge preferred">V5 傾向方案</span>
       </div>
       <h2>撥款作業（三區塊完整版）</h2>
       <p>新增流程導覽列、前期未匯區塊（跨期補漏），區塊順序調整為師傅收入明細 → 前期未匯 → 匯款清單。</p>
@@ -195,6 +219,20 @@
       <h2>撥款作業（Tab 佈局）</h2>
       <p>師傅收入明細與前期未匯合併為 Tab 切換，匯款清單常駐下方，解決筆電寬度與垂直捲動問題。</p>
       <div class="card-arrow">開啟原型 →</div>
+    </a>
+
+  </div>
+
+  <div class="section-label">設計探索</div>
+  <div class="grid">
+
+    <a class="card" href="variants-confirm-banner.html">
+      <div class="card-meta">
+        <span class="badge variant">Variants</span>
+      </div>
+      <h2>匯款清單 — 確認橫幅</h2>
+      <p>比較四種「確認已匯款」橫幅排版方向：黃色警示、藍色資訊、灰底邊線、步驟提示帶。</p>
+      <div class="card-arrow">開啟對照 →</div>
     </a>
 
   </div>
