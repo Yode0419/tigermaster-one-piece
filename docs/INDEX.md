@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-_Last updated: 2026-04-14_
+_Last updated: 2026-04-27_
 
 
 ```
@@ -10,7 +10,7 @@ docs/
 ├── operations/   — 平台各項運作規範
 ├── business/     — 收費邏輯、金流規則與商業模式
 ├── legal/        — 各項條款與政策原文歸檔
-├── design/       — 功能規劃與設計探索文件
+├── design/       — 功能規劃、設計探索文件與互動原型（依功能分類）
 └── _drafts/      — 草稿（架構已建立，內容待補）
 ```
 
@@ -85,16 +85,25 @@ docs/
 - **[派遣費說明條款](legal/dispatch-fee-terms.md)**
   `dispatch-fee-terms.md` — 客戶叫修時同意的派遣費支付規則原文 _(2026-04-08)_
 
-## design/
+## design/reconciliation/
 
-- **[對帳作業優化：師傅視角與撥款操作改善](design/reconciliation-optimization.md)**
+- **[設計原型索引 — 撥款作業](design/reconciliation/prototype/index.html)**
+  `prototype/` — 撥款作業後台介面的互動原型（v1–v6），含各版本迭代與 confirm banner 變體 _(2026-04-27)_
+- **[對帳作業優化：師傅視角與撥款操作改善](design/reconciliation/reconciliation-optimization.md)**
   `reconciliation-optimization.md` — 後台匯款資訊頁面的優化規劃，新增師傅維度視角、批次操作與 invoice_no 填入流程，並封鎖誤用的狀態直改路徑 _(2026-04-13)_
-- **[師傅詳情頁新增「請款方式」欄位](design/master-payout-method-field.md)**
+- **[師傅詳情頁新增「請款方式」欄位](design/reconciliation/master-payout-method-field.md)**
   `master-payout-method-field.md` — 後台師傅詳情頁新增請款方式 Radio Group 的 UI 設計規格，含空值處理、檢視／編輯模式行為與元件選型決策 _(2026-04-13)_
-- **[對帳與撥款作業優化：討論議程](design/reconciliation-discussion-agenda.md)**
+- **[對帳與撥款作業優化：討論議程](design/reconciliation/reconciliation-discussion-agenda.md)**
   `reconciliation-discussion-agenda.md` — 與董事長、總經理討論對帳與撥款作業優化的議程，含現有功能說明、對帳細節與撥款細節的待釐清事項 _(2026-04-14)_
-- **[對帳與撥款作業優化：主管討論結果與調整方向](design/reconciliation-discussion-results.md)**
+- **[對帳與撥款作業優化：主管討論結果與調整方向](design/reconciliation/reconciliation-discussion-results.md)**
   `reconciliation-discussion-results.md` — 董事長、總經理討論後的確認決策、新增規格（週期切換、中間款項請領、師傅報稅欄位）與待釐清事項 _(2026-04-14)_
+- **[撥款作業介面調整討論紀錄](design/reconciliation/payout-interface-redesign.md)**
+  `payout-interface-redesign.md` — 撥款後台三區塊的文案、版面與互動行為詳細設計紀錄，含術語對照表與各區塊決策說明 _(2026-04-14)_
+
+## design/pro-membership/
+
+- **[Pro 升級頁面：Tiger Points 折抵規則說明與邏輯修正](design/pro-membership/pro-tiger-points-rule-clarification.md)**
+  `pro-tiger-points-rule-clarification.md` — Pro 升級頁面新增折抵範圍說明的 UI 優化規劃，含後端邏輯修正方向、兩處文案設計與正面敘述策略 _(2026-04-27)_
 
 ## 草稿區（_drafts/）
 
