@@ -50,7 +50,7 @@ docs/
 - **[施工流程](process/construction-flow.md)**
   `construction-flow.md` — 施工進行中的師傅操作、材料採購分工與客服專案管理師角色 _(2026-03-31)_
 - **[完工驗收流程](process/completion-flow.md)**
-  `completion-flow.md` — 完工驗收方式、尾款支付流程與例外處理 _(2026-03-31)_
+  `completion-flow.md` — 完工驗收方式、尾款支付流程（含 Tiger Points 折抵機制）與例外處理 _(2026-04-27)_
 - **[完工後評價與小費機制](process/rating-and-tip.md)**
   `rating-and-tip.md` — 完工後雙向評價機制、小費功能與師傅星數顯示邏輯 _(2026-04-01)_
 - **[保固機制與售後服務流程](process/warranty-flow.md)**
