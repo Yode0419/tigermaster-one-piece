@@ -61,7 +61,7 @@ docs/
 - **[師傅招募與管理機制](operations/technician-onboarding.md)**
   `technician-onboarding.md` — 師傅招募、報價與淘汰機制 _(2026-03-26)_
 - **[常見問題原文](operations/faq.md)**
-  `faq.md` — 官網 Q&A（有下定相關問題、帳號相關問題）與 App 常見下單問題原文 _(2026-04-09)_
+  `faq.md` — 官網 Q&A（有下定相關問題、帳號相關問題）與 App 常見下單問題原文 _(2026-04-27)_
 
 ## business/
 
@@ -77,11 +77,11 @@ docs/
 - **[師傅管理辦法](legal/master-management-policy.md)**
   `master-management-policy.md` — 師傅管理辦法原文（接案、報價、保固、佣金等條款） _(2026-03-30)_
 - **[法律條款](legal/legal-terms.md)**
-  `legal-terms.md` — 平台法律條款原文 _(2026-04-08)_
+  `legal-terms.md` — 平台法律條款原文，含第 6.3 條平台服務費用說明 _(2026-04-27)_
 - **[Pro 會員服務條款](legal/pro-membership-terms.md)**
-  `pro-membership-terms.md` — 師虎來了 Pro 會員服務條款原文 _(2026-04-08)_
+  `pro-membership-terms.md` — 師虎來了 Pro 會員服務條款原文，含第 6.3 條 Tiger Points 折抵適用範圍 _(2026-04-27)_
 - **[報價單條款](legal/quotation-terms.md)**
-  `quotation-terms.md` — 報價單上的條款原文 _(2026-04-08)_
+  `quotation-terms.md` — 報價單上的條款原文 _(2026-04-27)_
 - **[派遣費說明條款](legal/dispatch-fee-terms.md)**
   `dispatch-fee-terms.md` — 客戶叫修時同意的派遣費支付規則原文 _(2026-04-08)_
 
@@ -100,10 +100,12 @@ docs/
 - **[撥款作業介面調整討論紀錄](design/reconciliation/payout-interface-redesign.md)**
   `payout-interface-redesign.md` — 撥款後台三區塊的文案、版面與互動行為詳細設計紀錄，含術語對照表與各區塊決策說明 _(2026-04-14)_
 
-## design/pro-membership/
+## design/tiger-points-and-terms/
 
-- **[Pro 升級頁面：Tiger Points 折抵規則說明與邏輯修正](design/pro-membership/pro-tiger-points-rule-clarification.md)**
-  `pro-tiger-points-rule-clarification.md` — Pro 升級頁面新增折抵範圍說明的 UI 優化規劃，含後端邏輯修正方向、兩處文案設計與正面敘述策略 _(2026-04-27)_
+- **[Pro 升級頁面：Tiger Points 折抵規則說明與邏輯修正](design/tiger-points-and-terms/pro-tiger-points-rule-clarification.md)**
+  `pro-tiger-points-rule-clarification.md` — Pro 升級頁面新增折抵範圍說明的 UI 優化規劃，含後端邏輯修正方向、兩處文案設計、正面敘述策略，及官網 Q1／Q3 更新內容 _(2026-04-27)_
+- **[法律條款補充平台服務費用說明](design/tiger-points-and-terms/2026-04-27-service-fee-clause-amendment.md)**
+  `2026-04-27-service-fee-clause-amendment.md` — 因客訴決定在法律條款第 6 條新增平台服務費用說明段落（6.3），含條號順移影響範圍與執行事項 _(2026-04-27)_
 
 ## 草稿區（_drafts/）
 
