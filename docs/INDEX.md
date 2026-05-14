@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-_Last updated: 2026-04-27_
+_Last updated: 2026-05-14_
 
 
 ```
@@ -106,6 +106,8 @@ docs/
   `pro-tiger-points-rule-clarification.md` — Pro 升級頁面新增折抵範圍說明的 UI 優化規劃，含後端邏輯修正方向、兩處文案設計、正面敘述策略，及官網 Q1／Q3 更新內容 _(2026-04-27)_
 - **[法律條款補充平台服務費用說明](design/tiger-points-and-terms/2026-04-27-service-fee-clause-amendment.md)**
   `2026-04-27-service-fee-clause-amendment.md` — 因客訴決定在法律條款第 6 條新增平台服務費用說明段落（6.3），含條號順移影響範圍與執行事項 _(2026-04-27)_
+- **[Tiger Points 說明頁文案補充與支付頁優化](design/tiger-points-and-terms/tiger-points-payment-visibility-improvement.md)**
+  `tiger-points-payment-visibility-improvement.md` — 因客戶付款後要求補折抵而進行的雙軌優化：支付頁置底區塊新增點數提示、說明 bottom sheet 新增第 4 條限制文案 _(2026-05-14)_
 
 ## 草稿區（_drafts/）
 
