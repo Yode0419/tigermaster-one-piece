@@ -1,17 +1,20 @@
 # Knowledge Base Index
 
-_Last updated: 2026-05-18_
+_Last updated: 2026-05-22_
 
 
 ```
 docs/
-├── product/      — 產品定位、功能架構與服務設計
-├── process/      — 各流程的執行步驟與細節
-├── operations/   — 平台各項運作規範
-├── business/     — 收費邏輯、金流規則與商業模式
-├── legal/        — 各項條款與政策原文歸檔
-├── design/       — 功能規劃、設計探索文件與互動原型（依功能分類）
-└── _drafts/      — 草稿（架構已建立，內容待補）
+├── product/              — 產品定位、功能架構與服務設計
+├── process/              — 各流程的執行步驟與細節
+├── operations/           — 平台各項運作規範
+├── business/             — 收費邏輯、金流規則與商業模式
+├── legal/                — 各項條款與政策原文歸檔
+├── design/               — 功能規劃、設計探索文件與互動原型（依功能分類）
+│   ├── order-flag/       — 訂單旗標功能設計
+│   ├── reconciliation/   — 對帳與撥款作業
+│   └── tiger-points-and-terms/ — Tiger Points 與條款調整
+└── _drafts/              — 草稿（架構已建立，內容待補）
 ```
 
 ---
@@ -84,6 +87,11 @@ docs/
   `quotation-terms.md` — 報價單上的條款原文 _(2026-04-27)_
 - **[派遣費說明條款](legal/dispatch-fee-terms.md)**
   `dispatch-fee-terms.md` — 客戶叫修時同意的派遣費支付規則原文 _(2026-04-08)_
+
+## design/order-flag/
+
+- **[訂單旗標：不支付給師傅車馬費](design/order-flag/no-pay-dispatch-fee.md)**
+  `no-pay-dispatch-fee.md` — 補完開發到一半的旗標邏輯，含文案調整、權限控制、儲存觸發規則與車馬費產生時的旗標判斷 _(2026-05-22)_
 
 ## design/reconciliation/
 
