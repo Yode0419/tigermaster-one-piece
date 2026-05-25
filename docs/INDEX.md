@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-_Last updated: 2026-05-22_
+_Last updated: 2026-05-25_
 
 
 ```
@@ -11,9 +11,6 @@ docs/
 ├── business/             — 收費邏輯、金流規則與商業模式
 ├── legal/                — 各項條款與政策原文歸檔
 ├── design/               — 功能規劃、設計探索文件與互動原型（依功能分類）
-│   ├── order-flag/       — 訂單旗標功能設計
-│   ├── reconciliation/   — 對帳與撥款作業
-│   └── tiger-points-and-terms/ — Tiger Points 與條款調整
 └── _drafts/              — 草稿（架構已建立，內容待補）
 ```
 
@@ -91,7 +88,7 @@ docs/
 ## design/order-flag/
 
 - **[訂單旗標：不支付給師傅車馬費](design/order-flag/no-pay-dispatch-fee.md)**
-  `no-pay-dispatch-fee.md` — 補完開發到一半的旗標邏輯，含文案調整、權限控制、儲存觸發規則與車馬費產生時的旗標判斷 _(2026-05-22)_
+  `no-pay-dispatch-fee.md` — 補完開發到一半的旗標邏輯，含文案調整、權限控制、儲存觸發規則、車馬費產生時的旗標判斷與系統註記格式 _(2026-05-25)_
 
 ## design/reconciliation/
 
