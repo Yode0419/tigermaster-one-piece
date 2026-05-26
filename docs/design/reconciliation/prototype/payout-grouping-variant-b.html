@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方案 B — 師傅分組（側欄＋詳情）</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+}
+
+/* ── back link ── */
+.back-bar {
+  padding: 6px 16px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 12px;
+  color: #888;
+}
+.back-bar a { color: #888; text-decoration: none; }
+.back-bar a:hover { color: #333; }
+
+/* ── page header (藍色標題列) ── */
+.page-header {
+  background: #2e86c1;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+}
+.page-header h1 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #fff;
+}
+
+/* ── controls row ── */
+.controls-row {
+  display: flex;
+  align-items: center;
+  padding: 10px 16px;
+  border-bottom: 1px solid #dee2e6;
+  gap: 8px;
+}
+.period-label {
+  font-size: 13px;
+  color: #555;
+  white-space: nowrap;
+}
+.period-sel {
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 4px 24px 4px 8px;
+  font-size: 13px;
+  color: #333;
+  appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 8px center;
+  cursor: pointer;
+}
+.controls-spacer { flex: 1; }
+.btn-dl {
+  background: #27ae60;
+  color: #fff;
+  border: none;
+  padding: 5px 14px;
+  font-size: 13px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn-dl:hover { background: #229954; }
+.btn-confirm {
+  background: #2e86c1;
+  color: #fff;
+  border: none;
+  padding: 5px 14px;
+  font-size: 13px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn-confirm:hover { background: #2471a3; }
+.btn-confirm:disabled { background: #adb5bd; cursor: not-allowed; }
+
+/* tooltip */
+.tip-wrap { position: relative; display: inline-flex; align-items: center; }
+.tip-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 16px; height: 16px;
+  border-radius: 50%; border: 1px solid #adb5bd;
+  color: #adb5bd; font-size: 11px; cursor: help; user-select: none;
+}
+.tip-box {
+  display: none; position: absolute; right: 0; top: 22px;
+  background: #333; color: #fff;
+  font-size: 12px; padding: 7px 10px; border-radius: 4px;
+  width: 260px; line-height: 1.7; z-index: 300; white-space: normal;
+}
+.tip-wrap:hover .tip-box { display: block; }
+
+/* ── split layout ── */
+.split-layout {
+  display: flex;
+  min-height: 520px;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* ── master sidebar ── */
+.master-sidebar {
+  width: 260px;
+  min-width: 240px;
+  flex-shrink: 0;
+  border-right: 1px solid #dee2e6;
+  display: flex;
+  flex-direction: column;
+}
+.sb-search-wrap {
+  padding: 8px;
+  border-bottom: 1px solid #dee2e6;
+  display: flex;
+  gap: 4px;
+}
+.sb-search {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid #ced4da;
+  border-radius: 3px;
+  padding: 4px 8px;
+  font-size: 13px;
+  color: #333;
+  outline: none;
+}
+.sb-search:focus { border-color: #2e86c1; }
+.sb-btn-search {
+  background: #2e86c1; color: #fff; border: none;
+  padding: 4px 10px; border-radius: 3px; font-size: 13px; cursor: pointer;
+  white-space: nowrap; flex-shrink: 0;
+}
+.sb-btn-search:hover { background: #2471a3; }
+.sb-btn-clear {
+  background: #fff; color: #e74c3c;
+  border: 1px solid #e74c3c;
+  padding: 4px 10px; border-radius: 3px; font-size: 13px; cursor: pointer;
+  white-space: nowrap; flex-shrink: 0;
+}
+.sb-btn-clear:hover { background: #fdf2f0; }
+.sb-list { flex: 1; overflow-y: auto; }
+
+/* sidebar item */
+.sidebar-item {
+  padding: 7px 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #f2f2f2;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.1s;
+}
+.sidebar-item:last-child { border-bottom: none; }
+.sidebar-item:hover { background: #f8f9fa; }
+.sidebar-item.active { background: #2e86c1; }
+.si-name { font-size: 13px; color: #333; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+.sidebar-item.active .si-name { color: #fff; }
+.si-total { font-size: 13px; color: #555; white-space: nowrap; margin-left: auto; }
+.sidebar-item.active .si-total { color: #fff; }
+
+/* payment method tags */
+.tag-invoice { font-size: 12px; color: #1e40af; white-space: nowrap; flex-shrink: 0; }
+.tag-lump    { font-size: 12px; color: #166534; white-space: nowrap; flex-shrink: 0; }
+.tag-split   { font-size: 12px; color: #6b21a8; white-space: nowrap; flex-shrink: 0; }
+.sidebar-item.active .tag-invoice,
+.sidebar-item.active .tag-lump,
+.sidebar-item.active .tag-split { color: rgba(255,255,255,0.9); }
+
+.sb-no-result {
+  padding: 20px 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #aaa;
+}
+
+/* ── detail panel ── */
+.detail-panel {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.detail-empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ccc;
+  font-size: 13px;
+}
+
+/* detail master header */
+.detail-master-header {
+  padding: 10px 16px 8px;
+  border-bottom: 1px solid #dee2e6;
+  background: #fff;
+}
+.dh-row1 {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.dh-row2 {
+  font-size: 13px;
+  color: #555;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.dh-name  { font-size: 16px; font-weight: 700; color: #333; }
+.dh-sep   { color: #ddd; }
+.dh-total { margin-left: auto; font-size: 20px; font-weight: 700; color: #333; }
+.dh-label { color: #888; margin-right: 2px; }
+.dh-val   { color: #333; }
+.dh-acno  { font-weight: 700; color: #222; letter-spacing: 0.03em; }
+
+/* detail table */
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.detail-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 400;
+  color: #888;
+  border-bottom: 1px solid #dee2e6;
+  background: #fff;
+  white-space: nowrap;
+}
+.detail-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f0f0f0;
+  color: #333;
+  vertical-align: middle;
+}
+.detail-table tr:last-child td { border-bottom: none; }
+
+/* status — plain text */
+.status-pending { color: #b7700a; }
+.status-done    { color: #1a7a3f; }
+
+/* remove button */
+.btn-rm {
+  background: #fff;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  font-size: 13px;
+  cursor: pointer;
+  padding: 3px 10px;
+  border-radius: 3px;
+  white-space: nowrap;
+}
+.btn-rm:hover { background: #fdf2f0; }
+
+/* modal */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 1000; align-items: center; justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: #fff;
+  border-radius: 4px;
+  padding: 24px 28px;
+  max-width: 400px; width: 90%;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.modal h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; color: #333; }
+.modal p  { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 4px; }
+.modal-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 20px; }
+.btn-mc {
+  border: 1px solid #ced4da; background: #fff; color: #555;
+  padding: 5px 16px; border-radius: 3px; font-size: 13px; cursor: pointer;
+}
+.btn-mc:hover { background: #f8f9fa; }
+.btn-mo {
+  background: #27ae60; color: #fff; border: none;
+  padding: 5px 16px; border-radius: 3px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.btn-mo:hover { background: #229954; }
+
+/* toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%;
+  transform: translateX(-50%) translateY(12px);
+  background: #333; color: #fff;
+  padding: 9px 20px; border-radius: 4px; font-size: 13px;
+  opacity: 0; transition: opacity 0.2s, transform 0.2s;
+  pointer-events: none; z-index: 9999; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+</style>
+</head>
+<body>
+
+<div class="back-bar">
+  <a href="index.html">← 返回索引</a>
+  &nbsp;｜&nbsp; 後期優化探索 — 方案 B：師傅分組（側欄＋詳情）
+</div>
+
+<div class="page-header">
+  <h1>匯款清單</h1>
+</div>
+
+<div class="controls-row">
+  <span class="period-label">匯款週期</span>
+  <select class="period-sel" id="period-sel" onchange="onPeriodChange()">
+    <option value="202604-2">202604-2（本期）</option>
+    <option value="202604-1">202604-1</option>
+  </select>
+  <div class="controls-spacer"></div>
+  <button class="btn-dl" onclick="showToast('✓ Excel 下載中…')">下載</button>
+  <button class="btn-confirm" id="btn-confirm" onclick="openModal()">確認已匯款</button>
+  <div class="tip-wrap">
+    <span class="tip-icon">?</span>
+    <span class="tip-box">請先至銀行完成本次匯款，再確認。<br>確認後「待匯款」項目將標記為「已匯款」，無法移除。</span>
+  </div>
+</div>
+
+<div class="split-layout">
+
+  <div class="master-sidebar">
+    <div class="sb-search-wrap">
+      <input class="sb-search" id="sb-search" type="text" placeholder="搜尋師傅姓名" />
+      <button class="sb-btn-search" onclick="onSearch()">搜尋</button>
+      <button class="sb-btn-clear" onclick="clearSearch()">清空</button>
+    </div>
+    <div class="sb-list" id="sb-list"></div>
+  </div>
+
+  <div class="detail-panel" id="detail-panel">
+    <div class="detail-empty">← 點選左側師傅查看明細</div>
+  </div>
+
+</div>
+
+<!-- 確認已匯款 Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h3>請確認已在銀行完成匯款</h3>
+    <p>確認前，請確保已至銀行完成本次匯款。</p>
+    <p>確認後，「待匯款」項目將標記為「已匯款」，無法再移除。</p>
+    <div class="modal-actions">
+      <button class="btn-mc" onclick="closeModal()">取消</button>
+      <button class="btn-mo" onclick="doConfirm()">確認已匯款</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Mock Data ────────────────────────────────────────────────
+const PERIODS_RAW = {
+  '202604-2': [
+    { id:'m1', name:'林志亮', payment:'整筆個人',
+      accountName:'林志亮', bankName:'玉山銀行', bankCode:'808', branchName:'新竹分行', branchCode:'0132', accountNo:'8080013200012345',
+      rows:[
+        { id:'r1a', no:'RO2026041400016', type:'完成訂單', amount:2200, status:'待匯款', period:'202604-2', date:'2026-04-14 09:32:11' },
+        { id:'r1b', no:'RO2026041300015', type:'完成訂單', amount:1800, status:'待匯款', period:'202604-2', date:'2026-04-13 14:20:05' },
+        { id:'r1c', no:'RO2026041000008', type:'完成訂單', amount:1600, status:'待匯款', period:'202604-2', date:'2026-04-10 11:05:48' },
+      ]
+    },
+    { id:'m2', name:'徐晨皓', payment:'開立發票',
+      accountName:'晨皓工程行', bankName:'國泰世華', bankCode:'013', branchName:'中正分行', branchCode:'0021', accountNo:'0130021098765432',
+      rows:[
+        { id:'r2a', no:'RO2026040400008', type:'完成訂單', amount:75000, status:'待匯款', period:'202604-2', date:'2026-04-04 16:44:22' },
+        { id:'r2b', no:'RO2026032000003', type:'完成訂單', amount:8000,  status:'已匯款', period:'202603-2', date:'2026-03-20 10:18:37' },
+      ]
+    },
+    { id:'m3', name:'李思頡', payment:'整筆個人',
+      accountName:'李思頡', bankName:'台灣銀行', bankCode:'004', branchName:'桃園分行', branchCode:'0056', accountNo:'0040056056789012',
+      rows:[
+        { id:'r3a', no:'RO2026041300003', type:'完成訂單', amount:4000, status:'待匯款', period:'202604-2', date:'2026-04-13 08:55:01' },
+      ]
+    },
+    { id:'m4', name:'陳奕臣', payment:'分期個人',
+      accountName:'陳奕臣', bankName:'第一銀行', bankCode:'007', branchName:'信義分行', branchCode:'0089', accountNo:'0070089034567890',
+      rows:[
+        { id:'r4a', no:'RO2026041300009', type:'完成訂單', amount:3000, status:'待匯款', period:'202604-2', date:'2026-04-13 13:22:40' },
+      ]
+    },
+    { id:'m5', name:'謝祐豪', payment:'整筆個人',
+      accountName:'謝祐豪', bankName:'中信銀行', bankCode:'822', branchName:'松山分行', branchCode:'0043', accountNo:'8220043078901234',
+      rows:[
+        { id:'r5a', no:'RO2026041100012', type:'訂單取消', amount:200, status:'待匯款', period:'202604-2', date:'2026-04-11 17:03:29' },
+      ]
+    },
+    { id:'m6', name:'吳柏輝', payment:'開立發票',
+      accountName:'柏輝水電工程', bankName:'兆豐銀行', bankCode:'017', branchName:'南京分行', branchCode:'0065', accountNo:'0170065065432109',
+      rows:[
+        { id:'r6a', no:'RO2026040400008', type:'訂單取消', amount:200, status:'待匯款', period:'202604-2', date:'2026-04-04 09:11:55' },
+      ]
+    },
+    { id:'m7', name:'莊上暐', payment:'分期個人',
+      accountName:'莊上暐', bankName:'中華郵政', bankCode:'700', branchName:'板橋郵局', branchCode:'0012', accountNo:'7000012089012345',
+      rows:[
+        { id:'r7a', no:'RO2026040600003', type:'訂單取消', amount:200, status:'待匯款', period:'202604-2', date:'2026-04-06 11:47:08' },
+      ]
+    },
+    { id:'m8', name:'胡振釗', payment:'整筆個人',
+      accountName:'胡振釗', bankName:'永豐銀行', bankCode:'807', branchName:'三重分行', branchCode:'0034', accountNo:'8070034023456789',
+      rows:[
+        { id:'r8a', no:'RO2026041500006', type:'訂單取消', amount:200, status:'待匯款', period:'202604-2', date:'2026-04-15 15:28:33' },
+      ]
+    },
+  ],
+  '202604-1': [
+    { id:'m9', name:'陳達人', payment:'開立發票',
+      accountName:'達人冷氣工程', bankName:'合庫銀行', bankCode:'006', branchName:'中山分行', branchCode:'0078', accountNo:'0060078089012345',
+      rows:[
+        { id:'r9a', no:'RO2026040100001', type:'完成訂單', amount:10960, status:'待匯款', period:'202604-1', date:'2026-04-01 09:00:12' },
+      ]
+    },
+    { id:'m10', name:'寧佑昇', payment:'整筆個人',
+      accountName:'寧佑昇', bankName:'台新銀行', bankCode:'812', branchName:'忠孝分行', branchCode:'0023', accountNo:'8120023023456789',
+      rows:[
+        { id:'r10a', no:'RO2026040200003', type:'訂單取消', amount:200, status:'待匯款', period:'202604-1', date:'2026-04-02 14:55:44' },
+      ]
+    },
+    { id:'m11', name:'林志亮', payment:'整筆個人',
+      accountName:'林志亮', bankName:'玉山銀行', bankCode:'808', branchName:'新竹分行', branchCode:'0132', accountNo:'8080013200012345',
+      rows:[
+        { id:'r11a', no:'RO2026040300007', type:'完成訂單', amount:500, status:'待匯款', period:'202604-1', date:'2026-04-03 10:30:19' },
+      ]
+    },
+    { id:'m12', name:'吳柏輝', payment:'開立發票',
+      accountName:'柏輝水電工程', bankName:'兆豐銀行', bankCode:'017', branchName:'南京分行', branchCode:'0065', accountNo:'0170065065432109',
+      rows:[
+        { id:'r12a', no:'RO2026040400011', type:'完成訂單', amount:1800, status:'待匯款', period:'202604-1', date:'2026-04-04 16:12:07' },
+      ]
+    },
+  ],
+};
+
+let state = JSON.parse(JSON.stringify(PERIODS_RAW));
+let selectedId  = null;
+let filterQuery = '';
+
+const getPeriod   = () => document.getElementById('period-sel').value;
+const getMasters  = () => state[getPeriod()] || [];
+const totalSum    = (m) => m.rows.reduce((s, r) => s + r.amount, 0);
+const hasPending  = () => getMasters().some(m => m.rows.some(r => r.status === '待匯款'));
+const fmt         = (n) => 'NT$' + n.toLocaleString('zh-TW');
+
+function paymentTagHtml(payment) {
+  const map = { '開立發票':'tag-invoice', '整筆個人':'tag-lump', '分期個人':'tag-split' };
+  return `<span class="${map[payment] || 'tag-lump'}">${payment}</span>`;
+}
+
+function renderSidebar() {
+  const q = filterQuery.trim();
+  const masters = getMasters().filter(m => !q || m.name.includes(q));
+  const sb = document.getElementById('sb-list');
+  if (!masters.length) {
+    sb.innerHTML = `<div class="sb-no-result">${q ? '查無師傅' : '此週期無資料'}</div>`;
+    return;
+  }
+  sb.innerHTML = masters.map(m => {
+    const active = m.id === selectedId;
+    return `
+<div class="sidebar-item${active ? ' active' : ''}" onclick="selectMaster('${m.id}')">
+  <span class="si-name">${m.name}</span>
+  ${paymentTagHtml(m.payment)}
+  <span class="si-total">${fmt(totalSum(m))}</span>
+</div>`;
+  }).join('');
+}
+
+function renderDetail() {
+  const panel = document.getElementById('detail-panel');
+  const m = getMasters().find(x => x.id === selectedId);
+  if (!m) {
+    panel.innerHTML = '<div class="detail-empty">← 點選左側師傅查看明細</div>';
+    return;
+  }
+  const rows = m.rows.map(r => {
+    const done = r.status === '已匯款';
+    return `<tr>
+      <td style="color:#2e86c1">${r.no}</td>
+      <td>${fmt(r.amount)}</td>
+      <td>${r.type}</td>
+      <td class="${done ? 'status-done' : 'status-pending'}">${r.status}</td>
+      <td>${r.period}</td>
+      <td>${r.date}</td>
+      <td>${done ? '' : `<button class="btn-rm" onclick="removeRow('${m.id}','${r.id}')">移除</button>`}</td>
+    </tr>`;
+  }).join('');
+  panel.innerHTML = `
+<div class="detail-master-header">
+  <div class="dh-row1">
+    <span class="dh-name">${m.name}</span>
+    <span class="dh-sep">|</span>
+    ${paymentTagHtml(m.payment)}
+    <span class="dh-total">${fmt(totalSum(m))}</span>
+  </div>
+  <div class="dh-row2">
+    <span><span class="dh-label">戶名：</span><span class="dh-val">${m.accountName}</span></span>
+    <span><span class="dh-label">銀行：</span><span class="dh-val">${m.bankName}（${m.bankCode}）${m.branchName}（${m.branchCode}）</span></span>
+    <span><span class="dh-label">帳號：</span><span class="dh-acno">${m.accountNo}</span></span>
+  </div>
+</div>
+<table class="detail-table">
+  <thead>
+    <tr>
+      <th>訂單編號</th>
+      <th>匯出款項</th>
+      <th>類型</th>
+      <th>狀態</th>
+      <th>匯款週期</th>
+      <th>建立日期</th>
+      <th>移除</th>
+    </tr>
+  </thead>
+  <tbody>${rows}</tbody>
+</table>`;
+}
+
+function selectMaster(mid) {
+  selectedId = mid;
+  renderSidebar();
+  renderDetail();
+}
+
+function removeRow(mid, rid) {
+  const masters = getMasters();
+  const m = masters.find(x => x.id === mid);
+  if (!m) return;
+  m.rows = m.rows.filter(r => r.id !== rid);
+  if (!m.rows.length) {
+    state[getPeriod()] = masters.filter(x => x.id !== mid);
+    const remaining = getMasters();
+    selectedId = remaining.length ? remaining[0].id : null;
+  }
+  syncConfirmBtn();
+  renderSidebar();
+  renderDetail();
+  showToast('已移除該筆資料');
+}
+
+function onPeriodChange() {
+  filterQuery = '';
+  document.getElementById('sb-search').value = '';
+  const masters = getMasters();
+  selectedId = masters.length ? masters[0].id : null;
+  syncConfirmBtn();
+  renderSidebar();
+  renderDetail();
+}
+
+function onSearch() {
+  filterQuery = document.getElementById('sb-search').value;
+  renderSidebar();
+}
+
+function clearSearch() {
+  filterQuery = '';
+  document.getElementById('sb-search').value = '';
+  renderSidebar();
+}
+
+function syncConfirmBtn() {
+  const btn = document.getElementById('btn-confirm');
+  if (btn) btn.disabled = !hasPending();
+}
+
+function openModal()  { document.getElementById('modal-overlay').classList.add('active'); }
+function closeModal() { document.getElementById('modal-overlay').classList.remove('active'); }
+
+function doConfirm() {
+  getMasters().forEach(m =>
+    m.rows.forEach(r => { if (r.status === '待匯款') r.status = '已匯款'; })
+  );
+  closeModal();
+  syncConfirmBtn();
+  renderSidebar();
+  renderDetail();
+  showToast('✓ 已確認匯款完成');
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+function init() {
+  const masters = getMasters();
+  selectedId = masters.length ? masters[0].id : null;
+  syncConfirmBtn();
+  renderSidebar();
+  renderDetail();
+}
+
+init();
+</script>
+</body>
+</html>

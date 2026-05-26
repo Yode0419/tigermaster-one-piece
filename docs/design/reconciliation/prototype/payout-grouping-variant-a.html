@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>方案 A — 師傅分組（手風琴式）</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #f5f5f5;
+  color: #1a1a1a;
+  font-size: 14px;
+  min-height: 100vh;
+}
+
+/* ── info topbar ── */
+.info-bar {
+  background: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.info-bar .tag {
+  background: #e67e22;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  margin-right: 10px;
+  letter-spacing: 0.04em;
+}
+.info-bar a { color: #adbdcb; text-decoration: none; }
+.info-bar a:hover { color: #fff; }
+
+/* ── page layout ── */
+.page-wrapper {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 24px 80px;
+}
+
+/* ── block card ── */
+.block-card {
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+/* ── block header ── */
+.block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid #ebebeb;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.block-header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.block-header h1 {
+  font-size: 18px;
+  font-weight: 700;
+  color: #2c3e50;
+  white-space: nowrap;
+}
+.period-selector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.period-selector label {
+  font-size: 13px;
+  color: #666;
+  white-space: nowrap;
+}
+.period-selector select {
+  border: 1px solid #d5d5d5;
+  border-radius: 6px;
+  padding: 5px 30px 5px 10px;
+  font-size: 13px;
+  color: #333;
+  appearance: none;
+  background: #fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E") no-repeat right 10px center;
+  cursor: pointer;
+}
+.block-header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.btn-dl {
+  border: 1px solid #ccc;
+  background: #fff;
+  color: #555;
+  padding: 7px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-dl:hover { background: #f7f7f7; }
+.vdivider { width: 1px; height: 22px; background: #e0e0e0; }
+.btn-confirm {
+  background: #2980b9;
+  color: #fff;
+  border: none;
+  padding: 7px 20px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-confirm:hover { background: #2471a3; }
+.btn-confirm:disabled { background: #b0bec5; cursor: not-allowed; }
+
+/* ── tooltip ── */
+.tip-wrap { position: relative; display: inline-flex; align-items: center; }
+.tip-icon {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 18px; height: 18px;
+  border-radius: 50%; border: 1px solid #bbb;
+  color: #888; font-size: 11px; cursor: help; user-select: none;
+}
+.tip-box {
+  display: none; position: absolute; right: 0; top: 26px;
+  background: #333; color: #fff;
+  font-size: 12px; padding: 8px 12px; border-radius: 6px;
+  width: 260px; line-height: 1.7; z-index: 300; white-space: normal;
+}
+.tip-wrap:hover .tip-box { display: block; }
+
+/* ── accordion list ── */
+.accordion-list {
+  padding: 20px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── group item ── */
+.group-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: border-color 0.15s;
+}
+.group-item:hover { border-color: #c8c8c8; }
+.group-item.expanded { border-color: #9ec6de; }
+
+/* ── group header ── */
+.group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  background: #f8f9fa;
+  cursor: pointer;
+  user-select: none;
+  gap: 12px;
+  transition: background 0.1s;
+}
+.group-item.expanded .group-header { background: #edf4f9; }
+.group-header:hover { filter: brightness(0.97); }
+
+.group-header-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-wrap: wrap;
+}
+.chevron {
+  font-size: 11px; color: #888;
+  display: inline-block;
+  transition: transform 0.2s;
+  flex-shrink: 0;
+}
+.group-item.expanded .chevron { transform: rotate(90deg); }
+
+.g-name { font-weight: 700; font-size: 14px; color: #2c3e50; white-space: nowrap; }
+.g-sep { color: #ccc; font-size: 13px; }
+.g-payment { font-size: 13px; color: #555; white-space: nowrap; }
+.g-account { font-size: 13px; color: #888; white-space: nowrap; }
+
+.group-header-right {
+  display: flex; align-items: center; gap: 10px; flex-shrink: 0;
+}
+.g-total { font-weight: 700; font-size: 14px; color: #2c3e50; white-space: nowrap; }
+.g-lbl { font-size: 11px; color: #999; white-space: nowrap; }
+
+/* ── group body ── */
+.group-body { display: none; }
+.group-item.expanded .group-body { display: block; }
+
+/* ── detail table ── */
+.detail-wrap { padding: 0 16px 16px; }
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 13px;
+}
+.detail-table th {
+  background: #f8f9fa;
+  color: #555; font-weight: 600; font-size: 12px;
+  padding: 8px 12px; text-align: left;
+  border-bottom: 1px solid #e8e8e8;
+  white-space: nowrap;
+}
+.detail-table td {
+  padding: 10px 12px;
+  border-bottom: 1px solid #f2f2f2;
+  color: #333;
+  vertical-align: middle;
+}
+.detail-table tr:last-child td { border-bottom: none; }
+
+/* ── badges ── */
+.badge-p {
+  background: #fff3cd; color: #7d5a00;
+  font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+}
+.badge-d {
+  background: #d1e7dd; color: #0a4a28;
+  font-size: 11px; font-weight: 600;
+  padding: 2px 8px; border-radius: 10px; white-space: nowrap;
+}
+
+/* ── remove button ── */
+.btn-rm {
+  background: none; border: 1px solid #e74c3c; color: #e74c3c;
+  padding: 3px 12px; border-radius: 5px;
+  font-size: 12px; cursor: pointer; white-space: nowrap;
+}
+.btn-rm:hover { background: #fdf2f0; }
+
+/* ── modal ── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,0.45);
+  z-index: 1000; align-items: center; justify-content: center;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: #fff; border-radius: 12px;
+  padding: 28px 32px; max-width: 420px; width: 90%;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+}
+.modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 12px; color: #2c3e50; }
+.modal p { font-size: 13px; color: #555; line-height: 1.7; margin-bottom: 4px; }
+.modal-actions {
+  display: flex; justify-content: flex-end; gap: 10px; margin-top: 24px;
+}
+.btn-mc {
+  border: 1px solid #ddd; background: #fff; color: #555;
+  padding: 7px 18px; border-radius: 6px; font-size: 13px; cursor: pointer;
+}
+.btn-mc:hover { background: #f5f5f5; }
+.btn-mo {
+  background: #2980b9; color: #fff; border: none;
+  padding: 7px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.btn-mo:hover { background: #2471a3; }
+
+/* ── toast ── */
+.toast {
+  position: fixed; bottom: 28px; left: 50%;
+  transform: translateX(-50%) translateY(16px);
+  background: #2c3e50; color: #fff;
+  padding: 11px 22px; border-radius: 8px; font-size: 13px;
+  opacity: 0; transition: opacity 0.25s, transform 0.25s;
+  pointer-events: none; z-index: 9999; white-space: nowrap;
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ── empty ── */
+.empty-msg {
+  text-align: center; padding: 48px 24px;
+  color: #bbb; font-size: 14px;
+}
+</style>
+</head>
+<body>
+
+<div class="info-bar">
+  <span>
+    <span class="tag">後期優化探索</span>
+    匯款清單 — 師傅分組視角 ｜ 方案 A：手風琴式
+  </span>
+  <a href="index.html">← 返回索引</a>
+</div>
+
+<div class="page-wrapper">
+  <div class="block-card">
+
+    <div class="block-header">
+      <div class="block-header-left">
+        <h1>匯款清單</h1>
+        <div class="period-selector">
+          <label>匯款週期</label>
+          <select id="period-sel" onchange="onPeriodChange()">
+            <option value="202604-2">202604-2（本期）</option>
+            <option value="202604-1">202604-1</option>
+          </select>
+        </div>
+      </div>
+      <div class="block-header-right">
+        <button class="btn-dl" onclick="showToast('✓ Excel 下載中…')">下載</button>
+        <div class="vdivider"></div>
+        <button class="btn-confirm" id="btn-confirm" onclick="openModal()">確認已匯款</button>
+        <div class="tip-wrap">
+          <span class="tip-icon">?</span>
+          <span class="tip-box">請先至銀行完成本次匯款，再確認。<br>確認後「待匯款」項目將標記為「已匯款」，無法移除。</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion-list" id="accordion-list"></div>
+
+  </div>
+</div>
+
+<!-- 確認已匯款 Modal -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h3>請確認已在銀行完成匯款</h3>
+    <p>確認前，請確保已至銀行完成本次匯款。</p>
+    <p>確認後，「待匯款」項目將標記為「已匯款」，無法再移除。</p>
+    <div class="modal-actions">
+      <button class="btn-mc" onclick="closeModal()">取消</button>
+      <button class="btn-mo" onclick="doConfirm()">確認已匯款</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ── Mock Data ────────────────────────────────────────────────
+const PERIODS_RAW = {
+  '202604-2': [
+    { id:'m1', name:'林志亮', payment:'銀行轉帳', account:'玉山銀行 808-****7890',
+      rows:[
+        { id:'r1a', no:'RO2026041400016', type:'完成訂單', amount:2200, status:'待匯款' },
+        { id:'r1b', no:'RO2026041300015', type:'完成訂單', amount:1800, status:'待匯款' },
+        { id:'r1c', no:'RO2026041000008', type:'完成訂單', amount:1600, status:'待匯款' },
+      ]
+    },
+    { id:'m2', name:'徐晨皓', payment:'銀行轉帳', account:'國泰世華 013-****3210',
+      rows:[
+        { id:'r2a', no:'RO2026040400008', type:'完成訂單', amount:75000, status:'待匯款' },
+        { id:'r2b', no:'RO2026032000003', type:'完成訂單', amount:8000,  status:'已匯款' },
+      ]
+    },
+    { id:'m3', name:'李思頡', payment:'銀行轉帳', account:'台灣銀行 004-****1234',
+      rows:[
+        { id:'r3a', no:'RO2026041300003', type:'完成訂單', amount:4000, status:'待匯款' },
+      ]
+    },
+    { id:'m4', name:'陳奕臣', payment:'銀行轉帳', account:'第一銀行 007-****9012',
+      rows:[
+        { id:'r4a', no:'RO2026041300009', type:'完成訂單', amount:3000, status:'待匯款' },
+      ]
+    },
+    { id:'m5', name:'謝祐豪', payment:'銀行轉帳', account:'中信銀行 822-****3456',
+      rows:[
+        { id:'r5a', no:'RO2026041100012', type:'訂單取消', amount:200, status:'待匯款' },
+      ]
+    },
+  ],
+  '202604-1': [
+    { id:'m6', name:'陳達人', payment:'銀行轉帳', account:'合庫銀行 006-****8901',
+      rows:[
+        { id:'r6a', no:'RO2026040100001', type:'完成訂單', amount:10960, status:'待匯款' },
+      ]
+    },
+    { id:'m7', name:'吳柏輝', payment:'銀行轉帳', account:'台新銀行 812-****2345',
+      rows:[
+        { id:'r7a', no:'RO2026040400011', type:'完成訂單', amount:1800, status:'待匯款' },
+      ]
+    },
+    { id:'m8', name:'林志亮', payment:'銀行轉帳', account:'玉山銀行 808-****7890',
+      rows:[
+        { id:'r8a', no:'RO2026040300007', type:'完成訂單', amount:500, status:'待匯款' },
+      ]
+    },
+  ],
+};
+
+// deep clone so mutations are isolated per session
+let state = JSON.parse(JSON.stringify(PERIODS_RAW));
+let expanded = new Set();
+
+// ── Helpers ──────────────────────────────────────────────────
+const getPeriod = () => document.getElementById('period-sel').value;
+
+const pendingSum = (master) =>
+  master.rows.filter(r => r.status === '待匯款').reduce((s, r) => s + r.amount, 0);
+
+const fmt = (n) => 'NT$' + n.toLocaleString('zh-TW');
+
+const hasPending = () =>
+  (state[getPeriod()] || []).some(m => m.rows.some(r => r.status === '待匯款'));
+
+// ── Render ───────────────────────────────────────────────────
+function render() {
+  const masters = state[getPeriod()] || [];
+  const list = document.getElementById('accordion-list');
+
+  if (!masters.length) {
+    list.innerHTML = '<div class="empty-msg">此週期無匯款資料</div>';
+    syncConfirmBtn();
+    return;
+  }
+
+  list.innerHTML = masters.map(m => {
+    const total   = pendingSum(m);
+    const allDone = m.rows.every(r => r.status === '已匯款');
+    const isExp   = expanded.has(m.id);
+
+    const rows = m.rows.map(r => {
+      const done = r.status === '已匯款';
+      return `<tr>
+        <td style="font-size:12px;color:#888;font-family:monospace">${r.no}</td>
+        <td>${r.type}</td>
+        <td style="font-weight:600">${fmt(r.amount)}</td>
+        <td><span class="${done ? 'badge-d' : 'badge-p'}">${r.status}</span></td>
+        <td>${done
+          ? '<span style="color:#ccc;font-size:12px">—</span>'
+          : `<button class="btn-rm" onclick="removeRow('${m.id}','${r.id}')">移除</button>`
+        }</td>
+      </tr>`;
+    }).join('');
+
+    return `
+<div class="group-item${isExp ? ' expanded' : ''}" id="g-${m.id}">
+  <div class="group-header" onclick="toggle('${m.id}')">
+    <div class="group-header-left">
+      <span class="chevron">▶</span>
+      <span class="g-name">${m.name}</span>
+      <span class="g-sep">|</span>
+      <span class="g-payment">${m.payment}</span>
+      <span class="g-sep">|</span>
+      <span class="g-account">${m.account}</span>
+    </div>
+    <div class="group-header-right">
+      <span class="g-total">${fmt(total)}</span>
+      ${allDone
+        ? '<span class="badge-d">已確認</span>'
+        : '<span class="g-lbl">待匯款合計</span>'}
+    </div>
+  </div>
+  <div class="group-body">
+    <div class="detail-wrap">
+      <table class="detail-table">
+        <thead>
+          <tr>
+            <th>訂單編號</th>
+            <th>類型</th>
+            <th>匯出款項</th>
+            <th>狀態</th>
+            <th>移除</th>
+          </tr>
+        </thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </div>
+  </div>
+</div>`;
+  }).join('');
+
+  syncConfirmBtn();
+}
+
+function syncConfirmBtn() {
+  const btn = document.getElementById('btn-confirm');
+  if (btn) btn.disabled = !hasPending();
+}
+
+// ── Actions ──────────────────────────────────────────────────
+function toggle(mid) {
+  expanded.has(mid) ? expanded.delete(mid) : expanded.add(mid);
+  const el = document.getElementById('g-' + mid);
+  if (el) el.classList.toggle('expanded', expanded.has(mid));
+}
+
+function removeRow(mid, rid) {
+  const masters = state[getPeriod()];
+  const m = masters.find(x => x.id === mid);
+  if (!m) return;
+  m.rows = m.rows.filter(r => r.id !== rid);
+  if (!m.rows.length) {
+    state[getPeriod()] = masters.filter(x => x.id !== mid);
+    expanded.delete(mid);
+  }
+  render();
+  showToast('已移除該筆資料');
+}
+
+function onPeriodChange() {
+  expanded.clear();
+  render();
+}
+
+// ── Modal ─────────────────────────────────────────────────────
+function openModal()  { document.getElementById('modal-overlay').classList.add('active'); }
+function closeModal() { document.getElementById('modal-overlay').classList.remove('active'); }
+
+function doConfirm() {
+  (state[getPeriod()] || []).forEach(m =>
+    m.rows.forEach(r => { if (r.status === '待匯款') r.status = '已匯款'; })
+  );
+  closeModal();
+  render();
+  showToast('✓ 已確認匯款完成');
+}
+
+// ── Toast ─────────────────────────────────────────────────────
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(t._timer);
+  t._timer = setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+// init
+render();
+</script>
+</body>
+</html>

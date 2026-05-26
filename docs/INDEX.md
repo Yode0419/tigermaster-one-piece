@@ -1,6 +1,6 @@
 # Knowledge Base Index
 
-_Last updated: 2026-05-25_
+_Last updated: 2026-05-26_
 
 
 ```
@@ -104,6 +104,8 @@ docs/
   `reconciliation-discussion-results.md` — 董事長、總經理討論後的確認決策、新增規格（週期切換、中間款項請領、師傅報稅欄位）與待釐清事項 _(2026-04-14)_
 - **[撥款作業介面調整討論紀錄](design/reconciliation/payout-interface-redesign.md)**
   `payout-interface-redesign.md` — 撥款後台三區塊的文案、版面與互動行為詳細設計紀錄，含術語對照表與各區塊決策說明 _(2026-04-14)_
+- **[匯款清單後期優化：師傅分組視角](design/reconciliation/payout-list-master-grouping.md)**
+  `payout-list-master-grouping.md` — 匯款清單第三區塊加入師傅分組邏輯的功能規劃，含群組結構設計、介面結構方案比較與待釐清事項 _(2026-05-26)_
 
 ## design/tiger-points-and-terms/
 
