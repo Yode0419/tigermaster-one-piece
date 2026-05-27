@@ -134,7 +134,7 @@ body {
   display: flex;
   flex-direction: column;
   align-self: flex-start;
-  max-height: 770px;
+  max-height: 700px;
   background: #fff;
 }
 .sb-search-wrap {
@@ -247,13 +247,14 @@ body {
   display: flex;
   align-items: baseline;
   gap: 16px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 .dh-row2 {
   font-size: 16px;
   color: #555;
   display: flex;
-  gap: 30px;
+  align-items: baseline;
+  gap: 24px;
   flex-wrap: wrap;
 }
 .dh-name  { font-size: 20px; font-weight: 700; color: #111; }
@@ -275,6 +276,17 @@ body {
 .dh-label { color: #555; margin-right: 2px; }
 .dh-val   { color: #333; }
 .dh-acno  { color: #333; letter-spacing: 0.03em; }
+.dh-payment {
+  white-space: nowrap;
+}
+.dh-bank-info {
+  margin-left: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 30px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
 
 /* detail table */
 .detail-table {
@@ -555,14 +567,15 @@ function renderDetail() {
 <div class="detail-master-header">
   <div class="dh-row1">
     <span class="dh-name">${m.name}</span>
-    <span class="dh-sep">|</span>
-    ${paymentTagHtml(m.payment)}
     <span class="dh-total"><span class="dh-total-label">總金額</span>${fmt(totalSum(m))}</span>
   </div>
   <div class="dh-row2">
-    <span><span class="dh-label">戶名：</span><span class="dh-val">${m.accountName}</span></span>
-    <span><span class="dh-label">銀行：</span><span class="dh-val">${m.bankName}(${m.bankCode}) ${m.branchName}(${m.branchCode})</span></span>
-    <span><span class="dh-label">帳號：</span><span class="dh-acno">${m.accountNo}</span></span>
+    <span class="dh-payment"><span class="dh-label">請款方式：</span>${paymentTagHtml(m.payment)}</span>
+    <div class="dh-bank-info">
+      <span><span class="dh-label">戶名：</span><span class="dh-val">${m.accountName}</span></span>
+      <span><span class="dh-label">銀行：</span><span class="dh-val">${m.bankName}(${m.bankCode}) ${m.branchName}(${m.branchCode})</span></span>
+      <span><span class="dh-label">帳號：</span><span class="dh-acno">${m.accountNo}</span></span>
+    </div>
   </div>
 </div>
 <table class="detail-table">
