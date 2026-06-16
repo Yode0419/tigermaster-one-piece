@@ -1,6 +1,7 @@
 # Knowledge Base Index
 
-_Last updated: 2026-05-26_
+_Last updated: 2026-06-16_
+
 
 
 ```
@@ -34,6 +35,12 @@ docs/
   `order-photo-management.md` — 三種照片類型的分類、上傳規則、各角色可見範圍與後台管理功能 _(2026-04-08)_
 - **[Pro 會員（師虎 Pro）](product/pro-membership.md)**
   `pro-membership.md` — 一次性付費終身會員方案的權益說明、行銷訴求與實際情況對照、推廣歷程 _(2026-04-08)_
+- **[折價券系統](product/coupon-system.md)**
+  `coupon-system.md` — 折價券兩種類型（派遣費／完工款）、後台設定欄位、客戶端驗證流程與訂單紀錄，含 2026 年 6 月金額彈性化異動說明 _(2026-06-16)_
+- **[Tiger Points](product/tiger-points.md)**
+  `tiger-points.md` — Tiger Points 的取得方式（Pro 升級與不定期活動）、客戶端查看入口、尾款兩頁支付流程、驗證規則、適用時機與後台管理能力（含批次發送開發中） _(2026-06-16)_
+- **[免派遣費次數（Pro 會員權益）](product/pro-dispatch-fee-credits.md)**
+  `pro-dispatch-fee-credits.md` — Pro 會員每年 6 次免派遣費的取得方式、自動套用邏輯、加成時段警告機制、次數規則與後台管理能力 _(2026-06-16)_
 
 ## process/
 
