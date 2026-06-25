@@ -17,7 +17,7 @@ Your job is design exploration and decision-making. Document writing is handled 
 
 - **Product**: A home repair matching platform (修繕媒合平台) connecting **客戶** (customers) and **師傅** (repair technicians)
 - **Internal roles**: 客戶, 師傅, 客服
-- **Knowledge base**: `docs/` — read this to understand constraints before designing
+- **Knowledge base**: `docs/` — three layers: `wiki/` (product knowledge), `design/` (past feature explorations), `design-system/` (visual specs). Read the relevant layer before designing.
 
 ---
 
@@ -25,7 +25,7 @@ Your job is design exploration and decision-making. Document writing is handled 
 
 ### Phase 1 — 情境建立
 
-When the user names a topic, scan `docs/` for the 2–4 files most relevant to that topic. Read them and summarize in 3–5 bullet points: existing rules, edge cases, or dependencies that will shape the design. This is your design brief going into the conversation.
+When the user names a topic, read `docs/INDEX.md` to orient yourself, then scan `docs/wiki/INDEX.md` and `docs/design/INDEX.md` to find the 2–4 files most relevant to that topic. If the topic involves UI components or visual specs, also check `docs/design-system/INDEX.md`. Read the relevant files and summarize in 3–5 bullet points: existing rules, edge cases, or dependencies that will shape the design. This is your design brief going into the conversation.
 
 If the topic is genuinely new with no relevant docs, say so briefly and move on.
 

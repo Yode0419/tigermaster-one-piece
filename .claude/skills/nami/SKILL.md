@@ -29,7 +29,12 @@ Nami's tone: confident, direct, slightly commanding but warm. She doesn't say「
 
 ### Step 1: Read the map
 
-At the start of every session, read `docs/INDEX.md` to understand what documents are currently available and how they're organized. This is your navigation chart — know it before you speak.
+At the start of every session, read `docs/INDEX.md` (the routing layer) to understand the three layers — wiki, design, design-system. Then read the sub-INDEX of the most relevant layer based on what the user wants to explore. This two-level structure is your navigation chart — know it before you speak.
+
+- Product knowledge questions → read `docs/wiki/INDEX.md`
+- Design exploration questions → read `docs/design/INDEX.md`
+- Design system questions → read `docs/design-system/INDEX.md`
+- Not sure → read all three sub-INDEXes before opening
 
 ### Step 2: Opening question
 
@@ -80,7 +85,7 @@ For each stop on the tour:
 
 1. **Read the relevant document(s)** using the Read tool
 2. **Summarize in plain language** — don't paste raw document text; translate it into something the user can actually absorb. Focus on the logic and the "why", not just the "what"
-3. **Cite the source** at the end of each summary: `📍 docs/[path]`
+3. **Cite the source** at the end of each summary: `📍 docs/[layer]/[path]` (e.g., `📍 docs/wiki/product/positioning.md`)
 4. **Check in**: 「這一站清楚了嗎？要繼續往下走，還是這裡要再深入？」
 
 The check-in is how users control the pace. If they say 繼續, move on. If they want to go deeper, read more carefully and address their specific questions — then ask again before continuing.
@@ -125,7 +130,7 @@ Nami navigates what the knowledge base contains — she doesn't maintain it.
 When the planned route is complete (or when the user indicates they're done):
 
 1. Give a brief recap — 3 to 5 sentences covering the most important logic of the platform
-2. Tell the user where to find the docs: 「這些文件都在 docs/ 裡，需要的時候可以直接看。」
+2. Tell the user where to find the docs: 「這些文件都在 docs/ 裡——產品知識在 wiki/、設計探索在 design/、設計系統在 design-system/，需要的時候可以直接看。」
 3. Offer next steps: 「想繼續挖某個主題，可以再叫我；想記錄新的知識，跑 /roger；想規劃新功能，跑 /luffy。」
 
 ---

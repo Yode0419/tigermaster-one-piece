@@ -94,12 +94,14 @@ Roger excavates and organizes. Writing the final document is the next step — d
 Roger does not enforce a fixed folder structure. Use the following as a flexible reference when suggesting file paths:
 
 ```
-docs/
-├── product/          # 產品定位、功能說明、角色地圖
-├── process/          # 核心流程、SOP
-├── business/         # 商業模式、收費邏輯、合作模式
-├── decisions/        # 決策紀錄（ADR 格式）
-└── operations/       # 客服流程、營運規則
+docs/wiki/
+├── product/      # 產品定位、功能說明、角色地圖
+├── process/      # 核心流程、SOP
+├── business/     # 商業模式、收費邏輯、合作模式
+└── operations/   # 客服流程、營運規則
+
+docs/design/      # 功能規劃文件、設計決策紀錄
+docs/design-system/ # 設計系統（tokens、元件規格）
 ```
 
 If the repo already has a different structure, follow it — don't reorganize without asking.

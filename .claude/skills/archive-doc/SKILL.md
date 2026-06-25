@@ -1,11 +1,42 @@
 ---
 name: archive-doc
-description: Files a document into the knowledge base at the right location, and keeps the structure clean and navigable over time. Two modes: single-file archiving (place one document in the right spot) and reorganization (restructure the docs folder when it has grown messy). Also maintains docs/INDEX.md so both humans and AI can navigate the knowledge base efficiently. Use when the user wants to file a document, asks "存到哪裡", "歸檔", "整理文件結構", "reorganize docs", "where should this go", or when called from another skill like write-doc after drafting a document.
+description: Files a document into the knowledge base at the right location, and keeps the structure clean and navigable over time. Two modes: single-file archiving (place one document in the right spot) and reorganization (restructure the docs folder when it has grown messy). Also maintains the appropriate sub-INDEX so both humans and AI can navigate the knowledge base efficiently. Use when the user wants to file a document, asks "存到哪裡", "歸檔", "整理文件結構", "reorganize docs", "where should this go", or when called from another skill like write-doc after drafting a document.
 ---
 
 # archive-doc
 
 File documents in the right place and keep the knowledge base navigable — for both humans and AI.
+
+---
+
+## Knowledge Base Structure
+
+The knowledge base has three layers, each with its own INDEX:
+
+```
+docs/
+├── INDEX.md              — routing layer (lightweight, points to three sub-INDEXes)
+├── wiki/                 — product knowledge (product, process, business, operations, legal)
+│   └── INDEX.md
+├── design/               — design exploration (feature plans, decision records, prototypes)
+│   └── INDEX.md
+├── design-system/        — design system (tokens, components, patterns)
+│   └── INDEX.md
+└── _drafts/              — cross-layer staging area for unfinished documents
+```
+
+**Layer routing:**
+- Product knowledge (features, business rules, flows, legal terms) → `docs/wiki/`
+- Design exploration (feature planning docs, decision records, prototypes) → `docs/design/`
+- Design system (tokens, component specs, visual patterns) → `docs/design-system/`
+
+---
+
+## Draft area
+
+`docs/_drafts/` is a staging zone for documents that aren't ready to be filed yet. Drafts are listed in `docs/INDEX.md` under the 草稿區 section.
+
+When operating in either mode, always include `docs/_drafts/` in your scan. Drafts are valid candidates for archiving — if the user asks to file a draft, treat it as a normal single-file operation: move it out of `_drafts/` into the right location, update the target sub-INDEX, and remove it from the 草稿區 section in root `docs/INDEX.md`.
 
 ---
 
@@ -26,23 +57,17 @@ Tell the user which mode you're using and why, in one sentence.
 
 ---
 
-## Draft area
-
-`docs/_drafts/` is a staging zone for documents that aren't ready to be filed yet. Drafts are visible in `docs/INDEX.md` under a separate section so they're not forgotten.
-
-When operating in either mode, always include `docs/_drafts/` in your scan. Drafts are valid candidates for archiving — if the user asks to file a draft, treat it as a normal single-file operation (move it out of `_drafts/` into the right location and update the index).
-
----
-
 ## Single-file mode
 
 ### Step 1: Read the current structure
 
-Scan `docs/` (including `_drafts/` and all subdirectories) to understand what exists. Read `docs/INDEX.md` if it exists — it's faster than reading individual files.
+Read root `docs/INDEX.md` to understand the three layers, then read the sub-INDEX of the layer most likely to receive this document. This is faster than reading individual files.
 
-### Step 2: Propose a location
+### Step 2: Determine the layer and propose a location
 
-Choose the most natural home for the document. Prefer existing folders when they fit well. Suggest creating a new subfolder only if there are already 2+ other files that would belong there too (avoid creating a folder for a single file).
+1. Identify which layer this document belongs to (wiki / design / design-system)
+2. Choose the most natural subfolder within that layer
+3. Prefer existing folders when they fit well. Suggest creating a new subfolder only if there are already 2+ other files that would belong there too (avoid creating a folder for a single file)
 
 Follow the naming conventions below.
 
@@ -50,7 +75,7 @@ Follow the naming conventions below.
 
 Show the user the proposed path. On confirmation:
 1. Move or write the file to that location
-2. Update `docs/INDEX.md`
+2. Update the target layer's sub-INDEX
 
 ---
 
@@ -58,7 +83,7 @@ Show the user the proposed path. On confirmation:
 
 ### Step 1: Survey the full structure
 
-Read `docs/` completely — file names, folder names, and `docs/INDEX.md` if it exists. For files whose purpose isn't clear from the name alone, read the first few lines.
+Read root `docs/INDEX.md` to understand the three-layer structure, then read each sub-INDEX. For files whose purpose isn't clear from the name alone, read the first few lines.
 
 ### Step 2: Identify problems
 
@@ -74,20 +99,16 @@ Look for:
 Write out the full proposed structure as a before/after diff. Be specific — list every file move, rename, folder creation, or deletion. Example:
 
 ```
-提案：
+Proposed changes:
 
-移動：
-  docs/product/positioning.md → docs/positioning.md
-  docs/product/roles.md       → docs/roles.md
+Move:
+  docs/wiki/product/positioning.md → docs/wiki/product/platform-overview.md
 
-刪除資料夾：
-  docs/product/  （已清空）
+Delete folder:
+  docs/wiki/product/old-folder/  (now empty)
 
-新增：
-  docs/INDEX.md
-
-不變：
-  docs/matching-flow.md
+No change:
+  docs/wiki/process/matching-flow.md
 ```
 
 Explain the reasoning briefly — what problem each change solves.
@@ -96,20 +117,20 @@ Explain the reasoning briefly — what problem each change solves.
 
 ### Step 4: Execute on confirmation
 
-Only after the user explicitly confirms (e.g., "好的", "執行", "confirm"): apply all changes from the plan. Then update `docs/INDEX.md` to reflect the new structure.
+Only after the user explicitly confirms (e.g., "好的", "執行", "confirm"): apply all changes from the plan. Then update the affected sub-INDEXes to reflect the new structure.
 
 **How to move files (always use `git mv`):**
 
 For every file move, use `git mv <old-path> <new-path>` via Bash. Never use Write + delete — that loses git history and risks content mismatch.
 
 ```bash
-git mv docs/positioning.md docs/product/positioning.md
+git mv docs/wiki/product/positioning.md docs/wiki/product/platform-overview.md
 ```
 
 If the destination folder doesn't exist yet, create it first:
 
 ```bash
-mkdir -p docs/product && git mv docs/positioning.md docs/product/positioning.md
+mkdir -p docs/wiki/product && git mv docs/_drafts/new-doc.md docs/wiki/product/new-doc.md
 ```
 
 ### Step 5: Verify content integrity
@@ -123,45 +144,39 @@ Report the verification result to the user before declaring the operation comple
 
 ---
 
-## Maintaining docs/INDEX.md
+## Maintaining sub-INDEXes
 
-After any file operation (single-file or reorganization), update `docs/INDEX.md`.
+After any file operation (single-file or reorganization), update the appropriate sub-INDEX:
 
-The index has one job: let a reader — human or AI — understand what's in the knowledge base without opening individual files. Keep it scannable and current.
+| File goes to | Sub-INDEX to update |
+|---|---|
+| `docs/wiki/` | `docs/wiki/INDEX.md` |
+| `docs/design/` | `docs/design/INDEX.md` |
+| `docs/design-system/` | `docs/design-system/INDEX.md` |
+| Draft added/removed | `docs/INDEX.md` (草稿區 section only) |
+
+The root `docs/INDEX.md` is a routing layer — do not add or remove file entries there. Only update it if a new layer is being created, or when a draft's status changes.
+
+The sub-INDEX has one job: let a reader — human or AI — understand what's in that layer without opening individual files. Keep it scannable and current.
 
 ### Format
 
-The index has two parts: a folder tree at the top for a quick overview, followed by per-section file lists.
+Each sub-INDEX has a header section, then per-folder sections.
 
-**Part 1 — Folder tree** (folders only, no individual files):
+**Section headers** (one `##` per subfolder):
 
-    docs/
-    ├── category-a/   — short description broad enough to cover future additions
-    ├── category-b/   — short description broad enough to cover future additions
-    └── _drafts/      — drafts (structure in place, content pending)
+    ## product/ — 產品定位與功能設計
 
-**Part 2 — Per-section file lists** (one `##` section per folder):
+**File entries** (one line per file):
 
-    ## category-a/
-
-    - **[H1 Title](category-a/topic-one.md)**
-      `topic-one.md` — one-sentence summary of what this doc contains _(YYYY-MM-DD)_
-
-    ## 草稿區（_drafts/）
-
-    - **[H1 Title](_drafts/draft-topic.md)**
-      `draft-topic.md` — one-sentence summary of draft content _(YYYY-MM-DD)_
-
-Each entry is two lines:
-1. `- **[H1 Title](relative/path)**` — read the document's first `# ` heading and use it verbatim as the link text, formatted bold
-2. `  \`filename.md\` — summary _(YYYY-MM-DD)_` — indented, filename in backticks, then a one-sentence summary and date
+    - **[H1 Title](relative/path.md)** — one-sentence summary of what this doc contains _(YYYY-MM-DD)_
 
 Rules:
-- **Folder tree**: show folders only — no individual files. Each folder gets a short description broad enough to cover future additions to that category. Keep descriptions concise and general.
-- **File list entries**: two lines per file as shown above. The summary should tell the reader *what* the document contains, not just name the topic.
-- If the structure uses subfolders, add a `##` section per folder in Part 2.
-- If the structure is flat (no subfolders), skip section headers — but always keep the `## 草稿區` section at the bottom, even if empty.
-- Update the `_Last updated_` date every time you touch this file.
+- One line per entry: `**[Title](path)**` — summary _(date)_
+- Read the document's first `# ` heading and use it verbatim as the link text, formatted bold
+- The summary should tell the reader *what* the document contains, not just name the topic
+- Paths are relative to the sub-INDEX file location (e.g., from `docs/wiki/INDEX.md`, the path to `docs/wiki/product/positioning.md` is `product/positioning.md`)
+- Update the `_Last updated_` date every time you touch a sub-INDEX
 
 ---
 
@@ -176,7 +191,7 @@ Apply these when proposing new file names or renaming during reorganization:
 
 ## Folder structure principles
 
-- Start flat: keep files directly under `docs/` until there's a clear reason to group
+- Within each layer, start flat: keep files directly under the layer folder until there's a clear reason to group
 - Create a subfolder only when 3+ files share a logical category — not for one or two files
 - Folder names follow the same kebab-case rule
-- Avoid deep nesting — two levels (`docs/process/matching-flow.md`) is usually enough; three levels is a warning sign
+- Avoid deep nesting — two levels (`docs/wiki/process/matching-flow.md`) is usually enough; three levels is a warning sign
