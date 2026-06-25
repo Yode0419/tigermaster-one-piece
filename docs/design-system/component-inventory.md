@@ -16,6 +16,7 @@ Atoms 是最小單位，不依賴其他自訂元件，由 Token 驅動。
 | [ ] | Badge | `Badge` | `ChatroomUnreadBadge` |
 | [ ] | Button | `Button` | `PillButton`, `FutureButton`, `ToggleDisableButton`, `TextIconButton` |
 | [ ] | Checkbox | `Checkbox` | `Checkbox`（Flutter, Material 2） |
+| [ ] | Chip | `Chip` | `ChoiceChip`（Flutter, Material 2） |
 | [ ] | Icon | `Icon` | `Icon`（Flutter） |
 | [ ] | Image | `Image` | `CustomNetworkImage` |
 | [ ] | Radio | `Radio` | `Radio`（Flutter） |
