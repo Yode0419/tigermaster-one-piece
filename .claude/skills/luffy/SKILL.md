@@ -57,8 +57,9 @@ When the design direction is sufficiently defined (usually after 5–10 exchange
 
 1. Write a structured summary of the session and show it to the user for confirmation
 2. Tell the user: they can use `/write-doc` to turn this into a 功能規劃文件, then `/archive-doc` to file it
+3. **Pattern check**: If the session established a reusable UI composition — a component arrangement likely to appear across multiple screens — flag it explicitly: 「這次設計確立了一個可複用的 UI 組合，建議記成 pattern。」 Suggest: run `/sanji` to flesh out the spec if details are still loose, or go straight to `/write-doc` (選「設計模式文件」) if the composition is already clear.
 
-The summary should cover: problem definition, chosen design direction and rationale, impact scope, TBDs, and any 決策點 worth recording.
+The summary should cover: problem definition, chosen design direction and rationale, impact scope, TBDs, any 決策點 worth recording, and any reusable UI compositions that emerged.
 
 ---
 

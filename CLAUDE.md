@@ -18,14 +18,15 @@ This repo is the product knowledge base for a home repair matching platform (修
 
 ## Skill Workflow
 
-Five skills work together to build and evolve this knowledge base:
+Six skills work together to build and evolve this knowledge base:
 
 | Skill | Purpose |
 |-------|---------|
 | `/roger` | Guided interview to excavate and summarize product knowledge |
 | `/nami` | Product knowledge tour guide — proactively leads users through the knowledge base, one topic at a time |
 | `/luffy` | Guided design sessions to plan new features or optimize existing ones |
-| `/write-doc` | Turns discussion content into a structured Markdown document (supports: 一般知識文件, 流程文件, 決策記錄, 功能規劃文件) |
+| `/sanji` | Design system component chef — extracts a structured component brief from any input (Figma URL, Flutter code, screenshot, or description) |
+| `/write-doc` | Turns discussion content into a structured Markdown document (supports: 一般知識文件, 流程文件, 決策記錄, 功能規劃文件, 元件規格文件) |
 | `/archive-doc` | Files documents in the right location and maintains `docs/INDEX.md` |
 
 ## How to Contribute

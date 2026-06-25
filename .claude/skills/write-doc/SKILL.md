@@ -21,6 +21,8 @@ Choose the type that best fits the content, then read the corresponding referenc
 | 流程文件 | Step-by-step flows, SOPs, end-to-end process descriptions | `references/process-doc.md` |
 | 決策記錄（ADR） | Decisions with lasting impact that need to be traceable | `references/decision-adr.md` |
 | 一般知識文件 | Product descriptions, role explanations, feature overviews | `references/knowledge-doc.md` |
+| 元件規格文件 | A single UI component spec — from a /sanji session; covers variants, tokens, usage rules, Flutter mapping, Figma status | `references/component-spec.md` |
+| 設計模式文件 | A recurring UI composition pattern — from a /sanji pattern session; covers component arrangement, usage context, variants, anti-patterns | `references/pattern-doc.md` |
 
 If unsure, ask the user which type fits — or propose one and let them confirm.
 
