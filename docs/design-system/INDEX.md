@@ -30,7 +30,7 @@ design-system/
 
 ## Components
 
-元件文件陸續建立中。
+待建立元件清單：[component-inventory.md](component-inventory.md)（依序用 `/sanji` 完成備料後列於此）
 
 ## Patterns
 
