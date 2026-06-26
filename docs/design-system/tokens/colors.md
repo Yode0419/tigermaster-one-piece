@@ -118,14 +118,4 @@ _最後同步：2026-06-25_
 
 ## Semantic Color Tokens
 
-語意化 token 是實際在元件中應引用的顏色，底層對應到 Primitive token。
-
-### Text
-
-| Token | 色值 | 對應 Primitive | 使用情境 |
-|-------|------|----------------|----------|
-| `Text/Primary` | `#23242A` | `Neutral/950` | 主要文字、標題 |
-| `Text/Secondary` | `#4F4F54` | `Neutral/800` | 次要文字、說明文字 |
-| `Text/Hint` | `#727276` | `Neutral/600` | 提示文字、placeholder、輔助說明 |
-
-> **待補充**：其他語意 token 群組（Background、Border、Status、Interactive 等）在整理中，將於後續版本補入。
+語意化 token 是實際在元件中應引用的顏色，底層對應到 Primitive token。完整定義（Text、Background、Icon、Border、Interactive、Status 六個群組）記錄於 [semantic-colors.md](semantic-colors.md)。
