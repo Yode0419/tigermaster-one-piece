@@ -26,10 +26,11 @@ _最後同步：2026-06-25_
 
 ### Base
 
-| Token | 色值 |
-|-------|------|
-| `Base/White` | `#FFFFFF` |
-| `Base/Black` | `#000000` |
+| Token | 色值 | 說明 |
+|-------|------|------|
+| `Base/White` | `#FFFFFF` | — |
+| `Base/Black` | `#000000` | — |
+| `Base/Overlay` | `rgba(0, 0, 0, 0.63)` | Modal / BottomSheet 遮罩底色 |
 
 ### Blue
 

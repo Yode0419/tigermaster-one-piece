@@ -54,7 +54,7 @@ Primitive token（原始色值）
 |-------|--------------|------|---------|
 | `Background/Page` | `Neutral/100` | `#F5F5F5` | 整個頁面底色 |
 | `Background/Card` | `Base/White` | `#FFFFFF` | 白色卡片、BottomSheet、輸入框底 |
-| `Background/Overlay` | `Base/Black @ 63%` | `#000000` at 63% opacity | Modal、BottomSheet 後方的半透明遮罩 |
+| `Background/Overlay` | `Base/Overlay` | `rgba(0, 0, 0, 0.63)` | Modal、BottomSheet 後方的半透明遮罩 |
 
 ---
 
