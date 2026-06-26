@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-06-26_
+_Last updated: 2026-06-26 — Button spec 新增_
 
 ---
 
@@ -29,7 +29,11 @@ design-system/
 
 ## Components
 
-待建立元件清單：[component-inventory.md](component-inventory.md)（依序用 `/sanji` 完成備料後列於此）
+工作清單：[component-inventory.md](component-inventory.md)
+
+### components/
+
+- **[Button](components/button.md)** — 文字按鈕規格：variant × fill 組合、token 對照、有效組合、Flutter widget 對應 _(2026-06-26)_
 
 ## Patterns
 
