@@ -123,6 +123,11 @@
 - **Loading**：Figma 使用 `disabled` + 修改 `Label` 文字呈現。Flutter 端由 `FutureButton` 包裝，視覺進入 disabled，label 替換為 loadingText（call site 自訂，非 spinner）
 - **含 Icon**：前置（`hasIconStart`）與後置（`hasIconEnd`）各為獨立 Frame slot，通常擇一使用
 
+---
+
+## Figma 元件
+
+**位置**：[TigerMaster-Design-System → Button](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System?node-id=131-2)
 
 ---
 
@@ -136,18 +141,6 @@
 | `ButtonShareStyle` | primary filled 硬碼 style；待 token 化後移除 |
 | `CountDownButton` | 行為邏輯層（倒數計時），不屬於視覺規格範疇 |
 | `ProUpgradeButton` | 頁面特規（漸層 + 固定路由），不屬於設計系統 |
-
----
-
-## Figma 狀態
-
-- [x] 已建立為 Figma Component（TigerMaster-Design-System）
-- **目前位置**：`TigerMaster-Design-System` → `Button` 頁
-- **下一步**：
-  1. 依新 variant 定義重命名（Tertiary → brand、Outline Primary → primary outlined 等）
-  2. 移除 hovered state（mobile app 無 hover）
-  3. `hasIconStart` / `hasIconEnd` 各建立獨立 Frame slot（Instance Swap），取代現有 variant 展開
-  4. 確認 `Interactive/Brand` 的黃色值與 Figma token 同步（Yellow/450，`#FFC827`）
 
 ---
 
