@@ -11,16 +11,17 @@
 
 ### Variant × Fill
 
-| Variant | Fill | 背景 | 文字 | 邊框 | 語意角色 |
-|---------|------|------|------|------|---------|
-| `primary` | `filled` | `Interactive/Primary` | `Interactive/OnPrimary` | — | 頁面主確認行動 |
-| `primary` | `outlined` | transparent | `Interactive/Secondary` | `Border/Interactive` | 次要全寬行動 |
-| `secondary` | `filled` | `Interactive/Action` | `Interactive/OnPrimary` | — | 頁面內次要行動 |
-| `secondary` | `outlined` | transparent | `Interactive/Action` | `Border/Interactive` | 小型輔助行動 |
-| `brand` | `filled` | `Interactive/Brand` | `Interactive/OnBrand` | — | 品牌色溝通 / 催促行動 |
-| `neutral` | `outlined` | transparent | `Text/Hint` | `Border/Default` | 帳號設定類低強調行動 |
-| `ghost` | — | transparent | `Text/Primary` | — | 三級動作、取消 |
-| `ghost` + `danger` | — | transparent | `Status/Error` | — | 破壞性確認（dialog 內）|
+| Variant | Fill | Tone | 背景 | 文字 | 邊框 | 語意角色 |
+|---------|------|------|------|------|------|---------|
+| `primary` | `filled` | — | `Interactive/Primary` | `Interactive/OnFilled` | — | 頁面主確認行動 |
+| `primary` | `outlined` | — | transparent | `Interactive/Primary` | `Border/Interactive` | 次要全寬行動 |
+| `secondary` | `filled` | — | `Interactive/Action` | `Interactive/OnFilled` | — | 頁面內次要行動 |
+| `secondary` | `outlined` | — | transparent | `Interactive/Action` | `Border/Interactive` | 小型輔助行動 |
+| `brand` | `filled` | — | `Interactive/Brand` | `Interactive/OnBrand` | — | 品牌色溝通 / 催促行動 |
+| `neutral` | `outlined` | — | transparent | `Text/Hint` | `Border/Default` | 帳號設定類低強調行動 |
+| `ghost` | — | `action` | transparent | `Interactive/Action` | — | 取消、三級動作 |
+| `ghost` | — | `neutral` | transparent | `Text/Hint` | — | 刻意壓制的低調入口 |
+| `ghost` | — | `danger` | transparent | `Status/Error` | — | 破壞性最終確認 |
 
 **停用狀態（所有 variant）**：整體套用 `opacity: 40%`，不修改底層顏色。
 
@@ -29,11 +30,12 @@
 | 修飾詞 | 值 | 說明 |
 |--------|-----|------|
 | `shape` | `rectangle` / `pill` | 全部 variant 適用 |
-| `size` | `md` / `sm` | 見下方 Size 規格 |
+| `size` | `lg` / `md` / `sm` | 見下方 Size 規格 |
 | `width` | `full` / `hug` | 全部 variant 適用 |
-| `hasIconStart` | `true` / `false` | 前置 Icon（Instance Swap slot） |
-| `danger` | `true` / `false` | 目前僅確認 `ghost` 使用 |
-| `state` | `default` / `pressed` / `disabled` / `loading` | 全部 variant 適用 |
+| `hasIconStart` | `true` / `false` | 前置 Icon（Frame slot） |
+| `hasIconEnd` | `true` / `false` | 後置 Icon（Frame slot） |
+| `tone` | `action` / `neutral` / `danger` | 僅 `ghost` variant 適用；預設為 `action` |
+| `state` | `default` / `pressed` / `disabled` | 全部 variant 適用 |
 
 ---
 
@@ -41,17 +43,40 @@
 
 ### Size 規格
 
-| Size | 垂直 Padding | 水平 Padding | Icon 間距 | 文字大小 |
-|------|------------|------------|---------|--------|
-| `md` | `Spacing/12` | `Spacing/20` | `Spacing/8` | TBD |
-| `sm` | `Spacing/8` | `Spacing/12` | `Spacing/8` | TBD |
+> 計算高度 = 垂直 Padding × 2 + Line Height（Label token）
+
+| Size | 垂直 Padding | 水平 Padding | Icon 間距 | 文字大小 | 計算高度 | 典型 Width |
+|------|------------|------------|---------|--------|--------|-----------|
+| `lg` | `Spacing/12` | `Spacing/20` | `Spacing/8` | `Label/L`（16px, LH 20）| **44px** | `full` |
+| `md` | `Spacing/8` | `Spacing/16` | `Spacing/8` | `Label/L`（16px, LH 20）| **36px** | `hug` |
+| `sm` | `Spacing/4` | `Spacing/12` | `Spacing/4` | `Label/M`（14px, LH 20）| **28px** | `hug` |
 
 ### Shape 圓角
 
 | Shape | Token |
 |-------|-------|
-| `rectangle` | `Radius/8` |
+| `rectangle` | `Radius/4` |
 | `pill` | `Radius/Full` |
+
+### Icon 規格
+
+| Size | Icon 尺寸 |
+|------|---------|
+| `lg` | 24px |
+| `md` | 20px |
+| `sm` | 16px |
+
+- **顏色**：與文字同色——由 `foregroundColor` 統一控制，各 variant 的 icon 色 = 文字 token
+
+### 狀態視覺
+
+| State | 視覺處理 |
+|-------|---------|
+| `default` | 正常顯示 |
+| `pressed` | `foregroundColor` 12% 透明度疊加，對應 Material 2 InkWell 預設行為 |
+| `disabled` | 整體 `opacity: 40%`，不修改底層顏色 |
+
+> **Loading pattern**：Figma 不另設 `loading` variant。使用 `disabled` state + 修改 `Label` 文字（如「處理中…」）即可表達。Flutter 端由 `FutureButton` 包裝處理，視覺上進入 disabled，label 替換為 loadingText（call site 自訂）。
 
 ---
 
@@ -59,14 +84,15 @@
 
 | Variant | Fill | Shape | Size | Width | 對應 app 情境 |
 |---------|------|-------|------|-------|------------|
-| primary | filled | rectangle | md | full | 下一步、上傳施工照片並驗收 |
-| primary | outlined | rectangle | md | full | 與客戶聯繫、與王小姐對話 |
-| secondary | filled | pill | md | hug | 新增一筆報價 |
+| primary | filled | rectangle | lg | full | 下一步、上傳施工照片並驗收 |
+| primary | outlined | rectangle | lg | full | 與客戶聯繫、與王小姐對話 |
+| secondary | filled | pill | md | hug | 新增一筆報價、開始接案 |
 | secondary | outlined | pill | sm | hug | 查看詳情、查看說明 |
 | brand | filled | rectangle | md | hug | 再次通知師傅、與師傅對話 |
-| neutral | outlined | rectangle | md | full | 切換為師傅帳號、登出 |
-| ghost | — | — | md | hug | 取消（dialog）、刪除帳號 |
-| ghost + danger | — | — | md | hug | 離開（dialog）|
+| neutral | outlined | rectangle | lg | full | 切換為師傅帳號、登出 |
+| ghost | — | action | md | hug | 取消（dialog）|
+| ghost | — | neutral | md | hug | 取消媒合、刪除帳號（頁面入口）|
+| ghost | — | danger | md | hug | 中止媒合、刪除（dialog confirm）|
 
 ---
 
@@ -77,8 +103,9 @@
 - 品牌導向的溝通或催促行動 → `brand filled`
 - 頁面內次要填充行動 → `secondary filled`，通常搭配 `pill`
 - 有邊框的支援行動（全寬或膠囊）→ `primary outlined` 或 `secondary outlined`
-- 三級動作、彈窗取消 → `ghost`
-- 需要明確確認的破壞性行動 → `ghost + danger`
+- 三級動作、彈窗取消 → `ghost/action`
+- 刻意壓制的破壞性入口（不希望誤觸）→ `ghost/neutral`
+- 需要明確確認的破壞性行動（dialog 最終確認）→ `ghost/danger`
 - 帳號設定類低強調行動 → `neutral outlined`
 
 **避免：**
@@ -93,9 +120,9 @@
 ## 邊界情況
 
 - **Disabled**：整體 `opacity: 40%`，不另設顏色 token，適用所有 variant
-- **Loading**：由 `FutureButton` 包裝處理，視覺上按鈕進入 disabled，同時顯示 loading 文字（非 spinner）
-- **含 Icon**：僅支援前置 icon（`hasIconStart`），透過 Instance Swap slot 替換；不支援後置 icon（`hasIconEnd`）
-- **「切換為師傅帳號」深藍文字**：這是頁面層套用 `Text/Brand` 的情境覆蓋，非 `neutral` variant 的標準樣式；`neutral` 標準文字色為 `Text/Hint`
+- **Loading**：Figma 使用 `disabled` + 修改 `Label` 文字呈現。Flutter 端由 `FutureButton` 包裝，視覺進入 disabled，label 替換為 loadingText（call site 自訂，非 spinner）
+- **含 Icon**：前置（`hasIconStart`）與後置（`hasIconEnd`）各為獨立 Frame slot，通常擇一使用
+
 
 ---
 
@@ -119,12 +146,8 @@
 - **下一步**：
   1. 依新 variant 定義重命名（Tertiary → brand、Outline Primary → primary outlined 等）
   2. 移除 hovered state（mobile app 無 hover）
-  3. Icon 改為 Instance Swap slot，取代現有 hasIconStart/hasIconEnd variant 展開
+  3. `hasIconStart` / `hasIconEnd` 各建立獨立 Frame slot（Instance Swap），取代現有 variant 展開
   4. 確認 `Interactive/Brand` 的黃色值與 Figma token 同步（Yellow/450，`#FFC827`）
 
 ---
 
-## 待釐清事項（TBD）
-
-- [ ] Typography token：`md` / `sm` size 各對應哪個 Label token（需對照 `typography.md`）
-- [ ] `neutral outlined` 標準外觀：`Border/Default`（`#EDEDED`）在視覺上是否夠明顯，或應調整為 `Border/Subtle`（需視覺驗證）

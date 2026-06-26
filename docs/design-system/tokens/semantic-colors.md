@@ -93,12 +93,11 @@ Primitive token（原始色值）
 
 | Token | 對應 Primitive | 色值 | 使用情境 |
 |-------|--------------|------|---------|
-| `Interactive/Primary` | `Brand/TigerBlue` | `#1F286F` | 主要 CTA 按鈕底色；Tab 選中狀態；進度狀態橫幅底色 |
-| `Interactive/OnPrimary` | `Base/White` | `#FFFFFF` | 主要按鈕上的文字與 icon |
-| `Interactive/Secondary` | `Brand/TigerBlue` | `#1F286F` | Outlined 主要按鈕文字色（底色透明）|
+| `Interactive/Primary` | `Brand/TigerBlue` | `#1F286F` | 品牌深藍互動色，filled 時作為底色，outlined / ghost 時作為前景色，視情境選用 |
+| `Interactive/OnFilled` | `Base/White` | `#FFFFFF` | 填色互動元件上的文字與 icon |
 | `Interactive/Brand` | `Yellow/450` | `#FFC827` | 品牌黃填色按鈕底色；Chip 選中底色；聊天室自方訊息氣泡底色 |
 | `Interactive/OnBrand` | `Neutral/950` | `#23242A` | 品牌黃按鈕上的文字與 icon |
-| `Interactive/Action` | `Blue/500` | `#3A89F8` | 藍色填色次要按鈕底色（新增一筆報價）|
+| `Interactive/Action` | `Blue/500` | `#3A89F8` | 藍色互動色，filled 時作為底色，outlined / ghost 時作為前景色，視情境選用 |
 
 ---
 

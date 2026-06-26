@@ -60,13 +60,15 @@ _最後同步：2026-06-25_
 
 ## Label
 
-用於標籤、按鈕文字、Badge、Tag、輔助說明。
+用於互動元件的文字標籤：按鈕、Chip、Tag、Badge、輔助說明。
+層級由大至小對應元件的視覺重要性。
 
-| Token | Size | Weight | Line Height | Flutter |
-|-------|------|--------|-------------|---------|
-| `Label/L` | 14px | 500 Medium | 22px | — |
-| `Label/M` | 12px | 500 Medium | 18px | — |
-| `Label/S` | 10px | 500 Medium | 14px | — |
+| Token | Size | Weight | Line Height | 比例 | 典型用途 | Flutter |
+|-------|------|--------|-------------|------|---------|---------|
+| `Label/L` | 16px | 500 Medium | 20px | 1.25× | lg / md 按鈕文字 | — |
+| `Label/M` | 14px | 500 Medium | 20px | 1.43× | sm 按鈕文字、次要標籤 | — |
+| `Label/S` | 12px | 500 Medium | 16px | 1.33× | Chip、Tag、Badge 文字 | — |
+| `Label/XS` | 10px | 500 Medium | 14px | 1.4× | 最小標籤 | — |
 
 ---
 
@@ -76,4 +78,14 @@ _最後同步：2026-06-25_
 - **Heading** 每個區塊最多使用一個層級，不跳級
 - **Title vs Body**：強調用 Title（Bold），正文用 Body（Regular）
 - **Label** 不用於段落文字，僅用於短文字元素
-- 最小使用尺寸：`Label/S`（10px），不得更小
+- 最小使用尺寸：`Label/XS`（10px），不得更小
+- **按鈕文字**：lg / md 按鈕 → `Label/L`；sm 按鈕 → `Label/M`
+
+---
+
+## 已知設計債
+
+| 問題 | 說明 | 建議處理時機 |
+|------|------|------------|
+| fontWeight 不一致 | Codebase 正文大量使用 w500，Body group 定義的 w400 尚未落地 | 重構各頁面文字時逐步對齊 |
+| 字型名稱不一致 | Codebase `main.dart` 使用 `Noto Sans CJK`；設計端與 token 定義使用 `Noto Sans TC` | 統一換成 `Noto Sans TC` |
