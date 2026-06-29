@@ -6,7 +6,7 @@
 分為 6 個群組，底層對應 [colors.md](colors.md) 的 Primitive token。
 
 _來源：設計訪談 + Flutter codebase（`fdtigermaster_app` v2.6.1）審查_
-_最後更新：2026-06-26_
+_最後更新：2026-06-29 — 新增 Icon/Subtle_
 
 ---
 
@@ -65,6 +65,7 @@ Primitive token（原始色值）
 | Token | 對應 Primitive | 色值 | 使用情境 |
 |-------|--------------|------|---------|
 | `Icon/Default` | `Neutral/950` | `#23242A` | Duotone 深色主體層；單色 icon（箭頭、chevron）|
+| `Icon/Subtle` | `Neutral/600` | `#727276` | 輔助性、弱化的 icon（TextField suffix、次要說明圖示）|
 | `Icon/Brand` | `Brand/TigerYellow` | `#FABF13` | Duotone 黃色填色層；底部導覽列選中狀態 |
 | `Icon/Inverse` | `Base/White` | `#FFFFFF` | 深色底上的 icon（底部導覽列非選中狀態）|
 | `Icon/Interactive` | `Blue/500` | `#3A89F8` | Outlined 互動按鈕內的 icon |
