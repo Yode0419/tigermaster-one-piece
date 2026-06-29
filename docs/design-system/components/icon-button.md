@@ -33,7 +33,7 @@
 
 | 屬性 | Token |
 |------|-------|
-| Background | `Background/Card` |
+| Background | `Background/Surface` |
 | Shape | `Radius/Full` |
 | Icon 色 | `Icon/Default` |
 

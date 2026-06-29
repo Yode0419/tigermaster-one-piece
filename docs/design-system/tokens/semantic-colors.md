@@ -6,7 +6,7 @@
 分為 6 個群組，底層對應 [colors.md](colors.md) 的 Primitive token。
 
 _來源：設計訪談 + Flutter codebase（`fdtigermaster_app` v2.6.1）審查_
-_最後更新：2026-06-29 — 新增 Icon/Subtle_
+_最後更新：2026-06-29 — 新增 Icon/Subtle；Background/Card 更名為 Background/Surface_
 
 ---
 
@@ -53,7 +53,7 @@ Primitive token（原始色值）
 | Token | 對應 Primitive | 色值 | 使用情境 |
 |-------|--------------|------|---------|
 | `Background/Page` | `Neutral/100` | `#F5F5F5` | 整個頁面底色 |
-| `Background/Card` | `Base/White` | `#FFFFFF` | 白色卡片、BottomSheet、輸入框底 |
+| `Background/Surface` | `Base/White` | `#FFFFFF` | 白色卡片、BottomSheet、輸入框底 |
 | `Background/Overlay` | `Base/Overlay` | `rgba(0, 0, 0, 0.63)` | Modal、BottomSheet 後方的半透明遮罩 |
 
 ---
