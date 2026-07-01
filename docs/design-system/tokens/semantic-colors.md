@@ -65,7 +65,7 @@ Primitive token（原始色值）
 | Token | 對應 Primitive | 色值 | 使用情境 |
 |-------|--------------|------|---------|
 | `Icon/Default` | `Neutral/950` | `#23242A` | Duotone 深色主體層；單色 icon（箭頭、chevron）|
-| `Icon/Subtle` | `Neutral/600` | `#727276` | 輔助性、弱化的 icon（TextField suffix、次要說明圖示）|
+| `Icon/Subtle` | `Neutral/500` | `#9E9E9E` | 輔助性、弱化的 icon（TextField suffix、次要說明圖示）|
 | `Icon/Brand` | `Brand/TigerYellow` | `#FABF13` | Duotone 黃色填色層；底部導覽列選中狀態 |
 | `Icon/Inverse` | `Base/White` | `#FFFFFF` | 深色底上的 icon（底部導覽列非選中狀態）|
 | `Icon/Interactive` | `Blue/500` | `#3A89F8` | Outlined 互動按鈕內的 icon |

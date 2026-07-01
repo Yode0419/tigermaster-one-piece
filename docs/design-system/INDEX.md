@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-06-30 — TextField spec 新增_
+_Last updated: 2026-07-01 — 新增 PasswordField 獨立元件，TextField 回歸單純三維 variant_
 
 ---
 
@@ -37,7 +37,8 @@ design-system/
 - **[Icon](components/icon.md)** — 圖示容器規格：Material / Phosphor 兩套系統說明、Phosphor Duotone、Size 對照、顏色由父元件決定 _(2026-06-29)_
 - **[IconButton](components/icon-button.md)** — 純圖示按鈕規格：ghost / filled variant、md / sm 尺寸、tone 定義、token 對照、Flutter widget 對應 _(2026-06-29)_
 - **[FAB（Floating Action Button）](components/fab.md)** — 浮動主要行動按鈕：通用規格定義、引導 Tooltip、使用門檻與禁用情境、CustomerServiceFab 實作案例 _(2026-06-29)_
-- **[TextField](components/text-field.md)** — 文字輸入框規格：一般/密碼/多行 variant、readonly state、token 對照、後綴 icon 位移邊界情況、Flutter widget 對應 _(2026-06-30)_
+- **[TextField](components/text-field.md)** — 文字輸入框規格：Lines/State/Content 三維 variant、readonly state、Content（Filled/Empty）placeholder 機制、Show Helper Text 開關、token 對照、後綴 icon 位移邊界情況、Flutter widget 對應 _(2026-07-01)_
+- **[PasswordField](components/password-field.md)** — 密碼輸入框規格：從 TextField 拆出的獨立元件，State/Content/Reveal 三維 variant、顯示/隱藏密碼機制、不提供字數顯示、Flutter widget 對應 _(2026-07-01)_
 
 ## Patterns
 
