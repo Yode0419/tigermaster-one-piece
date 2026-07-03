@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-03 — 新增 SegmentedControl 元件規格_
+_Last updated: 2026-07-03 — 新增 Elevation/Rise 陰影 token（置底區塊用）_
 
 ---
 
@@ -25,7 +25,7 @@ design-system/
 - [typography.md](tokens/typography.md) — 字型層級（Display / Heading / Title / Body / Label）_(2026-07-03)_
 - [spacing.md](tokens/spacing.md) — 間距 token（2–48px）_(2026-06-25)_
 - [radius.md](tokens/radius.md) — 圓角 token（4–Full）_(2026-06-25)_
-- [elevation.md](tokens/elevation.md) — 陰影層級（Card / Sheet）_(2026-06-29)_
+- [elevation.md](tokens/elevation.md) — 陰影層級（Card / Sheet / 置底區塊）_(2026-07-03)_
 
 ## Components
 
