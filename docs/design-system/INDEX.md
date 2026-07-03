@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-03 — 精簡 Checkbox/Radio/Switch 文件的冗餘說明段落_
+_Last updated: 2026-07-03 — 新增 SegmentedControl 元件規格_
 
 ---
 
@@ -42,6 +42,7 @@ design-system/
 - **[Checkbox](components/checkbox.md)** — 複選勾選框規格：State（enabled/disabled/error）× Selected（true/false）兩個獨立 variant 屬性、token 對照、避免互斥選項使用、Flutter widget 改造項目 _(2026-07-03)_
 - **[Radio](components/radio.md)** — 單選勾選框規格：State（enabled/disabled/error）× Selected（true/false）兩個獨立 variant 屬性、error 為群組層級共享狀態（非個別項目獨立判斷）、token 對照、Flutter widget 改造項目 _(2026-07-03)_
 - **[Switch](components/switch.md)** — 即時生效設定開關規格：Selected（true/false）× State（enabled/disabled）兩個獨立 variant 屬性、Material 2 風格溢出式 Thumb + 陰影、token 對照、與 Checkbox/Radio 可點擊區域差異、disabled 特例技術債說明 _(2026-07-03)_
+- **[SegmentedControl](components/segmented-control.md)** — 整頁內容切換元件規格：功能上等同 Tab（需搭配 TabController/TabBarView），視覺為 Segmented Control 樣式；分段數（2/3）與 Label 文字 variant、token 對照、Figma Component 已建立 _(2026-07-03)_
 
 ## Patterns
 
