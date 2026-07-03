@@ -19,6 +19,7 @@ _最後更新：2026-07-01_
 | 內容顯示 | Filled（使用者已輸入值，`Text/Primary`）/ Empty（空欄位提示文字 Placeholder，`Text/Hint`）——正式 VARIANT 維度，非 BOOLEAN 開關 |
 | 字數顯示器 | 顯示（有 `maxLength` 且無後綴控制項時）/ 隱藏（有後綴控制項時，現況讓位給 icon） |
 | Helper Text 顯示 | 顯示 / 隱藏——`Show Helper Text` BOOLEAN，預設 `true` |
+| Label 顯示 | 顯示 / 隱藏——`Show Label` BOOLEAN，預設 `true`；關閉時必須在欄位外部（正上方或區塊標題）另外提供標籤文字，不可完全無標籤，見下方使用規則 |
 
 ## Design Tokens
 
@@ -28,12 +29,13 @@ _最後更新：2026-07-01_
 | 邊框色（default） | `Border/Subtle` | ⚠ 見下方 TBD：codebase 現況色差待修正 |
 | 邊框色（focus） | `Border/Focus` | |
 | 邊框色（error） | `Border/Error` | |
-| Label / Hint 文字 | `Text/Hint`，Text Style `Body/XS` | `labelText`、`hintText` 共用 |
+| Label 文字 | `Text/Secondary`，Text Style `Body/S` | 欄位名稱，永久顯示的重要資訊，顏色/字級皆高於 Placeholder 一階，與其區隔 |
+| Hint 文字（輔助說明） | `Text/Hint`，Text Style `Body/S` | 字級與 Label 同階、顏色較淡，維持次要語意 |
 | 輸入文字（`Value Text`） | `Text/Primary`，Text Style `Body/M` | 預設文字 `Input text` |
 | Placeholder 文字（`Placeholder Text`） | `Text/Hint`，Text Style `Body/M` | 與 Value Text 字級相同（同一文字圖層切換內容）；⚠ 不可用更淡的色階，見下方邊界情況的對比度說明；預設文字 `Placeholder text` |
-| Error 文字 | `Status/Error`，Text Style `Body/XS` | |
+| Error 文字 | `Status/Error`，Text Style `Body/S` | 任務關鍵資訊，字級與 Label/Hint 同階，不使用最小字級 |
 | 後綴 icon | `Icon/Subtle` | |
-| 字數顯示器文字 | `Text/Hint`，Text Style `Body/XS` | |
+| 字數顯示器文字 | `Text/Hint`，Text Style `Body/XS` | 純裝飾性資訊，維持最低字級層級 |
 | 圓角 | 無 | Flutter 底線樣式，不適用 Radius token |
 
 ## 使用規則
@@ -46,6 +48,7 @@ _最後更新：2026-07-01_
 - 搜尋情境（改用未來的 `SearchBar` molecule）
 - 欄位值永不可編輯的純顯示情境（不應套用輸入框視覺語言）
 - 在 TextField 內建立按鈕/badge slot——外部按鈕（如 `PillButton`）應以 `Row` 並排組合，非 TextField 自身屬性
+- 關閉 `Show Label` 時完全不提供替代標籤——應在欄位外部（正上方或區塊標題）補上標籤文字
 
 ## 邊界情況
 

@@ -39,6 +39,8 @@ design-system/
 - **[FAB（Floating Action Button）](components/fab.md)** — 浮動主要行動按鈕：通用規格定義、引導 Tooltip、使用門檻與禁用情境、CustomerServiceFab 實作案例 _(2026-06-29)_
 - **[TextField](components/text-field.md)** — 文字輸入框規格：Lines/State/Content 三維 variant、readonly state、Content（Filled/Empty）placeholder 機制、Show Helper Text 開關、token 對照、後綴 icon 位移邊界情況、Flutter widget 對應 _(2026-07-01)_
 - **[PasswordField](components/password-field.md)** — 密碼輸入框規格：從 TextField 拆出的獨立元件，State/Content/Reveal 三維 variant、顯示/隱藏密碼機制、不提供字數顯示、Flutter widget 對應 _(2026-07-01)_
+- **[Checkbox](components/checkbox.md)** — 複選勾選框規格：State（enabled/disabled/error）× Selected（true/false）兩個獨立 variant 屬性、token 對照、避免互斥選項使用、Flutter widget 改造項目 _(2026-07-02)_
+- **[Radio](components/radio.md)** — 單選勾選框規格：State（enabled/disabled/error）× Selected（true/false）兩個獨立 variant 屬性、error 為群組層級共享狀態（非個別項目獨立判斷）、token 對照、Flutter widget 改造項目 _(2026-07-02)_
 - **[Switch](components/switch.md)** — 即時生效設定開關規格：Selected（true/false）× State（enabled/disabled）兩個獨立 variant 屬性、Material 2 風格溢出式 Thumb + 陰影、token 對照、與 Checkbox/Radio 可點擊區域差異、disabled 特例技術債說明 _(2026-07-02)_
 
 ## Patterns
