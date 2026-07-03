@@ -2,7 +2,7 @@
 
 _來源：Figma Design System / Foundations > Typography_
 _Figma 節點：`13:2`（`X00A5f1Ohj9BhgbMXwzNuM`）_
-_最後同步：2026-06-25_
+_最後同步：2026-07-03_
 
 ---
 

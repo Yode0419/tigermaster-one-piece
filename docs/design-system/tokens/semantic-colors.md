@@ -6,7 +6,7 @@
 分為 6 個群組，底層對應 [colors.md](colors.md) 的 Primitive token。
 
 _來源：設計訪談 + Flutter codebase（`fdtigermaster_app` v2.6.1）審查_
-_最後更新：2026-07-02 — 修正 Interactive/Brand 對應值（Figma 實際綁定 Brand/TigerYellow #FABF13，原文件誤植為 Yellow/450）_
+_最後更新：2026-07-03 — 修正 Interactive/Brand 對應值（Figma 實際綁定 Brand/TigerYellow #FABF13，原文件誤植為 Yellow/450）_
 
 ---
 
