@@ -4,7 +4,7 @@
 `完成` 打勾後，元件名稱改為連結指向 spec 文件。
 
 _Flutter codebase：`C:\Users\yode0\develop\source_code\android_app_2.6.1\fdtigermaster_app`_
-_最後更新：2026-07-01_
+_最後更新：2026-07-02_
 
 ---
 
@@ -25,7 +25,7 @@ Atoms 是最小單位，不依賴其他自訂元件，由 Token 驅動。
 | [ ] | LabeledIconButton | `Button` | —（需新建）|
 | [ ] | Radio | `Radio` | `Radio`（Flutter） |
 | [ ] | Rating | `Rating` | `RatingBar`, `RatingBarIndicator`（flutter_rating_bar） |
-| [ ] | Switch | `Switch` | `Switch`（Flutter, Material 2） |
+| [x] | [Switch](components/switch.md) | `Switch` | `Switch`（Flutter, Material 2） |
 | [ ] | Tag | `Tag` | `PillText` |
 | [ ] | Tooltip | `Tooltip` | `TapTooltip` |
 

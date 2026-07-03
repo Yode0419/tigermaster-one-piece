@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-01 — 新增 PasswordField 獨立元件，TextField 回歸單純三維 variant_
+_Last updated: 2026-07-02 — 新增 Switch 元件規格_
 
 ---
 
@@ -39,6 +39,7 @@ design-system/
 - **[FAB（Floating Action Button）](components/fab.md)** — 浮動主要行動按鈕：通用規格定義、引導 Tooltip、使用門檻與禁用情境、CustomerServiceFab 實作案例 _(2026-06-29)_
 - **[TextField](components/text-field.md)** — 文字輸入框規格：Lines/State/Content 三維 variant、readonly state、Content（Filled/Empty）placeholder 機制、Show Helper Text 開關、token 對照、後綴 icon 位移邊界情況、Flutter widget 對應 _(2026-07-01)_
 - **[PasswordField](components/password-field.md)** — 密碼輸入框規格：從 TextField 拆出的獨立元件，State/Content/Reveal 三維 variant、顯示/隱藏密碼機制、不提供字數顯示、Flutter widget 對應 _(2026-07-01)_
+- **[Switch](components/switch.md)** — 即時生效設定開關規格：Selected（true/false）× State（enabled/disabled）兩個獨立 variant 屬性、Material 2 風格溢出式 Thumb + 陰影、token 對照、與 Checkbox/Radio 可點擊區域差異、disabled 特例技術債說明 _(2026-07-02)_
 
 ## Patterns
 

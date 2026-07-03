@@ -6,7 +6,7 @@
 分為 6 個群組，底層對應 [colors.md](colors.md) 的 Primitive token。
 
 _來源：設計訪談 + Flutter codebase（`fdtigermaster_app` v2.6.1）審查_
-_最後更新：2026-06-29 — 新增 Icon/Subtle；Background/Card 更名為 Background/Surface_
+_最後更新：2026-07-02 — 修正 Interactive/Brand 對應值（Figma 實際綁定 Brand/TigerYellow #FABF13，原文件誤植為 Yellow/450）_
 
 ---
 
@@ -96,7 +96,7 @@ Primitive token（原始色值）
 |-------|--------------|------|---------|
 | `Interactive/Primary` | `Brand/TigerBlue` | `#1F286F` | 品牌深藍互動色，filled 時作為底色，outlined / ghost 時作為前景色，視情境選用 |
 | `Interactive/OnFilled` | `Base/White` | `#FFFFFF` | 填色互動元件上的文字與 icon |
-| `Interactive/Brand` | `Yellow/450` | `#FFC827` | 品牌黃填色按鈕底色；Chip 選中底色；聊天室自方訊息氣泡底色 |
+| `Interactive/Brand` | `Brand/TigerYellow` | `#FABF13` | 品牌黃填色按鈕底色；Chip 選中底色；聊天室自方訊息氣泡底色；Switch on 狀態 track |
 | `Interactive/OnBrand` | `Neutral/950` | `#23242A` | 品牌黃按鈕上的文字與 icon |
 | `Interactive/Action` | `Blue/500` | `#3A89F8` | 藍色互動色，filled 時作為底色，outlined / ghost 時作為前景色，視情境選用 |
 
