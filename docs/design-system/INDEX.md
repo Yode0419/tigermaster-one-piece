@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-06 — 新增 Tag 元件規格_
+_Last updated: 2026-07-06 — 新增 Tooltip 元件規格_
 
 ---
 
@@ -45,6 +45,7 @@ design-system/
 - **[SegmentedControl](components/segmented-control.md)** — 整頁內容切換元件規格：功能上等同 Tab（需搭配 TabController/TabBarView），視覺為 Segmented Control 樣式；分段數（2/3）與 Label 文字 variant、token 對照、Figma Component 已建立 _(2026-07-03)_
 - **[Chip](components/chip.md)** — 少量選項單選切換元件規格：Tone（Brand/Info）× Selected × Icon × Disabled 四維 variant、Tone 語意差異定義、新引入「元件專屬 token」概念（Chip/InfoSelected）、三處現況實作待整併為統一 Flutter widget _(2026-07-06)_
 - **[Tag](components/tag.md)** — 靜態顯示標籤規格：Tone（Info/Emphasis/Notice/Success）× Solid × Size 三維 variant、Emphasis 兩種視覺強度（淡底色/實色反白）、`Background/Notice` 由候選升級為正式 token、同步修正 `Status/Success`、`Status/ErrorContainer`、`radius.md` 圓角歸屬 _(2026-07-06)_
+- **[Tooltip](components/tooltip.md)** — 點擊觸發輔助說明泡泡規格：觸發圖示以 slot 帶入而非 Tone variant、統一 padding/最大寬度(280px)/自動消失時間(3秒)、Tap target 由觸發元件（如 IconButton）自身定義 _(2026-07-06)_
 
 ## Patterns
 

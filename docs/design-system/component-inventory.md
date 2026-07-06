@@ -27,7 +27,7 @@ Atoms 是最小單位，不依賴其他自訂元件，由 Token 驅動。
 | [ ] | Rating | `Rating` | `RatingBar`, `RatingBarIndicator`（flutter_rating_bar） |
 | [x] | [Switch](components/switch.md) | `Switch` | `Switch`（Flutter, Material 2） |
 | [x] | [Tag](components/tag.md) | `Tag` | `PillText` |
-| [ ] | Tooltip | `Tooltip` | `TapTooltip` |
+| [x] | [Tooltip](components/tooltip.md) | `Tooltip` | `TapTooltip` |
 
 ---
 
