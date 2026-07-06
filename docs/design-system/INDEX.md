@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-03 — 新增 Elevation/Rise 陰影 token（置底區塊用）_
+_Last updated: 2026-07-06 — 新增 Chip 元件規格_
 
 ---
 
@@ -20,7 +20,7 @@ design-system/
 
 ## Tokens
 
-- [colors.md](tokens/colors.md) — Primitive 色票（品牌色、中性色、功能色）_(2026-06-26)_
+- [colors.md](tokens/colors.md) — Primitive 色票（品牌色、中性色、功能色）+ Component Tokens 第三層說明 _(2026-07-06)_
 - [semantic-colors.md](tokens/semantic-colors.md) — Semantic 顏色 token（Text / Background / Icon / Border / Interactive / Status）_(2026-07-03)_
 - [typography.md](tokens/typography.md) — 字型層級（Display / Heading / Title / Body / Label）_(2026-07-03)_
 - [spacing.md](tokens/spacing.md) — 間距 token（2–48px）_(2026-06-25)_
@@ -43,6 +43,7 @@ design-system/
 - **[Radio](components/radio.md)** — 單選勾選框規格：State（enabled/disabled/error）× Selected（true/false）兩個獨立 variant 屬性、error 為群組層級共享狀態（非個別項目獨立判斷）、token 對照、Flutter widget 改造項目 _(2026-07-03)_
 - **[Switch](components/switch.md)** — 即時生效設定開關規格：Selected（true/false）× State（enabled/disabled）兩個獨立 variant 屬性、Material 2 風格溢出式 Thumb + 陰影、token 對照、與 Checkbox/Radio 可點擊區域差異、disabled 特例技術債說明 _(2026-07-03)_
 - **[SegmentedControl](components/segmented-control.md)** — 整頁內容切換元件規格：功能上等同 Tab（需搭配 TabController/TabBarView），視覺為 Segmented Control 樣式；分段數（2/3）與 Label 文字 variant、token 對照、Figma Component 已建立 _(2026-07-03)_
+- **[Chip](components/chip.md)** — 少量選項單選切換元件規格：Tone（Brand/Info）× Selected × Icon × Disabled 四維 variant、Tone 語意差異定義、新引入「元件專屬 token」概念（Chip/InfoSelected）、三處現況實作待整併為統一 Flutter widget _(2026-07-06)_
 
 ## Patterns
 

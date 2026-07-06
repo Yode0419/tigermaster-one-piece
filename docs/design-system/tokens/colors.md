@@ -120,3 +120,13 @@ _最後同步：2026-06-25_
 ## Semantic Color Tokens
 
 語意化 token 是實際在元件中應引用的顏色，底層對應到 Primitive token。完整定義（Text、Background、Icon、Border、Interactive、Status 六個群組）記錄於 [semantic-colors.md](semantic-colors.md)。
+
+---
+
+## Component Tokens（元件專屬 Token）
+
+顏色架構第三層：只給單一元件單一情境使用、無法歸入任何 Semantic 群組的顏色，命名為 `元件名稱/角色`，僅限該元件引用。
+
+| Token | 對應 Primitive | 使用元件 |
+|-------|--------------|---------|
+| `Chip/InfoSelected` | `Blue/200`（`#BFDAFF`） | [Chip](../components/chip.md)（Info tone 選中底色） |

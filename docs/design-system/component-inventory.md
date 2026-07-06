@@ -4,7 +4,7 @@
 `完成` 打勾後，元件名稱改為連結指向 spec 文件。
 
 _Flutter codebase：`C:\Users\yode0\develop\source_code\android_app_2.6.1\fdtigermaster_app`_
-_最後更新：2026-07-03_
+_最後更新：2026-07-06_
 
 ---
 
@@ -17,7 +17,7 @@ Atoms 是最小單位，不依賴其他自訂元件，由 Token 驅動。
 | [ ] | Badge | `Badge` | `ChatroomUnreadBadge` |
 | [x] | [Button](components/button.md) | `Button` | `PillButton`, `FutureButton`, `ToggleDisableButton`, `ButtonShareStyle` |
 | [x] | [Checkbox](components/checkbox.md) | `Checkbox` | `TitledCheckBox` |
-| [ ] | Chip | `Chip` | `ChoiceChip`（Flutter, Material 2） |
+| [x] | [Chip](components/chip.md) | `Chip` | `InvoiceCategoryPicker`, `WorkingDateTypeSwitch`, `ChoiceChip`（Flutter, Material 2） |
 | [x] | [FAB](components/fab.md) | `Button` | `FloatingActionButton`（Flutter） |
 | [x] | [Icon](components/icon.md) | `Icon` | `Icon`（Flutter） |
 | [x] | [IconButton](components/icon-button.md) | `Button` | `IconButton`（Flutter） |
