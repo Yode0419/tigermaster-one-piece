@@ -2,7 +2,7 @@
 
 _來源：Figma Design System / Foundations > Radius_
 _Figma 節點：`28:74`（`X00A5f1Ohj9BhgbMXwzNuM`）_
-_最後同步：2026-06-25_
+_最後同步：2026-07-06 — 修正 Tag 圓角歸屬（Radius/4 → Radius/Full），依 Tag 元件備料時核對 codebase 實際圓角為完全圓形_
 
 ---
 
@@ -10,12 +10,12 @@ _最後同步：2026-06-25_
 
 | Token | 值（px） | 常見用途 |
 |-------|----------|----------|
-| `Radius/4` | 4 | 小型元件，如 Tag、Badge、輸入框 |
+| `Radius/4` | 4 | 小型元件，如 Badge、輸入框 |
 | `Radius/8` | 8 | 標準元件，如 Button、小型 Card |
 | `Radius/12` | 12 | 中型 Card、選單項目 |
 | `Radius/16` | 16 | 大型 Card、Modal、Bottom Sheet |
 | `Radius/24` | 24 | 特殊圓角，如膠囊型按鈕容器 |
-| `Radius/Full` | 999 | 完全圓形，如頭像、圓形按鈕、Chip |
+| `Radius/Full` | 999 | 完全圓形，如頭像、圓形按鈕、Chip、Tag |
 
 ---
 
