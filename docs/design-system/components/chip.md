@@ -44,7 +44,7 @@ Chip 由三個獨立的 VARIANT 屬性交叉組成：
 | 選中底色 | `Interactive/Brand` | `#FABF13` |
 | 選中文字 | `Interactive/OnBrand` | `#23242A`，專為疊在 `Interactive/Brand` 底色上的文字定義 |
 | 未選中底色 | `Background/Page` | `#F5F5F5` |
-| 未選中文字 | `Text/Hint` | `#727276` |
+| 未選中文字 | `Text/Primary` | `#23242A` |
 | 邊框 | 恆為 transparent | 選中與未選中皆無邊框 |
 
 ### Info tone
