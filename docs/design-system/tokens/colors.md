@@ -31,6 +31,7 @@ _最後同步：2026-06-25_
 | `Base/White` | `#FFFFFF` | — |
 | `Base/Black` | `#000000` | — |
 | `Base/Overlay` | `rgba(0, 0, 0, 0.63)` | Modal / BottomSheet 遮罩底色 |
+| `Base/OverlaySubtle` | `rgba(0, 0, 0, 0.08)` | 淺色遮罩底色（如 Loading 骨架佔位）_(2026-07-07 新增)_ |
 
 ### Blue
 

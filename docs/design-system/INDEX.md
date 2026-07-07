@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-07 — 新增 Badge、CornerBadge 元件規格_
+_Last updated: 2026-07-07 — 新增 Image 元件規格、新增 Background/OverlaySubtle token_
 
 ---
 
@@ -20,8 +20,8 @@ design-system/
 
 ## Tokens
 
-- [colors.md](tokens/colors.md) — Primitive 色票（品牌色、中性色、功能色）+ Component Tokens 第三層說明 _(2026-07-06)_
-- [semantic-colors.md](tokens/semantic-colors.md) — Semantic 顏色 token（Text / Background / Icon / Border / Interactive / Status）_(2026-07-06)_
+- [colors.md](tokens/colors.md) — Primitive 色票（品牌色、中性色、功能色）+ Component Tokens 第三層說明 _(2026-07-07)_
+- [semantic-colors.md](tokens/semantic-colors.md) — Semantic 顏色 token（Text / Background / Icon / Border / Interactive / Status）_(2026-07-07)_
 - [typography.md](tokens/typography.md) — 字型層級（Display / Heading / Title / Body / Label）_(2026-07-03)_
 - [spacing.md](tokens/spacing.md) — 間距 token（2–48px）_(2026-06-25)_
 - [radius.md](tokens/radius.md) — 圓角 token（4–Full）_(2026-07-06)_
@@ -48,6 +48,7 @@ design-system/
 - **[Tooltip](components/tooltip.md)** — 點擊觸發輔助說明泡泡規格：觸發圖示以 slot 帶入而非 Tone variant、統一 padding/最大寬度(280px)/自動消失時間(3秒)、Tap target 由觸發元件（如 IconButton）自身定義 _(2026-07-06)_
 - **[Badge](components/badge.md)** — 通知提示元件規格：疊加於其他元件右上角，Content（Dot/Count）variant、9+ 上限規則（現況 'N' 列為技術債）、與 CornerBadge 明確區分 _(2026-07-07)_
 - **[CornerBadge](components/corner-badge.md)** — 卡片/圖片角落強調標記規格：Position（左下/右下，圓角鏡像翻轉）× Content（圖示+文字/純文字）、目前唯一場景為保固天數顯示 _(2026-07-07)_
+- **[Image](components/image.md)** — 遠端圖片顯示規格：State（Loading/Loaded/Error）單一維度、不定義 Shape variant（裁切交給外層元件）、統一 Error 佔位符取代現況不一致的錯誤處理 _(2026-07-07)_
 
 ## Patterns
 

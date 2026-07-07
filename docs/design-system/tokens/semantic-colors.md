@@ -6,7 +6,7 @@
 分為 6 個群組，底層對應 [colors.md](colors.md) 的 Primitive token。
 
 _來源：設計訪談 + Flutter codebase（`fdtigermaster_app` v2.6.1）審查_
-_最後更新：2026-07-06 — Tag 元件備料：Status/Success 改為 Green/600（提升對比）、Status/ErrorContainer 改為 Red/100、Background/Notice 由候選升級為正式 token_
+_最後更新：2026-07-07 — Image 元件備料：新增 Background/OverlaySubtle（淺色遮罩，Loading 狀態用）_
 
 ---
 
@@ -56,6 +56,7 @@ Primitive token（原始色值）
 | `Background/Surface` | `Base/White` | `#FFFFFF` | 白色卡片、BottomSheet、輸入框底 |
 | `Background/Overlay` | `Base/Overlay` | `rgba(0, 0, 0, 0.63)` | Modal、BottomSheet 後方的半透明遮罩 |
 | `Background/Notice` | `Yellow/100` | `#FFF9E7` | 提示性資訊底色（確認發票設定 BottomSheet 注意事項、Tag 元件 Notice tone）|
+| `Background/OverlaySubtle` | `Base/OverlaySubtle` | `rgba(0, 0, 0, 0.08)` | 淺色遮罩底色，用於骨架佔位等非強調性遮蓋情境（Image 元件 Loading 狀態）_(2026-07-07 新增)_ |
 
 ---
 
