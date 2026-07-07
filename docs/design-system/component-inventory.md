@@ -4,7 +4,7 @@
 `完成` 打勾後，元件名稱改為連結指向 spec 文件。
 
 _Flutter codebase：`C:\Users\yode0\develop\source_code\android_app_2.6.1\fdtigermaster_app`_
-_最後更新：2026-07-06_
+_最後更新：2026-07-07_
 
 ---
 
@@ -14,10 +14,11 @@ Atoms 是最小單位，不依賴其他自訂元件，由 Token 驅動。
 
 | 完成 | 元件名稱 | Figma 頁面 | 對應 Flutter Class |
 |---|---|---|---|
-| [ ] | Badge | `Badge` | `ChatroomUnreadBadge` |
+| [x] | [Badge](components/badge.md) | `Badge` | `ChatroomUnreadBadge`, `package:badges`（直接使用） |
 | [x] | [Button](components/button.md) | `Button` | `PillButton`, `FutureButton`, `ToggleDisableButton`, `ButtonShareStyle` |
 | [x] | [Checkbox](components/checkbox.md) | `Checkbox` | `TitledCheckBox` |
 | [x] | [Chip](components/chip.md) | `Chip` | `InvoiceCategoryPicker`, `WorkingDateTypeSwitch`, `ChoiceChip`（Flutter, Material 2） |
+| [x] | [CornerBadge](components/corner-badge.md) | `Badge` | `WarrantyDayBadge` |
 | [x] | [FAB](components/fab.md) | `Button` | `FloatingActionButton`（Flutter） |
 | [x] | [Icon](components/icon.md) | `Icon` | `Icon`（Flutter） |
 | [x] | [IconButton](components/icon-button.md) | `Button` | `IconButton`（Flutter） |

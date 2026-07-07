@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-06 — 新增 Tooltip 元件規格_
+_Last updated: 2026-07-07 — 新增 Badge、CornerBadge 元件規格_
 
 ---
 
@@ -46,6 +46,8 @@ design-system/
 - **[Chip](components/chip.md)** — 少量選項單選切換元件規格：Tone（Brand/Info）× Selected × Icon × Disabled 四維 variant、Tone 語意差異定義、新引入「元件專屬 token」概念（Chip/InfoSelected）、三處現況實作待整併為統一 Flutter widget _(2026-07-06)_
 - **[Tag](components/tag.md)** — 靜態顯示標籤規格：Tone（Info/Emphasis/Notice/Success）× Solid × Size 三維 variant、Emphasis 兩種視覺強度（淡底色/實色反白）、`Background/Notice` 由候選升級為正式 token、同步修正 `Status/Success`、`Status/ErrorContainer`、`radius.md` 圓角歸屬 _(2026-07-06)_
 - **[Tooltip](components/tooltip.md)** — 點擊觸發輔助說明泡泡規格：觸發圖示以 slot 帶入而非 Tone variant、統一 padding/最大寬度(280px)/自動消失時間(3秒)、Tap target 由觸發元件（如 IconButton）自身定義 _(2026-07-06)_
+- **[Badge](components/badge.md)** — 通知提示元件規格：疊加於其他元件右上角，Content（Dot/Count）variant、9+ 上限規則（現況 'N' 列為技術債）、與 CornerBadge 明確區分 _(2026-07-07)_
+- **[CornerBadge](components/corner-badge.md)** — 卡片/圖片角落強調標記規格：Position（左下/右下，圓角鏡像翻轉）× Content（圖示+文字/純文字）、目前唯一場景為保固天數顯示 _(2026-07-07)_
 
 ## Patterns
 
