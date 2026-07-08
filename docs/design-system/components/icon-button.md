@@ -2,7 +2,7 @@
 
 純圖示互動觸發點，不帶文字標籤，用於 AppBar 導覽操作、BottomSheet 關閉、頁面快捷行動。
 
-> **元件邊界**：此規格僅涵蓋獨立 IconButton。TextField 內嵌的 suffix icon button 屬於 `TextField` 元件規格範疇。帶文字標籤的圖示按鈕請見 `LabeledIconButton`。
+> **元件邊界**：此規格僅涵蓋獨立 IconButton。TextField 內嵌的 suffix icon button 屬於 `TextField` 元件規格範疇。帶文字標籤的圖示按鈕請見 [IconLabelButton](icon-label-button.md)。
 
 ---
 

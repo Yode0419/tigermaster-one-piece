@@ -4,7 +4,7 @@
 `完成` 打勾後，元件名稱改為連結指向 spec 文件。
 
 _Flutter codebase：`C:\Users\yode0\develop\source_code\android_app_2.6.1\fdtigermaster_app`_
-_最後更新：2026-07-08_
+_最後更新：2026-07-08 — IconLabelButton 完成備料_
 
 ---
 
@@ -23,7 +23,7 @@ Atoms 是最小單位，不依賴其他自訂元件，由 Token 驅動。
 | [x] | [Icon](components/icon.md) | `Icon` | `Icon`（Flutter） |
 | [x] | [IconButton](components/icon-button.md) | `Button` | `IconButton`（Flutter） |
 | [x] | [Image](components/image.md) | `Image` | `CustomNetworkImage` |
-| [ ] | LabeledIconButton | `Button` | —（需新建）|
+| [x] | [IconLabelButton](components/icon-label-button.md) | `Button` | —（需新建；待整併 `FABBottomNavBar._buildTabItem`、`chatroom_input_Bar.dart`、`master_order_detail.dart`）|
 | [x] | [Radio](components/radio.md) | `Radio` | `Radio`（Flutter） |
 | [ ] | Rating | `Rating` | `RatingBar`, `RatingBarIndicator`（flutter_rating_bar） |
 | [x] | [Switch](components/switch.md) | `Switch` | `Switch`（Flutter, Material 2） |
