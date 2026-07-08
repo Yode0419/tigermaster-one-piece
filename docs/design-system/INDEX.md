@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-07 — 新增 Image 元件規格、新增 Background/OverlaySubtle token_
+_Last updated: 2026-07-08 — 新增 PhotoUpload 元件規格_
 
 ---
 
@@ -49,6 +49,7 @@ design-system/
 - **[Badge](components/badge.md)** — 通知提示元件規格：疊加於其他元件右上角，Content（Dot/Count）variant、9+ 上限規則（現況 'N' 列為技術債）、與 CornerBadge 明確區分 _(2026-07-07)_
 - **[CornerBadge](components/corner-badge.md)** — 卡片/圖片角落強調標記規格：Position（左下/右下，圓角鏡像翻轉）× Content（圖示+文字/純文字）、目前唯一場景為保固天數顯示 _(2026-07-07)_
 - **[Image](components/image.md)** — 遠端圖片顯示規格：State（Loading/Loaded/Error）單一維度、不定義 Shape variant（裁切交給外層元件）、統一 Error 佔位符取代現況不一致的錯誤處理 _(2026-07-07)_
+- **[PhotoUpload](components/photo-upload.md)** — 可增減圖片上傳插槽規格：Type（Photo/Certificate）× State（default/loading/uploaded/disabled）兩維 variant、GridImageView 與 AccountImageUpload 兩處現況整併、圓角設計債（現況 5px 非既有 token）_(2026-07-08)_
 
 ## Patterns
 
