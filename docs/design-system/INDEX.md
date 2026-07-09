@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-09 — 新增 BottomSheet 元件規格_
+_Last updated: 2026-07-09 — 新增 Sticky Footer 元件規格_
 
 ---
 
@@ -54,7 +54,8 @@ design-system/
 - **[Rating](components/rating.md)** — 星級評分元件：Size（lg/sm，復用 Icon token）× Rate（0~5 半星 11 階）兩維 variant，唯讀顯示與互動輸入視覺一致、Icon/Brand+Icon/Subtle 零新增 token、Figma 由 5 顆獨立星星 Full/Half/Empty 子元件組成 _(2026-07-09)_
 - **[Avatar](components/avatar.md)** — 使用者頭像顯示元件：Size（36/60/75/100/140）× Source（Custom/Default）兩維 variant，無照片統一顯示品牌老虎佔位圖（非 Image 破圖樣式）、換頭像相機圖示定位為 Avatar+IconButton 複合用法而非內建 variant、Figma 尚未建立 _(2026-07-09)_
 - **[Dialog](components/dialog.md)** — 置中疊加的阻斷式對話框規格：Type（Standard/Emphasis）variant、Content 以 Figma Slot 功能表達、Actions 採「一主一次」原則並複用 Button instance、與 BottomSheet 使用情境明確區分、現況 16 個 dialog class 待整併、Figma 已建立 Component _(2026-07-09)_
-- **[BottomSheet](components/bottom-sheet.md)** — 模態式置底容器規格：Header 固定必備（leadingIcon/tailingIcon 開關）、Content 為彈性 slot、圓角 Radius/16 與 Header padding Spacing/12 化現況技術債、與 Dialog／Sticky Footer（尚未備料）明確區分使用情境、Figma 尚未建立 Component _(2026-07-09)_
+- **[BottomSheet](components/bottom-sheet.md)** — 模態式置底容器規格：hasHeader（Variant，有/無支援 Action Sheet 組合）、hasStickyFooter（Boolean property）、Content 為彈性 slot、圓角 Radius/16、與 Dialog／Sticky Footer 明確區分使用情境、Figma Component 已建立 _(2026-07-09)_
+- **[Sticky Footer](components/sticky-footer.md)** — 非模態置底常駐操作列規格：Content 三維 variant（Button only／Button + Slot／Flexible Slot）、按鈕固定滿版複用 Button、陰影 Elevation/Rise、padding 統一 Spacing/16、可獨立使用或嵌入 BottomSheet 搭配、Figma Component 已建立 _(2026-07-09)_
 
 ## Patterns
 
