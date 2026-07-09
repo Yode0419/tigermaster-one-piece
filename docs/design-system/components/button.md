@@ -45,11 +45,13 @@
 
 > 計算高度 = 垂直 Padding × 2 + Line Height（Label token）
 
-| Size | 垂直 Padding | 水平 Padding | Icon 間距 | 文字大小 | 計算高度 | 典型 Width |
-|------|------------|------------|---------|--------|--------|-----------|
-| `lg` | `Spacing/12` | `Spacing/20` | `Spacing/8` | `Label/L`（16px, LH 20）| **44px** | `full` |
-| `md` | `Spacing/8` | `Spacing/16` | `Spacing/8` | `Label/L`（16px, LH 20）| **36px** | `hug` |
-| `sm` | `Spacing/4` | `Spacing/12` | `Spacing/4` | `Label/M`（14px, LH 20）| **28px** | `hug` |
+| Size | 垂直 Padding | 水平 Padding | Icon 間距 | 文字大小 | 計算高度 | 典型 Width | 最小寬度 |
+|------|------------|------------|---------|--------|--------|-----------|---------|
+| `lg` | `Spacing/12` | `Spacing/20` | `Spacing/8` | `Label/L`（16px, LH 20）| **44px** | `full` | **96px** |
+| `md` | `Spacing/8` | `Spacing/16` | `Spacing/8` | `Label/L`（16px, LH 20）| **36px** | `hug` | **88px** |
+| `sm` | `Spacing/4` | `Spacing/12` | `Spacing/4` | `Label/M`（14px, LH 20）| **28px** | `hug` | **64px** |
+
+> **最小寬度依據**：比照業界慣例（文字按鈕最小寬度約為高度的 2.4 倍，如 Material Design 標準 88dp／36dp），避免極短文字標籤（如「是」「OK」）在 `hug` width 下顯得過窄、點擊區域不足。
 
 ### Shape 圓角
 
@@ -122,6 +124,7 @@
 - **Disabled**：整體 `opacity: 40%`，不另設顏色 token，適用所有 variant
 - **Loading**：Figma 使用 `disabled` + 修改 `Label` 文字呈現。Flutter 端由 `FutureButton` 包裝，視覺進入 disabled，label 替換為 loadingText（call site 自訂，非 spinner）
 - **含 Icon**：前置（`hasIconStart`）與後置（`hasIconEnd`）各為獨立 Frame slot，通常擇一使用
+- **極短文字標籤**（如「是」「OK」）：`hug` width 仍套用該 size 的最小寬度，不會因文字過短而視覺塌陷
 
 ---
 
