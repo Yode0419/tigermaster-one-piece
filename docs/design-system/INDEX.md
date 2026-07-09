@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-09 — 新增 Rating 元件規格_
+_Last updated: 2026-07-09 — 新增 Avatar 元件規格_
 
 ---
 
@@ -52,6 +52,7 @@ design-system/
 - **[PhotoUpload](components/photo-upload.md)** — 可增減圖片上傳插槽規格：Type（Photo/Certificate）× State（default/loading/uploaded/disabled）兩維 variant、GridImageView 與 AccountImageUpload 兩處現況整併、圓角設計債（現況 5px 非既有 token）_(2026-07-08)_
 - **[IconLabelButton](components/icon-label-button.md)** — 垂直排列（icon 上、文字下）的圖示+文字按鈕：參照 IconButton 拿掉 size 的 tone(default/inverse/brand) × state 兩維 variant、文字色複用既有 Interactive 群組 token（零新增）、BottomNavBar/聊天室選單/AppBar 客服按鈕三處現況待整併 _(2026-07-08)_
 - **[Rating](components/rating.md)** — 星級評分元件：Size（lg/sm，復用 Icon token）× Rate（0~5 半星 11 階）兩維 variant，唯讀顯示與互動輸入視覺一致、Icon/Brand+Icon/Subtle 零新增 token、Figma 由 5 顆獨立星星 Full/Half/Empty 子元件組成 _(2026-07-09)_
+- **[Avatar](components/avatar.md)** — 使用者頭像顯示元件：Size（36/60/75/100/140）× Source（Custom/Default）兩維 variant，無照片統一顯示品牌老虎佔位圖（非 Image 破圖樣式）、換頭像相機圖示定位為 Avatar+IconButton 複合用法而非內建 variant、Figma 尚未建立 _(2026-07-09)_
 
 ## Patterns
 
