@@ -6,7 +6,7 @@
 分為 6 個群組，底層對應 [colors.md](colors.md) 的 Primitive token。
 
 _來源：設計訪談 + Flutter codebase（`fdtigermaster_app` v2.6.1）審查_
-_最後更新：2026-07-07 — Image 元件備料：新增 Background/OverlaySubtle（淺色遮罩，Loading 狀態用）_
+_最後更新：2026-07-13 — Snackbar 元件備料：新增 Background/Inverse（深色實色底，深底元件通用角色）_
 
 ---
 
@@ -54,8 +54,9 @@ Primitive token（原始色值）
 |-------|--------------|------|---------|
 | `Background/Page` | `Neutral/100` | `#F5F5F5` | 整個頁面底色 |
 | `Background/Surface` | `Base/White` | `#FFFFFF` | 白色卡片、BottomSheet、輸入框底 |
-| `Background/Overlay` | `Base/Overlay` | `rgba(0, 0, 0, 0.63)` | Modal、BottomSheet 後方的半透明遮罩 |
+| `Background/Inverse` | `Neutral/900` | `#2A2A2A` | 深色實色底，用於需要跳脫頁面淺色底的浮動元件（[Snackbar](../components/snackbar.md) 底色）；通用角色，非 Snackbar 專屬 _(2026-07-13 新增)_ |
 | `Background/Notice` | `Yellow/100` | `#FFF9E7` | 提示性資訊底色（確認發票設定 BottomSheet 注意事項、Tag 元件 Notice tone）|
+| `Background/Overlay` | `Base/Overlay` | `rgba(0, 0, 0, 0.63)` | Modal、BottomSheet 後方的半透明遮罩 |
 | `Background/OverlaySubtle` | `Base/OverlaySubtle` | `rgba(0, 0, 0, 0.08)` | 淺色遮罩底色，用於骨架佔位等非強調性遮蓋情境（Image 元件 Loading 狀態）_(2026-07-07 新增)_ |
 
 ---
