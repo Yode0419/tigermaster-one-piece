@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-09 — 新增 Sticky Footer 元件規格_
+_Last updated: 2026-07-13 — 新增 ListItem 元件規格_
 
 ---
 
@@ -56,6 +56,7 @@ design-system/
 - **[Dialog](components/dialog.md)** — 置中疊加的阻斷式對話框規格：Type（Standard/Emphasis）variant、Content 以 Figma Slot 功能表達、Actions 採「一主一次」原則並複用 Button instance、與 BottomSheet 使用情境明確區分、現況 16 個 dialog class 待整併、Figma 已建立 Component _(2026-07-09)_
 - **[BottomSheet](components/bottom-sheet.md)** — 模態式置底容器規格：hasHeader（Variant，有/無支援 Action Sheet 組合）、hasStickyFooter（Boolean property）、Content 為彈性 slot、圓角 Radius/16、與 Dialog／Sticky Footer 明確區分使用情境、Figma Component 已建立 _(2026-07-09)_
 - **[Sticky Footer](components/sticky-footer.md)** — 非模態置底常駐操作列規格：Content 三維 variant（Button only／Button + Slot／Flexible Slot）、按鈕固定滿版複用 Button、陰影 Elevation/Rise、padding 統一 Spacing/16、可獨立使用或嵌入 BottomSheet 搭配、Figma Component 已建立 _(2026-07-09)_
+- **[ListItem](components/list-item.md)** — 通用列表列外殼規格：Leading Icon／Divider 為 Boolean property，Trailing 為三選一 Variant（Icon/Slot/None）、與 PriceText（明細類列表，未來另立 Pattern）明確區分使用情境、token 零新增（Trailing 數值文字複用 Body/L+Bold 強調規則）、Figma Component 已建立 _(2026-07-13)_
 
 ## Patterns
 
