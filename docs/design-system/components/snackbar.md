@@ -3,7 +3,7 @@
 頁面底部浮動、短暫顯示的非阻斷式通知元件，用於操作結果回饋（儲存成功/失敗、複製成功等），不阻斷頁面互動、自動消失。
 
 _來源：Flutter codebase（`fdtigermaster_app`）審查，`show_save_result_snack_bar.dart`（`showSaveResultSnackBar()` wrapper，11 處使用）+ 6 處 inline 直接呼叫 `SnackBar` 比對 + `/sanji` 訪談_
-_最後更新：2026-07-13 — Figma Component 建置完成後同步微調：Action 文字改用 Label/S、Message／Action 改為 Text property、Figma 狀態更新_
+_最後更新：2026-07-13 — 微調：圓角改 Radius/4、Icon 尺寸改 20px_
 
 ---
 
@@ -25,8 +25,8 @@ _最後更新：2026-07-13 — Figma Component 建置完成後同步微調：Act
 | 內文文字 | `Body/S`（14px/400） + `Interactive/OnFilled`（白） | 三個 Tone 共用不變色；現況 codebase 為 16px，依 [Tooltip](tooltip.md) 同類「輔助性、短暫顯示」邏輯下修一階 |
 | Action 文字 | `Label/S`（12px/500 Medium） + `Interactive/OnFilled`（白） | Action 本身是可點擊互動元素，改用 `typography.md` 定義的 Label 系列（「互動元件的文字標籤」，與 Chip/Tag/Badge 同層級）；比內文 `Body/S`（14px）小一階，視覺上更協調 |
 | Icon 顏色 | `Status/Success`（綠）／`Status/Error`（紅） | 既有 token，僅 Success／Error 使用 |
-| Icon 尺寸 | `16px`（[Icon](icon.md) 元件「標籤內嵌、輔助說明圖示」尺寸） | |
-| 圓角 | `Radius/8` | 比照 Button 標準元件圓角，非 Card 等級的 12/16 |
+| Icon 尺寸 | `20px`（[Icon](icon.md) 元件「行內次要圖示」尺寸） | |
+| 圓角 | `Radius/4` | 小型元件圓角（比照輸入框等級） |
 | Padding | `Spacing/16`（四邊統一） | 比照 [Sticky Footer](sticky-footer.md) 統一 padding 哲學 |
 | Elevation | **不使用** | `elevation.md` 明文規定「深色背景不使用」elevation，Snackbar 為深底元件 |
 | 顯示時間 | 純文字 2 秒／有 Action 4 秒 | 業界慣例：有 Action 時需拉長時間讓使用者反應，現況 2 秒為既有行為保留 |

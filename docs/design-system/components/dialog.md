@@ -5,7 +5,7 @@
 > **元件邊界**：與 BottomSheet（從螢幕底部滑出的容器，機制與適用情境不同）明確區分，詳見下方使用規則。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`PlatformAlertDialog`（`lib/component/dialog/platform_alert_dialog.dart`）、`ImportantOrderActionDialog`（`lib/component/dialog/important_order_action_dialog.dart`）為代表案例，另比對 14 個其他 dialog class（`AtmDialog`、`ProMemberUpgradeSuccessDialog` 等）；Figma component 已建立_
-_最後更新：2026-07-09_
+_最後更新：2026-07-14 — 圓角依 Type 拆分：Standard 改用 Radius/8、Emphasis 維持 Radius/16，呼應兩者風格差異（俐落提示 vs 慎重強調）_
 
 ---
 
@@ -22,7 +22,7 @@ _最後更新：2026-07-09_
 
 | 屬性 | Token | 備註 |
 |------|-------|------|
-| 圓角 | `Radius/16` | 兩個 Type 統一 |
+| 圓角 | `Standard` = `Radius/8`；`Emphasis` = `Radius/16` | 依 Type 區分，`Emphasis` 內容較重、圓角較大 |
 | 陰影 | `Elevation/Ambient` | |
 | 卡片背景 | `Background/Surface` | |
 | 背景遮罩 | `Background/Overlay` | 既有 token，本就用於 Modal／BottomSheet 遮罩，不新增 |

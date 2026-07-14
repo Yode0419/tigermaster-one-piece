@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-13 — 新增 Snackbar 元件規格_
+_Last updated: 2026-07-14 — 新增 Card 元件規格；圓角 token 盤點重構（Button/Card 改 Radius/4、Dialog 依 Type 拆分 Radius/8|16）；同步修正 Snackbar 圓角_
 
 ---
 
@@ -24,7 +24,7 @@ design-system/
 - [semantic-colors.md](tokens/semantic-colors.md) — Semantic 顏色 token（Text / Background / Icon / Border / Interactive / Status）_(2026-07-07)_
 - [typography.md](tokens/typography.md) — 字型層級（Display / Heading / Title / Body / Label）_(2026-07-03)_
 - [spacing.md](tokens/spacing.md) — 間距 token（2–48px）_(2026-06-25)_
-- [radius.md](tokens/radius.md) — 圓角 token（4–Full）_(2026-07-06)_
+- [radius.md](tokens/radius.md) — 圓角 token（4–Full）：使用規則改為「慎重程度與內容份量」邏輯，Button/Card（Inset）改用 `Radius/4`、Dialog 依 Type 拆分 `Radius/8`（Standard）/`Radius/16`（Emphasis）_(2026-07-14)_
 - [elevation.md](tokens/elevation.md) — 陰影層級（Card / Sheet / 置底區塊）_(2026-07-03)_
 
 ## Components
@@ -53,11 +53,12 @@ design-system/
 - **[IconLabelButton](components/icon-label-button.md)** — 垂直排列（icon 上、文字下）的圖示+文字按鈕：參照 IconButton 拿掉 size 的 tone(default/inverse/brand) × state 兩維 variant、文字色複用既有 Interactive 群組 token（零新增）、BottomNavBar/聊天室選單/AppBar 客服按鈕三處現況待整併 _(2026-07-08)_
 - **[Rating](components/rating.md)** — 星級評分元件：Size（lg/sm，復用 Icon token）× Rate（0~5 半星 11 階）兩維 variant，唯讀顯示與互動輸入視覺一致、Icon/Brand+Icon/Subtle 零新增 token、Figma 由 5 顆獨立星星 Full/Half/Empty 子元件組成 _(2026-07-09)_
 - **[Avatar](components/avatar.md)** — 使用者頭像顯示元件：Size（36/60/75/100/140）× Source（Custom/Default）兩維 variant，無照片統一顯示品牌老虎佔位圖（非 Image 破圖樣式）、換頭像相機圖示定位為 Avatar+IconButton 複合用法而非內建 variant、Figma 尚未建立 _(2026-07-09)_
-- **[Dialog](components/dialog.md)** — 置中疊加的阻斷式對話框規格：Type（Standard/Emphasis）variant、Content 以 Figma Slot 功能表達、Actions 採「一主一次」原則並複用 Button instance、與 BottomSheet 使用情境明確區分、現況 16 個 dialog class 待整併、Figma 已建立 Component _(2026-07-09)_
+- **[Dialog](components/dialog.md)** — 置中疊加的阻斷式對話框規格：Type（Standard/Emphasis）variant、圓角依 Type 拆分（`Radius/8`／`Radius/16`，呼應俐落提示 vs 慎重強調）、Content 以 Figma Slot 功能表達、Actions 採「一主一次」原則並複用 Button instance、與 BottomSheet 使用情境明確區分、現況 16 個 dialog class 待整併、Figma 已建立 Component _(2026-07-14)_
 - **[BottomSheet](components/bottom-sheet.md)** — 模態式置底容器規格：hasHeader（Variant，有/無支援 Action Sheet 組合）、hasStickyFooter（Boolean property）、Content 為彈性 slot、圓角 Radius/16、與 Dialog／Sticky Footer 明確區分使用情境、Figma Component 已建立 _(2026-07-09)_
 - **[Sticky Footer](components/sticky-footer.md)** — 非模態置底常駐操作列規格：Content 三維 variant（Button only／Button + Slot／Flexible Slot）、按鈕固定滿版複用 Button、陰影 Elevation/Rise、padding 統一 Spacing/16、可獨立使用或嵌入 BottomSheet 搭配、Figma Component 已建立 _(2026-07-09)_
 - **[ListItem](components/list-item.md)** — 通用列表列外殼規格：Leading Icon／Divider 為 Boolean property，Trailing 為三選一 Variant（Icon/Slot/None）、與 PriceText（明細類列表，未來另立 Pattern）明確區分使用情境、token 零新增（Trailing 數值文字複用 Body/L+Bold 強調規則）、Figma Component 已建立 _(2026-07-13)_
 - **[Snackbar](components/snackbar.md)** — 底部浮動非阻斷式通知規格：Tone（Default/Success/Error）× Icon（跟 Tone 綁定，非獨立 variant）× Action（Boolean）三維、三個 Tone 共用深底 `Background/Inverse`（不隨語意變色，經 WCAG 對比度驗證決定）、新增此語意 token、Action 文字採 `Label/S`、Message／Action label 皆為 Figma Text component property、現況 17 處呼叫（11 wrapper + 6 inline）待整併、Figma Component 已建立 _(2026-07-13)_
+- **[Card](components/card.md)** — 通用容器底座規格：Layout（Fill/Inset）× Padding（Standard/None）兩維 variant，陰影不分 Layout 一律套用 `Elevation/Drop`，Inset 圓角改用 `Radius/4` 呼應 Button 專業調性、Fill/Inset 判斷定調為軟性指引而非硬性規則、現況 7+ 處重複實作待整併為 `AppCard`、Figma Component 已建立 _(2026-07-14)_
 
 ## Patterns
 
