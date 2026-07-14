@@ -99,9 +99,7 @@ Tag 由 Tone、Solid、Size 三個變體屬性組成：
 
 ## Figma 元件
 
-- [ ] 已建立為 Figma Component（TigerMaster-Design-System）
-- **目前位置**：尚未建立
-- **下一步**：新增 Tag 元件，建立 Tone × Solid × Size 交叉組合（Info/Notice/Success 各 2 種 Size，Emphasis 為 2 種 Solid × 2 種 Size，共 10 個組合）
+**位置**：[TigerMaster-Design-System → Tag](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System?node-id=558-26)
 
 ---
 

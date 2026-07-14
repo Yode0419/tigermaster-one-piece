@@ -4,7 +4,7 @@
 
 > **元件邊界**：本規格僅涵蓋頭像的顯示邏輯（尺寸、圓角、佔位圖）。換頭像用的相機圖示疊加屬於「Avatar + IconButton」的複合用法，不是 Avatar 自身的 variant，詳見下方使用規則。
 
-_來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`HeadshotImage`（`lib/component/image/headshot_image.dart`）9 處使用情境比對（聊天泡泡、聊天室列表、帳號頁 Header、評價頁、語音通話畫面）+ `HeadshotImageSetting`（`lib/component/image/headshot_image_setting.dart`）比對；Figma 尚未建立對應 Component_
+_來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`HeadshotImage`（`lib/component/image/headshot_image.dart`）9 處使用情境比對（聊天泡泡、聊天室列表、帳號頁 Header、評價頁、語音通話畫面）+ `HeadshotImageSetting`（`lib/component/image/headshot_image_setting.dart`）比對_
 _最後更新：2026-07-09_
 
 ---
@@ -55,11 +55,9 @@ _最後更新：2026-07-09_
 | `HeadshotImage` | Size（36/60/75/100/140）；Source 由 `url` 是否有效決定 | 圓形頭像顯示，`errorWidget` 目前指向後端 default headshot 圖（即品牌老虎佔位圖來源） |
 | `HeadshotImageSetting` | 對應 Editable 複合用法 | 現況獨立實作（`InkWell` + `Stack` + 寫死的 `camera.png`），待整併為 Avatar + IconButton 疊加 |
 
-## Figma 狀態
+## Figma 元件
 
-- [ ] 已建立為 Figma Component（TigerMaster-Design-System）
-- **目前位置**：尚未建立
-- **下一步**：建立 Avatar Component，含 Size（36/60/75/100/140）× Source（Custom/Default）variant
+**位置**：[TigerMaster-Design-System → Avatar](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System?node-id=661-163)
 
 ---
 
