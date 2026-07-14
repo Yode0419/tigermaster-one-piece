@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-14 — 新增 Card 元件規格；圓角 token 盤點重構（Button/Card 改 Radius/4、Dialog 依 Type 拆分 Radius/8|16）；同步修正 Snackbar 圓角；FAB 同步 Figma Component（Content 改為 Type：Default/Slot）；補齊 Avatar／Tag／FAB 的 Figma 元件位置_
+_Last updated: 2026-07-14 — 新增 Banner 元件規格；新增 Card 元件規格；圓角 token 盤點重構（Button/Card 改 Radius/4、Dialog 依 Type 拆分 Radius/8|16）；同步修正 Snackbar 圓角；FAB 同步 Figma Component（Content 改為 Type：Default/Slot）；補齊 Avatar／Tag／FAB 的 Figma 元件位置_
 
 ---
 
@@ -59,6 +59,7 @@ design-system/
 - **[ListItem](components/list-item.md)** — 通用列表列外殼規格：Leading Icon／Divider 為 Boolean property，Trailing 為三選一 Variant（Icon/Slot/None）、與 PriceText（明細類列表，未來另立 Pattern）明確區分使用情境、token 零新增（Trailing 數值文字複用 Body/L+Bold 強調規則）、Figma Component 已建立 _(2026-07-13)_
 - **[Snackbar](components/snackbar.md)** — 底部浮動非阻斷式通知規格：Tone（Default/Success/Error）× Icon（跟 Tone 綁定，非獨立 variant）× Action（Boolean）三維、三個 Tone 共用深底 `Background/Inverse`（不隨語意變色，經 WCAG 對比度驗證決定）、新增此語意 token、Action 文字採 `Label/S`、Message／Action label 皆為 Figma Text component property、現況 17 處呼叫（11 wrapper + 6 inline）待整併、Figma Component 已建立 _(2026-07-13)_
 - **[Card](components/card.md)** — 通用容器底座規格：Layout（Fill/Inset）× Padding（Standard/None）兩維 variant，陰影不分 Layout 一律套用 `Elevation/Drop`，Inset 圓角改用 `Radius/4` 呼應 Button 專業調性、Fill/Inset 判斷定調為軟性指引而非硬性規則、現況 7+ 處重複實作待整併為 `AppCard`、Figma Component 已建立 _(2026-07-14)_
+- **[Banner](components/banner.md)** — 頁面內嵌持續性通知/提示容器：Tone（Info/Notice/Error）沿用 Tag 語意系統、Notice 拆 Solid 淡底/實色兩強度（實色收斂至既有 `Interactive/Brand`）、Leading 為 None/Icon/Slot 三選一、Closable／Action 為獨立於 variant grid 的 Boolean 元件屬性、文字支援換行與混用樣式、與 Snackbar 明確區分（持續性 vs 自動消失）、現況 3 處實作（`CloseableCard`／`NewVersionCard`／`unit_picker_bottom_sheet.dart`）待整併、Figma Component 已建立 _(2026-07-14)_
 
 ## Patterns
 
