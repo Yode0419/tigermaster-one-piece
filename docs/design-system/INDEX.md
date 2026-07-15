@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-14 — 新增 MessageBubble 元件規格；新增 Banner 元件規格；新增 Card 元件規格；圓角 token 盤點重構（Button/Card 改 Radius/4、Dialog 依 Type 拆分 Radius/8|16）；同步修正 Snackbar 圓角；FAB 同步 Figma Component（Content 改為 Type：Default/Slot）；補齊 Avatar／Tag／FAB 的 Figma 元件位置_
+_Last updated: 2026-07-15 — 新增 AppBar 元件規格並建立 Figma Component（Type：Standard/Tall × Background：Solid/Brand/Image × Extension：None/Slot/Overlay，三者完全獨立）；新增 MessageBubble 元件規格；新增 Banner 元件規格；新增 Card 元件規格；圓角 token 盤點重構（Button/Card 改 Radius/4、Dialog 依 Type 拆分 Radius/8|16）；同步修正 Snackbar 圓角；FAB 同步 Figma Component（Content 改為 Type：Default/Slot）；補齊 Avatar／Tag／FAB 的 Figma 元件位置_
 
 ---
 
@@ -61,6 +61,7 @@ design-system/
 - **[Card](components/card.md)** — 通用容器底座規格：Layout（Fill/Inset）× Padding（Standard/None）兩維 variant，陰影不分 Layout 一律套用 `Elevation/Drop`，Inset 圓角改用 `Radius/4` 呼應 Button 專業調性、Fill/Inset 判斷定調為軟性指引而非硬性規則、現況 7+ 處重複實作待整併為 `AppCard`、Figma Component 已建立 _(2026-07-14)_
 - **[Banner](components/banner.md)** — 頁面內嵌持續性通知/提示容器：Tone（Info/Notice/Error）沿用 Tag 語意系統、Notice 拆 Solid 淡底/實色兩強度（實色收斂至既有 `Interactive/Brand`）、Leading 為 None/Icon/Slot 三選一、Closable／Action 為獨立於 variant grid 的 Boolean 元件屬性、文字支援換行與混用樣式、與 Snackbar 明確區分（持續性 vs 自動消失）、現況 3 處實作（`CloseableCard`／`NewVersionCard`／`unit_picker_bottom_sheet.dart`）待整併、Figma Component 已建立 _(2026-07-14)_
 - **[MessageBubble](components/message-bubble.md)** — 聊天訊息泡泡規格：Type 分內容型（Text/Image/File/DayMark/CallLog）與互動型 Slot 兩大類、selfMessage × Status 兩維、自方底色與時間戳文字現況色值與既有 token 定義不符（設計債待修正）、Image 型態直接複用 Image 元件狀態機、Slot 插槽沿用泡泡標準規則、現況 6 個獨立 class + 2 個 builder 待整併、Figma Component 已建立 _(2026-07-14)_
+- **[AppBar](components/app-bar.md)** — 頁面最上層標題列規格：由 Type（Standard/Tall）、Background（Solid/Brand/Image）、Extension（None/Slot/Overlay）三個完全獨立的正交屬性組合表達、Leading/Title(Slot)/Actions(Slot) 全組合共用、捲動收合為純互動行為不做 Figma variant（比照 Dialog 處理方式）、帳號頁自訂高頭部歸類為 Tall+Overlay、Extension=Overlay 現況 3 套獨立實作已在設計面統一（Flutter 整併屬工程排程）、Figma Component 已建立 _(2026-07-15)_
 
 ## Patterns
 

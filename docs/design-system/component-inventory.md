@@ -4,7 +4,7 @@
 `完成` 打勾後，元件名稱改為連結指向 spec 文件。
 
 _Flutter codebase：`C:\Users\yode0\develop\source_code\android_app_2.6.1\fdtigermaster_app`_
-_最後更新：2026-07-14 — MessageBubble 完成備料；Figma page 改名為 `Chatroom`（比照 `Button` page 慣例，同頁納入聊天室系列元件），新增 ChatInputBar／ChatAppBar／ChatBackground 待辦項目與空白 Figma 區塊；Banner 完成備料；Card 完成備料_
+_最後更新：2026-07-15 — AppBar 完成備料並建立 Figma Component（Type：Standard/Tall × Background：Solid/Brand/Image × Extension：None/Slot/Overlay，三者完全獨立），ChatAppBar 依賴改註記為引用 AppBar Standard variant；MessageBubble 完成備料；Figma page 改名為 `Chatroom`（比照 `Button` page 慣例，同頁納入聊天室系列元件），新增 ChatInputBar／ChatAppBar／ChatBackground 待辦項目與空白 Figma 區塊；Banner 完成備料；Card 完成備料_
 
 ---
 
@@ -67,8 +67,8 @@ Organisms 由 Atoms 與 Molecules 混合組成，或佔據固定版面位置。
 
 | 完成 | 元件名稱 | Figma 頁面 | 對應 Flutter Class | 相依元件（參考用） |
 |---|---|---|---|---|
-| [ ] | AppBar | `Navigation` | `StackSliverAppBar` | `Icon`, `Button` |
-| [ ] | ChatAppBar | `Chatroom`（空白區塊已建立） | —（需新建；聊天室專屬頂部標題列，對話對象頭像/名稱/通話按鈕等） | `Avatar` ★, `Icon`, `IconButton` |
+| [x] | [AppBar](components/app-bar.md) | `Navigation` | Type（Standard/Tall）× Background（Solid/Brand/Image）× Extension（None/Slot/Overlay）三個完全獨立的正交屬性：Standard 與 Tall+Slot 用原生 `AppBar`（41+ 處各自實作）；Tall+Overlay（捲動收合）用 `StackSliverAppBar` + 2 套獨立原生 `SliverAppBar` 實作（3 套待整併，屬工程排程議題）；Tall+Overlay（靜態不收合）為帳號頁自訂高頭部（不用 `Scaffold.appBar`）；捲動收合純屬互動行為不做 variant。Figma Component 已建立 | `Icon`, `Button` |
+| [ ] | ChatAppBar | `Chatroom`（空白區塊已建立） | —（需新建；聊天室專屬頂部標題列，對話對象頭像/名稱/通話按鈕等；引用 AppBar Standard variant 為基礎） | `AppBar`（Standard）★, `Avatar` ★, `Icon`, `IconButton` |
 | [ ] | BottomNavBar | `Navigation` | `FABBottomNavBar` | `Icon`, `Badge`, `Button` |
 | [ ] | Carousel | `Carousel` | `CarouselBannerSwiper` | `Image`（Slot）, `Icon` |
 | [ ] | CategoryCard | `Card` | `L2Card`（Row）, `L3Card`（Stacked） | `Image`, `Badge`（選填） |
