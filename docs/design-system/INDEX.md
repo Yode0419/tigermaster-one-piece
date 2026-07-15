@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-15 — 新增 AppBar 元件規格並建立 Figma Component（Type：Standard/Tall × Background：Solid/Brand/Image × Extension：None/Slot/Overlay，三者完全獨立）；新增 MessageBubble 元件規格；新增 Banner 元件規格；新增 Card 元件規格；圓角 token 盤點重構（Button/Card 改 Radius/4、Dialog 依 Type 拆分 Radius/8|16）；同步修正 Snackbar 圓角；FAB 同步 Figma Component（Content 改為 Type：Default/Slot）；補齊 Avatar／Tag／FAB 的 Figma 元件位置_
+_Last updated: 2026-07-15 — 新增 ChatBackground 元件規格（Type：Default/Watermark，Watermark 僅限與客服對話情境）；新增 ChatAppBar 元件規格（Chat 情境 variant：To Client/To Master/To Admin/Admin Mode，Figma 尚未建立正式 Component）；新增 AppBar 元件規格並建立 Figma Component（Type：Standard/Tall × Background：Solid/Brand/Image × Extension：None/Slot/Overlay，三者完全獨立）；新增 MessageBubble 元件規格；新增 Banner 元件規格；新增 Card 元件規格；圓角 token 盤點重構（Button/Card 改 Radius/4、Dialog 依 Type 拆分 Radius/8|16）；同步修正 Snackbar 圓角；FAB 同步 Figma Component（Content 改為 Type：Default/Slot）；補齊 Avatar／Tag／FAB 的 Figma 元件位置_
 
 ---
 
@@ -62,6 +62,8 @@ design-system/
 - **[Banner](components/banner.md)** — 頁面內嵌持續性通知/提示容器：Tone（Info/Notice/Error）沿用 Tag 語意系統、Notice 拆 Solid 淡底/實色兩強度（實色收斂至既有 `Interactive/Brand`）、Leading 為 None/Icon/Slot 三選一、Closable／Action 為獨立於 variant grid 的 Boolean 元件屬性、文字支援換行與混用樣式、與 Snackbar 明確區分（持續性 vs 自動消失）、現況 3 處實作（`CloseableCard`／`NewVersionCard`／`unit_picker_bottom_sheet.dart`）待整併、Figma Component 已建立 _(2026-07-14)_
 - **[MessageBubble](components/message-bubble.md)** — 聊天訊息泡泡規格：Type 分內容型（Text/Image/File/DayMark/CallLog）與互動型 Slot 兩大類、selfMessage × Status 兩維、自方底色與時間戳文字現況色值與既有 token 定義不符（設計債待修正）、Image 型態直接複用 Image 元件狀態機、Slot 插槽沿用泡泡標準規則、現況 6 個獨立 class + 2 個 builder 待整併、Figma Component 已建立 _(2026-07-14)_
 - **[AppBar](components/app-bar.md)** — 頁面最上層標題列規格：由 Type（Standard/Tall）、Background（Solid/Brand/Image）、Extension（None/Slot/Overlay）三個完全獨立的正交屬性組合表達、Leading/Title(Slot)/Actions(Slot) 全組合共用、捲動收合為純互動行為不做 Figma variant（比照 Dialog 處理方式）、帳號頁自訂高頭部歸類為 Tall+Overlay、Extension=Overlay 現況 3 套獨立實作已在設計面統一（Flutter 整併屬工程排程）、Figma Component 已建立 _(2026-07-15)_
+- **[ChatAppBar](components/chat-app-bar.md)** — 聊天室頁面專屬頂部標題列：Chat（情境）variant 涵蓋 To Client/To Master/To Admin/Admin Mode 四種對話角色組合、Title 姓名 pill 為 ChatAppBar 專屬用法（不回頭修改 AppBar 主規格）、Action 複用 IconLabelButton 結構並覆寫為 Icon/Brand+Text/Brand（不新增 tone）、明確不含頭像（修正 component-inventory.md 先前描述）、現況 4 個獨立 Flutter class 待整併、Figma 尚未建立正式 Component _(2026-07-15)_
+- **[ChatBackground](components/chat-background.md)** — 聊天室頁面背景層：Type（Default/Watermark）variant，Watermark 僅限與客服對話情境（防假冒／識別客服對話），現況僅 `to_admin_chatroom.dart` 有實作（重複平鋪、透明度 0.05）、Admin Mode 背景色與 Background/Page token 值有微小落差列為技術債、Figma 尚未建立正式 Component _(2026-07-15)_
 
 ## Patterns
 
