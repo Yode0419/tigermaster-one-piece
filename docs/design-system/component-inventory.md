@@ -4,7 +4,7 @@
 `完成` 打勾後，元件名稱改為連結指向 spec 文件。
 
 _Flutter codebase：`C:\Users\yode0\develop\source_code\android_app_2.6.1\fdtigermaster_app`_
-_最後更新：2026-07-16 — ChatInputBar 完成備料並建立 Figma Component（State × Content 二維，TimeRequest 因 Figma 平台限制無法實際綁定顯示/隱藏，需手動處理，外層容器複用 Sticky Footer）；SearchBar 完成備料（Type：Boxed/Lined，僅涵蓋全螢幕大標題搜尋與地址自動完成搜尋兩種，MasterShop 緊湊型搜尋暫不處理，Figma 尚未建立正式 Component）_
+_最後更新：2026-07-16 — BottomNavBar 完成備料（Role：Client/Master/Admin 三個變體，分頁項目改為直接複用 IconLabelButton 的 tone，相依元件從 Badge 修正為 IconLabelButton，Figma 尚未建立正式 Component）；ChatInputBar 完成備料並建立 Figma Component（State × Content 二維，TimeRequest 因 Figma 平台限制無法實際綁定顯示/隱藏，需手動處理，外層容器複用 Sticky Footer）；SearchBar 完成備料（Type：Boxed/Lined，僅涵蓋全螢幕大標題搜尋與地址自動完成搜尋兩種，MasterShop 緊湊型搜尋暫不處理，Figma 尚未建立正式 Component）_
 
 _2026-07-15 — ChatAppBar 完成備料（Chat 情境 variant：To Client/To Master/To Admin/Admin Mode，修正先前「對話對象頭像」的錯誤描述，實際無頭像依賴，Figma 尚未建立正式 Component）；ChatBackground 完成備料（Type：Default/Watermark，Watermark 僅限與客服對話情境，修正先前「一般聊天室純白」的描述誤差，實際底色為 `Background/Page`）；AppBar 完成備料並建立 Figma Component（Type：Standard/Tall × Background：Solid/Brand/Image × Extension：None/Slot/Overlay，三者完全獨立）；MessageBubble 完成備料；Figma page 改名為 `Chatroom`（比照 `Button` page 慣例，同頁納入聊天室系列元件）；Banner 完成備料；Card 完成備料_
 
@@ -71,7 +71,7 @@ Organisms 由 Atoms 與 Molecules 混合組成，或佔據固定版面位置。
 |---|---|---|---|---|
 | [x] | [AppBar](components/app-bar.md) | `Navigation` | Type（Standard/Tall）× Background（Solid/Brand/Image）× Extension（None/Slot/Overlay）三個完全獨立的正交屬性：Standard 與 Tall+Slot 用原生 `AppBar`（41+ 處各自實作）；Tall+Overlay（捲動收合）用 `StackSliverAppBar` + 2 套獨立原生 `SliverAppBar` 實作（3 套待整併，屬工程排程議題）；Tall+Overlay（靜態不收合）為帳號頁自訂高頭部（不用 `Scaffold.appBar`）；捲動收合純屬互動行為不做 variant。Figma Component 已建立 | `Icon`, `Button` |
 | [x] | [ChatAppBar](components/chat-app-bar.md) | `Chatroom` | Chat（情境）：`to_client_chatroom.dart`、`to_master_chatroom.dart`、`to_admin_chatroom.dart`、`from_admin_chatroom.dart` 四個獨立 class 各自手刻，無共用元件，待整併 | `IconButton`, `IconLabelButton`（顏色覆寫） |
-| [ ] | BottomNavBar | `Navigation` | `FABBottomNavBar` | `Icon`, `Badge`, `Button` |
+| [x] | [BottomNavBar](components/bottom-nav-bar.md) | `Navigation` | `FABBottomNavBar` | `IconLabelButton` |
 | [ ] | Carousel | `Carousel` | `CarouselBannerSwiper` | `Image`（Slot）, `Icon` |
 | [ ] | CategoryCard | `Card` | `L2Card`（Row）, `L3Card`（Stacked） | `Image`, `Badge`（選填） |
 | [ ] | CompactOrderCard | `Card` | `MasterSuitableOrderCard` | — |
