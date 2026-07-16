@@ -3,7 +3,7 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-16 — 新增 SearchBar 元件規格（Type：Boxed/Lined，Boxed 搜尋圖示金色與 `Icon/Brand` token 吻合，Figma 尚未建立正式 Component）_
+_Last updated: 2026-07-16 — 新增 ChatInputBar 元件規格並建立 Figma Component（State × Content 二維 + TimeRequest Boolean，外層容器複用 Sticky Footer，TimeRequest 因 Figma 平台限制無法實際綁定，需手動隱藏）；新增 SearchBar 元件規格（Type：Boxed/Lined，Boxed 搜尋圖示金色與 `Icon/Brand` token 吻合，Figma 尚未建立正式 Component）_
 
 _2026-07-15 — 新增 ChatBackground 元件規格（Type：Default/Watermark，Watermark 僅限與客服對話情境）；新增 ChatAppBar 元件規格（Chat 情境 variant：To Client/To Master/To Admin/Admin Mode，Figma 尚未建立正式 Component）；新增 AppBar 元件規格並建立 Figma Component（Type：Standard/Tall × Background：Solid/Brand/Image × Extension：None/Slot/Overlay，三者完全獨立）；新增 MessageBubble 元件規格；新增 Banner 元件規格；新增 Card 元件規格；圓角 token 盤點重構（Button/Card 改 Radius/4、Dialog 依 Type 拆分 Radius/8|16）；同步修正 Snackbar 圓角；FAB 同步 Figma Component（Content 改為 Type：Default/Slot）；補齊 Avatar／Tag／FAB 的 Figma 元件位置_
 
@@ -67,6 +67,7 @@ design-system/
 - **[ChatAppBar](components/chat-app-bar.md)** — 聊天室頁面專屬頂部標題列：Chat（情境）variant 涵蓋 To Client/To Master/To Admin/Admin Mode 四種對話角色組合、Title 姓名 pill 為 ChatAppBar 專屬用法（不回頭修改 AppBar 主規格）、Action 複用 IconLabelButton 結構並覆寫為 Icon/Brand+Text/Brand（不新增 tone）、明確不含頭像（修正 component-inventory.md 先前描述）、現況 4 個獨立 Flutter class 待整併、Figma 尚未建立正式 Component _(2026-07-15)_
 - **[ChatBackground](components/chat-background.md)** — 聊天室頁面背景層：Type（Default/Watermark）variant，Watermark 僅限與客服對話情境（防假冒／識別客服對話），現況僅 `to_admin_chatroom.dart` 有實作（重複平鋪、透明度 0.05）、Admin Mode 背景色與 Background/Page token 值有微小落差列為技術債、Figma 尚未建立正式 Component _(2026-07-15)_
 - **[SearchBar](components/search-bar.md)** — 頁面內嵌搜尋輸入框規格：Type（Boxed/Lined）× Content（Empty/Filled）兩維 variant，Boxed 為圓角容器（服務搜尋等頁面內嵌情境）、Lined 為底線大字級（BottomSheet 內搜尋輸入，如地址自動完成）、Boxed 搜尋圖示金色與 `Icon/Brand` token 完全吻合、Content=Filled 時出現清除按鈕（`Icon/Subtle`，兩個 Type 共用，比照 TextField 命名慣例、屬本次規格新增非現況功能）、現況兩處各自呼叫原生 TextField/TextFormField 無共用 widget、Figma Component 已建立（Type × Content 共 4 個 variant）_(2026-07-16)_
+- **[ChatInputBar](components/chat-input-bar.md)** — 聊天室頁面底部訊息輸入列規格：State（Collapsed/Expanded）× Content（Empty/Filled）二維 variant + TimeRequest（Boolean，Figma 平台限制無法實際綁定，需手動隱藏）、外層容器複用 `Sticky Footer`（Flexible Slot）、文字輸入框為聊天室專屬客製元素（非 TextField instance）、Toggle/Send 按鈕分別複用 IconLabelButton/IconButton 故不定義獨立 disabled variant、現況單一 `ChatroomInputBar` class 4 角色頁面共用、Figma Component Set 已建立 _(2026-07-16)_
 
 ## Patterns
 
