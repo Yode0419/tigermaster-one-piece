@@ -3,7 +3,7 @@
 App 最底部的主導覽列，依角色（客戶／師傅／Admin）提供 4 個分頁項目的切換入口，中央為固定品牌 Logo。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`FABBottomNavBar`（`lib/component/bottom_navigator_bar/fab_bottom_nav_bar.dart`）為共用容器，`master_main_page.dart`／`client_main_page.dart`／`admin_main_page.dart` 三處呼叫比對；Figma Component 已建立_
-_最後更新：2026-07-16_
+_最後更新：2026-07-17 — 新增 `Reserve Home Indicator` Boolean_
 
 ---
 
@@ -12,6 +12,7 @@ _最後更新：2026-07-16_
 | 維度 | 值 |
 |------|-----|
 | Role | Client／Master／Admin（三個變體＝各角色實際 tab 內容組合，非通用 TabCount 維度）|
+| Reserve Home Indicator（Boolean） | 開＝內嵌 [HomeIndicator](home-indicator.md) instance；關＝不顯示 |
 
 分頁項目由專屬子元件 `NavBarItem` 組成（`Tab`：Home／Order／Notification／Account／Income／Chatroom／None(佔位) × `Toggle`：on/off 選中狀態），內部沿用 [IconLabelButton](icon-label-button.md) 的圖示+文字視覺基礎。中央為固定 Logo，下方視角色顯示對應文字（英雄榜／下單流程／Admin 無文字）。
 
@@ -41,6 +42,7 @@ _最後更新：2026-07-16_
 - **Admin 佔位 tab**：目前只有 2 個功能 tab + 2 個佔位（icon=`close`、label=「無」），視為 Admin variant 現況內容，非正式 disabled state
 - **中央文字為空（Admin）**：Admin 的中央 Logo 下方不顯示文字，屬現況內容差異，非缺漏
 - **中央 Logo 按鈕 no-op（Admin）**：現況按下無反應，視為超出本規格範圍（頁面邏輯層級問題）
+- **與 HomeIndicator 的組裝關係**：[HomeIndicator](home-indicator.md) 為 BottomNavBar 內嵌的 instance（由 `Reserve Home Indicator` Boolean 控制顯示／隱藏），與 Sticky Footer 邏輯一致
 
 ## Flutter Widget
 

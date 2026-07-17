@@ -3,7 +3,7 @@
 聊天室頁面底部的訊息輸入列，讓使用者輸入文字、附加照片，並在特定角色組合下發起日期邀約。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`ChatroomInputBar`（`lib/component/chatroom/chatroom_input_Bar.dart`）+ 四個聊天室頁面呼叫端比對：`to_client_chatroom.dart`、`to_master_chatroom.dart`、`to_admin_chatroom.dart`、`from_admin_chatroom.dart`；Figma Component Set 已建立_
-_最後更新：2026-07-16_
+_最後更新：2026-07-17 — 補上與 HomeIndicator 的組裝關係（沿用 Sticky Footer 的 `Reserve Home Indicator` Boolean）_
 
 ---
 
@@ -15,7 +15,7 @@ _最後更新：2026-07-16_
 | Content | Empty（顯示 Placeholder）／Filled（顯示使用者輸入值，輸入框邊框變色） |
 | TimeRequest（Boolean，Figma 端僅為標記，非功能性） | true（預設，日期按鈕顯示）／false（無實際綁定，見下方限制說明） |
 
-> 元件邊界：外層容器直接複用 [Sticky Footer](sticky-footer.md)（`Content: Flexible Slot`），承載本元件的自訂內容；不定義獨立 disabled 屬性——disabled 完全由內部子元件（IconButton／IconLabelButton）各自的 disabled 狀態決定，非 ChatInputBar 自身 variant。文字輸入框**不複用** [TextField](text-field.md) 元件——聊天室輸入框為專屬客製實作（貼近現況 codebase 原生 `TextField` 寫法：隨內容增高），僅套用相近的顏色／字級／邊框 token 維持視覺一致，不是 TextField 元件的 instance。
+> 元件邊界：外層容器直接複用 [Sticky Footer](sticky-footer.md)（`Content: Flexible Slot`），承載本元件的自訂內容；不定義獨立 disabled 屬性——disabled 完全由內部子元件（IconButton／IconLabelButton）各自的 disabled 狀態決定，非 ChatInputBar 自身 variant。文字輸入框**不複用** [TextField](text-field.md) 元件——聊天室輸入框為專屬客製實作（貼近現況 codebase 原生 `TextField` 寫法：隨內容增高），僅套用相近的顏色／字級／邊框 token 維持視覺一致，不是 TextField 元件的 instance。`Reserve Home Indicator` Boolean 沿用外層 Sticky Footer instance 曝露的屬性（見 [HomeIndicator](home-indicator.md) 組裝規則），非 ChatInputBar 獨立新增的屬性。
 >
 > ⚠ **TimeRequest 限制**：Figma 平台不允許把 component property 綁在巢狀於另一個 instance（Sticky Footer）插槽內的子層上，因此 `TimeRequest` 目前只是一個沒有實際接線的 Boolean property，日期按鈕在 Expanded 的兩個 variant 中固定顯示。對應到「客服涉入即不應顯示日期按鈕」（`to_admin`／`from_admin`）的情境時，需在該 instance 手動刪除／隱藏日期按鈕圖層，非由屬性面板切換。
 
@@ -51,6 +51,7 @@ _最後更新：2026-07-16_
 ## 邊界情況
 
 - 文字輸入隨內容增高，最多 5 行，超過捲動（不再增高）
+- **與 HomeIndicator 的組裝關係**：透過外層 Sticky Footer instance 的 `Reserve Home Indicator` Boolean 控制底部留白，邏輯與 [Sticky Footer](sticky-footer.md)／[BottomNavBar](bottom-nav-bar.md) 一致
 
 ## Flutter Widget
 

@@ -5,7 +5,7 @@
 > **元件邊界**：帳號/登入頁的自訂高頭部區塊雖不透過 `Scaffold.appBar` 實作，但功能角色等同 AppBar，歸類為 `Type=Tall` + `Extension=Overlay`（靜態不收合）。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1`）審查，共 66 處 AppBar 相關呼叫；`stack_sliver_app_bar.dart`、`client_account_page.dart`、`phone_input_section.dart`、`select_l1l2_display_section.dart`、`select_l3_display_section.dart`、`search_working_categories.dart` 等為代表案例；Figma Component 已建立_
-_最後更新：2026-07-15_
+_最後更新：2026-07-17 — 新增 `Reserve Status Bar` Boolean（內嵌 [StatusBar](status-bar.md) instance，非留白）_
 
 ---
 
@@ -19,6 +19,7 @@ _最後更新：2026-07-15_
 | Leading | 預設返回鍵／自訂／無 |
 | Title（Slot） | `Standard`：與 Leading/Actions 同列，置中，`Title/M`；`Tall`：獨立第二列，左對齊全寬，`Heading/3`；若 `Extension≠None`，其內容為緊接 Title 之下的第三列 |
 | Actions（Slot） | 無／單一 icon／icon+文字按鈕 |
+| Reserve Status Bar（Boolean） | 開＝內嵌 [StatusBar](status-bar.md) instance（固定其中一組 Frame Group，跨尺寸群組需手動更換 instance）；關＝不顯示 |
 
 `Type` 與 `Extension` 相互獨立，任一 `Type` 皆可搭配任一 `Extension`（例：師傅端首頁是 `Standard`+`Brand`+`None`，通知列表是 `Standard`+`Brand`+`Slot`）。實際高度由 `Type`／`Extension` 組合與內容決定，數值以 Figma 元件為準，不在此重複列出。
 
@@ -56,6 +57,8 @@ _最後更新：2026-07-15_
 | Actions icon | 複用 [IconButton](icon-button.md) 既有 token | |
 
 ## 邊界情況
+
+- **與 StatusBar 的組裝關係**：[StatusBar](status-bar.md) 為 AppBar 內嵌的 instance（由 `Reserve Status Bar` Boolean 控制顯示／隱藏），非獨立疊加元件。`Background=Image` 現有的 12% 暗化遮罩保證 StatusBar 用 `Light Content` 時對比足夠，不需人工判斷
 
 - **捲動收合行為不做 Figma variant**：`Extension=Overlay` 的部分頁面（訂單詳情、L3、叫修需求頁）捲動時會漸變收合成 `Standard` 的樣子，部分（帳號/登入頁首）維持靜態不收合。兩者靜止畫面相同，差異純屬互動行為，比照 Dialog 規格處理方式僅文字記錄
 - **客戶端首頁**：極窄的本體，搭配頁面層級（非 AppBar 內、非捲動連動）的獨立浮動卡片（進行中訂單），屬刻意設計的首頁專屬特例

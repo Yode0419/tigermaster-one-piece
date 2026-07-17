@@ -2,9 +2,13 @@
 
 _功能規劃文件、設計決策紀錄與互動原型，依功能分類。_
 
-_Last updated: 2026-06-25_
+_Last updated: 2026-07-17_
 
 ---
+
+## （design/ 根目錄）— 跨功能基礎規則
+
+- **[Design Frame 尺寸標準：375×812 升級至 393×852](frame-size-standard.md)** — 決策記錄：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移；StatusBar／HomeIndicator 依尺寸群組分開定義，並回頭修正 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 的留白邏輯 _(2026-07-17)_
 
 ## order-flag/ — 訂單旗標
 

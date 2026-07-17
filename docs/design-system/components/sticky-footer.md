@@ -5,7 +5,7 @@
 > **元件邊界**：與 BottomSheet（模態、變暗背景、可關閉的置底容器）明確區分；Sticky Footer 不阻斷頁面互動，也不具備開關/關閉行為。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`ScaffoldBottomSheet`（`lib/component/bottom_sheet/scaffold_bottom_sheet.dart`）為主容器，`QuotationSubmitBottomSection` 為 `Button + Slot` 代表案例（3 個報價相關畫面共用）；Figma Component 已建立_
-_最後更新：2026-07-09_
+_最後更新：2026-07-17 — 新增 `Reserve Home Indicator` Boolean，翻盤原「安全區不進 Figma」的舊規則_
 
 ---
 
@@ -15,6 +15,7 @@ _最後更新：2026-07-09_
 |------|-----|
 | Content | `Button only`（純按鈕）／`Button + Slot`（按鈕固定於下，上方彈性 slot 放輔助內容，如金額摘要 Pill）／`Flexible Slot`（完全自訂內容，不含固定按鈕，例外情況逃生艙） |
 | Button | 固定滿版寬度，複用 [Button](button.md) `primary filled` variant |
+| Reserve Home Indicator（Boolean） | 開＝內嵌 [HomeIndicator](home-indicator.md) instance；關＝不顯示 |
 
 ## Design Tokens
 
@@ -35,8 +36,11 @@ _最後更新：2026-07-09_
 
 ## 邊界情況
 
-- **底部安全區域（Home Indicator）** → 純行為規則，`Spacing/16` 之外疊加安全區域內距，Flutter 用 `SafeArea` 處理，不寫入 Figma 視覺規格（比照 Dialog 鍵盤避讓規則）
 - **`Button + Slot` 內容過寬** → Slot 撐滿全寬，內容超出自動換行，無需特別處理
+
+## 已翻盤的舊規則
+
+原（2026-07-09）：「底部安全區域（Home Indicator）純行為規則，`Spacing/16` 之外疊加安全區域內距，Flutter 用 `SafeArea` 處理，不寫入 Figma 視覺規格（比照 Dialog 鍵盤避讓規則）」。此規則前提是「畫面不畫 HomeIndicator」，現已因「所有完整畫面都要顯示 HomeIndicator」的決策不再成立，正式翻盤——改用 `Reserve Home Indicator` Boolean 直接內嵌 HomeIndicator instance。詳見 [HomeIndicator](home-indicator.md)。
 
 ## Flutter Widget
 
