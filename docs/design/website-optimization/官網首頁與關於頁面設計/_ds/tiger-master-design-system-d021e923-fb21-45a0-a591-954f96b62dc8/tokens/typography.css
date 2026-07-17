@@ -1,0 +1,27 @@
+:root{
+/* Family — the site uses system CJK fonts, no webfonts shipped */
+--font-sans:arial,"Microsoft JhengHei","微軟正黑體","Noto Sans TC",sans-serif;
+/* Scale (from _var.scss + component styles) */
+--font-size-xs:12px;
+--font-size-caption:14px;
+--font-size-body:18px;
+--font-size-sub:20px;
+--font-size-sm:22px;   /* $font-sm */
+--font-size-md:24px;   /* $font-md */
+--font-size-lg:36px;   /* $font-lg — section titles (.title) */
+--font-size-hero:48px; /* banner h1, line-height 61px */
+--font-size-num:64px;  /* step numbers, line-height 87px, weight 700, yellow */
+--font-size-bgtext:100px; /* ghost background words, weight 800, #f6f6f6 */
+/* Weights */
+--weight-regular:400;
+--weight-medium:500;  /* section titles */
+--weight-bold:700;
+--weight-heavy:800;   /* ghost text, modal headings */
+/* Line heights */
+--leading-body:1.5;
+--leading-hero:61px;
+--leading-num:87px;
+}
+body{font-family:var(--font-sans);color:var(--text-heading);line-height:var(--leading-body);margin:0}
+a{color:var(--brand-navy);text-decoration:none}
+a:hover{color:var(--brand-navy-2)}

@@ -1,0 +1,5 @@
+/* The production site ships no webfonts: it relies on system fonts
+   (arial + Microsoft JhengHei 微軟正黑體). Noto Sans TC from Google Fonts
+   is the nearest cross-platform match for JhengHei and is loaded as a
+   fallback for machines without it. */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800&display=swap');

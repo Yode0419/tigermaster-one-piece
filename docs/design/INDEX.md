@@ -6,9 +6,13 @@ _Last updated: 2026-07-17_
 
 ---
 
-## （design/ 根目錄）— 跨功能基礎規則
+## website-optimization/ — 官網內容優化
 
-- **[Design Frame 尺寸標準：375×812 升級至 393×852](frame-size-standard.md)** — 決策記錄：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移；StatusBar／HomeIndicator 依尺寸群組分開定義，並回頭修正 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 的留白邏輯 _(2026-07-17)_
+- **[官網首頁與關於我們頁內容優化](website-optimization/homepage-about-optimization.md)** — 董事長指派的官網改版案，以 PPT 內容為骨架擴充既有首頁／關於我們頁文案，含商業模式差異化與企業福委會區塊的版本選定、品牌宣言待定案 _(2026-07-17)_
+
+## frame-size-standard/ — 跨功能基礎規則
+
+- **[Design Frame 尺寸標準：375×812 升級至 393×852](frame-size-standard/frame-size-standard.md)** — 決策記錄：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移；StatusBar／HomeIndicator 依尺寸群組分開定義，並回頭修正 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 的留白邏輯 _(2026-07-17)_
 
 ## order-flag/ — 訂單旗標
 

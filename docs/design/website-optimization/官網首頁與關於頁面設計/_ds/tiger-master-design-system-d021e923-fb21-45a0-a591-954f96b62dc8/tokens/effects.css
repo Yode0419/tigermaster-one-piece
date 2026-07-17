@@ -1,0 +1,24 @@
+:root{
+/* Radii — small and rectangular; capsules for tags/checkboxes only */
+--radius-xs:2px;   /* btnBlue default, QA feedback buttons */
+--radius-sm:3px;   /* long-btn */
+--radius-md:4px;   /* form-btn, cards (.board), search input */
+--radius-select:5px;
+--radius-lg:8px;   /* logo tile, select option list */
+--radius-capsule:20px; /* capsule checkbox, days pill */
+--radius-circle:50%;
+/* Shadows — soft ambient, no offset */
+--shadow-card:0px 0px 4px rgba(0,0,0,0.15);
+--shadow-popover:0px 0px 2px rgba(0,0,0,0.3);
+--shadow-input:0px 0px 2px rgba(0,0,0,0.25);
+--shadow-input-hover:0px 0px 4px rgba(0,0,0,0.5);
+--shadow-select:0px 0px 0.82369px 0px rgba(50,50,71,0.20),0px 0.82369px 3.29477px 0px rgba(50,50,71,0.08);
+/* Motion */
+--transition-hover:all .5s; /* @kind other */ /* button overlay, nav underline */
+--transition-quick:all .2s; /* @kind other */ /* pagination dots */
+--transition-panel:0.3s ease-in-out; /* @kind other */ /* back-to-top, dropdowns */
+/* Layout */
+--container-max:1100px;  /* navbar */
+--container-footer:1400px;
+--banner-height:435px;
+}
