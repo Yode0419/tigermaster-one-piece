@@ -34,6 +34,27 @@
 
 ---
 
+## SEO 角度分析（技術稽核，待後續詳細處理）
+
+對 `fdtigermaster-offical-site` repo 做的技術稽核。總體結論：此站為 Vue 2.7 CSR SPA，但 build 時透過 `PrerenderSPAPlugin`（Puppeteer）將首頁、關於我們頁等路由預先渲染成靜態 HTML，爬蟲可讀性本身無重大問題；風險集中在 meta 資訊與標題結構這兩塊，剛好都能搭這次內容 revamp 一併處理。
+
+### 技術 SEO
+
+- 全站共用同一份 `<title>` / `<meta name="description">`（`public/index.html`），無任何 per-route 機制，首頁與關於我們頁預渲染後標題描述完全相同
+- `<html lang="">` 為空字串，缺少 `lang="zh-TW"`
+- 無 JSON-LD 結構化資料（缺 Organization / LocalBusiness schema）
+- `public/sitemap.xml` 過時（`lastmod` 全為 2022-05-20），`/JoinUs` 重複列出兩次
+- OG 標籤存在但全站共用一份；無 Twitter Card 標籤
+
+### 內容結構 SEO
+
+- **Home.vue 完全沒有 `<h1>` 或 `<h2>`，所有標題皆為 `<h3>`**，首頁沒有任何 h1 宣告頁面主體 —— 目前發現的最明確結構缺陷
+- About.vue 有唯一 `<h1>`，階層正確，但手機版/桌機版各維護一份重複 DOM，「核心價值」「核心人物」等 `<h2>` 頁內重複出現
+- `Home.vue:287` 服務項目圖片在 v-for 迴圈中 8 張圖全寫死同一個 `alt="service_01"`，未使用實際服務名稱；多處合作夥伴 logo 也共用同一組 alt 文字
+- 兩頁幾乎全用 `<div>` + Bootstrap Vue，未使用語意化標籤（`<section>`/`<article>`）
+
+---
+
 ## 影響範圍
 
 - `fdtigermaster-offical-site` repo 的 `src/views/Home.vue`（商業模式差異化、企業福委會兩區塊需依上述版本調整）
@@ -47,6 +68,36 @@
 - [ ] 品牌宣言最終版本（`stmtPhoto` / `stmtSplit` / `stmtBlue`，或其他）
 - [ ] 「投資人」是否為官網正式讀者之一（目前為設計師推測，董事長未明講，暫不特別展開處理）
 - [ ] 關於我們頁「創辦人的話」「陪伴感敘事」「AI/數位化願景」「里程碑時間軸（2028+未來藍圖）」的具體文案調整，待品牌宣言定案後展開
+
+### SEO 待辦（後續詳細處理）
+
+> 補充脈絡：目前用品牌詞「師虎來了」搜尋 Google 已排第一、AI 摘要也能正確描述，但這是品牌詞查詢的預期結果——沒有競爭者會搶別人專屬的品牌詞，不代表網站 SEO 體質良好。以下待辦真正要解決的是**非品牌詞**（如「水電師傅推薦」「抓漏 桃園」等使用者還不知道品牌名時的服務型/在地型搜尋），這類查詢才有真實競爭、也才是能帶來新客的流量。目前的技術缺口不影響現有品牌詞搜尋體驗，屬於「未來要靠 SEO 拿非品牌新客流量前，需要先補的地基」，非緊急問題。
+
+**優先順序判斷**：重要不緊急。不阻塞本次內容改版，也沒有證據顯示目前的技術缺口正在造成流量或排名損失（品牌詞搜尋一切正常，也無爬蟲擋阻或處罰跡象）。但屬於修改成本低、長期效益高的項目，建議排入下一輪處理，不宜無限期擱置——尤其 alt 文字錯誤與重複 title 是現在就存在、只是還沒被追蹤到影響的問題。
+
+- [ ] Home.vue 補上 `<h1>`／`<h2>` 標題階層（目前全站無 h1，首頁全用 h3）
+- [ ] Home.vue / About.vue 建立 per-route `<title>` / `<meta description>` 機制，取代目前全站共用一份
+- [ ] `Home.vue:287` 服務項目圖片 alt 文字改為對應實際服務名稱（目前 8 張圖共用 `alt="service_01"`）
+- [ ] 補充 JSON-LD 結構化資料（Organization / LocalBusiness schema）
+- [ ] `public/sitemap.xml` 更新 `lastmod` 並移除 `/JoinUs` 重複項
+- [ ] `<html lang="">` 補上 `lang="zh-TW"`
+- [ ] About.vue 手機版/桌機版重複 DOM（造成 h2 頁內重複）評估是否需要重構
+
+**預期效果**（技術地基工程，非直接拉排名——排名仍取決於內容深度與外部連結）：
+
+- 非品牌詞搜尋結果的點擊率提升（title/description 不再跨頁重複、更貼合查詢意圖）
+- AI Overview／Google AI 摘要在被問到差異化問題時（如「師虎來了跟找師傅有什麼不同」），能更準確萃取內容——目前缺少結構化資料與清楚標題階層，AI 較難正確引用
+- 避免因重複 title／頁內重複內容被搜尋引擎降權的下行風險
+- 效果時間軸：搜尋引擎重新爬取、AI 系統更新索引通常需 2-6 週才會反映在結果上，非部署後立即可見
+
+**驗證方式**：
+
+- Google Search Console：篩選非品牌詞查詢，追蹤曝光數、平均排名、CTR 部署前後對比（品牌詞排除，因為本來就穩定）
+- Rich Results Test（Google 官方工具）：驗證 JSON-LD 是否被正確解析
+- Lighthouse／PageSpeed Insights 的 SEO 分數：h1、meta description、alt、lang 等項目部署前後直接對比，最快可拿到的量化證據
+- 手動搜尋測試：實際搜尋預期的非品牌詞（如「水電師傅推薦」「抓漏 桃園」），觀察官網是否出現、AI 摘要是否正確描述差異化
+- `site:` 搜尋 + GSC 內 Sitemap 提交狀態：確認頁面被正確索引、無重複收錄
+- [ ] About.vue 手機版/桌機版重複 DOM（造成 h2 頁內重複）評估是否需要重構
 
 ---
 
