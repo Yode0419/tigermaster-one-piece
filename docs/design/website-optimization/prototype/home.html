@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>師虎來了｜首頁</title>
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/tokens/colors.css">
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/tokens/typography.css">
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/tokens/effects.css">
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/styles.css">
+<script src="image-slot.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+  body{margin:0;background:#fff;font-family:arial,"Noto Sans TC","Microsoft JhengHei",微軟正黑體,sans-serif;}
+  a{color:#1f286f;text-decoration:none;}
+  a:hover{color:#fabf13;}
+  html{scroll-behavior:smooth;}
+
+  /* 里程碑數字條 */
+  .stats-strip{background:var(--surface-blue-tint,#eff3fe);padding:48px 0;}
+  .stats-strip-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;text-align:center;}
+  .stats-strip-item .num{font-size:var(--font-size-hero,48px);font-weight:var(--weight-bold,700);color:var(--brand-navy,#1f286f);line-height:1;}
+  .stats-strip-item .label{font-size:var(--font-size-body,18px);color:var(--text-dark,#4a4a4a);margin:10px 0 0;}
+
+  /* 客戶評價跑馬燈 */
+  .reviews-section{padding:80px 0;}
+  .reviews-heading{max-width:1320px;margin:0 auto;padding:0 24px;}
+  .reviews-marquee{overflow:hidden;margin-top:40px;-webkit-mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent);}
+  .review-track{display:flex;gap:24px;width:max-content;animation:marquee 50s linear infinite;padding:4px 0;}
+  .review-track:hover{animation-play-state:paused;}
+  @keyframes marquee{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+  .review-card{flex:0 0 320px;background:#fff;border-radius:var(--radius-md,4px);box-shadow:var(--shadow-card,0 0 4px rgba(0,0,0,.15));padding:28px 24px;display:flex;flex-direction:column;gap:12px;}
+  .review-card .review-top{display:flex;justify-content:space-between;align-items:center;}
+  .review-card .reviewer{font-size:17px;font-weight:700;color:var(--text-ink,#23242a);}
+  .review-card .stars{color:var(--brand-yellow,#fabf13);font-size:14px;}
+  .review-card .tag{display:inline-block;background:var(--surface-blue-tint,#eff3fe);color:var(--brand-navy,#1f286f);font-size:13px;font-weight:500;padding:3px 12px;border-radius:20px;align-self:flex-start;}
+  .review-card .body{font-size:15px;color:var(--text-light,#6f6f6f);line-height:1.7;margin:0;flex:1;}
+  .review-card .meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--text-faint,#929292);}
+  .review-card .done-badge{color:var(--brand-navy,#1f286f);font-weight:500;}
+</style>
+</head>
+<body>
+<div style="width:100%;min-width:1280px;background:#fff;color:#23242a;">
+
+  <!-- 1 導覽列 Navbar -->
+  <div style="background:#fabf13;height:72px;display:flex;align-items:center;padding:0 40px;gap:40px;position:sticky;top:0;z-index:50;">
+    <img src="assets/text_logo.png" style="height:42px;" alt="師虎來了">
+    <div style="display:flex;gap:32px;flex:1;">
+      <a href="#" style="font-size:18px;font-weight:700;color:#333;">首頁</a>
+      <a href="#" style="font-size:18px;font-weight:700;color:#333;">服務項目</a>
+      <a href="#" style="font-size:18px;font-weight:700;color:#333;">關於我們</a>
+      <a href="#" style="font-size:18px;font-weight:700;color:#333;">常見問題</a>
+      <a href="#" style="font-size:18px;font-weight:700;color:#333;">部落格</a>
+      <a href="#" style="font-size:18px;font-weight:700;color:#1f286f;">師虎學院</a>
+      <a href="#" style="font-size:18px;font-weight:700;color:#1f286f;">師虎商城</a>
+      <a href="#welfare" style="font-size:18px;font-weight:700;color:#333;">企業福委會</a>
+    </div>
+    <a href="#app-download" style="background:#1f286f;color:#fff;font-size:16px;font-weight:500;padding:10px 24px;border-radius:4px;cursor:pointer;display:inline-block;" style-hover="box-shadow:inset 0 0 0 999px rgba(0,0,0,.1);">立即下載 APP</a>
+  </div>
+
+  <!-- 2 頂部輪播 Hero Carousel（維持現況，示意） -->
+  <div style="position:relative;height:560px;overflow:hidden;background:#f5f5f5;">
+    <image-slot id="carousel-slide-1" shape="rect" placeholder="輪播圖 1440×560（廣告/公告，維持現有輪播機制）" style="width:100%;height:100%;"></image-slot>
+    <div style="position:absolute;left:32px;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;background:rgba(51,51,51,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:rgba(51,51,51,.7);"><i class="fas fa-arrow-left" style="color:#fff;font-size:18px;"></i></div>
+    <div style="position:absolute;right:32px;top:50%;transform:translateY(-50%);width:52px;height:52px;border-radius:50%;background:rgba(51,51,51,.5);display:flex;align-items:center;justify-content:center;cursor:pointer;" style-hover="background:rgba(51,51,51,.7);"><i class="fas fa-arrow-right" style="color:#fff;font-size:18px;"></i></div>
+    <div style="position:absolute;bottom:24px;left:0;right:0;display:flex;gap:12px;justify-content:center;align-items:center;">
+      <div style="width:24px;height:12px;border-radius:40%;background:#fabf13;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#ccc;"></div>
+      <div style="width:12px;height:12px;border-radius:50%;background:#ccc;"></div>
+    </div>
+  </div>
+
+  <!-- 3 品牌宣言區 Brand Statement（stmtSplit） -->
+  <div>
+    <div style="background:#fff;position:relative;overflow:hidden;">
+      <div style="position:absolute;font-size:100px;font-weight:800;color:#f6f6f6;line-height:1.1;top:16px;left:-6px;z-index:0;">NO MORE LUCK</div>
+      <div style="max-width:1320px;margin:0 auto;padding:90px 24px;display:flex;gap:72px;align-items:center;position:relative;z-index:1;">
+        <div style="flex:1;">
+          <h2 style="font-size:44px;font-weight:700;margin:0 0 8px;line-height:1.3;">找師傅，<br><span style="border-bottom:6px solid #fabf13;">不該靠運氣。</span></h2>
+          <p style="font-size:22px;color:#4a4a4a;line-height:1.8;margin:32px 0 40px;max-width:520px;">師虎來了不只是幫您找到師傅，而是對整個修繕服務負責——從報價、施工到保固，每一步都有人陪您。</p>
+          <div style="display:flex;gap:16px;">
+            <a href="#app-download" style="background:#1f286f;color:#fff;font-size:18px;font-weight:500;padding:14px 32px;border-radius:4px;cursor:pointer;display:inline-block;" style-hover="box-shadow:inset 0 0 0 999px rgba(0,0,0,.1);">立即下載 APP</a>
+            <a href="#biz-model" style="background:#fff;border:0.5px solid #1f286f;color:#1f286f;font-size:18px;font-weight:500;padding:14px 32px;border-radius:4px;cursor:pointer;display:inline-block;" style-hover="background:#1f286f;color:#fff;">看看師虎哪裡不一樣</a>
+          </div>
+        </div>
+        <div style="flex:0 0 560px;"><img src="assets/imagery/step_img_02.jpg" style="width:100%;border-radius:4px;display:block;" alt=""></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW 里程碑數字條 Milestone Stats Strip -->
+  <div class="stats-strip">
+    <div class="stats-strip-inner">
+      <div class="stats-strip-item">
+        <div class="num" data-countup="25000" data-suffix="+">25,000+</div>
+        <p class="label">完成交易</p>
+      </div>
+      <div class="stats-strip-item">
+        <div class="num" data-countup="20000" data-suffix="+">20,000+</div>
+        <p class="label">平台會員</p>
+      </div>
+      <div class="stats-strip-item">
+        <div class="num" data-countup="2200" data-suffix="+">2,200+</div>
+        <p class="label">合作師傅</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SAMPLE CONTENT: illustrative placeholder reviews for layout purposes only. Replace with 8 curated real App/platform reviews before launch. See homepage-about-optimization.md decision #8/#15. -->
+  <!-- 11 客戶評價／真實留言 Customer Reviews -->
+  <div class="reviews-section">
+    <div class="reviews-heading">
+      <h3 style="font-size:36px;font-weight:500;margin:0;">客戶評價／真實留言</h3>
+      <p style="font-size:22px;color:#4a4a4a;margin:16px 0 0;">來自 App 完工後的真實評價，師虎的好由客戶來跟您說。</p>
+    </div>
+    <div class="reviews-marquee">
+      <div class="review-track">
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">王O婷</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">水電服務</span>
+          <p class="body">師傅準時到府，抓漏抓得很仔細，還會拍照跟我解釋原因，收費也跟報價一致，很安心。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>2 週前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">陳O豪</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span></div>
+          <span class="tag">漏水抓修</span>
+          <p class="body">找了好幾家都沒抓到問題，師虎的師傅第一次上門就找到漏水點，專案管理師全程都有追蹤進度。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>1 個月前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">林O如</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">裝潢整修</span>
+          <p class="body">老屋翻新工程比較複雜，還好有專案管理師幫忙協調師傅時程，比自己找工班省心很多。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>3 週前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">張O偉</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span></div>
+          <span class="tag">家具修繕</span>
+          <p class="body">木工師傅手藝很細，家具修好之後幾乎看不出來壞過，價格也比外面詢問的實在。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>5 天前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">吳O玲</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">安裝服務</span>
+          <p class="body">冷氣安裝當天師傅提前打電話確認時間，走管配線都很整齊，完工後還教我怎麼保養濾網。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>1 週前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">黃O志</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">清潔服務</span>
+          <p class="body">搬家前的深度清潔請師虎來處理，廚房油垢跟浴室水垢都清得很乾淨，價格透明沒有額外加價。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>2 個月前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">劉O菁</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span></div>
+          <span class="tag">家電服務</span>
+          <p class="body">洗衣機故障維修，師傅到府後很快找出問題，備料也備得齊全，一次就修好了。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>4 天前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">許O翔</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">房屋漏水</span>
+          <p class="body">頂樓防水工程做完後遇到颱風測試，完全沒有再漏水，保固服務也讓人很放心。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>3 個月前</span></div>
+        </div>
+        <!-- duplicate set for seamless marquee loop -->
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">王O婷</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">水電服務</span>
+          <p class="body">師傅準時到府，抓漏抓得很仔細，還會拍照跟我解釋原因，收費也跟報價一致，很安心。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>2 週前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">陳O豪</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span></div>
+          <span class="tag">漏水抓修</span>
+          <p class="body">找了好幾家都沒抓到問題，師虎的師傅第一次上門就找到漏水點，專案管理師全程都有追蹤進度。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>1 個月前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">林O如</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">裝潢整修</span>
+          <p class="body">老屋翻新工程比較複雜，還好有專案管理師幫忙協調師傅時程，比自己找工班省心很多。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>3 週前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">張O偉</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></span></div>
+          <span class="tag">家具修繕</span>
+          <p class="body">木工師傅手藝很細，家具修好之後幾乎看不出來壞過，價格也比外面詢問的實在。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>5 天前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">吳O玲</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">安裝服務</span>
+          <p class="body">冷氣安裝當天師傅提前打電話確認時間，走管配線都很整齊，完工後還教我怎麼保養濾網。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>1 週前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">黃O志</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">清潔服務</span>
+          <p class="body">搬家前的深度清潔請師虎來處理，廚房油垢跟浴室水垢都清得很乾淨，價格透明沒有額外加價。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>2 個月前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">劉O菁</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></span></div>
+          <span class="tag">家電服務</span>
+          <p class="body">洗衣機故障維修，師傅到府後很快找出問題，備料也備得齊全，一次就修好了。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>4 天前</span></div>
+        </div>
+        <div class="review-card">
+          <div class="review-top"><span class="reviewer">許O翔</span><span class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></span></div>
+          <span class="tag">房屋漏水</span>
+          <p class="body">頂樓防水工程做完後遇到颱風測試，完全沒有再漏水，保固服務也讓人很放心。</p>
+          <div class="meta"><span class="done-badge">已完工</span><span>3 個月前</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4 商業模式區 Business Model（bizNumbers） -->
+  <div id="biz-model">
+    <div style="position:relative;overflow:hidden;">
+      <div style="position:absolute;font-size:100px;font-weight:800;color:#f6f6f6;line-height:1.1;top:16px;right:-6px;z-index:0;">DIFFERENCE</div>
+      <div style="max-width:1100px;margin:0 auto;padding:90px 24px;position:relative;z-index:1;">
+        <h3 style="font-size:36px;font-weight:500;margin:0;text-align:center;">我們的商業模式，跟其他平台就是不一樣</h3>
+        <p style="font-size:22px;color:#4a4a4a;line-height:1.7;margin:24px auto 64px;max-width:820px;text-align:center;text-wrap:pretty;">找師傅最怕的不是找不到人，而是出了問題沒有人負責。</p>
+        <div style="display:flex;gap:64px;align-items:center;margin-bottom:64px;">
+          <div style="flex:0 0 auto;">
+            <div style="display:inline-block;background:#fabf13;color:#1f286f;font-size:15px;font-weight:700;padding:5px 14px;border-radius:20px;margin-bottom:16px;">全台唯一</div>
+            <div style="display:flex;align-items:baseline;gap:10px;"><span style="color:#fabf13;font-size:96px;font-weight:700;line-height:1;">3</span><span style="font-size:32px;font-weight:500;">成訂金</span></div>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-top:8px;"><span style="color:#1f286f;font-size:96px;font-weight:700;line-height:1;">7</span><span style="font-size:32px;font-weight:500;">成驗收滿意再付款</span></div>
+          </div>
+          <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+            <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:28px 24px;"><i class="fas fa-hard-hat" style="font-size:28px;color:#fabf13;"></i><p style="font-size:20px;font-weight:500;margin:14px 0 8px;">施工過程有人協助</p><p style="font-size:15px;color:#6f6f6f;line-height:1.7;margin:0;">有問題直接找師虎來了，不用自己和師傅周旋。</p></div>
+            <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:28px 24px;"><i class="fas fa-shield-alt" style="font-size:28px;color:#fabf13;"></i><p style="font-size:20px;font-weight:500;margin:14px 0 8px;">保固直接找師虎來了</p><p style="font-size:15px;color:#6f6f6f;line-height:1.7;margin:0;">保固期間不必擔心找不到師傅。</p></div>
+            <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:28px 24px;"><i class="fas fa-credit-card" style="font-size:28px;color:#fabf13;"></i><p style="font-size:20px;font-weight:500;margin:14px 0 8px;">每一筆付款都有保障</p><p style="font-size:15px;color:#6f6f6f;line-height:1.7;margin:0;">工程款皆透過平台管理，不需私下付款。</p></div>
+            <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:28px 24px;"><i class="fas fa-file-invoice" style="font-size:28px;color:#fabf13;"></i><p style="font-size:20px;font-weight:500;margin:14px 0 8px;">發票由師虎來了開立</p><p style="font-size:15px;color:#6f6f6f;line-height:1.7;margin:0;">付款更透明，報帳也更方便。</p></div>
+          </div>
+        </div>
+        <p style="font-size:24px;font-weight:500;margin:0 0 24px;text-align:center;">一張表看懂，在師虎叫修差在哪</p>
+        <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr;border-radius:4px;overflow:hidden;box-shadow:0 0 4px rgba(0,0,0,.15);">
+          <div style="background:#f5f5f5;padding:20px 28px;"></div>
+          <div style="background:#1f286f;padding:20px;text-align:center;"><img src="assets/logo.svg" style="height:36px;" alt="師虎來了"></div>
+          <div style="background:#f5f5f5;padding:20px;text-align:center;font-size:20px;font-weight:500;color:#6f6f6f;display:flex;align-items:center;justify-content:center;">自己找師傅</div>
+          <div style="padding:22px 28px;font-size:20px;font-weight:500;border-top:1px solid #eee;">付款方式</div>
+          <div style="background:#eff3fe;padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#1f286f;font-weight:500;line-height:1.6;">3 成訂金<br>7 成驗收滿意再付款</div>
+          <div style="padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#6f6f6f;line-height:1.6;">常需先付大筆工程款</div>
+          <div style="padding:22px 28px;font-size:20px;font-weight:500;border-top:1px solid #eee;">施工遇到問題</div>
+          <div style="background:#eff3fe;padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#1f286f;font-weight:500;line-height:1.6;">平台專人協助處理協調</div>
+          <div style="padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#6f6f6f;line-height:1.6;">自己和師傅周旋</div>
+          <div style="padding:22px 28px;font-size:20px;font-weight:500;border-top:1px solid #eee;">保固服務</div>
+          <div style="background:#eff3fe;padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#1f286f;font-weight:500;line-height:1.6;">直接找師虎來了</div>
+          <div style="padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#6f6f6f;line-height:1.6;">師傅可能已聯絡不上</div>
+          <div style="padding:22px 28px;font-size:20px;font-weight:500;border-top:1px solid #eee;">交易安全</div>
+          <div style="background:#eff3fe;padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#1f286f;font-weight:500;line-height:1.6;">款項由平台管理<br>不需私下付款</div>
+          <div style="padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#6f6f6f;line-height:1.6;">現金交付陌生師傅</div>
+          <div style="padding:22px 28px;font-size:20px;font-weight:500;border-top:1px solid #eee;">發票</div>
+          <div style="background:#eff3fe;padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#1f286f;font-weight:500;line-height:1.6;">由師虎來了統一開立</div>
+          <div style="padding:22px;text-align:center;border-top:1px solid #eee;font-size:17px;color:#6f6f6f;line-height:1.6;">不一定有發票</div>
+        </div>
+        <p style="text-align:center;font-size:24px;font-weight:500;color:#1f286f;margin:56px 0 0;">我們不是把一位師傅介紹給您，<span style="border-bottom:4px solid #fabf13;">而是對整個修繕服務負責。</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5 叫修理由區 Why Tiger Master（HOW IT WORK） -->
+  <div style="position:relative;overflow:hidden;">
+    <div style="position:absolute;font-size:100px;font-weight:800;color:#f6f6f6;line-height:1.1;top:-10px;right:0;z-index:0;">HOW IT WORK</div>
+    <div style="max-width:1320px;margin:0 auto;position:relative;text-align:center;z-index:1;">
+      <h3 style="font-size:36px;font-weight:500;margin:80px 0;">為什麼一定要在師虎上叫修?</h3>
+      <div style="display:flex;">
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;border-right:2px dotted #000;padding:0 12px;">
+          <div style="height:104px;margin-bottom:28px;"><img src="assets/illustrations/HowItWork_item_01.png" style="height:100%;" alt=""></div>
+          <p style="font-size:24px;font-weight:500;white-space:pre-line;margin:8px 0;flex-grow:1;">預先掌握
+行情範圍</p>
+          <div style="margin:30px 0;"><div style="width:0;height:0;border-style:solid;border-width:15px 15px 0 15px;border-color:#000 transparent transparent transparent;"></div><div style="width:0;height:0;border-style:solid;border-width:14px 14px 0 14px;border-color:#fff transparent transparent transparent;transform:translate(1px,-16px);"></div></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;border-right:2px dotted #000;padding:0 12px;">
+          <div style="height:104px;margin-bottom:28px;"><img src="assets/illustrations/HowItWork_item_02.png" style="height:100%;" alt=""></div>
+          <p style="font-size:24px;font-weight:500;white-space:pre-line;margin:8px 0;flex-grow:1;">精準媒合
+專業師傅</p>
+          <div style="margin:30px 0;"><div style="width:0;height:0;border-style:solid;border-width:15px 15px 0 15px;border-color:#000 transparent transparent transparent;"></div><div style="width:0;height:0;border-style:solid;border-width:14px 14px 0 14px;border-color:#fff transparent transparent transparent;transform:translate(1px,-16px);"></div></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;border-right:2px dotted #000;padding:0 12px;">
+          <div style="height:104px;margin-bottom:28px;"><img src="assets/illustrations/HowItWork_item_03.png" style="height:100%;" alt=""></div>
+          <p style="font-size:24px;font-weight:500;white-space:pre-line;margin:8px 0;flex-grow:1;">專屬一對一
+專案管理師</p>
+          <div style="margin:30px 0;"><div style="width:0;height:0;border-style:solid;border-width:15px 15px 0 15px;border-color:#000 transparent transparent transparent;"></div><div style="width:0;height:0;border-style:solid;border-width:14px 14px 0 14px;border-color:#fff transparent transparent transparent;transform:translate(1px,-16px);"></div></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;border-right:2px dotted #000;padding:0 12px;">
+          <div style="height:104px;margin-bottom:28px;"><img src="assets/illustrations/HowItWork_item_04.png" style="height:100%;" alt=""></div>
+          <p style="font-size:24px;font-weight:500;white-space:pre-line;margin:8px 0;flex-grow:1;">有保障的
+修繕過程</p>
+          <div style="margin:30px 0;"><div style="width:0;height:0;border-style:solid;border-width:15px 15px 0 15px;border-color:#000 transparent transparent transparent;"></div><div style="width:0;height:0;border-style:solid;border-width:14px 14px 0 14px;border-color:#fff transparent transparent transparent;transform:translate(1px,-16px);"></div></div>
+        </div>
+        <div style="flex:1;display:flex;flex-direction:column;align-items:center;padding:0 12px;">
+          <div style="height:104px;margin-bottom:28px;"><img src="assets/illustrations/HowItWork_item_05.png" style="height:100%;" alt=""></div>
+          <p style="font-size:24px;font-weight:500;white-space:pre-line;margin:8px 0;flex-grow:1;">便利選擇
+多項服務</p>
+          <div style="margin:30px 0;"><div style="width:0;height:0;border-style:solid;border-width:15px 15px 0 15px;border-color:#000 transparent transparent transparent;"></div><div style="width:0;height:0;border-style:solid;border-width:14px 14px 0 14px;border-color:#fff transparent transparent transparent;transform:translate(1px,-16px);"></div></div>
+        </div>
+      </div>
+    </div>
+    <div style="max-width:1320px;margin:0 auto;"><img src="assets/imagery/big_pic.jpg" style="width:100%;margin:60px 0 0;display:block;" alt=""></div>
+  </div>
+
+  <!-- 6 特色步驟區 Feature Steps 01–05 -->
+  <div>
+    <!-- 01 -->
+    <div style="position:relative;max-width:1320px;margin:60px auto 0;display:flex;gap:40px;align-items:flex-start;">
+      <div style="position:absolute;font-size:100px;font-weight:800;color:#f6f6f6;line-height:1.1;right:0;bottom:-30px;text-align:right;white-space:pre-line;z-index:0;">PRICE
+RANGE</div>
+      <div style="flex:0 0 40%;position:relative;z-index:1;padding:0 24px;">
+        <div style="font-weight:700;font-size:64px;line-height:87px;color:#fabf13;">01</div>
+        <img src="assets/illustrations/HowItWork_item_01.png" style="width:145px;margin:36px 0;" alt="">
+        <h3 style="font-size:36px;line-height:46px;font-weight:500;margin:0 0 24px;">預先掌握行情範圍</h3>
+        <p style="font-size:22px;line-height:1.5;color:#4a4a4a;margin:0;">想找最便宜卻被事後追加，您是否感到受騙？師虎平台公開各工項參考價格，您的心裡也有底，讓您不再當冤大頭。</p>
+      </div>
+      <div style="flex:1;position:relative;z-index:1;"><img src="assets/imagery/step_img_01.png" style="width:100%;max-width:679px;" alt=""></div>
+    </div>
+    <!-- 02 -->
+    <div style="position:relative;margin:60px 0 0;display:flex;gap:40px;align-items:flex-start;">
+      <div style="position:absolute;font-size:100px;font-weight:800;color:#f6f6f6;line-height:1.1;left:8%;bottom:-30px;z-index:0;">EMPLOYEE</div>
+      <div style="flex:0 0 32%;margin-left:max(calc((100% - 1320px)/2),24px);position:relative;z-index:1;">
+        <div style="font-weight:700;font-size:64px;line-height:87px;color:#fabf13;">02</div>
+        <img src="assets/illustrations/HowItWork_item_02.png" style="width:85px;margin:36px 0;" alt="">
+        <h3 style="font-size:36px;line-height:46px;font-weight:500;margin:0 0 24px;">精準媒合專業師傅</h3>
+        <p style="font-size:22px;line-height:1.5;color:#4a4a4a;margin:0;">加入師虎平台的技術師傅皆經過一對一面試，通過考核後才可上線接案。嚴格篩選下，平均錄取率只有 36%。</p>
+      </div>
+      <div style="flex:1;position:relative;z-index:1;text-align:right;"><img src="assets/imagery/step_img_02.jpg" style="width:92%;" alt=""></div>
+    </div>
+    <!-- 03 -->
+    <div style="position:relative;margin:80px 0 0;display:flex;gap:40px;align-items:flex-start;overflow:hidden;">
+      <div style="position:absolute;font-size:100px;font-weight:800;color:#f6f6f6;line-height:1.1;right:-6px;top:0;text-align:right;white-space:pre-line;z-index:0;">TECHNICAL
+PROJECT
+SERVICES</div>
+      <div style="flex:0 0 46%;position:relative;z-index:1;">
+        <image-slot id="step3-photo" shape="rect" placeholder="客服/專案管理師照片（官網 step 03 圖）" style="width:100%;height:400px;"></image-slot>
+      </div>
+      <div style="flex:0 0 32%;position:relative;z-index:1;">
+        <div style="font-weight:700;font-size:64px;line-height:87px;color:#fabf13;">03</div>
+        <img src="assets/illustrations/HowItWork_item_03.png" style="width:110px;margin:36px 0;" alt="">
+        <h3 style="font-size:36px;line-height:46px;font-weight:500;margin:0 0 24px;">擁有專屬的技術<br>專案管理師</h3>
+        <p style="font-size:22px;line-height:1.5;color:#4a4a4a;margin:0;">訂單成立即刻擁有一對一專案管理師，在修繕過程中擔任您與師傅的橋樑，讓您溝通無障礙，服務有享受。</p>
+      </div>
+    </div>
+    <!-- 04 -->
+    <div style="position:relative;margin:80px 0 0;overflow:hidden;">
+      <div style="position:absolute;font-size:100px;font-weight:800;color:#f6f6f6;line-height:1.1;right:-6px;top:0;z-index:0;">WARRANTY</div>
+      <div style="max-width:1320px;margin:0 auto;padding:0 24px;position:relative;z-index:1;">
+        <div style="max-width:640px;">
+          <div style="font-weight:700;font-size:64px;line-height:87px;color:#fabf13;">04</div>
+          <img src="assets/illustrations/HowItWork_item_04.png" style="width:110px;margin:36px 0;" alt="">
+          <h3 style="font-size:36px;line-height:46px;font-weight:500;margin:0 0 24px;">有保障的修繕過程</h3>
+          <p style="font-size:22px;line-height:1.5;color:#4a4a4a;margin:0;">不同於其他不負責任的平台只負責提供媒合，當您有糾紛或需要售後協助時求助無門。只要您在師虎平台完成修繕服務，售後保固服務也由師虎為您承擔。</p>
+        </div>
+        <img src="assets/imagery/big_pic.jpg" style="width:100%;height:340px;object-fit:cover;display:block;margin-top:48px;" alt="">
+      </div>
+    </div>
+    <!-- 05 -->
+    <div style="position:relative;margin:80px 0 0;overflow:hidden;">
+      <div style="position:absolute;font-size:100px;font-weight:800;color:#f6f6f6;line-height:1.1;right:-6px;top:40px;z-index:0;">APP</div>
+      <div style="max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:1;text-align:center;">
+        <div style="font-weight:700;font-size:64px;line-height:87px;color:#fabf13;">05</div>
+        <img src="assets/illustrations/HowItWork_item_05.png" style="width:110px;margin:24px 0;" alt="">
+        <h3 style="font-size:36px;line-height:46px;font-weight:500;margin:0 0 24px;">便利選擇多項服務</h3>
+        <p style="font-size:22px;line-height:1.6;color:#4a4a4a;margin:0 auto;max-width:640px;">找師傅跟叫外送一樣簡單！配合您的時間，讓您省去上網亂槍打鳥或等待被聯繫，24 小時都可以用 APP 一指叫修。</p>
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:56px;position:relative;z-index:1;">
+        <div style="width:200px;height:300px;transform:skewX(-12deg);overflow:hidden;border-radius:2px;"><img src="assets/services/service_02.jpg" style="width:130%;height:100%;object-fit:cover;transform:skewX(12deg) translateX(-12%);display:block;" alt=""></div>
+        <div style="width:200px;height:300px;transform:skewX(-12deg);overflow:hidden;border-radius:2px;"><img src="assets/services/service_08.jpg" style="width:130%;height:100%;object-fit:cover;transform:skewX(12deg) translateX(-12%);display:block;" alt=""></div>
+        <div style="width:200px;height:300px;transform:skewX(-12deg);overflow:hidden;border-radius:2px;"><img src="assets/services/service_05.jpg" style="width:130%;height:100%;object-fit:cover;transform:skewX(12deg) translateX(-12%);display:block;" alt=""></div>
+        <div style="width:200px;height:300px;transform:skewX(-12deg);overflow:hidden;border-radius:2px;"><img src="assets/services/service_03.jpg" style="width:130%;height:100%;object-fit:cover;transform:skewX(12deg) translateX(-12%);display:block;" alt=""></div>
+        <div style="width:200px;height:300px;transform:skewX(-12deg);overflow:hidden;border-radius:2px;"><img src="assets/services/service_04.jpg" style="width:130%;height:100%;object-fit:cover;transform:skewX(12deg) translateX(-12%);display:block;" alt=""></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 APP 下載區 App Download -->
+  <div id="app-download" style="background:#1f286f;margin-top:80px;">
+    <div style="max-width:1320px;margin:0 auto;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;padding:0 24px;">
+      <div style="padding:56px 0;color:#fff;">
+        <h3 style="font-size:36px;font-weight:500;margin:0 0 28px;">立即下載「師虎來了」APP！</h3>
+        <div style="display:flex;align-items:center;gap:20px;">
+          <img src="assets/square_logo.png" style="width:90px;" alt="app icon">
+          <div>
+            <p style="font-size:18px;margin:0 0 13px;">師虎來了，讓您找師傅就跟叫外送一樣簡單。</p>
+            <div style="display:flex;gap:12px;">
+              <img src="assets/store/app_store_transparent.svg" style="height:40px;" alt="App Store">
+              <img src="assets/store/google_play_transparent.svg" style="height:40px;" alt="Google Play">
+            </div>
+          </div>
+        </div>
+      </div>
+      <img src="assets/imagery/bluebg.png" style="width:42%;display:block;align-self:flex-end;" alt="">
+    </div>
+  </div>
+
+  <!-- 8 服務項目區 Services -->
+  <div style="background:#f5f5f5;padding:80px 0;">
+    <div style="max-width:1320px;margin:0 auto;padding:0 24px;">
+      <h3 style="font-size:36px;font-weight:500;margin:0;">服務項目</h3>
+      <p style="font-size:22px;color:#4a4a4a;margin:16px 0 40px;">八大修繕類別，200 種服務工項，居家修繕任何問題都可以在師虎找到解決方案。</p>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+        <div style="position:relative;overflow:hidden;"><img src="assets/services/service_01.jpg" style="width:100%;height:220px;object-fit:cover;display:block;" alt=""><div style="position:absolute;left:0;bottom:0;background:#1f286f;color:#fff;font-size:16px;padding:6px 20px;">安裝服務</div></div>
+        <div style="position:relative;overflow:hidden;"><img src="assets/services/service_02.jpg" style="width:100%;height:220px;object-fit:cover;display:block;" alt=""><div style="position:absolute;left:0;bottom:0;background:#1f286f;color:#fff;font-size:16px;padding:6px 20px;">水電服務</div></div>
+        <div style="position:relative;overflow:hidden;"><img src="assets/services/service_03.jpg" style="width:100%;height:220px;object-fit:cover;display:block;" alt=""><div style="position:absolute;left:0;bottom:0;background:#1f286f;color:#fff;font-size:16px;padding:6px 20px;">清潔服務</div></div>
+        <div style="position:relative;overflow:hidden;"><img src="assets/services/service_04.jpg" style="width:100%;height:220px;object-fit:cover;display:block;" alt=""><div style="position:absolute;left:0;bottom:0;background:#1f286f;color:#fff;font-size:16px;padding:6px 20px;">裝潢整修</div></div>
+        <div style="position:relative;overflow:hidden;"><img src="assets/services/service_05.jpg" style="width:100%;height:220px;object-fit:cover;display:block;" alt=""><div style="position:absolute;left:0;bottom:0;background:#1f286f;color:#fff;font-size:16px;padding:6px 20px;">搬運服務</div></div>
+        <div style="position:relative;overflow:hidden;"><img src="assets/services/service_06.jpg" style="width:100%;height:220px;object-fit:cover;display:block;" alt=""><div style="position:absolute;left:0;bottom:0;background:#1f286f;color:#fff;font-size:16px;padding:6px 20px;">家電服務</div></div>
+        <div style="position:relative;overflow:hidden;"><img src="assets/services/service_07.jpg" style="width:100%;height:220px;object-fit:cover;display:block;" alt=""><div style="position:absolute;left:0;bottom:0;background:#1f286f;color:#fff;font-size:16px;padding:6px 20px;">房屋漏水</div></div>
+        <div style="position:relative;overflow:hidden;"><img src="assets/services/service_08.jpg" style="width:100%;height:220px;object-fit:cover;display:block;" alt=""><div style="position:absolute;left:0;bottom:0;background:#1f286f;color:#fff;font-size:16px;padding:6px 20px;">消毒病媒</div></div>
+        <div style="display:flex;align-items:center;justify-content:center;background:#fff;color:#1f286f;font-size:20px;font-weight:500;cursor:pointer;">更多服務 <span style="margin-left:10px;">→</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 9 叫修流程區 How It Works（八步驟） -->
+  <div style="max-width:1320px;margin:0 auto;padding:90px 24px;">
+    <h3 style="font-size:36px;font-weight:500;text-align:center;margin:0 0 60px;">八個步驟，讓您叫修輕鬆搞定。</h3>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:48px 32px;justify-items:center;">
+      <div style="max-width:300px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">01</div><div style="text-align:center;"><img src="assets/illustrations/Frame_01.png" style="height:130px;" alt=""></div><p style="text-align:center;font-size:22px;font-weight:500;margin:12px 0 8px;">註冊師虎來了APP</p><p style="font-size:15px;line-height:1.6;color:#6f6f6f;margin:0;">業界首創修繕專案管理，免繁瑣議價及溝通，提供安心專業服務。</p></div>
+      <div style="max-width:300px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">02</div><div style="text-align:center;"><img src="assets/illustrations/Frame_02.png" style="height:130px;" alt=""></div><p style="text-align:center;font-size:22px;font-weight:500;margin:12px 0 8px;">點選需要的修繕服務</p><p style="font-size:15px;line-height:1.6;color:#6f6f6f;margin:0;">即時掌握修繕價格，並享有平台保固，雙重保障不用再當冤大頭。</p></div>
+      <div style="max-width:300px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">03</div><div style="text-align:center;"><img src="assets/illustrations/Frame_03.png" style="height:130px;" alt=""></div><p style="text-align:center;font-size:22px;font-weight:500;margin:12px 0 8px;">即時下單即時媒合</p><p style="font-size:15px;line-height:1.6;color:#6f6f6f;margin:0;">時間由您掌握，即刻到府或預約修繕皆可，快速有效率完成您的交託。</p></div>
+      <div style="max-width:300px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">04</div><div style="text-align:center;"><img src="assets/illustrations/Frame_04.png" style="height:130px;" alt=""></div><p style="text-align:center;font-size:22px;font-weight:500;margin:12px 0 8px;">媒合成功線上支付派遣費</p><p style="font-size:15px;line-height:1.6;color:#6f6f6f;margin:0;">保障您的預約時間及師傅派工權益，媒合成功後支付 300 元派遣費用。</p></div>
+      <div style="max-width:300px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">05</div><div style="text-align:center;"><img src="assets/illustrations/Frame_05.png" style="height:130px;" alt=""></div><p style="text-align:center;font-size:22px;font-weight:500;margin:12px 0 8px;">現場勘查，線上報價</p><p style="font-size:15px;line-height:1.6;color:#6f6f6f;margin:0;">師傅於指定時間到場勘查，線上報價，三方驗證價格更有保障。</p></div>
+      <div style="max-width:300px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">06</div><div style="text-align:center;"><img src="assets/illustrations/Frame_06.png" style="height:130px;" alt=""></div><p style="text-align:center;font-size:22px;font-weight:500;margin:12px 0 8px;">同意報價後開始施工</p><p style="font-size:15px;line-height:1.6;color:#6f6f6f;margin:0;">由您線上審核並同意報價後，合約正式成立，師傅始可開始施工。</p></div>
+      <div style="max-width:300px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">07</div><div style="text-align:center;"><img src="assets/illustrations/Frame_07.png" style="height:130px;" alt=""></div><p style="text-align:center;font-size:22px;font-weight:500;margin:12px 0 8px;">線上驗收刷卡免現金</p><p style="font-size:15px;line-height:1.6;color:#6f6f6f;margin:0;">三種驗收方式供您選擇，全程線上交易不收現金，三方認證真安心。</p></div>
+      <div style="max-width:300px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">08</div><div style="text-align:center;"><img src="assets/illustrations/Frame_08.png" style="height:130px;" alt=""></div><p style="text-align:center;font-size:22px;font-weight:500;margin:12px 0 8px;">評價師傅保固免擔心</p><p style="font-size:15px;line-height:1.6;color:#6f6f6f;margin:0;">師傅完工分潤由您的評價決定，售後保固由師虎為您承擔。</p></div>
+    </div>
+  </div>
+
+  <!-- NOTE: partner list kept as-is from draft; per docs/design/website-optimization/homepage-about-optimization.md decision #10/#16, only 重樂/育達科大/中華電信福委會 are confirmed 企業福委會 partners — 統一證券/崇越科技/英濟科技 appear to be investors (see About page milestone timeline), and 遠傳電信 usage is not yet authorized. Flagged for review, not auto-corrected. -->
+  <!-- 10 企業福委會區 Enterprise Welfare（welCards） -->
+  <div id="welfare">
+    <div style="background:#eff3fe;position:relative;overflow:hidden;">
+      <div style="position:absolute;font-size:100px;font-weight:800;color:rgba(255,255,255,.7);line-height:1.1;top:16px;left:-6px;z-index:0;">ENTERPRISE</div>
+      <div style="max-width:1320px;margin:0 auto;padding:90px 24px;position:relative;z-index:1;">
+        <h3 style="font-size:36px;font-weight:500;margin:0;">企業福委會特約廠商</h3>
+        <p style="font-size:22px;color:#4a4a4a;margin:16px 0 48px;max-width:860px;line-height:1.7;">您的公司也可以把「安心修繕」變成員工福利。</p>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;">
+          <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:40px 32px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">01</div><p style="font-size:24px;font-weight:500;margin:16px 0 10px;">員工專屬修繕優惠</p><p style="font-size:16px;color:#6f6f6f;line-height:1.7;margin:0;">特約企業員工享有專屬派遣優惠與服務通道，居家修繕更划算。</p></div>
+          <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:40px 32px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">02</div><p style="font-size:24px;font-weight:500;margin:16px 0 10px;">同樣完整的平台保障</p><p style="font-size:16px;color:#6f6f6f;line-height:1.7;margin:0;">3 成訂金、施工協助、平台保固、統一發票，保障一項不少。</p></div>
+          <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:40px 32px;"><div style="font-weight:700;font-size:40px;color:#fabf13;">03</div><p style="font-size:24px;font-weight:500;margin:16px 0 10px;">福委會零負擔導入</p><p style="font-size:16px;color:#6f6f6f;line-height:1.7;margin:0;">專人對接、提供說明文宣與導入協助，福委會不需額外行政作業。</p></div>
+        </div>
+        <div style="display:flex;align-items:center;gap:32px;margin-top:48px;background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:24px 32px;">
+          <p style="font-size:16px;color:#6f6f6f;margin:0;flex:0 0 auto;">合作企業</p>
+          <div style="display:flex;gap:32px;flex-wrap:wrap;flex:1;">
+            <span style="font-size:18px;font-weight:500;color:#1f286f;">統一證券</span>
+            <span style="font-size:18px;font-weight:500;color:#1f286f;">崇越科技</span>
+            <span style="font-size:18px;font-weight:500;color:#1f286f;">英濟科技</span>
+            <span style="font-size:18px;font-weight:500;color:#1f286f;">中華電信職工福委會</span>
+            <span style="font-size:18px;font-weight:500;color:#1f286f;">遠傳電信</span>
+          </div>
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSfiSAoRjo2t17BMcRZ20uDt_BuNgBsPHjBonmr6CIE_29rjpQ/viewform" target="_blank" rel="noopener" style="background:#1f286f;color:#fff;font-size:16px;font-weight:500;padding:12px 28px;border-radius:4px;cursor:pointer;flex:0 0 auto;display:inline-block;">洽詢合作</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 12 頁尾 Footer -->
+  <div style="background:#333;color:#fff;">
+    <div style="max-width:1400px;margin:0 auto;padding:64px 40px 40px;display:flex;gap:80px;">
+      <div style="flex:0 0 260px;">
+        <img src="assets/logo.svg" style="width:180px;display:block;" alt="師虎來了">
+        <p style="font-size:15px;color:#bbb;line-height:1.8;margin:20px 0 0;">飛達智能股份有限公司<br>客服信箱：service@fdtigermaster.com<br>客服時間：週一至週五 09:00–18:00</p>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:repeat(3,1fr);gap:40px;">
+        <div style="display:flex;flex-direction:column;gap:12px;"><p style="color:#fabf13;font-size:18px;font-weight:700;margin:0 0 6px;">關於師虎</p><a href="about.html" style="color:#fff;font-size:15px;">關於我們</a><a href="about.html" style="color:#fff;font-size:15px;">公司里程碑</a><a href="#welfare" style="color:#fff;font-size:15px;">企業特約合作</a></div>
+        <div style="display:flex;flex-direction:column;gap:12px;"><p style="color:#fabf13;font-size:18px;font-weight:700;margin:0 0 6px;">服務</p><a href="#" style="color:#fff;font-size:15px;">服務項目</a><a href="#" style="color:#fff;font-size:15px;">常見問題</a><a href="#" style="color:#fff;font-size:15px;">部落格</a></div>
+        <div style="display:flex;flex-direction:column;gap:12px;"><p style="color:#fabf13;font-size:18px;font-weight:700;margin:0 0 6px;">更多平台</p><a href="#" style="color:#fff;font-size:15px;">師虎學院</a><a href="#" style="color:#fff;font-size:15px;">師虎商城</a><a href="#" style="color:#fff;font-size:15px;">師傅招募</a></div>
+      </div>
+      <div style="flex:0 0 200px;">
+        <p style="color:#fabf13;font-size:18px;font-weight:700;margin:0 0 16px;">追蹤我們</p>
+        <div style="display:flex;gap:16px;">
+          <img src="assets/social/facebook.svg" style="width:32px;" alt="Facebook">
+          <img src="assets/social/messenger.svg" style="width:32px;" alt="Messenger">
+          <img src="assets/social/youtube.svg" style="width:32px;" alt="YouTube">
+        </div>
+      </div>
+    </div>
+    <div style="border-top:1px solid #4a4a4a;text-align:center;padding:20px;font-size:13px;color:#999;">© 2026 飛達智能股份有限公司 FD Intelligence Co., Ltd. All Rights Reserved.</div>
+  </div>
+
+</div>
+<script src="count-up.js"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+:root{
+/* Brand */
+--brand-yellow:#fabf13;
+--brand-navy:#1f286f;
+--brand-navy-2:#2d2d70;
+--brand-dark:#333333;
+/* Text */
+--text-black:#000000;
+--text-ink:#23242a;
+--text-dark:#4a4a4a;
+--text-gray:#4f4f54;
+--text-light:#6f6f6f;
+--text-muted:#727276;
+--text-faint:#929292;
+--text-placeholder:#c4c4c4;
+--text-warm-gray:#b3aca2;
+/* Surfaces */
+--surface-page:#ffffff;
+--surface-gray:#f5f5f5;
+--surface-ghost:#f6f6f6;
+--surface-blue-tint:#eff3fe;
+--surface-blue-tint-2:#f0f3fd;
+--surface-neutral:#eeeeee;
+--surface-breadcrumb:#e5e5e5;
+/* Borders */
+--border-input:#6c6c6c;
+--border-light:#d1d1d1;
+--border-divider:#929292;
+--border-soft:#dadada;
+--border-table:#e3e6f0;
+/* Accents */
+--accent-blue:#3a89f8;
+--price-blue-light:rgb(64,174,254);
+--price-blue-dark:rgb(52,73,255);
+--color-error:red;
+/* Semantic aliases */
+--color-primary:var(--brand-yellow);
+--color-secondary:var(--brand-navy);
+--text-body:var(--text-dark);
+--text-heading:var(--text-black);
+--surface-card:var(--surface-page);
+--surface-footer:var(--brand-dark);
+--surface-navbar:var(--brand-yellow);
+--link-on-dark:#ffffff;
+--link-on-dark-hover:var(--brand-yellow);
+}
