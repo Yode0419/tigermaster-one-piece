@@ -27,10 +27,12 @@ wiki/
 
 ```
 exploration/
-├── order-flag/              — 訂單旗標
-├── reconciliation/          — 對帳與撥款
-└── tiger-points-and-terms/  — Tiger Points 與條款
+├── in-progress/  — 設計或開發進行中
+├── completed/    — 開發已上線
+└── on-hold/      — 暫停或決定不做
 ```
+
+各狀態底下以功能命名資料夾，清單見 [exploration/INDEX.md](exploration/INDEX.md)。
 
 ---
 

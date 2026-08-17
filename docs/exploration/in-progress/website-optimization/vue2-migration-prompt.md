@@ -22,12 +22,12 @@ components via vue-property-decorator, Bootstrap Vue) — no need to locate or c
 the repo. Do not touch any route other than `/` (Home.vue). Read `src/views/Home.vue` in
 full before editing — the line numbers below are from a prior read and may have drifted.
 
-SOURCE CONTENT: Read `C:\yode\tigermaster-one-piece\docs\design\website-optimization\prototype\home.html`,
+SOURCE CONTENT: Read `C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\prototype\home.html`,
 the section commented `<!-- 3 品牌宣言區 Brand Statement（stmtSplit） -->` (around line 74-90).
 Port its markup/copy faithfully: left column heading "找師傅，不該靠運氣。", body copy, two
 CTA buttons ("立即下載 APP" and "看看師虎哪裡不一樣"), right column image. For background
 on why this content/wording was chosen, see decision #7 and #13 in
-`C:\yode\tigermaster-one-piece\docs\design\website-optimization\homepage-about-optimization.md`.
+`C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\homepage-about-optimization.md`.
 
 WHERE TO INSERT: right after the Hero Carousel block (`<Carousel .../>` / `<MobileSwiper .../>`,
 currently around `Home.vue:40-41`) and before the "HOW IT WORK"/五大優勢 section (currently
@@ -94,7 +94,7 @@ Confirmed via prior search: this repo has NO existing count-up/number-animation 
 library (no vue-count-to, no custom helper in `src/utility/`) — check again yourself in
 case that's changed since, but don't assume you need to search from scratch.
 
-SOURCE CONTENT: `C:\yode\tigermaster-one-piece\docs\design\website-optimization\prototype\home.html`,
+SOURCE CONTENT: `C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\prototype\home.html`,
 section commented `<!-- NEW 里程碑數字條 Milestone Stats Strip -->` (around line 92-108),
 and its supporting JS at `...\prototype\count-up.js` (IntersectionObserver-triggered,
 requestAnimationFrame-based, ~1.4s ease-out, comma-formatted output). Three stats:
@@ -143,13 +143,13 @@ the big deposit-ratio number, 4 guarantee cards, and comparison table.
 CONTEXT: You're already working inside this Vue2 project. Read `src/views/Home.vue` in
 full before editing.
 
-SOURCE CONTENT: `C:\yode\tigermaster-one-piece\docs\design\website-optimization\prototype\home.html`,
+SOURCE CONTENT: `C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\prototype\home.html`,
 section commented `<!-- 4 商業模式區 Business Model（bizNumbers） -->` (around line 220-265).
 Port verbatim: the "訂金:尾款 = 3:7" headline number, the 4 guarantee cards, and the
 comparison table (5 rows as they actually appear in the prototype file — read it directly,
 don't assume the row count/labels from memory, a prior summary of this table was found to
 be inaccurate). Background: decisions #5 and #6 in
-`C:\yode\tigermaster-one-piece\docs\design\website-optimization\homepage-about-optimization.md`
+`C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\homepage-about-optimization.md`
 explain why this framing was chosen (avoid vague/competitor-specific marketing terms like
 "安心支付").
 
@@ -204,7 +204,7 @@ REMOVE — 合作夥伴 (Partners):
   anywhere else in the file, then delete all of them.
 
 ADD — 企業福委會 (Enterprise Welfare), in the same template position: read
-`C:\yode\tigermaster-one-piece\docs\design\website-optimization\prototype\home.html`,
+`C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\prototype\home.html`,
 section commented `<!-- 10 企業福委會區 Enterprise Welfare（welCards） -->` (around line
 434-455). This section was recently simplified — it's now: heading "企業福委會特約廠商",
 one subtitle paragraph, a row of 5 partner-name pill/chip buttons (white rounded boxes,
@@ -267,7 +267,7 @@ i.e. right after the "8個步驟" process section), and before 企業福委會 i
 also already run, matching the prototype's section order (企業福委會 comes first, then
 客戶評價 — see the prototype file's own ordering for reference).
 
-SOURCE CONTENT: `C:\yode\tigermaster-one-piece\docs\design\website-optimization\prototype\home.html`,
+SOURCE CONTENT: `C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\prototype\home.html`,
 section commented `<!-- 11 客戶評價／真實留言 Customer Reviews -->` (around line 111-219).
 This is a CSS-only marquee: 8 unique review cards, each duplicated once in the DOM (16
 total) for a seamless `@keyframes marquee` loop, pausing on hover
@@ -289,7 +289,7 @@ sample/illustrative, not real customer reviews (see the `SAMPLE CONTENT` HTML co
 the source file). Carry an equivalent comment into the new Vue component's template or a
 code comment near the data array, so nobody mistakes it for real reviews later. Decision
 log reference: decisions #8 and #15 in
-`C:\yode\tigermaster-one-piece\docs\design\website-optimization\homepage-about-optimization.md`
+`C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\homepage-about-optimization.md`
 describe the real intended source (curated real App/platform reviews) for a future update.
 
 STYLING: `$secondary-color`/`$theme-color` from `src/style/_var.scss`. Use
@@ -327,11 +327,11 @@ KEEP UNCHANGED:
 REMOVE AND REPLACE: the intro + mobile-only 核心價值 + 核心人物/創辦人 member card +
 desktop 核心價值 + 品牌故事 + 未來展望 blocks (currently `About.vue:11-117`, i.e.
 everything between the banner and the trailing `<Footer />` call). Replace with content
-ported from `C:\yode\tigermaster-one-piece\docs\design\website-optimization\prototype\about.html`,
+ported from `C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\prototype\about.html`,
 specifically the sections commented `<!-- intro -->`, `<!-- 創辦人的話 -->`,
 `<!-- 我們相信 -->`, `<!-- 願景 -->` (around lines 50-106 in that file). Note this content
 is an agreed interim draft — the decision log
-(`C:\yode\tigermaster-one-piece\docs\design\website-optimization\homepage-about-optimization.md`,
+(`C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\homepage-about-optimization.md`,
 待釐清事項 section) flags that some copy details are still pending a future meeting; migrate
 the current draft as-is anyway, don't block on that.
 
@@ -379,7 +379,7 @@ full before editing, and confirm `src/components/Home/StatsCounter.vue` already 
 (built in a previous migration phase) — if it doesn't exist yet, stop and say so rather than
 rebuilding a duplicate count-up implementation.
 
-SOURCE CONTENT: `C:\yode\tigermaster-one-piece\docs\design\website-optimization\prototype\about.html`,
+SOURCE CONTENT: `C:\yode\tigermaster-one-piece\docs\exploration\in-progress\website-optimization\prototype\about.html`,
 section commented `<!-- 里程碑 -->` (around line 107-131): 3 stat cards (25,000+ 完成交易 /
 20,000+ 平台會員 / 2,200+ 合作師傅 — must exactly match the homepage's Milestone Stats Strip
 numbers/labels from Phase 2) followed by a full 2019–2028 timeline, with "未來藍圖" tags on

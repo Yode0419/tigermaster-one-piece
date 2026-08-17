@@ -27,6 +27,7 @@ docs/
 | `/nami` | 產品知識導覽——帶你一站一站認識這個平台 |
 | `/luffy` | 引導式設計討論，規劃新功能或優化既有功能 |
 | `/sanji` | 設計系統元件主廚，從 Figma 連結、Flutter 程式碼、截圖或口頭描述萃取元件規格 |
+| `/robin` | 功能開發完成後，把探索文件萃取成產品知識寫進 `wiki/`，並留下決策摘要 |
 | `/write-doc` | 將討論內容整理成結構化的 Markdown 文件 |
 | `/archive-doc` | 將文件歸檔到適當位置，維護 `docs/INDEX.md` |
 
@@ -40,6 +41,21 @@ docs/
 
 **建立元件規格**：`/sanji` → `/write-doc` → `/archive-doc`
 
+**功能開發完成**：`/robin`（自動串接 `/write-doc` → `/archive-doc`）
+
+### 設計探索的狀態
+
+`docs/exploration/` 底下先分狀態資料夾，功能資料夾再放在其中：
+
+```
+exploration/
+├── in-progress/  — 設計或開發還沒結束，或已上線但知識還沒整理進 wiki
+├── completed/    — 已上線且 /robin 整理過，資料夾內留有 decision-summary.md
+└── on-hold/      — 暫停或決定不做，文件保留供日後參考
+```
+
+功能開發完成後執行 `/robin`：她會把關鍵知識萃取進 `wiki/`、在功能資料夾內留下 `decision-summary.md`，再把整個資料夾搬進 `completed/`。原始探索文件不刪不改——`wiki/` 記錄「現在怎麼運作」，探索文件記錄「當初為什麼這樣決定」。
+
 想到要寫的主題，記錄在根目錄的 `BACKLOG.md`。文件中的待釐清事項（TBD）使用 `- [ ]` checkbox 格式，搭配 VSCode [Todo Tree](https://marketplace.visualstudio.com/items?itemName=Gruntfuggly.todo-tree) 插件可快速瀏覽全專案的待辦項目。
 
-（以航海王為命名主軸：`/roger` 建立了大秘寶，`/nami` 帶路領航，`/luffy` 則在偉大的航道上探索它。專案名稱 tigermaster-one-piece 亦源於此。）
+（以航海王為命名主軸：`/roger` 建立了大秘寶，`/nami` 帶路領航，`/luffy` 在偉大的航道上探索它，`/sanji` 掌廚打理細節，`/robin` 則作為考古學家，把航行留下的線索解讀成能傳世的歷史本文。專案名稱 tigermaster-one-piece 亦源於此。）

@@ -18,8 +18,11 @@ docs/
 ├── INDEX.md              — routing layer (lightweight, points to three sub-INDEXes)
 ├── wiki/                 — product knowledge (product, process, business, operations, legal)
 │   └── INDEX.md
-├── design/               — design exploration (feature plans, decision records, prototypes)
-│   └── INDEX.md
+├── exploration/          — design exploration (feature plans, decision records, prototypes)
+│   ├── INDEX.md
+│   ├── in-progress/      — design or development still running
+│   ├── completed/        — shipped AND synced into wiki/ by /robin
+│   └── on-hold/          — paused or dropped
 ├── design-system/        — design system (tokens, components, patterns)
 │   └── INDEX.md
 └── _drafts/              — cross-layer staging area for unfinished documents
@@ -29,6 +32,8 @@ docs/
 - Product knowledge (features, business rules, flows, legal terms) → `docs/wiki/`
 - Design exploration (feature planning docs, decision records, prototypes) → `docs/exploration/`
 - Design system (tokens, component specs, visual patterns) → `docs/design-system/`
+
+**Inside `exploration/`, the subfolder is a status, not a category.** A new exploration document almost always belongs under `in-progress/<feature>/` — design work that has just been documented is by definition not finished. Only `/robin` moves a feature folder into `completed/`, as part of syncing its knowledge into `wiki/`; do not file anything directly into `completed/` yourself, and do not move feature folders between status folders during reorganization. If a document seems to belong to a completed feature, file it under that feature's existing folder wherever it currently sits, and mention to the user that `/robin` is the skill that handles status transitions.
 
 ---
 

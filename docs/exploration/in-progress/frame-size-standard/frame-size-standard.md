@@ -20,7 +20,7 @@
 - 兩種尺寸畫面長期並存於同一 Figma 檔案，非過渡期限定的暫時狀態
 - StatusBar／HomeIndicator 元件依畫面所屬尺寸群組分開定義（375 群組維持 44pt 高、393 群組採真實的 59pt 高），不可混用
 - 所有代表完整手機畫面的 Frame 都必須顯示 StatusBar／HomeIndicator（不論 375 或 393、不論用途），因此 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 四個既有元件新增對應的留白 Boolean（`Reserve Status Bar`／`Reserve Home Indicator`），翻盤 Sticky Footer 原「安全區不進 Figma」的舊規則
-- 規則落地為 [`docs/design-system/tokens/layout.md`](../design-system/tokens/layout.md)；元件規格見 [StatusBar](../design-system/components/status-bar.md)、[HomeIndicator](../design-system/components/home-indicator.md)；Figma 端「Layout Grid」基礎頁（node `174:66`）同步新增 393×852 規格範例，並修正原本 375 規格誤標為「iPhone SE」的錯誤（375×812 實際對應 iPhone X／11 Pro／12 mini／13 mini，iPhone SE 實際解析度為 375×667）
+- 規則落地為 [`docs/design-system/tokens/layout.md`](../../../design-system/tokens/layout.md)；元件規格見 [StatusBar](../../../design-system/components/status-bar.md)、[HomeIndicator](../../../design-system/components/home-indicator.md)；Figma 端「Layout Grid」基礎頁（node `174:66`）同步新增 393×852 規格範例，並修正原本 375 規格誤標為「iPhone SE」的錯誤（375×812 實際對應 iPhone X／11 Pro／12 mini／13 mini，iPhone SE 實際解析度為 375×667）
 
 ## 理由
 
