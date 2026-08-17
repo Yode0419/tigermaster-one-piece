@@ -51,7 +51,7 @@
 1. 把 prototype 畫不出來的東西寫成規格：所有互動狀態、邊界案例、資料規則、響應式斷點行為。
 
 ### Phase 6｜決策留存（貫穿全程，不是最後才做）
-1. 每個重大決策都寫一份「決策記錄」（格式見下方範本 D），存放位置比照本 repo 既有慣例（`docs/exploration/` 下的 `.md` 決策記錄樣式，可參考同目錄的 [`frame-size-standard.md`](../frame-size-standard/frame-size-standard.md)）。
+1. 每個重大決策都寫一份「決策記錄」（格式見下方範本 D），存放位置比照本 repo 既有慣例（`docs/exploration/` 下的 `.md` 決策記錄樣式，可參考 [`frame-size-standard.md`](../../in-progress/frame-size-standard/frame-size-standard.md)）。
 2. **保持「總覽/README」與實際進度同步更新**。查考來源專案時發現，對方的專案總覽文件還寫著「目前是 v7 版、暫停中」，但實際原型早就進到 v11 版且已經在跑額外的同步工具 —— 這種「總覽文件」和「實際產出」脫節的狀況很容易發生。建議每完成一個里程碑就順手更新總覽，不要等到事後才補。
 
 ---

@@ -22,10 +22,6 @@ _Last updated: 2026-08-17_
 
 ## 進行中
 
-### website-optimization/ — 官網內容優化
-
-- **[官網首頁與關於我們頁內容優化](in-progress/website-optimization/homepage-about-optimization.md)** — 董事長指派的官網改版案，以 PPT 內容為骨架擴充既有首頁／關於我們頁文案，含商業模式差異化與企業福委會區塊的版本選定、品牌宣言待定案 _(2026-07-17)_
-
 ### frame-size-standard/ — 跨功能基礎規則
 
 - **[Design Frame 尺寸標準：375×812 升級至 393×852](in-progress/frame-size-standard/frame-size-standard.md)** — 決策記錄：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移；StatusBar／HomeIndicator 依尺寸群組分開定義，並回頭修正 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 的留白邏輯 _(2026-07-17)_
@@ -44,6 +40,21 @@ _Last updated: 2026-08-17_
 ---
 
 ## 已完成
+
+### website-optimization/ — 官網內容優化
+
+- **[官網首頁與關於我們頁內容改版 — 決策摘要](completed/website-optimization/decision-summary.md)** — 品牌宣言、商業模式差異化比較表、客戶評價、企業福委會等區塊的最終決策與版本選定理由；含企業福委會清單一則決策記錄誤植的釐清紀錄 _(2026-08-17)_
+- **[官網首頁與關於我們頁內容優化](completed/website-optimization/homepage-about-optimization.md)** — 董事長指派的官網改版案，以 PPT 內容為骨架擴充既有首頁／關於我們頁文案，含問題定義、SEO 稽核與完整決策記錄 _(2026-07-17)_
+- **[官網首頁改版策略手冊](completed/website-optimization/homepage-redesign-strategy-playbook.md)** — 借鏡外部方法論的流程參考手冊，本輪未實際套用，供未來改版流程參考 _(2026-07-17)_
+- **[Vue2 遷移 Prompt](completed/website-optimization/vue2-migration-prompt.md)** — 工程交接用的實作 prompt _(2026-07-17)_
+- **[改版前首頁文案現況](completed/website-optimization/current-homepage-content.md)** — 改版前首頁逐字文案整理 _(2026-07-17)_
+- **[改版前關於我們頁文案現況](completed/website-optimization/current-about-content.md)** — 改版前關於我們頁逐字文案整理 _(2026-07-17)_
+- **[專案背景說明](completed/website-optimization/project-background.md)** — 專案背景、範圍與探索性原型狀態說明
+- **[董事長會議議程](completed/website-optimization/chairman-meeting-outline.md)** — 董事長會議議程，含待拍板事項清單
+- **[董事長會議簡報逐字稿](completed/website-optimization/chairman-meeting-slides-script.md)** — 會議簡報逐字稿
+- **[官網調整討論紀錄](completed/website-optimization/record/20260721_官網調整討論.txt)** — 2026-07-21 討論會議逐字紀錄
+- **[設計原型：首頁正式版](completed/website-optimization/官網首頁與關於頁面設計/首頁正式版.dc.html)** — Claude Design + Fable5 探索性設計提案，含多版本區塊切換（`sc-if`）
+- **[設計原型：首頁最終版](completed/website-optimization/prototype/home.html)** — 官網改版互動原型，含企業福委會清單來源說明註記
 
 ### order-flag/ — 訂單旗標
 

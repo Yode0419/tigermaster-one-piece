@@ -25,7 +25,7 @@
 
 ## 設計方向
 
-以董事長 PPT 內容為骨架，在既有官網頁面上擴充+微調，不做大幅結構翻新。已有一份 Claude Design + Fable5 的探索性設計提案（`docs/exploration/in-progress/website-optimization/官網首頁與關於頁面設計/` 資料夾，尚未給董事長確認過），`首頁正式版.dc.html` 中部分區塊做了 tweaks 多版本切換（`sc-if`），討論結果如下：
+以董事長 PPT 內容為骨架，在既有官網頁面上擴充+微調，不做大幅結構翻新。已有一份 Claude Design + Fable5 的探索性設計提案（`docs/exploration/completed/website-optimization/官網首頁與關於頁面設計/` 資料夾，尚未給董事長確認過），`首頁正式版.dc.html` 中部分區塊做了 tweaks 多版本切換（`sc-if`），討論結果如下：
 
 - **商業模式差異化區塊**：採用 `bizNumbers` 版本（大數字+四張保障卡+「師虎 vs 自己找師傅」對照表，已是檔案預設版本）。理由：對照表是直接回應「理解服務模式差異」的工具，數字開場呼應「憑什麼比較貴」的疑問。排除 `bizCard`（深藍主打卡）、`bizJourney`（5步驟旅程）——兩者皆無對照表；`bizPhotoTable`（照片對照表）可作備選。
 - **企業福委會區塊**：採用 `welCards` 版本（三大權益卡+企業列表，已是檔案預設版本），CTA 按鈕改連到既有 [Google 表單](https://docs.google.com/forms/d/e/1FAIpQLSfiSAoRjo2t17BMcRZ20uDt_BuNgBsPHjBonmr6CIE_29rjpQ/viewform)，不採用 `welForm`（嵌入表單版），避免與 Google 表單資料來源分裂。理由：三大權益卡是唯一同時具備具體好處說明的版本，B2B 決策者需要先看到具體利益才會聯繫。原「合作夥伴」區塊移除，企業列表併入此區塊，移除台灣大哥大、工業技術研究院（非現況合作對象），新增重樂、育達科大等本次確定合作對象；入口位置除原規劃外也會嘗試加入 navbar 排版測試。
