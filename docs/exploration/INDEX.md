@@ -30,10 +30,6 @@ _Last updated: 2026-08-17_
 
 - **[Design Frame 尺寸標準：375×812 升級至 393×852](in-progress/frame-size-standard/frame-size-standard.md)** — 決策記錄：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移；StatusBar／HomeIndicator 依尺寸群組分開定義，並回頭修正 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 的留白邏輯 _(2026-07-17)_
 
-### order-flag/ — 訂單旗標
-
-- **[訂單旗標：不支付給師傅車馬費](in-progress/order-flag/no-pay-dispatch-fee.md)** — 補完開發到一半的旗標邏輯，含文案調整、權限控制、儲存觸發規則、車馬費產生時的旗標判斷與系統註記格式 _(2026-05-25)_
-
 ### reconciliation/ — 對帳與撥款
 
 - **[對帳作業優化：師傅視角與撥款操作改善](in-progress/reconciliation/reconciliation-optimization.md)** — 後台匯款資訊頁面的優化規劃，新增師傅維度視角、批次操作與 invoice_no 填入流程，並封鎖誤用的狀態直改路徑 _(2026-04-13)_
@@ -54,7 +50,10 @@ _Last updated: 2026-08-17_
 
 ## 已完成
 
-_尚無——已上線的功能待執行 `/robin` 完成知識同步後移入。_
+### order-flag/ — 訂單旗標
+
+- **[訂單旗標：不支付給師傅車馬費 — 決策摘要](completed/order-flag/decision-summary.md)** — 為什麼旗標不做狀態動態 disabled、以車馬費收入記錄而非場勘/報價單為判斷依據、取消旗標固定恢復 $200 _(2026-08-17)_
+- **[訂單旗標：不支付給師傅車馬費](completed/order-flag/no-pay-dispatch-fee.md)** — 補完開發到一半的旗標邏輯，含文案調整、權限控制、儲存觸發規則、車馬費產生時的旗標判斷與系統註記格式 _(2026-05-25)_
 
 ---
 
