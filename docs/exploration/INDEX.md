@@ -32,6 +32,7 @@ _Last updated: 2026-08-17_
 
 ### reconciliation/ — 對帳與撥款
 
+- **[開發現況：部分同步紀錄](in-progress/reconciliation/development-status.md)** — 後台三區塊版面與撥款五步驟已上線並同步進 wiki；師傅分組視角、請款方式欄位、批次加入仍卡在後端 API，程式碼已寫但被註解，資料夾暫留 in-progress _(2026-08-17)_
 - **[對帳作業優化：師傅視角與撥款操作改善](in-progress/reconciliation/reconciliation-optimization.md)** — 後台匯款資訊頁面的優化規劃，新增師傅維度視角、批次操作與 invoice_no 填入流程，並封鎖誤用的狀態直改路徑 _(2026-04-13)_
 - **[師傅詳情頁新增「請款方式」欄位](in-progress/reconciliation/master-payout-method-field.md)** — 後台師傅詳情頁新增請款方式 Radio Group 的 UI 設計規格，含空值處理、檢視／編輯模式行為與元件選型決策 _(2026-04-13)_
 - **[對帳與撥款作業優化：討論議程](in-progress/reconciliation/reconciliation-discussion-agenda.md)** — 與董事長、總經理討論對帳與撥款作業優化的議程，含現有功能說明與待釐清事項 _(2026-04-14)_
