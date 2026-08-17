@@ -2,7 +2,7 @@
 
 _TigerMaster 平台的核心知識文件，包含功能邏輯、業務規則、執行流程與法律條款。_
 
-_Last updated: 2026-06-25_
+_Last updated: 2026-08-17_
 
 ---
 
@@ -15,7 +15,7 @@ _Last updated: 2026-06-25_
 - **[編號規則](product/identifier-rules.md)** — 訂單編號與用戶 ID 的格式規則，及其他資料表的識別碼設計慣例 _(2026-04-13)_
 - **[聊天室功能](product/chat.md)** — 三種聊天室的種類、開啟條件、功能清單與防混淆／防私下交易設計機制 _(2026-04-02)_
 - **[訂單照片管理](product/order-photo-management.md)** — 三種照片類型的分類、上傳規則與各角色可見範圍 _(2026-04-08)_
-- **[Pro 會員（師虎 Pro）](product/pro-membership.md)** — 一次性付費終身會員方案的權益說明與推廣歷程 _(2026-04-08)_
+- **[Pro 會員（師虎 Pro）](product/pro-membership.md)** — 一次性付費終身會員方案的權益說明與推廣歷程 _(2026-08-17)_
 - **[折價券系統](product/coupon-system.md)** — 兩種折價券類型、後台設定、客戶端驗證流程與 2026 年金額彈性化異動說明 _(2026-06-16)_
 - **[Tiger Points](product/tiger-points.md)** — 取得方式、兩頁支付流程、驗證規則、適用時機與後台管理能力 _(2026-06-16)_
 - **[免派遣費次數（Pro 會員權益）](product/pro-dispatch-fee-credits.md)** — 每年 6 次免派遣費的取得方式、自動套用邏輯與後台管理 _(2026-06-16)_

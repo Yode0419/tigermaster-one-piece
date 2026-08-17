@@ -40,12 +40,6 @@ _Last updated: 2026-08-17_
 - **[匯款清單後期優化：師傅分組視角](in-progress/reconciliation/payout-list-master-grouping.md)** — 匯款清單第三區塊加入師傅分組邏輯的功能規劃，含群組結構設計與介面結構方案比較 _(2026-05-26)_
 - **[設計原型索引 — 撥款作業](in-progress/reconciliation/prototype/index.html)** — 撥款作業後台介面的互動原型（v1–v6），含各版本迭代與 confirm banner 變體 _(2026-04-27)_
 
-### tiger-points-and-terms/ — Tiger Points 與條款
-
-- **[Pro 升級頁面：Tiger Points 折抵規則說明與邏輯修正](in-progress/tiger-points-and-terms/pro-tiger-points-rule-clarification.md)** — Pro 升級頁面新增折抵範圍說明的 UI 優化規劃，含後端邏輯修正方向、文案設計與官網 Q1／Q3 更新內容 _(2026-04-27)_
-- **[法律條款補充平台服務費用說明](in-progress/tiger-points-and-terms/2026-04-27-service-fee-clause-amendment.md)** — 因客訴決定在法律條款第 6 條新增平台服務費用說明段落（6.3），含條號順移影響範圍 _(2026-04-27)_
-- **[Tiger Points 說明頁文案補充與支付頁優化](in-progress/tiger-points-and-terms/tiger-points-payment-visibility-improvement.md)** — 支付流程拆為兩頁（已完成驗收 / 確認付款資訊），Tiger Points 折抵 card 置於 Page 2 頂部確保可見 _(2026-05-18)_
-
 ---
 
 ## 已完成
@@ -54,6 +48,13 @@ _Last updated: 2026-08-17_
 
 - **[訂單旗標：不支付給師傅車馬費 — 決策摘要](completed/order-flag/decision-summary.md)** — 為什麼旗標不做狀態動態 disabled、以車馬費收入記錄而非場勘/報價單為判斷依據、取消旗標固定恢復 $200 _(2026-08-17)_
 - **[訂單旗標：不支付給師傅車馬費](completed/order-flag/no-pay-dispatch-fee.md)** — 補完開發到一半的旗標邏輯，含文案調整、權限控制、儲存觸發規則、車馬費產生時的旗標判斷與系統註記格式 _(2026-05-25)_
+
+### tiger-points-and-terms/ — Tiger Points 與條款
+
+- **[Tiger Points 折抵規則與支付頁優化、法律條款服務費揭露 — 決策摘要](completed/tiger-points-and-terms/decision-summary.md)** — 折抵判斷點改為「升級時訂單是否已報價」、支付頁拆兩頁解決可見度問題、法律條款補上服務費揭露段落 _(2026-08-17)_
+- **[Pro 升級頁面：Tiger Points 折抵規則說明與邏輯修正](completed/tiger-points-and-terms/pro-tiger-points-rule-clarification.md)** — Pro 升級頁面新增折抵範圍說明的 UI 優化規劃，含後端邏輯修正方向、文案設計與官網 Q1／Q3 更新內容 _(2026-04-27)_
+- **[法律條款補充平台服務費用說明](completed/tiger-points-and-terms/2026-04-27-service-fee-clause-amendment.md)** — 因客訴決定在法律條款第 6 條新增平台服務費用說明段落（6.3），含條號順移影響範圍 _(2026-04-27)_
+- **[Tiger Points 說明頁文案補充與支付頁優化](completed/tiger-points-and-terms/tiger-points-payment-visibility-improvement.md)** — 支付流程拆為兩頁（已完成驗收 / 確認付款資訊），Tiger Points 折抵 card 置於 Page 2 頂部確保可見 _(2026-05-18)_
 
 ---
 
