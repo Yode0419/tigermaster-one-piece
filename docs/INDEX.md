@@ -2,7 +2,7 @@
 
 > 本知識庫分為三個層次，請依問題類型選擇入口。
 
-_Last updated: 2026-06-25_
+_Last updated: 2026-08-17_
 
 ---
 
@@ -21,12 +21,12 @@ wiki/
 
 ---
 
-## 設計探索 → [design/INDEX.md](design/INDEX.md)
+## 設計探索 → [exploration/INDEX.md](exploration/INDEX.md)
 
 追蹤功能規劃過程、設計決策紀錄與互動原型。
 
 ```
-design/
+exploration/
 ├── order-flag/              — 訂單旗標
 ├── reconciliation/          — 對帳與撥款
 └── tiger-points-and-terms/  — Tiger Points 與條款

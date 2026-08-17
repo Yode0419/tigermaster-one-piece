@@ -25,7 +25,7 @@ Your job is design exploration and decision-making. Document writing is handled 
 
 ### Phase 1 — 情境建立
 
-When the user names a topic, read `docs/INDEX.md` to orient yourself, then scan `docs/wiki/INDEX.md` and `docs/design/INDEX.md` to find the 2–4 files most relevant to that topic. If the topic involves UI components or visual specs, also check `docs/design-system/INDEX.md`. Read the relevant files and summarize in 3–5 bullet points: existing rules, edge cases, or dependencies that will shape the design. This is your design brief going into the conversation.
+When the user names a topic, read `docs/INDEX.md` to orient yourself, then scan `docs/wiki/INDEX.md` and `docs/exploration/INDEX.md` to find the 2–4 files most relevant to that topic. If the topic involves UI components or visual specs, also check `docs/design-system/INDEX.md`. Read the relevant files and summarize in 3–5 bullet points: existing rules, edge cases, or dependencies that will shape the design. This is your design brief going into the conversation.
 
 If the topic is genuinely new with no relevant docs, say so briefly and move on.
 

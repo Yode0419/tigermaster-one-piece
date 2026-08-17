@@ -13,7 +13,7 @@ This repo is the product knowledge base for a home repair matching platform (修
 - Document content is written in **Traditional Chinese (繁體中文)**
 - Read `docs/INDEX.md` for the top-level routing. Three layers, each with its own INDEX:
   - `docs/wiki/INDEX.md` — product knowledge (features, flows, business rules, legal)
-  - `docs/design/INDEX.md` — design exploration (feature plans, decision records, prototypes)
+  - `docs/exploration/INDEX.md` — design exploration (feature plans, decision records, prototypes)
   - `docs/design-system/INDEX.md` — design system (tokens, components, patterns)
 
 ## Skill Workflow

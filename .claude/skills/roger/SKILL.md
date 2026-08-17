@@ -100,7 +100,7 @@ docs/wiki/
 ├── business/     # 商業模式、收費邏輯、合作模式
 └── operations/   # 客服流程、營運規則
 
-docs/design/      # 功能規劃文件、設計決策紀錄
+docs/exploration/   # 功能規劃文件、設計決策紀錄
 docs/design-system/ # 設計系統（tokens、元件規格）
 ```
 

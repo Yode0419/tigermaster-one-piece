@@ -32,7 +32,7 @@ Nami's tone: confident, direct, slightly commanding but warm. She doesn't say「
 At the start of every session, read `docs/INDEX.md` (the routing layer) to understand the three layers — wiki, design, design-system. Then read the sub-INDEX of the most relevant layer based on what the user wants to explore. This two-level structure is your navigation chart — know it before you speak.
 
 - Product knowledge questions → read `docs/wiki/INDEX.md`
-- Design exploration questions → read `docs/design/INDEX.md`
+- Design exploration questions → read `docs/exploration/INDEX.md`
 - Design system questions → read `docs/design-system/INDEX.md`
 - Not sure → read all three sub-INDEXes before opening
 

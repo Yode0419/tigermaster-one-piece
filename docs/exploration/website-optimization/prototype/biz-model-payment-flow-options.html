@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>商業模式區｜付款流程視覺化 提案比較</title>
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/tokens/fonts.css">
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/tokens/colors.css">
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/tokens/typography.css">
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/tokens/effects.css">
+<link rel="stylesheet" href="_ds/tiger-master-design-system-d021e923-fb21-45a0-a591-954f96b62dc8/styles.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<style>
+  body{margin:0;background:#f0f1f3;color:#23242a;font-family:arial,"Noto Sans TC","Microsoft JhengHei",微軟正黑體,sans-serif;}
+  .intro{background:#1f286f;color:#fff;padding:28px 24px;}
+  .intro h1{font-size:22px;margin:0 0 8px;font-weight:700;}
+  .intro p{font-size:15px;margin:0;color:#cfd4f0;line-height:1.7;max-width:900px;}
+  .variant{background:#fff;max-width:1100px;margin:32px auto;border-radius:8px;overflow:hidden;box-shadow:0 0 8px rgba(0,0,0,.08);}
+  .variant-label{background:#fabf13;color:#1f286f;font-size:16px;font-weight:700;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;}
+  .variant-label .note{font-size:13px;font-weight:500;color:#5a4400;}
+  .variant-body{padding:56px 32px;}
+  .section-heading{font-size:28px;font-weight:500;margin:0 0 12px;text-align:center;}
+  .section-sub{font-size:17px;color:#4a4a4a;line-height:1.7;margin:0 auto 40px;max-width:700px;text-align:center;}
+  .badge{display:inline-block;background:#fabf13;color:#1f286f;font-size:14px;font-weight:700;padding:5px 14px;border-radius:20px;}
+  .caption{text-align:center;font-size:15px;color:#6f6f6f;line-height:1.8;max-width:600px;margin:24px auto 0;}
+  .current-block{display:flex;gap:16px;align-items:baseline;}
+</style>
+</head>
+<body>
+
+<div class="intro">
+  <h1>商業模式區「付款流程」視覺化 — 3 個排版方案</h1>
+  <p>回應老闆對商業模式區的手寫意見：「使用者不用閱讀就能理解流程」。目標是把「30% 訂金開工 → 施工完成 → 70% 驗收滿意再付款」這個順序，改成不用讀完整句子也看得懂的視覺流程；並在下方加入量化後的產業對比說明（業界需先預付 60～80% 工程款）。以下只針對這個局部元件比較，其餘區塊（四張保障卡、對照表）不受影響、維持現況。</p>
+</div>
+
+<!-- 現況參考 -->
+<div class="variant">
+  <div class="variant-label">現況（比對用）<span class="note">兩個數字疊放，需要讀完文字才知道先後順序</span></div>
+  <div class="variant-body">
+    <div class="section-heading">我們跟其他平台就是不一樣</div>
+    <div class="section-sub">找師傅最怕的不是找不到人，而是出了問題沒有人負責。</div>
+    <div style="max-width:340px;margin:0 auto;">
+      <span class="badge">全台唯一</span>
+      <div class="current-block" style="margin-top:16px;"><span style="color:#fabf13;font-size:80px;font-weight:700;line-height:1;">3</span><span style="font-size:26px;font-weight:500;">成訂金</span></div>
+      <div class="current-block" style="margin-top:8px;"><span style="color:#1f286f;font-size:80px;font-weight:700;line-height:1;">7</span><span style="font-size:26px;font-weight:500;">成驗收滿意再付款</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- 方案 1：水平時間軸 -->
+<div class="variant">
+  <div class="variant-label">方案 1：水平時間軸<span class="note">圖示＋數字＋箭頭，橫向一次看完整段流程</span></div>
+  <div class="variant-body">
+    <div class="section-heading">我們跟其他平台就是不一樣</div>
+    <div class="section-sub">找師傅最怕的不是找不到人，而是出了問題沒有人負責。</div>
+    <div style="text-align:center;margin-bottom:8px;"><span class="badge">全台唯一，大型裝潢修繕付款保障</span></div>
+    <div style="display:flex;align-items:flex-start;justify-content:center;margin:32px 0 0;">
+      <div style="flex:0 0 210px;text-align:center;">
+        <div style="width:72px;height:72px;border-radius:50%;background:#fff7e0;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;"><i class="fas fa-file-signature" style="font-size:28px;color:#fabf13;"></i></div>
+        <div style="font-size:44px;font-weight:700;color:#fabf13;line-height:1;">30%</div>
+        <p style="font-size:17px;font-weight:500;margin:10px 0 0;">訂金開工</p>
+      </div>
+      <div style="flex:0 0 60px;display:flex;align-items:center;justify-content:center;padding-top:34px;"><i class="fas fa-chevron-right" style="font-size:20px;color:#ccc;"></i></div>
+      <div style="flex:0 0 210px;text-align:center;">
+        <div style="width:72px;height:72px;border-radius:50%;background:#f5f5f5;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;"><i class="fas fa-tools" style="font-size:28px;color:#6f6f6f;"></i></div>
+        <div style="font-size:44px;line-height:1;height:53px;"></div>
+        <p style="font-size:17px;font-weight:500;margin:10px 0 0;color:#6f6f6f;">施工完成</p>
+      </div>
+      <div style="flex:0 0 60px;display:flex;align-items:center;justify-content:center;padding-top:34px;"><i class="fas fa-chevron-right" style="font-size:20px;color:#ccc;"></i></div>
+      <div style="flex:0 0 210px;text-align:center;">
+        <div style="width:72px;height:72px;border-radius:50%;background:#eff3fe;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;"><i class="fas fa-thumbs-up" style="font-size:28px;color:#1f286f;"></i></div>
+        <div style="font-size:44px;font-weight:700;color:#1f286f;line-height:1;">70%</div>
+        <p style="font-size:17px;font-weight:500;margin:10px 0 0;">驗收滿意再付款</p>
+      </div>
+    </div>
+    <p class="caption">業界裝潢工程需先預付 60～80% 工程款；師虎來了透過平台保障，讓您看到施工成果、驗收完成後，再支付尾款。</p>
+  </div>
+</div>
+
+<!-- 方案 2：分段付款進度條 -->
+<div class="variant">
+  <div class="variant-label">方案 2：付款進度條<span class="note">用比例長度直接呈現 3:7，最直覺但需注意會不會被誤讀成「完成度」</span></div>
+  <div class="variant-body">
+    <div class="section-heading">我們跟其他平台就是不一樣</div>
+    <div class="section-sub">找師傅最怕的不是找不到人，而是出了問題沒有人負責。</div>
+    <div style="text-align:center;margin-bottom:32px;"><span class="badge">全台唯一付款保障</span></div>
+    <div style="max-width:720px;margin:0 auto;position:relative;">
+      <div style="display:flex;height:56px;border-radius:28px;overflow:hidden;box-shadow:0 0 4px rgba(0,0,0,.15);">
+        <div style="flex:0 0 30%;background:#fabf13;display:flex;align-items:center;justify-content:center;color:#1f286f;font-size:20px;font-weight:700;">30%</div>
+        <div style="flex:0 0 70%;background:#1f286f;display:flex;align-items:center;justify-content:center;color:#fff;font-size:20px;font-weight:700;">70%</div>
+      </div>
+      <div style="position:absolute;left:30%;top:-14px;transform:translateX(-50%);width:2px;height:84px;background:#fff;box-shadow:0 0 0 1px #ddd;"></div>
+      <div style="position:absolute;left:30%;top:-40px;transform:translateX(-50%);background:#fff;border:1px solid #ddd;border-radius:20px;padding:4px 12px;font-size:13px;font-weight:500;color:#4a4a4a;white-space:nowrap;"><i class="fas fa-tools" style="color:#6f6f6f;margin-right:4px;"></i>施工完成</div>
+      <div style="display:flex;margin-top:16px;">
+        <div style="flex:0 0 30%;text-align:center;font-size:16px;font-weight:500;color:#1f286f;">訂金開工</div>
+        <div style="flex:0 0 70%;text-align:center;font-size:16px;font-weight:500;color:#1f286f;">驗收滿意再付款</div>
+      </div>
+    </div>
+    <p class="caption">業界裝潢工程需先預付 60～80% 工程款；師虎來了透過平台保障，讓您看到施工成果、驗收完成後，再支付尾款。</p>
+  </div>
+</div>
+
+<!-- 方案 3：垂直階梯（最貼近老闆手稿） -->
+<div class="variant">
+  <div class="variant-label">方案 3：垂直階梯<span class="note">最貼近老闆手繪箭頭方向，可維持原本左窄欄＋右四卡的版面結構</span></div>
+  <div class="variant-body">
+    <div class="section-heading">我們跟其他平台就是不一樣</div>
+    <div class="section-sub">找師傅最怕的不是找不到人，而是出了問題沒有人負責。</div>
+    <div style="display:flex;gap:64px;align-items:flex-start;justify-content:center;">
+      <div style="flex:0 0 300px;">
+        <span class="badge">全台唯一付款保障</span>
+        <div style="margin-top:24px;position:relative;padding-left:64px;">
+          <div style="position:absolute;left:23px;top:20px;bottom:20px;width:2px;background:repeating-linear-gradient(to bottom,#ddd 0,#ddd 4px,transparent 4px,transparent 9px);"></div>
+          <div style="position:relative;margin-bottom:36px;">
+            <div style="position:absolute;left:-64px;top:0;width:48px;height:48px;border-radius:50%;background:#fff7e0;display:flex;align-items:center;justify-content:center;"><i class="fas fa-file-signature" style="font-size:18px;color:#fabf13;"></i></div>
+            <div style="font-size:32px;font-weight:700;color:#fabf13;line-height:1;">30%</div>
+            <p style="font-size:16px;font-weight:500;margin:6px 0 0;">訂金開工</p>
+          </div>
+          <div style="position:relative;margin-bottom:36px;">
+            <div style="position:absolute;left:-64px;top:0;width:48px;height:48px;border-radius:50%;background:#f5f5f5;display:flex;align-items:center;justify-content:center;"><i class="fas fa-tools" style="font-size:18px;color:#6f6f6f;"></i></div>
+            <p style="font-size:16px;font-weight:500;margin:12px 0 0;color:#6f6f6f;">施工完成</p>
+          </div>
+          <div style="position:relative;">
+            <div style="position:absolute;left:-64px;top:0;width:48px;height:48px;border-radius:50%;background:#eff3fe;display:flex;align-items:center;justify-content:center;"><i class="fas fa-thumbs-up" style="font-size:18px;color:#1f286f;"></i></div>
+            <div style="font-size:32px;font-weight:700;color:#1f286f;line-height:1;">70%</div>
+            <p style="font-size:16px;font-weight:500;margin:6px 0 0;">驗收滿意再付款</p>
+          </div>
+        </div>
+      </div>
+      <div style="flex:1;display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:520px;">
+        <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:24px 20px;"><i class="fas fa-hard-hat" style="font-size:24px;color:#fabf13;"></i><p style="font-size:17px;font-weight:500;margin:12px 0 6px;">施工過程有人協助</p></div>
+        <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:24px 20px;"><i class="fas fa-shield-alt" style="font-size:24px;color:#fabf13;"></i><p style="font-size:17px;font-weight:500;margin:12px 0 6px;">保固直接找師虎來了</p></div>
+        <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:24px 20px;"><i class="fas fa-credit-card" style="font-size:24px;color:#fabf13;"></i><p style="font-size:17px;font-weight:500;margin:12px 0 6px;">每一筆付款都有保障</p></div>
+        <div style="background:#fff;border-radius:4px;box-shadow:0 0 4px rgba(0,0,0,.15);padding:24px 20px;"><i class="fas fa-file-invoice" style="font-size:24px;color:#fabf13;"></i><p style="font-size:17px;font-weight:500;margin:12px 0 6px;">發票由師虎來了開立</p></div>
+      </div>
+    </div>
+    <p class="caption">業界裝潢工程需先預付 60～80% 工程款；師虎來了透過平台保障，讓您看到施工成果、驗收完成後，再支付尾款。</p>
+  </div>
+</div>
+
+<div style="height:40px;"></div>
+</body>
+</html>

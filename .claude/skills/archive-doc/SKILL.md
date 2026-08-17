@@ -27,7 +27,7 @@ docs/
 
 **Layer routing:**
 - Product knowledge (features, business rules, flows, legal terms) → `docs/wiki/`
-- Design exploration (feature planning docs, decision records, prototypes) → `docs/design/`
+- Design exploration (feature planning docs, decision records, prototypes) → `docs/exploration/`
 - Design system (tokens, component specs, visual patterns) → `docs/design-system/`
 
 ---
@@ -151,7 +151,7 @@ After any file operation (single-file or reorganization), update the appropriate
 | File goes to | Sub-INDEX to update |
 |---|---|
 | `docs/wiki/` | `docs/wiki/INDEX.md` |
-| `docs/design/` | `docs/design/INDEX.md` |
+| `docs/exploration/` | `docs/exploration/INDEX.md` |
 | `docs/design-system/` | `docs/design-system/INDEX.md` |
 | Draft added/removed | `docs/INDEX.md` (草稿區 section only) |
 
