@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-08-17_
+_Last updated: 2026-08-27_
 
 ---
 
@@ -21,6 +21,10 @@ _Last updated: 2026-08-17_
 ---
 
 ## 進行中
+
+### renovation-highlight/ — 凸顯裝潢工程能力
+
+- **[凸顯裝潢工程能力構想](in-progress/renovation-highlight/renovation-highlight-idea.md)** — 董事長口頭提出的初步構想：把既有的裝潢整修 L1 分類從分類清單裡提升為獨立入口／頁面，App 首頁新增裝潢入口（仍走原本叫修流程）、官網新增裝潢作品展示頁，純初步構想尚未定案 _(2026-08-27)_
 
 ### frame-size-standard/ — 跨功能基礎規則
 
