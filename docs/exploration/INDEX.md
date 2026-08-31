@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-08-27_
+_Last updated: 2026-08-31_
 
 ---
 
@@ -21,6 +21,10 @@ _Last updated: 2026-08-27_
 ---
 
 ## 進行中
+
+### service-catalog-app-cta/ — 官網服務工項頁 App 導流
+
+- **[官網服務工項頁新增 App 導流構想](in-progress/service-catalog-app-cta/service-catalog-app-cta-idea.md)** — 顧問來訪提出：服務工項頁展示約200個工項介紹與價格區間，但缺少導流下載App的CTA；已核對前端程式碼確認現況，並記錄桌機／手機情境需分別設計等待釐清事項，純初步構想尚未定案 _(2026-08-31)_
 
 ### renovation-highlight/ — 凸顯裝潢工程能力
 
