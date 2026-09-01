@@ -2,7 +2,7 @@
 
 > 本知識庫分為三個層次，請依問題類型選擇入口。
 
-_Last updated: 2026-08-17_
+_Last updated: 2026-09-01_
 
 ---
 
@@ -49,8 +49,6 @@ design-system/
 
 ---
 
-## 草稿區 → [_drafts/](_drafts/)
+## 草稿區 → [_drafts/INDEX.md](_drafts/INDEX.md)
 
-跨層暫存區，文件確認前的草稿。
-
-- **[知識庫工作流擴展：Wireframe 生成能力](_drafts/knowledge-base-wireframe-workflow.md)** — 在知識庫內整合設計探索工作流的規劃構想，含 wireframe 生成技能的使用情境與待釐清事項 _(2026-04-08)_
+跨層暫存區，文件確認前的草稿，清單見 [_drafts/INDEX.md](_drafts/INDEX.md)。

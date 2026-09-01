@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-08-31_
+_Last updated: 2026-09-01_
 
 ---
 
@@ -21,6 +21,12 @@ _Last updated: 2026-08-31_
 ---
 
 ## 進行中
+
+### figma-organization/ — Figma 檔案整理與 design ops 方法論
+
+- **[Figma 檔案整理：現況與目標](in-progress/figma-organization/figma-folder-architecture-decision.md)** — 起頭文件，描述整理前的混亂現況與整理目標，正式分類方法論待研究 design ops 成熟做法後再定 _(2026-09-01)_
+- **[Figma 現況快照（師虎生態系）](in-progress/figma-organization/figma-current-state.md)** — 「師虎生態系」Figma team 完成第一輪初步整理後的完整資料夾樹狀結構記錄 _(2026-09-01)_
+- **[研究提示詞：設計流程／交付開發／設計檔案維護／AI協作](in-progress/figma-organization/research-prompt-design-process-ai-collab.md)** — 待另開 session 執行的研究提示詞，聚焦中小企業規模、工具無關的方法論 _(2026-09-01)_
 
 ### service-catalog-app-cta/ — 官網服務工項頁 App 導流
 
