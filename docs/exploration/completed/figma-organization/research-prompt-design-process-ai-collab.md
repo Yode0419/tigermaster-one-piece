@@ -61,8 +61,7 @@ DesignOps 框架（那通常假設有專職角色、多個團隊分工），但�
 ## 背景
 
 此提示詞是在 tigermaster-one-piece 專案 Figma 檔案整理討論過程中產出（見
-[figma-folder-architecture-decision.md](figma-folder-architecture-decision.md)、
-[figma-migration-checklist.md](figma-migration-checklist.md)）。當時已針對 Figma
+[figma-folder-architecture-decision.md](figma-folder-architecture-decision.md)）。當時已針對 Figma
 資料夾組織模式與 AI／Figma MCP 協作現況做過一輪研究，此提示詞是延伸——把範圍從
 「Figma 這個工具」擴大到「設計流程、交付開發、檔案維護、AI 協作」的通用方法論，
 刻意要求不綁定特定工具，因為設計師希望這套邏輯換工具後依然適用。

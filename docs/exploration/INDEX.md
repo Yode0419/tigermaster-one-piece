@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-09-01_
+_Last updated: 2026-09-03_
 
 ---
 
@@ -12,21 +12,15 @@ _Last updated: 2026-09-01_
 
 | 狀態 | 資料夾 | 意義 |
 |---|---|---|
-| 進行中 | `in-progress/` | 設計探索或開發還沒結束，或已上線但知識尚未整理進 wiki |
-| 已完成 | `completed/` | 已開發上線，且關鍵知識已透過 `/robin` 整理進 `docs/wiki/`，資料夾內留有 `decision-summary.md` |
+| 進行中 | `in-progress/` | 設計探索或開發還沒結束，或已上線／已採用但知識尚未整理進知識庫 |
+| 已完成 | `completed/` | 功能已開發上線，或設計方法論已定案並實際採用（例如已套進 Figma 檔案使用），且關鍵知識已透過 `/robin` 整理進 `docs/wiki/` 或 `docs/design-ops/`，資料夾內留有 `decision-summary.md` |
 | 已擱置 | `on-hold/` | 暫停或決定不做，文件保留供日後參考 |
 
-功能開發完成後，執行 `/robin` 完成知識同步，她會把功能資料夾搬進 `completed/` 並更新本索引。
+功能開發完成，或設計方法論定案並實際採用後，執行 `/robin` 完成知識同步，她會把資料夾搬進 `completed/` 並更新本索引。
 
 ---
 
 ## 進行中
-
-### figma-organization/ — Figma 檔案整理與 design ops 方法論
-
-- **[Figma 檔案整理：現況與目標](in-progress/figma-organization/figma-folder-architecture-decision.md)** — 起頭文件，描述整理前的混亂現況與整理目標，正式分類方法論待研究 design ops 成熟做法後再定 _(2026-09-01)_
-- **[Figma 現況快照（師虎生態系）](in-progress/figma-organization/figma-current-state.md)** — 「師虎生態系」Figma team 完成第一輪初步整理後的完整資料夾樹狀結構記錄 _(2026-09-01)_
-- **[研究提示詞：設計流程／交付開發／設計檔案維護／AI協作](in-progress/figma-organization/research-prompt-design-process-ai-collab.md)** — 待另開 session 執行的研究提示詞，聚焦中小企業規模、工具無關的方法論 _(2026-09-01)_
 
 ### service-catalog-app-cta/ — 官網服務工項頁 App 導流
 
@@ -54,6 +48,15 @@ _Last updated: 2026-09-01_
 ---
 
 ## 已完成
+
+### figma-organization/ — Figma 檔案整理與 Design Ops 方法論
+
+- **[Figma 檔案整理與 Design Ops 方法論 — 決策摘要](completed/figma-organization/decision-summary.md)** — 建立 TigerMaster File Handbook 統一 Figma 檔案規範，並開設 docs/design-ops/ 知識層收錄設計團隊工作方法；其餘延伸主題（設計流程、交付開發、AI 協作規範、影響力評估）待有真實案例才建立 _(2026-09-03)_
+- **[Figma 檔案整理：現況與目標](completed/figma-organization/figma-folder-architecture-decision.md)** — 起頭文件，描述整理前的混亂現況與整理目標，正式分類方法論待研究 design ops 成熟做法後再定 _(2026-09-01)_
+- **[Figma 現況快照（師虎生態系）](completed/figma-organization/figma-current-state.md)** — 「師虎生態系」Figma team 完成第一輪初步整理後的完整資料夾樹狀結構記錄 _(2026-09-01)_
+- **[研究提示詞：設計流程／交付開發／設計檔案維護／AI協作](completed/figma-organization/research-prompt-design-process-ai-collab.md)** — 待另開 session 執行的研究提示詞，聚焦中小企業規模、工具無關的方法論 _(2026-09-01)_
+- **[TigerMaster File Handbook｜自我文件化內容草稿](completed/figma-organization/handbook-overview-content.md)** — Handbook 五個 Documentation page（Overview／File Structure／Usage／File Status／Change Log）的定案文字內容 _(2026-09-03)_
+- **[建置提示詞：TigerMaster File Handbook（Figma Library）](completed/figma-organization/build-prompt-file-handbook.md)** — 拿去給 Figma agent 執行的建置提示詞，實際建置後有兩處調整已與此文件不同步，保留作為建置過程紀錄 _(2026-09-02)_
 
 ### website-optimization/ — 官網內容優化
 

@@ -1,7 +1,7 @@
 # Figma 檔案整理：現況與目標
 
 **日期：** 2026-09-02（初版 2026-09-01）
-**狀態：** 起頭文件，描述現況與目標；已定案兩項決策（File Handbook、檔案生命週期五階段），其餘方法論仍待研究 design ops 成熟做法後再決定。
+**狀態：** 起頭文件，描述現況與目標；File Handbook、檔案生命週期五階段、design-ops 知識庫結構三項決策已定案，詳見 [decision-summary.md](decision-summary.md)。既有檔案的回溯套用仍是進行中的操作性工作，見下方待釐清事項。
 
 ---
 
@@ -114,8 +114,7 @@ Figma 檔案的生命週期採用五個階段標記，對應到封面上的 `_Fi
 
 ## 待釐清事項（TBD）
 
-- [ ] design ops 研究尚未進行（提示詞已備妥，待另開 session 執行）
-- [ ] 「舊資料」「其他」「師虎商城/未分類」內部的實際整理／分類尚未執行
-- [ ] 部分檔案的進度狀態尚未標記
+- [x] design ops 研究與分類方法論已定案 —— 未實際執行本文件備妥的研究提示詞，改為直接依討論結果決定：design-ops 只建立 file-maintenance/，設計流程／交付開發／AI 協作規範／影響力評估等主題等真實需要出現才建立，見 [decision-summary.md](decision-summary.md)
 - [x] TigerMaster File Handbook 檔案已在 Figma 建立元件（[連結](https://www.figma.com/design/glmNjH2sb9rS81NCJeDdWA/TigerMaster-File-Handbook?node-id=273-1085)，2026-09-02）——已有 `_File-status` 五狀態標籤、Thumbnail、Document（Header＋Blank／Overview／Change Log 三種 template＋Section Title／Info Row／Divider／Change Entry 子元件，單一尺寸不分 PPT／A4）、Annotation Kit（Light／Dark 兩色調，含 Marker／Note／Leader／Interaction／Change Tag）
-- [ ] 既有檔案尚未套用新封面／狀態標籤（回溯套用範圍與順序待定）
+- [ ] 「舊資料」「其他」「師虎商城/未分類」內部的實際整理／分類尚未執行
+- [ ] 既有檔案尚未套用新封面／狀態標籤（回溯套用範圍與順序待定，涵蓋所有檔案的進度狀態標記）
