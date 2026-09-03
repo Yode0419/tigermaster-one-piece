@@ -11,29 +11,13 @@ File documents in the right place and keep the knowledge base navigable — for 
 
 ## Knowledge Base Structure
 
-The knowledge base has three layers, each with its own INDEX:
+`docs/INDEX.md` is the single source of truth for which layers exist — each layer gets a one-line description and a link to its own `INDEX.md`. **Read it fresh each time; don't assume a fixed layer count or set of names here.** Layers get added as real need arises (`design-system/` and `design-ops/` both started small and grew later), and this file would silently go stale if it hardcoded them — that already happened once (this section used to hardcode "three layers" and missed `design-ops/` when it was added).
 
-```
-docs/
-├── INDEX.md              — routing layer (lightweight, points to three sub-INDEXes)
-├── wiki/                 — product knowledge (product, process, business, operations, legal)
-│   └── INDEX.md
-├── exploration/          — design exploration (feature plans, decision records, prototypes)
-│   ├── INDEX.md
-│   ├── in-progress/      — design or development still running
-│   ├── completed/        — shipped AND synced into wiki/ by /robin
-│   └── on-hold/          — paused or dropped
-├── design-system/        — design system (tokens, components, patterns)
-│   └── INDEX.md
-└── _drafts/              — cross-layer staging area for unfinished documents
-```
+To file a document: match it against each layer's one-line description in `docs/INDEX.md` to pick the right layer, then read that layer's own `INDEX.md` for its subfolder conventions.
 
-**Layer routing:**
-- Product knowledge (features, business rules, flows, legal terms) → `docs/wiki/`
-- Design exploration (feature planning docs, decision records, prototypes) → `docs/exploration/`
-- Design system (tokens, component specs, visual patterns) → `docs/design-system/`
+**One layer has structure worth knowing about in advance — `docs/exploration/`** organizes by status, not category: `in-progress/`, `completed/`, `on-hold/`. A new exploration document almost always belongs under `in-progress/<feature>/` — design work that has just been documented is by definition not finished. Only `/robin` moves a feature folder into `completed/`, as part of syncing its knowledge into another layer; do not file anything directly into `completed/` yourself, and do not move feature folders between status folders during reorganization. If a document seems to belong to a completed feature, file it under that feature's existing folder wherever it currently sits, and mention to the user that `/robin` is the skill that handles status transitions.
 
-**Inside `exploration/`, the subfolder is a status, not a category.** A new exploration document almost always belongs under `in-progress/<feature>/` — design work that has just been documented is by definition not finished. Only `/robin` moves a feature folder into `completed/`, as part of syncing its knowledge into `wiki/`; do not file anything directly into `completed/` yourself, and do not move feature folders between status folders during reorganization. If a document seems to belong to a completed feature, file it under that feature's existing folder wherever it currently sits, and mention to the user that `/robin` is the skill that handles status transitions.
+`docs/_drafts/` sits alongside the layers as a cross-layer staging area, not a layer itself — see below.
 
 ---
 
@@ -66,11 +50,11 @@ Tell the user which mode you're using and why, in one sentence.
 
 ### Step 1: Read the current structure
 
-Read root `docs/INDEX.md` to understand the three layers, then read the sub-INDEX of the layer most likely to receive this document. This is faster than reading individual files.
+Read root `docs/INDEX.md` to see the current layers, then read the sub-INDEX of the layer most likely to receive this document. This is faster than reading individual files.
 
 ### Step 2: Determine the layer and propose a location
 
-1. Identify which layer this document belongs to (wiki / design / design-system)
+1. Identify which layer this document belongs to, by matching it against each layer's description in `docs/INDEX.md`
 2. Choose the most natural subfolder within that layer
 3. Prefer existing folders when they fit well. Suggest creating a new subfolder only if there are already 2+ other files that would belong there too (avoid creating a folder for a single file)
 
@@ -88,7 +72,7 @@ Show the user the proposed path. On confirmation:
 
 ### Step 1: Survey the full structure
 
-Read root `docs/INDEX.md` to understand the three-layer structure, then read each sub-INDEX. For files whose purpose isn't clear from the name alone, read the first few lines.
+Read root `docs/INDEX.md` to see the current layers, then read each sub-INDEX. For files whose purpose isn't clear from the name alone, read the first few lines.
 
 ### Step 2: Identify problems
 
@@ -151,14 +135,7 @@ Report the verification result to the user before declaring the operation comple
 
 ## Maintaining sub-INDEXes
 
-After any file operation (single-file or reorganization), update the appropriate sub-INDEX:
-
-| File goes to | Sub-INDEX to update |
-|---|---|
-| `docs/wiki/` | `docs/wiki/INDEX.md` |
-| `docs/exploration/` | `docs/exploration/INDEX.md` |
-| `docs/design-system/` | `docs/design-system/INDEX.md` |
-| Draft added/removed | `docs/INDEX.md` (草稿區 section only) |
+After any file operation (single-file or reorganization), update the sub-INDEX of whichever layer received the file — that layer's own `INDEX.md`, linked from root `docs/INDEX.md`. If a draft was added or removed instead, update `docs/INDEX.md` itself (草稿區 section only).
 
 The root `docs/INDEX.md` is a routing layer — do not add or remove file entries there. Only update it if a new layer is being created, or when a draft's status changes.
 

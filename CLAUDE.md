@@ -11,10 +11,12 @@ This repo is the product knowledge base for a home repair matching platform (修
 
 - Folder and file names use **English** (to avoid path encoding issues)
 - Document content is written in **Traditional Chinese (繁體中文)**
-- Read `docs/INDEX.md` for the top-level routing. Three layers, each with its own INDEX:
+- Read `docs/INDEX.md` for the top-level routing. Four layers, each with its own INDEX:
   - `docs/wiki/INDEX.md` — product knowledge (features, flows, business rules, legal)
   - `docs/exploration/INDEX.md` — design exploration (feature plans, decision records, prototypes)
   - `docs/design-system/INDEX.md` — design system (tokens, components, patterns)
+  - `docs/design-ops/INDEX.md` — how the design team itself operates (file maintenance, and other topics as real need arises)
+- `README.md` duplicates the layer structure and skill table for GitHub display. Whenever `docs/INDEX.md`'s layer structure or the skill table changes (a layer added/removed, a skill's behavior changes), update `README.md` to match in the same change — it's easy to forget and silently drifts out of sync otherwise.
 
 ## Skill Workflow
 

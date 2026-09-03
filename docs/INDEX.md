@@ -1,8 +1,8 @@
 # TigerMaster 知識庫
 
-> 本知識庫分為三個層次，請依問題類型選擇入口。
+> 本知識庫分為四個層次，請依問題類型選擇入口。
 
-_Last updated: 2026-09-01_
+_Last updated: 2026-09-03_
 
 ---
 
@@ -45,6 +45,17 @@ design-system/
 ├── tokens/      — 顏色、字型、間距、圓角、陰影
 ├── components/  — 元件規格（陸續建立中）
 └── patterns/    — 複合版型（陸續建立中）
+```
+
+---
+
+## 設計營運 → [design-ops/INDEX.md](design-ops/INDEX.md)
+
+設計團隊自己怎麼運作：檔案維護、設計流程、交付開發、AI 協作規範。
+
+```
+design-ops/
+└── file-maintenance/  — 設計檔案維護規範（其他主題視真實需要才建立）
 ```
 
 ---
