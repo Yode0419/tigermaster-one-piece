@@ -22,6 +22,12 @@ _Last updated: 2026-09-03_
 
 ## 進行中
 
+### priority-review/ — SCRUM 票優先順序重新評估
+
+- **[SCRUM 票優先順序評估](in-progress/priority-review/priority-criteria.md)** — 重新評估舊 Jira 空間搬遷來的 SCRUM 需求票優先順序，四題快速評分（使用者體感／內部人力成本／產品策略相關性／風險降低價值），草稿待確認 _(2026-09-15)_
+- **[SCRUM 票缺陷嚴重度判斷](in-progress/priority-review/defect-severity.md)** — 已經壞掉的票獨立判斷處理急迫度，不跟功能票比重要性，草稿待確認 _(2026-09-15)_
+- **[SCRUM 優先順序評估草稿](in-progress/priority-review/priority-evaluation-draft.md)** — SCRUM-19~70 套用評分標準後的逐票結果，含 Jira 現況優先級對照與落差標記，待人工調整確認 _(2026-09-15)_
+
 ### service-catalog-app-cta/ — 官網服務工項頁 App 導流
 
 - **[官網服務工項頁新增 App 導流構想](in-progress/service-catalog-app-cta/service-catalog-app-cta-idea.md)** — 顧問來訪提出：服務工項頁展示約200個工項介紹與價格區間，但缺少導流下載App的CTA；已核對前端程式碼確認現況，並記錄桌機／手機情境需分別設計等待釐清事項，純初步構想尚未定案 _(2026-08-31)_
