@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-09-03_
+_Last updated: 2026-09-17_
 
 ---
 
@@ -21,6 +21,11 @@ _Last updated: 2026-09-03_
 ---
 
 ## 進行中
+
+### backoffice-guide/ — 後台操作指南建置方法論
+
+- **[後台操作指南建置方法論](in-progress/backoffice-guide/methodology.md)** — 顧問提出新人/客服無操作手冊、知識鎖在個人身上、增資併購盡職調查等痛點；文件規格已定案(功能說明文件／操作指南文件二分、4 欄格式、巢狀頁面資料夾規則、overview.md 與 build-tracker.md 角色拆分)，讀者存取方式仍待與顧問、董事長討論 _(2026-09-17)_
+- **[後台操作指南建置 TODO](in-progress/backoffice-guide/TODO.md)** — 目前行動清單：盤點頁面建立 build-tracker.md、鋪 overview.md 骨架、試跑幾頁驗證 SOP，之後封裝成引導式的 `/franky` skill _(2026-09-17)_
 
 ### priority-review/ — SCRUM 票優先順序重新評估
 

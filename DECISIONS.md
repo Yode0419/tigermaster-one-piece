@@ -10,3 +10,4 @@
 - 2026-08-17: 根 `docs/INDEX.md` 只列三個狀態資料夾，不列個別功能。Why: 最外層是路由層，細節放各自的 INDEX。
 - 2026-08-17: 用語用「已完成」，不用「已落地」；INDEX 章節標題不加 emoji。Why: 使用者明確指定。
 - 2026-08-17: `/robin` 暫不處理「已擱置」狀態，只做 進行中 → 已完成。Why: 擱置情境不同（不需產出 wiki 文件）且少見，避免範圍蔓延，先手動處理。
+- 2026-09-17: 決定在這個知識庫內開始製作後台操作指南，方法論放 `docs/exploration/in-progress/backoffice-guide/`，實際內容直接建置在 `docs/wiki/operations/backoffice-guide/`，不透過 exploration 累積。詳細規格、格式、命名等細節見 `methodology.md`(持續維護，不在此重複)。Why: 要漸進式發布，內容堆在 exploration 裡等方法論結案才同步，會讓急需這份指南的新客服等不到文件。
