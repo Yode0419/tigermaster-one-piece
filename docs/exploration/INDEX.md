@@ -22,6 +22,13 @@ _Last updated: 2026-09-17_
 
 ## 進行中
 
+### pro360-partnership/ — Pro360 合作案生命週期整理
+
+- **[Pro360 合作案：2026-09-18 內部會議逐字稿整理](in-progress/pro360-partnership/meeting-notes-20260918.md)** — 公司十月起成為 Pro360 平台獨家達人，每日接收裝潢修繕案件；逐字稿結構化整理，含流程節點草案、合作機制細節與待釐清問題清單（每日件數、金額門檻、費用數字、客戶授權等多處逐字稿內部矛盾） _(2026-09-18)_
+- **[Pro360 平台本身的服務模式（背景研究）](in-progress/pro360-partnership/pro360-platform-research.md)** — Pro360 官網公開的客戶端/達人端流程、費用機制研究，確認官網查無獨家導單方案，本次合作應為雙方客製商業條款；文中「完工款抽成 0%」為 Pro360 一般公開模式，不適用本次獨家合作案，實際分潤機制見 discussion-log.md 更正 _(2026-09-18)_
+- **[討論紀錄與決策追蹤](in-progress/pro360-partnership/discussion-log.md)** — 逐字稿待釐清問題的後續討論結果，持續更新中 _(2026-09-18)_
+- **[交接文件](in-progress/pro360-partnership/handoff-20260918.md)** — 整合前述所有討論的濃縮版現況，供新 session 快速上手，下一步是用 tldraw 畫生命週期圖草稿 _(2026-09-18)_
+
 ### backoffice-guide/ — 後台操作指南建置方法論
 
 - **[後台操作指南建置方法論](in-progress/backoffice-guide/methodology.md)** — 顧問提出新人/客服無操作手冊、知識鎖在個人身上、增資併購盡職調查等痛點；文件規格已定案(功能說明文件／操作指南文件二分、4 欄格式、巢狀頁面資料夾規則、overview.md 與 build-tracker.md 角色拆分)，讀者存取方式仍待與顧問、董事長討論 _(2026-09-17)_
