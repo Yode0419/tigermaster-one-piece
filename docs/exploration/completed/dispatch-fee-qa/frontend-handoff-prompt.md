@@ -25,11 +25,11 @@ src/views/MobileQA.vue（MobileQAList 陣列）
 
 最終要呈現的文案、每一則要放在清單的哪個位置、要新增/修改/刪除哪些既有問答，都寫在
 這份文件裡，請你先讀過，作為文案的唯一依據：
-C:\yode\tigermaster-one-piece\docs\exploration\in-progress\dispatch-fee-qa\qa-copy.md
+C:\yode\tigermaster-one-piece\docs\exploration\completed\dispatch-fee-qa\qa-copy.md
 
 如果需要更多背景（為什麼要改、跟 App／法律條款／後端計費規則的對照過程、有哪些已知
 但這次不處理的問題），可以參考同資料夾的：
-C:\yode\tigermaster-one-piece\docs\exploration\in-progress\dispatch-fee-qa\dispatch-fee-qa.md
+C:\yode\tigermaster-one-piece\docs\exploration\completed\dispatch-fee-qa\dispatch-fee-qa.md
 
 請注意：
 

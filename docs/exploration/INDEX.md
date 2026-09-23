@@ -22,10 +22,6 @@ _Last updated: 2026-09-23_
 
 ## 進行中
 
-### dispatch-fee-qa/ — 官網 QA 新增派遣費說明
-
-- **[官網 QA 新增「派遣費說明」](in-progress/dispatch-fee-qa/dispatch-fee-qa.md)**：董事長希望客戶在 QA 就能查到加成時段；App 下單前已有派遣費說明，計畫把相同內容放進官網 QA（改官網即可，App 不用更新）。已於 2026-09-23 上線 `/QA` 與 `/MobileQA`，`/MobileQA` 版面跑版一併修正；待執行 `/robin` 同步 wiki _(2026-09-23)_
-
 ### pro360-partnership/ — Pro360 合作案生命週期整理
 
 - **[Pro360 合作案：2026-09-18 內部會議逐字稿整理](in-progress/pro360-partnership/meeting-notes-20260918.md)** — 公司十月起成為 Pro360 平台獨家達人，每日接收裝潢修繕案件；逐字稿結構化整理，含流程節點草案、合作機制細節與待釐清問題清單（每日件數、金額門檻、費用數字、客戶授權等多處逐字稿內部矛盾） _(2026-09-18)_
@@ -73,6 +69,13 @@ _Last updated: 2026-09-23_
 ---
 
 ## 已完成
+
+### dispatch-fee-qa/ — 官網 QA 新增派遣費說明
+
+- **[官網 QA 新增派遣費說明：決策摘要](completed/dispatch-fee-qa/decision-summary.md)**：官網 `/QA` 與 App 內 `/MobileQA` 補齊派遣費問答（含五種時段範圍與金額），`/MobileQA` 版面一併重整，2026-09-23 上線；知識已同步至 wiki 的客戶費用總覽、常見問題原文、官網內容架構 _(2026-09-23)_
+- **[官網 QA 新增「派遣費說明」](completed/dispatch-fee-qa/dispatch-fee-qa.md)**：董事長希望客戶在 QA 就能查到加成時段；已核對 App、官網與後端現況，含法律條款核對、`/MobileQA` 跑版診斷、決策記錄與上線紀錄 _(2026-09-23)_
+- **[官網 QA 文案：派遣費](completed/dispatch-fee-qa/qa-copy.md)**：上線版文案原文 _(2026-09-23)_
+- **[交接給前端 AI Agent](completed/dispatch-fee-qa/frontend-handoff-prompt.md)**：交給官網 repo AI agent 執行的提示指令 _(2026-09-22)_
 
 ### figma-organization/ — Figma 檔案整理與 Design Ops 方法論
 
