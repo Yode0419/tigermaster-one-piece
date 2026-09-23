@@ -22,6 +22,14 @@ _Last updated: 2026-09-23_
 
 ## 進行中
 
+### hardware-store-partnership/：師傅材料採購：振宇五金合作
+
+- **[師傅材料採購：與振宇五金合作構想](in-progress/hardware-store-partnership/hardware-store-partnership-idea.md)**：台中為主的連鎖五金行振宇五金想合作讓師傅向其採購；方向是不再自建商城（舊商城開發一半不可用），改為平台當入口導流到對方商城或門市自取；含訂單內採購與純導流兩種模式、待釐清事項，純初步構想 _(2026-09-23)_
+
+### web-ordering/：客戶端網頁版下單
+
+- **[客戶端網頁版下單構想](in-progress/web-ordering/web-ordering-idea.md)**：合作夥伴反映要客人下載 App 會造成導流斷層，構想把客戶端註冊、下單、訂單查看、聊天室搬到網頁，後台共用；已釐清客戶端不需手機定位，純初步構想 _(2026-09-23)_
+
 ### pro360-partnership/ — Pro360 合作案生命週期整理
 
 - **[Pro360 合作案：2026-09-18 內部會議逐字稿整理](in-progress/pro360-partnership/meeting-notes-20260918.md)** — 公司十月起成為 Pro360 平台獨家達人，每日接收裝潢修繕案件；逐字稿結構化整理，含流程節點草案、合作機制細節與待釐清問題清單（每日件數、金額門檻、費用數字、客戶授權等多處逐字稿內部矛盾） _(2026-09-18)_
@@ -29,6 +37,7 @@ _Last updated: 2026-09-23_
 - **[討論紀錄與決策追蹤](in-progress/pro360-partnership/discussion-log.md)** — 逐字稿待釐清問題的後續討論結果，持續更新中 _(2026-09-18)_
 - **[客服手冊修改建議](in-progress/pro360-partnership/handbook-review-20260921.md)**：針對董事長製作的客服手冊，依四個分頁整理修改建議、回報表對照與待董事長回答的問題 _(2026-09-21)_
 - **[客服流程表](in-progress/pro360-partnership/service-flow-table-20260921.md)**：給師虎客服看的特約案處理流程，含各步驟時限、例外情境與回報表對照，草稿 _(2026-09-21)_
+- **[Pro360 合作案：2026-09-23 與 Pro360 開會整理](in-progress/pro360-partnership/meeting-notes-20260923.md)**：Pro360 回答了派案機制（帳號只收專屬案件、即時派案、含沒有填預算的案件）、釋回操作方式（回報問題）與上線前測試安排 _(2026-09-23)_
 - **[交接文件（2026-09-21）](in-progress/pro360-partnership/handoff-20260921.md)**：把客服流程表畫成 tldraw 流程圖的交接，含節點、連線、視覺慣例與驗收標準，取代 9/18 那份 _(2026-09-21)_
 - **[交接文件](in-progress/pro360-partnership/handoff-20260918.md)** — 整合前述所有討論的濃縮版現況，供新 session 快速上手，下一步是用 tldraw 畫生命週期圖草稿 _(2026-09-18)_
 
