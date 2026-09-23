@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-09-21_
+_Last updated: 2026-09-23_
 
 ---
 
@@ -24,7 +24,7 @@ _Last updated: 2026-09-21_
 
 ### dispatch-fee-qa/ — 官網 QA 新增派遣費說明
 
-- **[官網 QA 新增「派遣費說明」](in-progress/dispatch-fee-qa/dispatch-fee-qa.md)**：董事長希望客戶在 QA 就能查到加成時段；App 下單前已有派遣費說明，計畫把相同內容放進官網 QA（改官網即可，App 不用更新）。已核對兩個 repo 現況，決定內容形式與範圍；另記錄 `/mobileQA` 版面跑版診斷，修復留待後續 _(2026-09-21)_
+- **[官網 QA 新增「派遣費說明」](in-progress/dispatch-fee-qa/dispatch-fee-qa.md)**：董事長希望客戶在 QA 就能查到加成時段；App 下單前已有派遣費說明，計畫把相同內容放進官網 QA（改官網即可，App 不用更新）。已於 2026-09-23 上線 `/QA` 與 `/MobileQA`，`/MobileQA` 版面跑版一併修正；待執行 `/robin` 同步 wiki _(2026-09-23)_
 
 ### pro360-partnership/ — Pro360 合作案生命週期整理
 
