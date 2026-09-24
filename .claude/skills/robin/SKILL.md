@@ -156,7 +156,8 @@ In `docs/exploration/INDEX.md`:
 1. Move the feature's `###` section from **進行中** to **已完成**, keeping all existing entries intact.
 2. Update every entry's path in that section from `in-progress/<feature>/...` to `completed/<feature>/...`.
 3. Add the decision summary as the **first** entry in the section, so a reader hits the summary before the raw exploration files.
-4. Update the `_Last updated:_` date at the top.
+4. Update the folder counts in the status headings (e.g. `## 進行中（8）` → `## 進行中（7）`, `## 已完成（5）` → `## 已完成（6）`). Recount from disk with `ls -d docs/exploration/<status>/*/` rather than doing arithmetic on the old numbers.
+5. Update the `_Last updated:_` date at the top.
 
 Do not rename or delete any of the original exploration documents — they only change status folder, nothing else. Their messiness is the record.
 

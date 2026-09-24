@@ -66,7 +66,7 @@ Present it like this:
 
 - **Option 1 — Draft area**: Save to `docs/_drafts/[filename].md`. Use a descriptive filename in kebab-case.
 - **Option 2 — archive-doc**: Hand off the confirmed content to `/archive-doc`, which will determine the right path, save the file, and update `docs/INDEX.md`.
-- **Option 3 — Custom path**: Save directly to the path the user specifies. Create the directory if it doesn't exist.
+- **Option 3 — Custom path**: Save directly to the path the user specifies. Create the directory if it doesn't exist. If the path is under `docs/` (other than `docs/_drafts/`), then add the entry to that layer's sub-INDEX following `/archive-doc`'s "Maintaining sub-INDEXes" rules, including the folder count in the status heading when a new feature folder was created under `docs/exploration/`.
 
 ---
 
