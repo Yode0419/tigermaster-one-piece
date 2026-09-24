@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-09-23_
+_Last updated: 2026-09-24_
 
 ---
 
@@ -64,17 +64,6 @@ _Last updated: 2026-09-23_
 
 - **[Design Frame 尺寸標準：375×812 升級至 393×852](in-progress/frame-size-standard/frame-size-standard.md)** — 決策記錄：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移；StatusBar／HomeIndicator 依尺寸群組分開定義，並回頭修正 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 的留白邏輯 _(2026-07-17)_
 
-### reconciliation/ — 對帳與撥款
-
-- **[開發現況：部分同步紀錄](in-progress/reconciliation/development-status.md)** — 後台三區塊版面與撥款五步驟已上線並同步進 wiki；師傅分組視角、請款方式欄位、批次加入仍卡在後端 API，程式碼已寫但被註解，資料夾暫留 in-progress _(2026-08-17)_
-- **[對帳作業優化：師傅視角與撥款操作改善](in-progress/reconciliation/reconciliation-optimization.md)** — 後台匯款資訊頁面的優化規劃，新增師傅維度視角、批次操作與 invoice_no 填入流程，並封鎖誤用的狀態直改路徑 _(2026-04-13)_
-- **[師傅詳情頁新增「請款方式」欄位](in-progress/reconciliation/master-payout-method-field.md)** — 後台師傅詳情頁新增請款方式 Radio Group 的 UI 設計規格，含空值處理、檢視／編輯模式行為與元件選型決策 _(2026-04-13)_
-- **[對帳與撥款作業優化：討論議程](in-progress/reconciliation/reconciliation-discussion-agenda.md)** — 與董事長、總經理討論對帳與撥款作業優化的議程，含現有功能說明與待釐清事項 _(2026-04-14)_
-- **[對帳與撥款作業優化：主管討論結果與調整方向](in-progress/reconciliation/reconciliation-discussion-results.md)** — 確認決策、新增規格（週期切換、中間款項請領、師傅報稅欄位）與待釐清事項 _(2026-04-14)_
-- **[撥款作業介面調整討論紀錄](in-progress/reconciliation/payout-interface-redesign.md)** — 撥款後台三區塊的文案、版面與互動行為詳細設計紀錄，含術語對照表 _(2026-04-14)_
-- **[匯款清單後期優化：師傅分組視角](in-progress/reconciliation/payout-list-master-grouping.md)** — 匯款清單第三區塊加入師傅分組邏輯的功能規劃，含群組結構設計與介面結構方案比較 _(2026-05-26)_
-- **[設計原型索引 — 撥款作業](in-progress/reconciliation/prototype/index.html)** — 撥款作業後台介面的互動原型（v1–v6），含各版本迭代與 confirm banner 變體 _(2026-04-27)_
-
 ---
 
 ## 已完成
@@ -126,4 +115,15 @@ _Last updated: 2026-09-23_
 
 ## 已擱置
 
-_目前沒有已擱置的功能。_
+### reconciliation/ — 對帳與撥款
+
+_2026-09-24 擱置：前期優化已上線並同步進 wiki；後期項目因前端工程師離職、現況堪用、董事長重心轉往企業合作而暫停。_
+
+- **[開發現況：部分同步紀錄](on-hold/reconciliation/development-status.md)**：前期優化已上線；後期的師傅分組與請款方式設計、前端皆已完成但卡在後端 API，其餘後期項目三邊都未開始；含擱置原因與重啟條件 _(2026-09-24)_
+- **[對帳作業優化：師傅視角與撥款操作改善](on-hold/reconciliation/reconciliation-optimization.md)** — 後台匯款資訊頁面的優化規劃，新增師傅維度視角、批次操作與 invoice_no 填入流程，並封鎖誤用的狀態直改路徑 _(2026-04-13)_
+- **[師傅詳情頁新增「請款方式」欄位](on-hold/reconciliation/master-payout-method-field.md)** — 後台師傅詳情頁新增請款方式 Radio Group 的 UI 設計規格，含空值處理、檢視／編輯模式行為與元件選型決策 _(2026-04-13)_
+- **[對帳與撥款作業優化：討論議程](on-hold/reconciliation/reconciliation-discussion-agenda.md)** — 與董事長、總經理討論對帳與撥款作業優化的議程，含現有功能說明與待釐清事項 _(2026-04-14)_
+- **[對帳與撥款作業優化：主管討論結果與調整方向](on-hold/reconciliation/reconciliation-discussion-results.md)** — 確認決策、新增規格（週期切換、中間款項請領、師傅報稅欄位）與待釐清事項 _(2026-04-14)_
+- **[撥款作業介面調整討論紀錄](on-hold/reconciliation/payout-interface-redesign.md)** — 撥款後台三區塊的文案、版面與互動行為詳細設計紀錄，含術語對照表 _(2026-04-14)_
+- **[匯款清單後期優化：師傅分組視角](on-hold/reconciliation/payout-list-master-grouping.md)** — 匯款清單第三區塊加入師傅分組邏輯的功能規劃，含群組結構設計與介面結構方案比較 _(2026-05-26)_
+- **[設計原型索引 — 撥款作業](on-hold/reconciliation/prototype/index.html)** — 撥款作業後台介面的互動原型（v1–v6），含各版本迭代與 confirm banner 變體 _(2026-04-27)_
