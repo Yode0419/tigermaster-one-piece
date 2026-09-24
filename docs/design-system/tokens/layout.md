@@ -1,7 +1,7 @@
 # Layout / Frame 尺寸
 
 _性質：專案規則文件，非 Figma variable/token，無對應 Figma 節點_
-_最後更新：2026-07-17 — 補上 AppBar／Sticky Footer／BottomNavBar 內嵌 StatusBar／HomeIndicator instance 的組裝方式_
+_最後更新：2026-09-24：既有 375 畫面改由 figma-ssot 統一以 393 重畫，不再逐一挑選遷移_
 
 ---
 
@@ -18,7 +18,7 @@ _最後更新：2026-07-17 — 補上 AppBar／Sticky Footer／BottomNavBar 內�
 | 用途 | 尺寸 | 對應機型 |
 |---|---|---|
 | **新畫面標準尺寸**（含 AI 生成） | **393×852** | iPhone 14 Pro／15／15 Pro／16 等 Dynamic Island 機型 |
-| 既有畫面現況尺寸（不強制遷移） | 375×812 | iPhone X／XS／11 Pro／12 mini／13 mini 等瀏海機型（mini 系列已停產） |
+| 既有畫面現況尺寸（將由 figma-ssot 統一以 393 重畫取代） | 375×812 | iPhone X／XS／11 Pro／12 mini／13 mini 等瀏海機型（mini 系列已停產） |
 
 ## 安全區高度差異
 
@@ -34,8 +34,7 @@ _最後更新：2026-07-17 — 補上 AppBar／Sticky Footer／BottomNavBar 內�
 ## 使用規則
 
 - 所有新畫面（不論人工繪製或 AI 生成）一律使用 **393×852**，不再新增 375×812 的新畫面
-- 既有 375×812 畫面**不強制回頭改**，維持現況；除非該畫面被判斷為可能用於教學／行銷素材（對外展示），才優先排入遷移
-- 兩種尺寸畫面會長期並存於同一 Figma 檔案中，非過渡期限定的暫時狀態
+- 既有 375×812 畫面不逐一遷移。App 正式主檔的畫面由 [figma-ssot](../../exploration/in-progress/figma-ssot/figma-ssot-overview.md) 統一以 393×852 重畫，舊畫面移入 Archive；完成前兩種尺寸暫時並存
 - 元件本身（Button／Card／TextField 等）多為 auto-layout、寬度隨容器彈性調整，不綁定特定 frame 寬度，遷移 Frame 尺寸對元件庫本身影響有限；真正需要跟著畫面尺寸分開定義的是 StatusBar／HomeIndicator 這類直接代表螢幕尺寸的元件
 - StatusBar／HomeIndicator 元件規格需依畫面所屬尺寸群組分開定義，不可混用（例如 375 寬畫面不可搭配 59pt 高的 393 版 StatusBar）
 - [AppBar](../components/app-bar.md)、[Sticky Footer](../components/sticky-footer.md)、[BottomNavBar](../components/bottom-nav-bar.md) 透過 `Reserve Status Bar`／`Reserve Home Indicator` Boolean 直接內嵌 [StatusBar](../components/status-bar.md)／[HomeIndicator](../components/home-indicator.md) instance；內嵌 instance 固定其中一組 Frame Group，跨尺寸群組需手動更換

@@ -3,7 +3,9 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-07-17 — 新增 layout.md，確立新畫面標準 Frame 尺寸為 393×852（既有 375×812 畫面不強制遷移，僅教學／行銷用途優先遷移），為 AI 生成介面提供唯一尺寸標準；新增 StatusBar／HomeIndicator 元件規格並建立 Figma Component（系統 chrome 裝飾元件，永遠透明無自身背景，Base/White／Base/Black 為刻意 Primitive token 例外）；回頭為 AppBar／Sticky Footer／BottomNavBar 補上 `Reserve Status Bar`／`Reserve Home Indicator` Boolean，直接內嵌 StatusBar／HomeIndicator instance（固定其中一組 Frame Group，跨尺寸群組需手動更換），翻盤 Sticky Footer 原「安全區不進 Figma」舊規則_
+_Last updated: 2026-09-24：layout.md 更新，既有 375×812 畫面不再挑選優先遷移，改由 figma-ssot 專案統一以 393×852 重畫，舊畫面移入 Archive_
+
+_2026-07-17 — 新增 layout.md，確立新畫面標準 Frame 尺寸為 393×852（既有 375×812 畫面不強制遷移，僅教學／行銷用途優先遷移），為 AI 生成介面提供唯一尺寸標準；新增 StatusBar／HomeIndicator 元件規格並建立 Figma Component（系統 chrome 裝飾元件，永遠透明無自身背景，Base/White／Base/Black 為刻意 Primitive token 例外）；回頭為 AppBar／Sticky Footer／BottomNavBar 補上 `Reserve Status Bar`／`Reserve Home Indicator` Boolean，直接內嵌 StatusBar／HomeIndicator instance（固定其中一組 Frame Group，跨尺寸群組需手動更換），翻盤 Sticky Footer 原「安全區不進 Figma」舊規則_
 
 _2026-07-16 — 新增 BottomNavBar 元件規格（Role：Client/Master/Admin 三個變體，分頁項目直接複用 IconLabelButton 的 tone；選中色現況 `Colors.yellow` 未對到 `Interactive/Brand`，列為技術債；中央 Logo 按鈕為固定素材，不套用 FAB 規格；Figma 尚未建立正式 Component）；新增 ChatInputBar 元件規格並建立 Figma Component（State × Content 二維 + TimeRequest Boolean，外層容器複用 Sticky Footer，TimeRequest 因 Figma 平台限制無法實際綁定，需手動隱藏）；新增 SearchBar 元件規格（Type：Boxed/Lined，Boxed 搜尋圖示金色與 `Icon/Brand` token 吻合，Figma 尚未建立正式 Component）_
 
@@ -30,7 +32,7 @@ design-system/
 - [spacing.md](tokens/spacing.md) — 間距 token（2–48px）_(2026-06-25)_
 - [radius.md](tokens/radius.md) — 圓角 token（4–Full）：使用規則改為「慎重程度與內容份量」邏輯，Button/Card（Inset）改用 `Radius/4`、Dialog 依 Type 拆分 `Radius/8`（Standard）/`Radius/16`（Emphasis）_(2026-07-14)_
 - [elevation.md](tokens/elevation.md) — 陰影層級（Card / Sheet / 置底區塊）_(2026-07-03)_
-- [layout.md](tokens/layout.md) — Frame 尺寸規則：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移，含 StatusBar 高度差異（44pt vs 59pt）說明 _(2026-07-16)_
+- [layout.md](tokens/layout.md) — Frame 尺寸規則：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面由 figma-ssot 統一以 393 重畫，含 StatusBar 高度差異（44pt vs 59pt）說明 _(2026-09-24)_
 
 ## Components
 

@@ -24,6 +24,10 @@ _Last updated: 2026-09-24_
 
 ## 進行中（8）
 
+### figma-ssot/：Figma SSOT：App 正式畫面的唯一維護來源
+
+- **[Figma SSOT 專案總覽](in-progress/figma-ssot/figma-ssot-overview.md)**：讓 Figma 成為 App 正式畫面的唯一維護來源，分四階段：盤點與架構制定（Flutter repo 進行中）、Figma 建立架構、畫面填入、上架後維護流程；本處只記階段狀態，階段內進度看各自位置 _(2026-09-24)_
+
 ### hardware-store-partnership/：師傅材料採購：振宇五金合作
 
 - **[師傅材料採購：與振宇五金合作構想](in-progress/hardware-store-partnership/hardware-store-partnership-idea.md)**：台中為主的連鎖五金行振宇五金想合作讓師傅向其採購；方向是不再自建商城（舊商城開發一半不可用），改為平台當入口導流到對方商城或門市自取；含訂單內採購與純導流兩種模式、待釐清事項，純初步構想 _(2026-09-23)_
@@ -62,13 +66,14 @@ _Last updated: 2026-09-24_
 
 - **[凸顯裝潢工程能力構想](in-progress/renovation-highlight/renovation-highlight-idea.md)** — 董事長口頭提出的初步構想：把既有的裝潢整修 L1 分類從分類清單裡提升為獨立入口／頁面，App 首頁新增裝潢入口（仍走原本叫修流程）、官網新增裝潢作品展示頁，純初步構想尚未定案 _(2026-08-27)_
 
-### frame-size-standard/ — 跨功能基礎規則
-
-- **[Design Frame 尺寸標準：375×812 升級至 393×852](in-progress/frame-size-standard/frame-size-standard.md)** — 決策記錄：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移；StatusBar／HomeIndicator 依尺寸群組分開定義，並回頭修正 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 的留白邏輯 _(2026-07-17)_
-
 ---
 
-## 已完成（5）
+## 已完成（6）
+
+### frame-size-standard/ — 跨功能基礎規則
+
+- **[Design Frame 尺寸標準：決策摘要](completed/frame-size-standard/decision-summary.md)**：新畫面唯一標準 393×852，StatusBar／HomeIndicator 依尺寸群組分開定義；原「挑教學／行銷畫面優先遷移」改由 figma-ssot 全面以 393 重畫取代；規則已在 design-system 的 layout.md _(2026-09-24)_
+- **[Design Frame 尺寸標準：375×812 升級至 393×852](completed/frame-size-standard/frame-size-standard.md)** — 決策記錄：新畫面標準改為 393×852（Dynamic Island 機型），既有 375×812 畫面不強制遷移；StatusBar／HomeIndicator 依尺寸群組分開定義，並回頭修正 AppBar／Sticky Footer／BottomNavBar／ChatInputBar 的留白邏輯 _(2026-07-17)_
 
 ### dispatch-fee-qa/ — 官網 QA 新增派遣費說明
 
