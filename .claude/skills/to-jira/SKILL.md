@@ -1,6 +1,6 @@
 ---
 name: to-jira
-description: Turns a product requirement or a bug report into a Jira ticket for the tigermaster SCRUM project, through a short Q&A, a priority check for requirements, and a full text preview that the user must explicitly approve before anything is created. Works standalone or drafts from a docs/exploration/ document. Invoke when the user runs /to-jira, or says things like 「開一張票」「建 Jira ticket」「這個需求丟進 Jira」「回報這個 bug 到 Jira」「把這份規劃拆成 ticket」. Not for Morph Inspect bugs (that is the separate bug-to-jira skill).
+description: Turns a product requirement or a bug report into a Jira ticket for the tigermaster SCRUM project, through a duplicate check against existing tickets, a short Q&A, a priority check for requirements, and a full text preview that the user must explicitly approve before anything is created. Works standalone or drafts from a docs/exploration/ document. Invoke when the user runs /to-jira, or says things like 「開一張票」「建 Jira ticket」「這個需求丟進 Jira」「回報這個 bug 到 Jira」「把這份規劃拆成 ticket」. Not for Morph Inspect bugs (that is the separate bug-to-jira skill).
 ---
 
 # to-jira：需求／Bug 轉 Jira ticket
@@ -14,7 +14,7 @@ description: Turns a product requirement or a bug report into a Jira ticket for 
 | `config/<專案>.json` | 站台、專案 key、issue type、標題前綴。預設 `tigermaster` |
 | `templates/story.md`、`templates/bug.md` | 描述模板，擬稿前先讀 |
 | `references/priority-rules.md` | 分流測試與需求優先級評分，需要時才讀 |
-| `scripts/jira.py` | `check`／`preview`／`create` |
+| `scripts/jira.py` | `check`／`search`／`preview`／`create` |
 | `.env` | 個人金鑰，gitignore。**不要讀取、印出或貼進對話** |
 
 路徑以本 skill 資料夾 `.claude/skills/to-jira/` 為準。
@@ -40,7 +40,21 @@ description: Turns a product requirement or a bug report into a Jira ticket for 
 ### 2. 分流：需求還是 Bug
 依 `references/priority-rules.md` 的分流測試判斷，把判斷和理由用一句話告訴使用者確認。
 
-### 3. 問答補齊
+### 3. 重複檢查
+在詳細問答之前做，避免白問一輪。SCRUM 無法刪除票，重複建立收不回來。
+
+1. `search`（不帶關鍵字）列出全部票的標題，判斷有沒有意思相近的，換了說法也算。
+2. `search <關鍵字>` 挑 2 到 3 個關鍵字，比對標題與描述，抓標題沒寫到的票。
+3. 所有狀態都算，包括已完成（可能早就處理過，或是問題復發）。
+
+沒有相似的票：一句話帶過，繼續問答。
+
+有相似的票：列出票號、狀態、標題、連結，請使用者選：
+- A. 還是要建立（講的不是同一件事）
+- B. 不建立，結束
+- C. 不建立，改去補充既有的票：整理出要補充的內容讓使用者自己貼到 Jira。skill 不修改、不留言既有的票。
+
+### 4. 問答補齊
 - 一次問一題，已知的不問。
 - 需求：角色、想做到的事、好處、目前遇到的問題、目標。
 - Bug：頁面／功能、重現步驟、預期、實際、環境。
@@ -48,12 +62,12 @@ description: Turns a product requirement or a bug report into a Jira ticket for 
 - Bug 只寫事實，不寫修法建議；沒測過的寫「尚未測試」。
 - 不設負責人、Labels、Epic。
 
-### 4. 優先級（只有需求票）
+### 5. 優先級（只有需求票）
 依 `references/priority-rules.md` 逐題問四個面向，每題附上你的建議分數與一句理由，讓使用者確認或修改。算出總分與對應的 High／Medium／Low。使用者要覆寫就照他的。業務決策還沒定案時，建議不設優先級。
 
 Bug 票不評嚴重度。
 
-### 5. 預覽
+### 6. 預覽
 把草稿寫成 JSON 檔（用 Write 工具，放在 scratchpad），格式見 `scripts/jira.py` 開頭說明。執行 `preview` 做格式檢查，通過後在對話中顯示完整預覽：
 
 ```
@@ -61,11 +75,15 @@ Bug 票不評嚴重度。
 標題：【後台】...
 
 <描述全文，照模板排版>
+
+重複檢查：已比對 N 張，無相似票（或：使用者確認與 SCRUM-xx 不同）
 ```
+
+問答中如果內容方向明顯改變，預覽前用新的關鍵字再 `search` 一次。
 
 問使用者：「確認建立嗎？」使用者要修改就改完再預覽一次。
 
-### 6. 建立
+### 7. 建立
 **只有使用者明確回覆「建立」「確認」「OK」「可以」這類同意時才執行 `create`。** 模糊的回覆（例如「嗯」「看起來不錯吧」、或同時提出修改）不算同意。SCRUM 無法刪除票，建錯收不回來。
 
 建立後回覆票號與連結。Bug 票提醒使用者自己補上截圖或影片附件。
@@ -78,6 +96,7 @@ Bug 票不評嚴重度。
 
 ```
 PYTHONUTF8=1 PYTHONIOENCODING=utf-8 python .claude/skills/to-jira/scripts/jira.py check
+PYTHONUTF8=1 PYTHONIOENCODING=utf-8 python .claude/skills/to-jira/scripts/jira.py search [關鍵字 ...]
 PYTHONUTF8=1 PYTHONIOENCODING=utf-8 python .claude/skills/to-jira/scripts/jira.py preview <draft.json>
 PYTHONUTF8=1 PYTHONIOENCODING=utf-8 python .claude/skills/to-jira/scripts/jira.py create <draft.json>
 ```

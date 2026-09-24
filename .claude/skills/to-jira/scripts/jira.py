@@ -5,6 +5,7 @@
 
 Usage (run from anywhere; paths are resolved relative to the skill folder):
   python jira.py check   [--config tigermaster]
+  python jira.py search  [--config tigermaster] [keyword ...]   # no keyword = list all
   python jira.py preview <draft.json>
   python jira.py create  <draft.json>
 
@@ -184,6 +185,35 @@ def cmd_check(cfg):
     print(f"[OK] 已連線 {cfg['base_url']}，身分：{r.json().get('displayName')}")
 
 
+def cmd_search(cfg, keywords):
+    """No keywords: list every non-subtask issue (key, status, summary).
+    With keywords: issues whose summary/description contain ANY of them."""
+    auth = load_env(cfg)
+    jql = f"project = {cfg['project_key']} AND issuetype not in subTaskIssueTypes()"
+    if keywords:
+        terms = " OR ".join('text ~ "{}"'.format(k.replace('"', '\\"')) for k in keywords)
+        jql += f" AND ({terms})"
+    jql += " ORDER BY created DESC"
+    rows, token = [], None
+    while True:
+        params = {"jql": jql, "maxResults": 100, "fields": "summary,status"}
+        if token:
+            params["nextPageToken"] = token
+        r = requests.get(cfg["base_url"] + "/rest/api/3/search/jql", auth=auth, params=params)
+        if r.status_code != 200:
+            die(f"搜尋失敗 HTTP {r.status_code}：{r.text[:500]}")
+        data = r.json()
+        for i in data.get("issues", []):
+            rows.append(f"{i['key']}｜{i['fields']['status']['name']}｜{i['fields']['summary']}")
+        token = data.get("nextPageToken")
+        if not token or data.get("isLast", True):
+            break
+    label = f"關鍵字 {' / '.join(keywords)}" if keywords else "全部票"
+    print(f"== {label}：{len(rows)} 張 ==")
+    for row in rows:
+        print(row)
+
+
 def cmd_preview(d, cfg):
     fields, notes = build_fields(cfg, d)
     print(f"專案：{cfg['project_key']}　類型：{fields['issuetype']['name']}"
@@ -209,13 +239,17 @@ def cmd_create(d, cfg):
 
 
 def main():
-    if len(sys.argv) < 2 or sys.argv[1] not in ("check", "preview", "create"):
+    if len(sys.argv) < 2 or sys.argv[1] not in ("check", "search", "preview", "create"):
         print(__doc__)
         sys.exit(1)
     cmd = sys.argv[1]
-    if cmd == "check":
-        name = sys.argv[3] if len(sys.argv) > 3 and sys.argv[2] == "--config" else "tigermaster"
-        cmd_check(load_config(name))
+    if cmd in ("check", "search"):
+        args = sys.argv[2:]
+        name = "tigermaster"
+        if len(args) >= 2 and args[0] == "--config":
+            name, args = args[1], args[2:]
+        cfg = load_config(name)
+        cmd_check(cfg) if cmd == "check" else cmd_search(cfg, args)
         return
     if len(sys.argv) < 3:
         die("請指定草稿檔路徑")
