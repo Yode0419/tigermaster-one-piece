@@ -43,5 +43,6 @@ Flutter repo 本機路徑：`C:\Users\yode0\develop\source_code\android_app_2.6.
 
 ## 關聯
 
+- Jira：[SCRUM-34](https://tigermaster.atlassian.net/browse/SCRUM-34)
 - [Figma 檔案整理與 Design Ops 方法論](../../completed/figma-organization/decision-summary.md)：本專案的前一步，建立了 File Handbook
 - 全部階段完成後，以 `/robin` 將定案的維護規則整理進 `docs/design-ops/`

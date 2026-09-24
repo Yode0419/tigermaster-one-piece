@@ -12,6 +12,9 @@ Thumbs.db
 .claude/history.jsonl
 .claude/todos/
 
+# /to-jira pre-update snapshots of existing tickets
+.claude/skills/to-jira/backups/
+
 # Python cache
 __pycache__/
 

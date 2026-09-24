@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-/to-jira helper: create a Jira issue from a draft JSON file.
+/to-jira helper: create or update a Jira issue from a draft JSON file.
 
 Usage (run from anywhere; paths are resolved relative to the skill folder):
   python jira.py check   [--config tigermaster]
   python jira.py search  [--config tigermaster] [keyword ...]   # no keyword = list all
+  python jira.py get     [--config tigermaster] <ISSUE-KEY>     # print current content
   python jira.py preview <draft.json>
   python jira.py create  <draft.json>
+  python jira.py update  <draft.json>
 
-Draft JSON (written with the Write tool, UTF-8):
+Create draft JSON (written with the Write tool, UTF-8):
   {
     "config": "tigermaster",          # config/<name>.json
     "type": "story" | "bug",
@@ -17,6 +19,12 @@ Draft JSON (written with the Write tool, UTF-8):
     "priority": "High",               # optional; ignored when the type does not support it
     "description": "markdown text"    # see md_to_adf() for the supported subset
   }
+
+Update draft JSON: "config" + "key" (e.g. "SCRUM-34") + at least one of
+"summary" / "description" / "priority". Fields left out are not touched; the
+description is replaced as a whole. Before writing, update saves the current
+fields to backups/<KEY>-<timestamp>.json (gitignored) and keeps only the
+newest 3 per issue; other file names in backups/ are never deleted.
 
 Credentials come from the .env named in the config (never printed).
 """
@@ -26,10 +34,12 @@ import os
 import re
 import subprocess
 import sys
+from datetime import datetime
 
 import requests
 
 SKILL_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+KEEP_BACKUPS = 3
 
 
 def die(msg):
@@ -146,17 +156,81 @@ def md_to_adf(md):
     return {"type": "doc", "version": 1, "content": content}
 
 
+def adf_to_md(node):
+    """Rough inverse of md_to_adf, for showing the current description. Unknown
+    node types fall back to their plain text."""
+    if not node:
+        return ""
+    t = node.get("type")
+    kids = node.get("content", [])
+    if t == "text":
+        s = node.get("text", "")
+        marks = {m["type"] for m in node.get("marks", [])}
+        if "strong" in marks:
+            s = f"**{s}**"
+        if "code" in marks:
+            s = f"`{s}`"
+        return s
+    if t == "hardBreak":
+        return "\n"
+    if t == "heading":
+        return "## " + "".join(adf_to_md(k) for k in kids)
+    if t == "rule":
+        return "---"
+    if t in ("orderedList", "bulletList"):
+        lines = []
+        for i, item in enumerate(kids, 1):
+            prefix = f"{i}. " if t == "orderedList" else "- "
+            lines.append(prefix + " ".join(adf_to_md(k) for k in item.get("content", [])))
+        return "\n".join(lines)
+    if t == "doc":
+        return "\n\n".join(adf_to_md(k) for k in kids)
+    return "".join(adf_to_md(k) for k in kids)
+
+
 # ---------- commands ----------
 
 def load_draft(path):
     with open(path, encoding="utf-8") as f:
         d = json.load(f)
-    for key in ("config", "type", "summary", "description"):
+    if not d.get("config"):
+        die("草稿缺少欄位 config")
+    if d.get("key"):
+        if not any(d.get(k) for k in ("summary", "description", "priority")):
+            die("更新草稿至少要有 summary、description、priority 其中一個")
+        return d
+    for key in ("type", "summary", "description"):
         if not d.get(key):
             die(f"草稿缺少欄位 {key}")
     if d["type"] not in ("story", "bug"):
         die("type 必須是 story 或 bug")
     return d
+
+
+def fetch_issue(cfg, auth, key):
+    r = requests.get(f"{cfg['base_url']}/rest/api/3/issue/{key}", auth=auth,
+                     params={"fields": "summary,description,priority,status,issuetype"})
+    if r.status_code != 200:
+        die(f"讀取 {key} 失敗 HTTP {r.status_code}：{r.text[:500]}")
+    return r.json()
+
+
+def build_update_fields(cfg, d, issue):
+    """Fields for an update draft; priority is dropped when the issue's type
+    does not support it."""
+    fields, notes = {}, []
+    if d.get("summary"):
+        fields["summary"] = d["summary"]
+    if d.get("description"):
+        fields["description"] = md_to_adf(d["description"])
+    if d.get("priority"):
+        type_name = issue["fields"]["issuetype"]["name"]
+        kind = next((k for k, v in cfg["issue_types"].items() if v == type_name), None)
+        if cfg["priority_supported"].get(kind):
+            fields["priority"] = {"name": d["priority"]}
+        else:
+            notes.append(f"{type_name}類型無法設定優先級，已忽略 {d['priority']}")
+    return fields, notes
 
 
 def build_fields(cfg, d):
@@ -214,7 +288,29 @@ def cmd_search(cfg, keywords):
         print(row)
 
 
+def cmd_get(cfg, key):
+    f = fetch_issue(cfg, load_env(cfg), key)["fields"]
+    print(f"{key}｜{f['issuetype']['name']}｜{f['status']['name']}"
+          f"｜優先級：{(f.get('priority') or {}).get('name', '（無）')}")
+    print(f"標題：{f['summary']}")
+    print("描述：")
+    print(adf_to_md(f.get("description")) or "（空白）")
+
+
 def cmd_preview(d, cfg):
+    if d.get("key"):
+        issue = fetch_issue(cfg, load_env(cfg), d["key"])
+        fields, notes = build_update_fields(cfg, d, issue)
+        print(f"更新：{d['key']}　將覆寫欄位：{'、'.join(fields) or '（無）'}")
+        if "summary" in fields:
+            print(f"標題：{issue['fields']['summary']} → {fields['summary']}")
+        if "priority" in fields:
+            old = (issue["fields"].get("priority") or {}).get("name", "（無）")
+            print(f"優先級：{old} → {fields['priority']['name']}")
+        for n in notes:
+            print(f"注意：{n}")
+        print("[dry-run] 格式檢查通過，未寫入。")
+        return
     fields, notes = build_fields(cfg, d)
     print(f"專案：{cfg['project_key']}　類型：{fields['issuetype']['name']}"
           f"　優先級：{fields.get('priority', {}).get('name', '（不設定）')}")
@@ -238,24 +334,69 @@ def cmd_create(d, cfg):
     print(f"[OK] 已建立 {key}：{cfg['base_url']}/browse/{key}")
 
 
+def cmd_update(d, cfg):
+    if env_tracked_by_git(cfg):
+        die(f"{cfg['env_file']} 被 git 追蹤中，請先移出版控再使用")
+    key = d["key"]
+    auth = load_env(cfg)
+    issue = fetch_issue(cfg, auth, key)
+    fields, notes = build_update_fields(cfg, d, issue)
+    for n in notes:
+        print(f"注意：{n}")
+    if not fields:
+        die("沒有可更新的欄位")
+    backup_dir = os.path.join(SKILL_DIR, "backups")
+    os.makedirs(backup_dir, exist_ok=True)
+    backup = os.path.join(backup_dir, f"{key}-{datetime.now():%Y%m%d-%H%M%S}.json")
+    with open(backup, "w", encoding="utf-8") as f:
+        json.dump(issue, f, ensure_ascii=False, indent=2)
+    r = requests.put(f"{cfg['base_url']}/rest/api/3/issue/{key}", auth=auth, json={"fields": fields})
+    if r.status_code >= 300:
+        die(f"更新失敗 HTTP {r.status_code}：{r.text[:1000]}（原內容備份：{backup}）")
+    print(f"[OK] 已更新 {key}：{cfg['base_url']}/browse/{key}")
+    print(f"更新前內容備份：{backup}")
+    # keep only the newest KEEP_BACKUPS timestamped snapshots per issue
+    pattern = re.compile(rf"^{re.escape(key)}-\d{{8}}-\d{{6}}\.json$")
+    snaps = sorted(f for f in os.listdir(backup_dir) if pattern.match(f))
+    for old in snaps[:-KEEP_BACKUPS]:
+        os.remove(os.path.join(backup_dir, old))
+
+
 def main():
-    if len(sys.argv) < 2 or sys.argv[1] not in ("check", "search", "preview", "create"):
+    cmds = ("check", "search", "get", "preview", "create", "update")
+    if len(sys.argv) < 2 or sys.argv[1] not in cmds:
         print(__doc__)
         sys.exit(1)
     cmd = sys.argv[1]
-    if cmd in ("check", "search"):
+    if cmd in ("check", "search", "get"):
         args = sys.argv[2:]
         name = "tigermaster"
         if len(args) >= 2 and args[0] == "--config":
             name, args = args[1], args[2:]
         cfg = load_config(name)
-        cmd_check(cfg) if cmd == "check" else cmd_search(cfg, args)
+        if cmd == "check":
+            cmd_check(cfg)
+        elif cmd == "search":
+            cmd_search(cfg, args)
+        else:
+            if not args:
+                die("請指定票號，例如 SCRUM-34")
+            cmd_get(cfg, args[0])
         return
     if len(sys.argv) < 3:
         die("請指定草稿檔路徑")
     d = load_draft(sys.argv[2])
     cfg = load_config(d["config"])
-    (cmd_preview if cmd == "preview" else cmd_create)(d, cfg)
+    if cmd == "preview":
+        cmd_preview(d, cfg)
+    elif d.get("key") and cmd == "create":
+        die("草稿有 key，是更新草稿，請用 update")
+    elif cmd == "create":
+        cmd_create(d, cfg)
+    elif not d.get("key"):
+        die("更新草稿缺少 key（例如 SCRUM-34）")
+    else:
+        cmd_update(d, cfg)
 
 
 if __name__ == "__main__":

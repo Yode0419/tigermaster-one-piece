@@ -31,7 +31,7 @@ Eight skills work together to build and evolve this knowledge base:
 | `/robin` | Syncs a shipped feature's exploration docs into `docs/wiki/`, leaves a decision summary behind, and marks the feature 已完成 |
 | `/write-doc` | Turns discussion content into a structured Markdown document (supports: 一般知識文件, 流程文件, 決策記錄, 功能規劃文件, 元件規格文件) |
 | `/archive-doc` | Files documents in the right location and maintains `docs/INDEX.md` |
-| `/to-jira` | Turns a requirement or bug into a Jira ticket (tigermaster SCRUM) via a duplicate check, Q&A and a confirmed preview; personal API token lives in the gitignored `.claude/skills/to-jira/.env` |
+| `/to-jira` | Turns a requirement or bug into a Jira ticket (tigermaster SCRUM) via a duplicate check, Q&A and a confirmed preview, or rewrites an existing ticket (backed up first); personal API token lives in the gitignored `.claude/skills/to-jira/.env` |
 
 ## How to Contribute
 
