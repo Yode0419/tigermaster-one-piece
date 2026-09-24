@@ -1,0 +1,20 @@
+{
+  "name": "tigermaster",
+  "base_url": "https://tigermaster.atlassian.net",
+  "project_key": "SCRUM",
+  "env_file": ".env",
+  "issue_types": {
+    "story": "任務",
+    "bug": "漏洞"
+  },
+  "priority_supported": {
+    "story": true,
+    "bug": false
+  },
+  "title_prefixes": ["【Web】", "【App】", "【後台】", "【系統】"],
+  "templates": {
+    "story": "templates/story.md",
+    "bug": "templates/bug.md"
+  },
+  "priority_rules": "references/priority-rules.md"
+}

@@ -11,3 +11,11 @@ Thumbs.db
 .claude/cache/
 .claude/history.jsonl
 .claude/todos/
+
+# Python cache
+__pycache__/
+
+# Secrets (API tokens etc.)
+.env
+.env.*
+!.env.example

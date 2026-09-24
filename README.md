@@ -31,6 +31,7 @@ docs/
 | `/robin` | 功能開發完成、或設計方法論定案採用後，把探索文件萃取成知識寫進 `wiki/` 或 `design-ops/`，並留下決策摘要 |
 | `/write-doc` | 將討論內容整理成結構化的 Markdown 文件 |
 | `/archive-doc` | 將文件歸檔到適當位置，維護 `docs/INDEX.md` |
+| `/to-jira` | 透過問答把需求或 Bug 整理成 Jira ticket，預覽確認後才建立（首次使用需在 `.claude/skills/to-jira/.env` 填入個人 API token，參考同資料夾的 `.env.example`） |
 
 ### 使用流程
 
@@ -43,6 +44,8 @@ docs/
 **建立元件規格**：`/sanji` → `/write-doc` → `/archive-doc`
 
 **功能開發完成**：`/robin`（自動串接 `/write-doc` → `/archive-doc`）
+
+**開 Jira ticket**：`/to-jira`（可單獨使用，也可從 `/luffy` 的規劃文件擬稿）
 
 ### 設計探索的狀態
 
