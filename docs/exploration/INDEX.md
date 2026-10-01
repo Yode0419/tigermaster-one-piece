@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-09-24_
+_Last updated: 2026-10-01_
 
 ---
 
@@ -22,7 +22,13 @@ _Last updated: 2026-09-24_
 
 ---
 
-## 進行中（8）
+## 進行中（9）
+
+### zhisheng-partnership/：智生活合作
+
+- **[智生活合作：專案總覽](in-progress/zhisheng-partnership/overview.md)**：智生活 App 有「到府修繕」入口，要把公司現有服務放進去，初期可能走人工處理，後續視合作延伸再設計內容或串接；人工處理流程與商業條件尚待釐清 _(2026-10-01)_
+- **[工項照片與說明提供](in-progress/zhisheng-partnership/photo-supply.md)**：董事長要求提供 14 個小項的照片、對應工項編號與說明，禮拜五前交付；已整理小項與平台工項對照、抓好 27 張官網圖片，老屋翻新在平台無專屬工項、排水維修已補 P 類工項，Excel 尚未製作 _(2026-10-01)_
+- **[工項對照表（草稿）](in-progress/zhisheng-partnership/item-table-draft.md)**：以工項為單位（圖片、工項、說明為一組），按董事長的 14 小項分組，之後從每個小項選用；含 4 個待討論問題，定案後轉 Excel _(2026-10-01)_
 
 ### figma-ssot/：Figma SSOT：App 正式畫面的唯一維護來源
 
