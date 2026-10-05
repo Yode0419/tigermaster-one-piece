@@ -32,6 +32,7 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 - **Frame**：維持 393×852，名稱與位置不變。畫完後刪除三行佔位文字。
 - **Material 2 預設值**：不寫在程式裡，要自己判斷。已遇到：頁面背景 `#FAFAFA`、AppBar 標題 20px Medium 加陰影（用元件原本樣式即可）。
 - **示意資料**：常見台灣姓名；時間依當下日期由新到舊；格式照真實資料（例如訂單編號 `RO` + 日期 + 5 碼流水號）。
+- **示意資料前後接得上**：從上一格點進來的畫面，沿用上一格的同一筆資料（例如 1.2.1 是 1.1.1 第一列那間聊天室，最後一則訊息與列表相同）。
 
 ---
 
@@ -44,7 +45,7 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 5. **自排區塊**：依繪製原則綁 token，重複區塊做成本機元件。
 6. **組 Frame**：用三區 Auto Layout 結構（見下節），刪除三行佔位文字。
 7. **驗證**：把 Frame 暫時拉大（例如 430×932），確認內容區會伸縮、底部維持貼底，再改回 393×852；截圖一次確認。
-8. **記錄**：近似對應與新查到的 Key 寫進 [reference.md](reference.md)，判斷與問題寫進當批的 `batches/` 紀錄，回報時列出這次新增的近似對應。
+8. **記錄**：近似對應與新查到的 Key 寫進 [reference.md](reference.md)，判斷與問題寫進當批的 `batches/` 紀錄，回報時列出這次新增的近似對應，以及「DS 沒有、由 Claude 自己排的部分」（沒有就寫沒有），讓使用者一眼看到哪些是 Claude 的判斷。
 
 ---
 
@@ -58,9 +59,14 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 | 1. 固定頂部 | AppBar 或 ChatAppBar instance，寬度 Fill |
 | 2. `Content` | 寬高都 Fill，裁切內容，原型捲動方向設為垂直；裡面放實際內容（寬度 Fill） |
 | 3. 固定底部 | BottomNavBar、ChatInputBar 或底部按鈕，寬度 Fill；沒有就省略。BottomNavBar 高 82，中央 Logo 圓圈會往上蓋到 `Content`，所以固定底部要排在 `Content` 之後（圖層在上方） |
-| 浮層 | Dialog、Bottom Sheet、遮罩設為忽略 Auto Layout 的絕對定位，綁約束貼底或置中（待第一個 Dialog 畫面驗證） |
+| 浮層 | Dialog、Bottom Sheet、遮罩設為忽略 Auto Layout 的絕對定位，排在最上層。遮罩 `Scrim` 蓋滿整個 Frame（含狀態列），填色綁 `Background/Overlay`，約束 Stretch；BottomSheet 寬 393、貼底，約束左右 Stretch、垂直 Bottom（1.2.3 已驗證；Dialog 置中待 1.3.3 驗證） |
 
 - 內容比畫面長時，只畫第一屏看得到的部分，超出的部分由 `Content` 裁切，Frame 不加高。
+- **聊天室**：背景用 ChatBackground instance，設為絕對定位、約束 Stretch，放在最底層；`Content` 主軸對齊設為頂部（訊息少時貼在上方；訊息超出畫面時，進入聊天室會停在最底部，所以只畫最新的一屏，從頂部排起、最後一則貼近輸入列），左右 padding 綁 `Spacing/16`、訊息間距綁 `Spacing/8`。
+- **浮層畫面的底圖**：沿用打開浮層前的那一格（例如 1.2.3 從 1.2.2 點「傳送照片」打開，底圖複製 1.2.2）。
+- **動作選單（程式的 CupertinoActionSheet）**：BottomSheet 用 hasHeader=false、Footer=Inline、開啟 hasDragHandle；選項用 ListItem（Trailing=None、關閉前方圖示、最後一列關閉分隔線），在 Slot 裡包一層左右 padding 綁 `Spacing/16` 的外框；「取消」用按鈕區的 Button，Style 改為 Ghost Neutral。有標題的（例如「重送訊息？」）改用 hasHeader=true 並關閉左右圖示。
+- **內容短的 BottomSheet 一律用 Footer=Inline**，不要用 Sticky 再手動固定高度。
+- **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，所以每則訊息包一層寬度 Fill 的水平 Auto Layout（無底色），對方訊息靠左、自己的訊息靠右、日期分隔置中。
 - 把既有 Frame 改成 Auto Layout 時，先建立 `Content` 並調整圖層順序，再設 `layoutMode`；最後確認 Frame 的 x、y 沒有跑掉。
 
 ---
@@ -88,6 +94,9 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 
 - 查 DS 元件：`search_design_system` 一次只能查一筆，改用 `use_figma` 在 DS 檔案逐頁列出元件、屬性與 key 比較快。
 - 每次 `use_figma` 都要重新 `setCurrentPageAsync` 切到目標 Page。
+- 同一個畫面的不同狀態（例如 1.2.2 是 1.2.1 展開輸入列）：把上一格的子圖層複製過來，只換有變化的部分。複製來的 instance 如果有文字覆寫，**不要用 `setProperties` 切換 variant**，曾發生覆寫文字的寬度沒有重算、超出外框；改成刪掉後直接建立目標 variant 的新 instance，再重新覆寫。
+- 在 DS 複製 variant 來新增 variant 時，複製品會遺失所有屬性連結（顯示開關、文字、Slot），Slot 也會變成一般 Frame。要逐一接回 `componentPropertyReferences`；Slot 用 `component.createSlot()` 重建、把內容搬進去、接回原本的 Slot 屬性，再刪掉 `createSlot()` 多產生的屬性。
+- DS 檔案裡看得到、但還沒發布的元件，匯入時會出現「not found」。先用一段只匯入不建立的腳本確認每個 Key 都能匯入，再組畫面；匯入失敗就請使用者發布 DS 元件庫，不要自己複製一份。
 - 元件屬性名稱帶有 `#id` 後綴（例如 `Has Leading#851:0`），用名稱前綴找出完整 key 再 `setProperties`。
 - 綁顏色：`setBoundVariableForPaint` 會回傳新的 paint，要重新指定給 `fills`。
 - 改文字前先載入字型；單行截斷用 `textTruncation = 'ENDING'` 加 `maxLines = 1`，寬度設 Fill。
