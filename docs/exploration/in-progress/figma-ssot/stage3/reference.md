@@ -31,7 +31,7 @@
 | MessageBubble（整組） | `64d16df720ff2534707fc0d827767fca1de57884` | 用 `importComponentSetByKeyAsync` 匯入再依名稱挑 variant。屬性 Type（Text／Image／File／CallLog／Slot／DayMark）、Self Message；氣泡寬度上限 240。訊息文字是 `Bubble` 框裡的文字，時間是 `Meta` 框裡的文字；Self 的已讀狀態是 `_Message Status` instance（Sending／Sent／Failed／Read） |
 | ChatInputBar（整組） | `050daf67b1fcafa68d1d402c60b18bde3ab709c9` | 用 `importComponentSetByKeyAsync` 匯入再依名稱挑 variant。高 106，已含 HomeIndicator；輸入框提示文字圖層原文為「Placeholder text」。屬性 State（Collapsed／Expanded）、Content（Empty／Filled）、TimeRequest（布林，管理員設 false，只影響 Expanded）、Reserve Home Indicator（布林）。兩個布林都直接在 ChatInputBar instance 上 `setProperties` |
 | BottomSheet（整組） | `623ce912db34f3b5f72ef1e0c2037ef3f9f1f98a` | variant hasHeader（true／false）、Footer（Sticky／Inline）；Title（文字）、leadingIcon、tailingIcon、hasFooter、hasDragHandle（布林）。內容放進 `Content` Slot（先刪掉 `Slot Rectangle`）。短內容用 Footer=Inline，長內容用 Sticky |
-| ListItem（整組） | `0255130eee127e0935f6853dca74e7041a9f3035` | variant Trailing（Icon／Slot／None）；Label（文字）、Has Leading Icon、Has Divider（布林）。本身左右沒有留白，外層要給 `Spacing/16` |
+| ListItem（整組） | `0255130eee127e0935f6853dca74e7041a9f3035` | variant Trailing（Icon／Slot／None）、State（default／pressed）；Label（文字）、Has Leading Icon、Has Divider（布林）。自帶左右 `Spacing/16`，直接放、寬度填滿 |
 | Button | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。「取消」用 Neutral Outlined |
 
 ---

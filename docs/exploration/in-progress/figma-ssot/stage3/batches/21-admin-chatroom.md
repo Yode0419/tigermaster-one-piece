@@ -129,7 +129,7 @@
 **DS 沒有、由 Claude 自己排的部分**
 
 - `Scrim`：一個蓋滿 Frame 的外框，填色綁 `Background/Overlay`。DS 沒有遮罩元件。
-- `Options`：Slot 裡包住兩列 ListItem 的外框，左右 padding `Spacing/16`。因為 ListItem 本身沒有左右留白。
+- BottomSheet 的 Slot 間距由 `Spacing/8` 改為 0，讓兩列 ListItem 緊貼、分隔線在兩列正中間。（最初另包一層 `Options` 外框補左右 16，ListItem 擴充後已拿掉。）
 **遇到的問題**
 
 - DS 沒有 iOS 動作選單元件。與使用者討論後定出「照 Flutter 與照 DS 的分界」，記在 [stage3.md](../stage3.md) 決策。

@@ -64,7 +64,7 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 - 內容比畫面長時，只畫第一屏看得到的部分，超出的部分由 `Content` 裁切，Frame 不加高。
 - **聊天室**：背景用 ChatBackground instance，設為絕對定位、約束 Stretch，放在最底層；`Content` 主軸對齊設為頂部（訊息少時貼在上方；訊息超出畫面時，進入聊天室會停在最底部，所以只畫最新的一屏，從頂部排起、最後一則貼近輸入列），左右 padding 綁 `Spacing/16`、訊息間距綁 `Spacing/8`。
 - **浮層畫面的底圖**：沿用打開浮層前的那一格（例如 1.2.3 從 1.2.2 點「傳送照片」打開，底圖複製 1.2.2）。
-- **動作選單（程式的 CupertinoActionSheet）**：BottomSheet 用 hasHeader=false、Footer=Inline、開啟 hasDragHandle；選項用 ListItem（Trailing=None、關閉前方圖示、最後一列關閉分隔線），在 Slot 裡包一層左右 padding 綁 `Spacing/16` 的外框；「取消」用按鈕區的 Button，Style 改為 Ghost Neutral。有標題的（例如「重送訊息？」）改用 hasHeader=true 並關閉左右圖示。
+- **動作選單（程式的 CupertinoActionSheet）**：BottomSheet 用 hasHeader=false、Footer=Inline、開啟 hasDragHandle；選項用 ListItem（Trailing=None、關閉前方圖示、最後一列關閉分隔線），直接放進 Slot、寬度填滿（元件自帶左右留白），Slot 間距改為 0（Slot 預設 `Spacing/8`，列表項目之間不留間距）；「取消」用按鈕區的 Button，Style 改為 Ghost Neutral。有標題的（例如「重送訊息？」）改用 hasHeader=true 並關閉左右圖示。
 - **內容短的 BottomSheet 一律用 Footer=Inline**，不要用 Sticky 再手動固定高度。
 - **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，所以每則訊息包一層寬度 Fill 的水平 Auto Layout（無底色），對方訊息靠左、自己的訊息靠右、日期分隔置中。
 - 把既有 Frame 改成 Auto Layout 時，先建立 `Content` 並調整圖層順序，再設 `layoutMode`；最後確認 Frame 的 x、y 沒有跑掉。
@@ -96,6 +96,7 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 - 每次 `use_figma` 都要重新 `setCurrentPageAsync` 切到目標 Page。
 - 同一個畫面的不同狀態（例如 1.2.2 是 1.2.1 展開輸入列）：把上一格的子圖層複製過來，只換有變化的部分。複製來的 instance 如果有文字覆寫，**不要用 `setProperties` 切換 variant**，曾發生覆寫文字的寬度沒有重算、超出外框；改成刪掉後直接建立目標 variant 的新 instance，再重新覆寫。
 - 在 DS 複製 variant 來新增 variant 時，複製品會遺失所有屬性連結（顯示開關、文字、Slot），Slot 也會變成一般 Frame。要逐一接回 `componentPropertyReferences`；Slot 用 `component.createSlot()` 重建、把內容搬進去、接回原本的 Slot 屬性，再刪掉 `createSlot()` 多產生的屬性。
+- DS 元件發布新版後，目標檔案裡既有的 instance 不一定會馬上更新（ChatInputBar 自動更新了，ListItem 沒有）。用到新版的屬性或結構時，先檢查 instance 是否已是新版，沒有就從 `importComponentSetByKeyAsync` 匯入新版重建。
 - DS 檔案裡看得到、但還沒發布的元件，匯入時會出現「not found」。先用一段只匯入不建立的腳本確認每個 Key 都能匯入，再組畫面；匯入失敗就請使用者發布 DS 元件庫，不要自己複製一份。
 - 元件屬性名稱帶有 `#id` 後綴（例如 `Has Leading#851:0`），用名稱前綴找出完整 key 再 `setProperties`。
 - 綁顏色：`setBoundVariableForPaint` 會回傳新的 paint，要重新指定給 `fills`。
