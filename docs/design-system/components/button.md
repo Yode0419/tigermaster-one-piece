@@ -14,14 +14,16 @@
 | Variant | Fill | Tone | 背景 | 文字 | 邊框 | 語意角色 |
 |---------|------|------|------|------|------|---------|
 | `primary` | `filled` | — | `Interactive/Primary` | `Interactive/OnFilled` | — | 頁面主確認行動 |
-| `primary` | `outlined` | — | transparent | `Interactive/Primary` | `Border/Interactive` | 次要全寬行動 |
+| `primary` | `outlined` | — | `Background/Surface` | `Interactive/Primary` | `Border/Interactive` | 次要全寬行動 |
 | `secondary` | `filled` | — | `Interactive/Action` | `Interactive/OnFilled` | — | 頁面內次要行動 |
-| `secondary` | `outlined` | — | transparent | `Interactive/Action` | `Border/Interactive` | 小型輔助行動 |
+| `secondary` | `outlined` | — | `Background/Surface` | `Interactive/Action` | `Border/Interactive` | 小型輔助行動 |
 | `brand` | `filled` | — | `Interactive/Brand` | `Interactive/OnBrand` | — | 品牌色溝通 / 催促行動 |
-| `neutral` | `outlined` | — | transparent | `Text/Hint` | `Border/Default` | 帳號設定類低強調行動 |
+| `neutral` | `outlined` | — | `Background/Surface` | `Text/Hint` | `Border/Default` | 帳號設定類低強調行動 |
 | `ghost` | — | `action` | transparent | `Interactive/Action` | — | 取消、三級動作 |
 | `ghost` | — | `neutral` | transparent | `Text/Hint` | — | 刻意壓制的低調入口 |
 | `ghost` | — | `danger` | transparent | `Status/Error` | — | 破壞性最終確認 |
+
+**Outlined 一律白底**（2026-10-05）：App 的頁面底色是 `Background/Page`（灰），透明底的 Outlined 放在灰色頁面上邊框太淡、幾乎看不見；程式在帳號頁、訂單詳情、報價等處也明確設白底。放在白色卡片或 BottomSheet 上看不出差別。按下狀態的 12% 疊色疊在白底上。避免放在有顏色或照片的背景上（會出現一塊白框）。
 
 **停用狀態（所有 variant）**：整體套用 `opacity: 40%`，不修改底層顏色。
 
@@ -43,13 +45,15 @@
 
 ### Size 規格
 
-> 計算高度 = 垂直 Padding × 2 + Line Height（Label token）
+> 計算高度 = 垂直 Padding × 2 + Line Height（Label token）；`lg` 另設最小高度，以最小高度為準
 
 | Size | 垂直 Padding | 水平 Padding | Icon 間距 | 文字大小 | 計算高度 | 典型 Width | 最小寬度 |
 |------|------------|------------|---------|--------|--------|-----------|---------|
-| `lg` | `Spacing/12` | `Spacing/20` | `Spacing/8` | `Label/L`（16px, LH 20）| **44px** | `full` | **96px** |
+| `lg` | `Spacing/12` | `Spacing/20` | `Spacing/8` | `Label/L`（16px, LH 20）| **48px**（最小高度 `Spacing/48`，內容垂直置中） | `full` | **96px** |
 | `md` | `Spacing/8` | `Spacing/16` | `Spacing/8` | `Label/L`（16px, LH 20）| **36px** | `hug` | **88px** |
 | `sm` | `Spacing/4` | `Spacing/12` | `Spacing/4` | `Label/M`（14px, LH 20）| **28px** | `hug` | **64px** |
+
+> **lg 高度 48**（2026-10-05）：原本由內距撐出 44，改為 48。內距改 14 沒有 token、改 16 會變 52，所以維持 `Spacing/12` 內距，另設最小高度 `Spacing/48`。
 
 > **最小寬度依據**：比照業界慣例（文字按鈕最小寬度約為高度的 2.4 倍，如 Material Design 標準 88dp／36dp），避免極短文字標籤（如「是」「OK」）在 `hug` width 下顯得過窄、點擊區域不足。
 

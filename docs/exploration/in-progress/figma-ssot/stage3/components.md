@@ -16,6 +16,10 @@
 
 **ListItem 已擴充（2026-10-05）**：新增 State variant（default／pressed，按下底色 `Overlay/Pressed/Neutral` 12%），左右 `Spacing/16` 收進元件，分隔線內縮。規格見 `docs/design-system/components/list-item.md`。
 
+**Button 的 Outlined 加白底（2026-10-05）**：Primary、Secondary、Neutral Outlined 共 54 個 variant 最底層加 `Background/Surface`，按下狀態的 12% 疊色保留在上層。規格見 `docs/design-system/components/button.md`。
+
+**Button lg 高度改為 48（2026-10-05）**：54 個 lg variant 加最小高度 `Spacing/48`，內距不變，內容垂直置中；原本一個高度固定 44 的 variant（Primary Filled／rect／default）改為依內容撐開。
+
 **文件與 Figma 不一致**：`docs/design-system/INDEX.md` 寫 ChatAppBar、ChatBackground「Figma 尚未建立正式 Component」，但 Figma Chatroom 頁已有這兩個元件組，待確認是否完成並更新索引。
 
 ---

@@ -44,13 +44,17 @@
 | BottomSheet（整組） | `623ce912db34f3b5f72ef1e0c2037ef3f9f1f98a` | variant hasHeader（true／false）、Footer（Sticky／Inline）；Title（文字）、leadingIcon、tailingIcon、hasFooter、hasDragHandle（布林）。內容放進 `Content` Slot（先刪掉 `Slot Rectangle`）。短內容用 Footer=Inline，長內容用 Sticky |
 | ListItem（整組） | `0255130eee127e0935f6853dca74e7041a9f3035` | variant Trailing（Icon／Slot／None）、State（default／pressed）；Label（文字）、Has Leading Icon、Has Divider（布林）。自帶左右 `Spacing/16`，直接放、寬度填滿 |
 | Dialog（Standard／Emphasis） | `c65efcd66dd4013a7e31d53205c959ad418a7bd4`／`079dcccc432c1708fef015ad9299629dc1462aca` | 整組 `2b55cd9f7f7872a2792bfa16829a0c18b154d285`，沒有元件屬性。Standard 寬 300、按鈕水平排列；Emphasis 寬 343、主按鈕實心、垂直堆疊 |
-| Button | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。「取消」用 Neutral Outlined |
+| AppBar（Tall／None／Brand） | `efc873c2b05847cfa181346fa992131319a4f0f0` | 帳號頁頁首。高 214（狀態列 59＋空的第一列 64＋Title 列）；頭像區放進 `Title` Slot（先刪掉 `Title Text`） |
+| Avatar 75（custom／default） | `c3822d64f3710381168854c191704361513e0d38`／`cc75fbf7eb48e16f491c7d1ae4efcabc3cacfd56` | 帳號頁頁首頭像 |
+| Card（Inset／None） | `f64c6178c1da1ba24c970626af159042bfa6a065` | 整組 `0a964e8beb2f6f7b514d76fa4926d79dd66db241`，variant Layout（Inset／Fill）× Padding（Standard／None）。內容放進 `Slot`（先刪掉 `Slot Rectangle`）。包 ListItem 時用 Padding=None |
+| Button（整組） | `86872cf8e34bcd719965b50d7a9ab2abeb291235` | 用 `importComponentSetByKeyAsync` 匯入，依名稱 `Style=…, Size=lg, Shape=rect, State=default` 挑 variant。Label（文字）、hasIconStart、hasIconEnd |
+| Button（BottomSheet 內） | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。「取消」用 Neutral Outlined |
 
 ---
 
 ## Token 與樣式 Key
 
-用 `importVariableByKeyAsync`、`importStyleByKeyAsync` 匯入。只列已用到的，完整清單在 DS 檔案。
+變數用 `figma.variables.importVariableByKeyAsync`（不是 `figma.importVariableByKeyAsync`），文字樣式用 `figma.importStyleByKeyAsync` 匯入。只列已用到的，完整清單在 DS 檔案。
 
 | 名稱 | Key |
 |---|---|
@@ -64,6 +68,10 @@
 | `Spacing/8`／`Spacing/12` | `8553c60279b7619ca64c897f0d2c58d8c3b66775`／`67a4b5ad236fc440d60d6c73b16e476634956c9f` |
 | `Spacing/16` | `d83cd74d5f15f468c9a0b21f1b921aea1498c990` |
 | `Spacing/2`／`Spacing/32` | `f3e1f7d57728f7edd081803c55856ec51a5a1607`／`197c60a72bcfd6e3f421ea278e69c467c1334fb9` |
+| `Spacing/48` | `c12c67e02fe456bb24980764e0f975ac5658a72f` |
+| `Heading/4`（20 Medium） | `abfffd46333b70a4306a33ba9f777b4c238e794d` |
+| `Title/L`（20 Medium） | `12b6da252d350ebf12cd89584efc49e660a0ec09` |
+| `Body/S`（14 Regular） | `12d8e3bd37213cb45a5c8f384594ec0fdb3aee0a` |
 | `Radius/Full` | `b73e8cc968980a0228feb1f7af1ca4f41c10fbe4` |
 | `Status/Error`（#FF2851） | `95cb702e62654b3fab2f169f8a6b19063eda34bf` |
 | `Text/Inverse`／`Icon/Inverse`（白） | `1aa6d7b6c559ffc6cf8829a686fa5da64d9e862b`／`b50ca8e9952006eb895ed1f24032497ed4da5795` |
@@ -88,6 +96,11 @@
 | `Colors.black54`（通話畫面背景暗化，54%） | `Background/Overlay`（63%） | 無 | | 管理員 1.3.1 |
 | `Colors.red`（#F44336，掛斷鍵） | `Status/Error`（#FF2851） | 無 | | 管理員 1.3.1 |
 | 28px Bold（通話畫面姓名） | `Heading/2`（28 SemiBold） | 無 | | 管理員 1.3.1 |
+| 14 Regular（帳號頁版本文字，Material 2 預設 body2） | `Body/XS`（12 Regular，使用者指定） | `Body/S`（數值完全相同） | | 管理員 2.1.1 |
+| 18px（About 對話框版本到著作權文字） | `Spacing/16` | `Spacing/20` | | 管理員 2.2.1 |
+| 60px（帳號頁按鈕到版本文字） | 區段間距 `Spacing/16`＋`Version` 上方 `Spacing/48`，共 64 | `Spacing/40`（共 56） | | 管理員 2.1.1 |
+| 30px（帳號頁版本文字下方） | `Spacing/32` | `Spacing/24` | | 管理員 2.1.1 |
+| `(190,190,190)` #BEBEBE（版本文字灰） | `Text/Hint`（#727276） | 原始色 `Neutral/400`（#BABABA，較接近但不是語意 token） | | 管理員 2.1.1 |
 | `#000000`（全螢幕照片檢視的黑底，`PhotoView` 預設） | `Base/Black`（原始色，使用者指定；語意 token 沒有純黑） | `Background/Inverse`（#2A2A2A，AppBar 遮罩會看出帶狀） | | 管理員 1.2.4 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。

@@ -3,7 +3,7 @@
 ## 概述
 
 - **上層專案**：[Figma SSOT 專案總覽](../figma-ssot-overview.md)
-- **狀態**：進行中（管理員端試做中）
+- **狀態**：進行中（管理員端已完成，下一步檢查點 1）
 - **開始**：2026-10-05
 - **結構依據**：[建置交接包 r01](../figma-build-r01.md) 的完整結構表
 - **Figma 檔案**：
@@ -47,6 +47,10 @@
 - 2026-10-05：全螢幕照片畫面的黑底綁原始色 `Base/Black`，不用語意 token `Background/Inverse`。Why：語意 token 沒有純黑，#2A2A2A 底上 AppBar 的 12% 遮罩會看出帶狀，純黑與程式一致。
 - 2026-10-05：只有圖示、沒有文字的 FAB 用 Type=Slot 放圖示，第一個案例是 1.2.4 傳送鍵。Why：Default 一定帶文字，程式沒有文字，內容照 Flutter。
 - 2026-10-05：1.2.5 確認重送訊息改用 Dialog（Standard），不照程式的 iOS 動作選單從底部出現。Why：程式的文字訊息只有網址有點擊事件，失敗訊息點了不會觸發重送，這個畫面現況是 bug、使用者看不到；既然沒有實際畫面可照，就畫預期行為，確認型動作依 DS 用 Dialog。程式有 bug 導致照不到現況時，回報使用者決定畫法。
+- 2026-10-05：程式數值剛好有對應 token、但 DS 規格另有規定時，照 DS。第一個案例：帳號頁左右邊距程式為 8，依 DS 頁面左右邊距用 `Spacing/16`。Why：邊距屬於樣式，與「樣式照 DS」一致；「沒有對應 token 才用 DS」只是補空缺的規則，不代表有 token 就照程式。
+- 2026-10-05：沒有 AppBar、頂部跟著內容捲動的頁面，頂部仍放在固定頂部區，捲動行為只用文字記錄。Why：只畫第一屏，靜止畫面相同；放進捲動區會讓 AppBar 內嵌的狀態列一起捲走，與 App 不符。
+- 2026-10-05：DS 的 Outlined 按鈕（Primary／Secondary／Neutral）一律加白底 `Background/Surface`，規格見 `docs/design-system/components/button.md`。Why：頁面底色是灰色，透明底的 Outlined 在灰色頁面上幾乎看不見；程式在帳號頁等處也是白底。
+- 2026-10-05：DS 的 Button lg 高度由 44 改為 48（內距維持 `Spacing/12`，加最小高度 `Spacing/48`），規格見 `docs/design-system/components/button.md`。Why：使用者指定。
 - 2026-10-05：不在知識庫建立逐格的畫面索引，畫的期間也不收集 Figma 連結；專案結束時以 `/robin` 把結構表整理成 Page／Section 層級的「畫面地圖」並附三個 Figma 檔案連結，細節由 AI 到 Figma 依 Frame 名稱查找。Why：Figma 是唯一維護來源，逐格索引會多一處要同步；Frame 名稱帶編號，AI 可自行查到。若出現沒有 Figma 權限的使用者，或連不到 Figma 的 AI agent，再重新考慮。
 
 ---
@@ -56,7 +60,7 @@
 | 批次 | 角色 | Page | Frame 數 | 狀態 | 紀錄 |
 |---|---|---|---|---|---|
 | 21 | 管理員端 | 1 客服聊天室 | 10 | 已完成（10/10，已驗收） | [21-admin-chatroom](batches/21-admin-chatroom.md) |
-| 22 | 管理員端 | 2 帳號 | 3 | 未開始 | |
+| 22 | 管理員端 | 2 帳號 | 3 | 已完成（3/3，已驗收） | [22-admin-account](batches/22-admin-account.md) |
 | ▶ | 檢查點 1 | 檢討流程，整理成 Skill，決定第一批元件候選 | — | 未開始 | |
 | 12 | 師傅端 | 1 首頁與接案 | 11 | 未開始 | |
 | ▶ | 檢查點 2 | 檢討一般資料頁的流程與品質 | — | 未開始 | |

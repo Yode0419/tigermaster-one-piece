@@ -70,6 +70,11 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 - **換圖示**：建立 icon 元件（Icon=Phosphor）的 instance（預設是 Smiley），用 `search_design_system` 限定 Phosphor 圖示庫（見 [reference.md](reference.md)）以圖示名稱搜尋，拿元件組 Key 匯入、挑 variant（`Format=Outline, Weight=Regular`／`Fill` 等），對內部的 Smiley instance 做 `swapComponent`。換完後填色會變回預設，需要白色時把內部 Vector 的填色綁 `Icon/Inverse`（1.2.6、1.3.1 已驗證）。
 - **缺圖示時的佔位**：Phosphor 搜尋不到對應圖示時，保留 Smiley，圖層名稱寫上要換成的圖示，並記入 [components.md](components.md) 的 DS 待辦。
 - **全螢幕照片（程式的 `PhotoView` 加 `extendBodyBehindAppBar`）**：管理員檔案已有本機元件 `PhotoViewer`，Frame 只放一個寬高 Fill 的 instance；其他檔案還沒有，照以下結構排。Frame 填色綁 `Base/Black`，只放 `Content`（寬高 Fill、內容置中），照片用 Image 元件、寬度 Fill、維持照片比例；AppBar 用 Background=Image 並隱藏 `Background Image`、`Title Text` 圖層，絕對定位貼頂、約束左右 Stretch；底部放 HomeIndicator（Light）絕對定位貼底；右下 FAB 照 Flutter `endFloat` 距右 16、距 HomeIndicator 16，約束 Right／Bottom（1.2.4 已驗證，待使用者確認）。
+- **沒有 AppBar、頂部跟著內容捲動的頁面**（例如帳號頁的 `ClientAccountHeaderSection`）：頂部一樣放在固定頂部區，用 DS 對應的 AppBar variant；捲動行為只在批次紀錄用文字說明。Why：只畫第一屏，靜止畫面相同；放進 `Content` 會讓 AppBar 內嵌的狀態列一起捲走，反而與 App 不符；DS 的 AppBar 規格也規定捲動行為不做 variant（2.1.1 已驗證）。
+- **一般資料頁（帳號頁這類列表、卡片、按鈕組成的頁面）**：`Content` 左右與上方 padding `Spacing/16`；內容依程式分成區段（例如「幫助」「其他」），每個區段是一個垂直 Auto Layout（區段標題＋內容，間距 `Spacing/8`），區段之間 `Spacing/16`。區段標題 `Heading/4`；設定入口用 Card（Inset、Padding=None）包 ListItem；全寬按鈕用 Button lg、寬度 Fill（2.1.1 已驗證）。
+- **帳號頁頁首**：AppBar（Tall、None、Brand），關閉 Has Leading、Has Action；刪掉 `Title` Slot 裡的 `Title Text`，放 `Profile`（水平、間距 `Spacing/16`、垂直置中）：Avatar 75＋姓名 `Title/L`／Email `Body/XS`（2.1.1 已驗證）。
+- **Flutter 內建對話框的文字**：`showAboutDialog`、Material 預設按鈕等文字由 Flutter 依語系產生，不在程式裡。到 Flutter SDK 的 `flutter_localizations/lib/src/l10n/material_zh_TW.arb` 查 zh_TW 字串（例如「查看授權」「關閉」），版面看 SDK 的元件原始碼（例如 `material/about.dart`）。SDK 在 `C:\Users\yode0\develop\flutter`（2.2.1 已驗證）。
+- **Dialog 的按鈕要換樣式時**：Dialog 內部的按鈕不能刪掉再插入新的（`Cannot move node … inside of an instance`），改用 `swapComponent` 換成目標 variant，再設定 Label（2.3.1 已驗證）。
 - **內容短的 BottomSheet 一律用 Footer=Inline**，不要用 Sticky 再手動固定高度。
 - **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，所以每則訊息包一層寬度 Fill 的水平 Auto Layout（無底色），對方訊息靠左、自己的訊息靠右、日期分隔置中。
 - 把既有 Frame 改成 Auto Layout 時，先建立 `Content` 並調整圖層順序，再設 `layoutMode`；最後確認 Frame 的 x、y 沒有跑掉。
@@ -97,6 +102,8 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 
 ## Figma 操作注意事項
 
+- `figma.createAutoLayout()` 建立的外框預設會裁切內容，裡面放 Card 等有陰影的元件時陰影會被切掉。自己建的區段、外框一律設 `clipsContent = false`，只有 `Content` 保留裁切（2.1.1 已發生）。
+- 匯入變數用 `figma.variables.importVariableByKeyAsync`，`figma.importVariableByKeyAsync` 不存在。
 - 查 DS 元件：`search_design_system` 一次只能查一筆，改用 `use_figma` 在 DS 檔案逐頁列出元件、屬性與 key 比較快。
 - 每次 `use_figma` 都要重新 `setCurrentPageAsync` 切到目標 Page。
 - 同一個畫面的不同狀態（例如 1.2.2 是 1.2.1 展開輸入列）：把上一格的子圖層複製過來，只換有變化的部分。複製來的 instance 如果有文字覆寫，**不要用 `setProperties` 切換 variant**，曾發生覆寫文字的寬度沒有重算、超出外框；改成刪掉後直接建立目標 variant 的新 instance，再重新覆寫。
