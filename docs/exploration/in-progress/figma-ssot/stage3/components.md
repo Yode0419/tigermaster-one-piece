@@ -25,5 +25,18 @@
 | 候選 | 出現位置 | 狀態 |
 |---|---|---|
 | 通話畫面（撥出中、通話中） | 客戶端 6.3、師傅端 5.3、管理員端 1.3 | 待試做時確認 |
-| 全螢幕照片檢視 | 管理員端 1.2.6，其他角色的聊天室待確認 | 待試做時確認 |
+| 全螢幕照片檢視（`PhotoViewer`） | 管理員 1.2.4、1.2.6；客戶 5.1.4、6.1.5、6.1.7；師傅 5.1.5、5.1.7；程式另有 `horizontal_image_list`（可能是訂單照片，不能下載） | 已建本機元件（管理員檔案）。三個 App 檔案都會用到，建議檢查點 1 升級進 DS，見下方 DS 待辦 2 |
 | 聊天室列表列（`AdminChatroomListItem`） | 管理員端 1.1.1（同畫面重複 8 次） | 已建本機元件；客戶端、師傅端的聊天室列表是否同樣式待確認 |
+
+---
+
+## DS 待辦
+
+階段 3 畫圖時發現、要回 DS 檔案處理的事。建議在檢查點 1 前後一起處理，完成後在此標記並更新 DS 文件。
+
+| # | 項目 | 內容 | 狀態 |
+|---|---|---|---|
+| 1 | 接回 Phosphor 圖示庫 | DS 的 icon 元件引用的 Phosphor 元件顯示「Component removed from library」，既有圖示仍能顯示，但無法替換或新增。使用者已把 Phosphor Icons（2.1，1,512 icons × 6 weights）加回團隊的 Design System 資料夾，發布中（2026-10-05）。發布後：在 DS 用「Swap library」把遺失的圖示接到新元件庫；名稱對不上時由 Claude 寫腳本依名稱替換（目前命名為圖示名稱的元件組，variant 為 `Format=Outline, Weight=Regular`）；接著確認各 App 檔案裡的圖示也接回 | 等待發布 |
+| 2 | `PhotoViewer` 升級進 DS | 以 `/sanji` 升級。建議屬性：Has Send（右下傳送鍵）、Has Download（右上下載鍵）、Photo（外露 Image，可換照片或切載入中、失敗）。Has Download 的做法待使用者決定：A. 維持外露 AppBar 切 Has Action；B. 下載鍵移出 AppBar、放在元件本身那層疊在右上，才能做成真正的開關（Claude 建議 B） | 檢查點 1 |
+| 3 | 1.2.6 下載鍵換圖示 | 1 完成後，在 `PhotoViewer`（或 2 升級後的 DS 元件）把 Smiley 佔位換成 Phosphor DownloadSimple | 等 1 |
+| 4 | 375 系統列淘汰 | 依 [layout.md](../../../../design-system/tokens/layout.md)，目標全面使用 393。StatusBar 刪除 Frame Group=375 兩個變體並拿掉只剩一個值的 Frame Group 屬性；HomeIndicator 目前只有 375 寬，改為 393（現在每次放入都要手動拉寬）。刪除前先確認各 App 檔案 Archive 裡的舊 375 畫面是否引用這些變體 | 檢查點 1 |

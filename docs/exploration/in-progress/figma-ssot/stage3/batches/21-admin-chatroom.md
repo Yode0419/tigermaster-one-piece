@@ -14,9 +14,9 @@
 | 1.2.1 與客戶／師傅對話 | 已完成 |
 | 1.2.2 展開更多功能 | 已完成 |
 | 1.2.3 選擇照片來源 | 已完成 |
-| 1.2.4 確認傳送照片 | 未開始 |
-| 1.2.5 確認重送訊息 | 未開始 |
-| 1.2.6 檢視與下載照片 | 未開始 |
+| 1.2.4 確認傳送照片 | 已完成 |
+| 1.2.5 確認重送訊息 | 已完成 |
+| 1.2.6 檢視與下載照片 | 已完成（下載圖示待換，見 components.md DS 待辦 3） |
 | 1.3.1 撥出中 | 未開始 |
 | 1.3.2 通話中 | 未開始 |
 | 1.3.3 對方正在通話中 | 未開始 |
@@ -26,6 +26,7 @@
 ## 本機元件
 
 - `AdminChatroomListItem`：放在本 Page 右側的「本機元件」Section。屬性：Name、Info、Last Message、Time（文字）、Unread（顯示紅點）；頭像為可切換的 Avatar instance。
+- `PhotoViewer`：全螢幕照片檢視，用於 1.2.4、1.2.6。屬性 Has Send；下載鍵切換外露 AppBar 的 Has Action；`Photo` 外露。
 
 ---
 
@@ -135,3 +136,90 @@
 - DS 沒有 iOS 動作選單元件。與使用者討論後定出「照 Flutter 與照 DS 的分界」，記在 [stage3.md](../stage3.md) 決策。
 - 第一版用 Sticky 底部按鈕區：內容短時按鈕區蓋住第二個選項，手動固定高度後，「取消」又被分隔陰影隔成另一區、下方多出空白，使用者覺得奇怪。討論後參考 M3，擴充 DS 的 BottomSheet（Footer=Inline、拖曳把手，見 stage3.md 決策），再用新版重畫。
 - 擴充 DS 時，複製出來的 variant 遺失屬性連結，Slot 也變成一般 Frame（Plugin API 的行為），要用 `createSlot()` 重建並接回原屬性，再刪掉多產生的屬性。
+
+---
+
+## 1.2.4 確認傳送照片（2026-10-05）
+
+**程式**：`chatroom_input_bar.dart`（`_showImagePicker`：只有圖庫選一張時才進確認頁，相機或多張直接送出）、`send_image_confirm.dart`
+
+**對照程式的判斷**
+
+| 項目 | 程式現況 | Figma 做法 |
+|---|---|---|
+| 版面 | 全螢幕照片，AppBar 疊在照片上方（`extendBodyBehindAppBar`），沒有底部區 | Frame 只放 `Content`（填滿整個 Frame）；AppBar、FAB、HomeIndicator 都設為絕對定位疊在上面 |
+| 背景 | `PhotoView` 預設純黑 | Frame 填色綁 `Base/Black`（原始色）。最初用 `Background/Inverse`（#2A2A2A），AppBar 的 12% 遮罩在灰底上看出帶狀，使用者改為 `Base/Black` |
+| 照片 | `PhotoView` 置中、等比縮放到完整顯示 | Image（State=Loaded）寬度填滿、高 295（4:3），在 `Content` 垂直置中 |
+| 頂部 | AppBar 底色 `black26`、白色 iOS 返回箭頭、無標題、無右側按鈕 | AppBar（Standard／None／Image）：Has Action 關閉、隱藏元件內的 `Background Image`（讓下方照片透出）與 `Title Text`；元件自帶 12% 暗化遮罩與白色狀態列 |
+| 傳送鍵 | 右下角 FAB，白底、深藍 `Icons.send`，56px，無文字 | FAB（Type=Slot），Slot 內放輸入列同一個傳送圖示（PaperPlaneRight 實心、TigerBlue）；維持元件的 78px 與陰影；距右 16、距 HomeIndicator 上緣 16 |
+| 底部系統列 | 系統 Home 指示條 | HomeIndicator（Style=Light）寬 393 貼底 |
+| 示意照片 | 管理員從圖庫選的照片 | Image 元件內建的貓咪照片（Plugin API 不能自行上傳圖片），使用者決定維持 |
+| 返回 | 回傳 false，回到聊天室不送出 | 只畫畫面本身 |
+
+**DS 沒有、由 Claude 自己排的部分**
+
+- 全螢幕照片檢視的整體版面（黑底、照片置中、AppBar 疊在照片上）。DS 沒有這種畫面的元件或樣板，1.2.6 會再出現一次。
+- 隱藏 AppBar（Image）裡的 `Background Image` 與 `Title Text` 兩個圖層。元件沒有對應的開關，是 Claude 判斷「照片在 AppBar 下方透出」比較接近程式。
+- FAB 用 Type=Slot 自放圖示。DS 規格寫 Slot「目前無實際使用情境，暫不建議用於正式畫面」，但 Default 一定有文字，程式沒有文字，只好用 Slot。這是 Slot 的第一個案例。
+- FAB 的位置（右 16、下 16）照 Flutter `endFloat` 的預設邊距，沒有綁 token（絕對定位的座標不能綁變數）。
+
+**遇到的問題**
+
+- 黑底沒有語意 token：`Background/Inverse` 是 #2A2A2A，AppBar 的 12% 遮罩在灰底上會看出一條較深的帶狀。使用者決定改用原始色 `Base/Black`（見 stage3.md 決策）。
+- 示意照片：Plugin API 不支援 `createImageAsync`，無法放入與「水管漏水」對話相符的照片，目前是 DS 的貓咪佔位照片。
+- FAB 的 Slot 沒有 Auto Layout，放進去的圖示會停在原座標，要手動設定 x、y 置中。
+- 畫 1.2.6 時，本格內容做成本機元件 `PhotoViewer`，本格改為它的 instance（Has Send 開啟），外觀不變。
+
+---
+
+## 1.2.5 確認重送訊息（2026-10-05）
+
+**程式**：`from_admin_chatroom.dart`（`_showResendConfirmBottomSheet`）、`message_builder.dart`（`FAIL_TEXT`：自己的黃底氣泡，時間旁顯示灰色叉叉，點氣泡觸發重送）
+
+**對照程式的判斷**
+
+| 項目 | 程式現況 | Figma 做法 |
+|---|---|---|
+| 底圖 | 聊天室中，管理員點傳送失敗的文字訊息 | 複製 1.2.1（輸入列收合），最後加一則管理員回覆「師傅預計4點左右抵達，到了會先打電話給您。」下午3:45，接續陳怡君的提問 |
+| 失敗狀態 | 時間旁 12px 灰色 `Icons.close` | MessageBubble 的 `Status` 改為 Failed |
+| 觸發 | 失敗訊息傳入 `onResend`，但 `TextMessage` 只有網址那段有點擊事件，純文字的失敗訊息點了沒反應（bug） | 畫預期行為：點失敗訊息後跳出確認 |
+| 選單樣式 | iOS 動作選單，有標題「重送訊息？」 | 使用者決定改用 Dialog（Type=Standard，DS 規格「單句是非題」），置中；見 stage3.md 決策 |
+| 標題 | 「重送訊息？」，無內文 | Dialog 標題「重送訊息？」，隱藏內容 Slot |
+| 按鈕 | 「確認」＋獨立的「取消」 | Dialog 原本的兩顆按鈕：「取消」Ghost Neutral、「確認」Ghost Action，順序照 DS（次要在左） |
+| 遮罩 | 系統預設半透明黑 | 複製 1.2.3 的 `Scrim` |
+
+**DS 沒有、由 Claude 自己排的部分**：沒有新的，`Scrim` 沿用 1.2.3。
+
+**遇到的問題**
+
+- reference.md 寫的 `_Message Status` 是元件名稱，instance 的圖層名稱是 `Status`、屬性是 `State`，第一次用名稱找圖層失敗。已更正 reference.md。
+- 第一版照分界決策用 BottomSheet＋一列 ListItem「確認」。使用者檢視時指出：確認型動作做成單列清單語意不對，且程式這個畫面本來就觸發不到（bug），改為 Dialog。
+
+---
+
+## 1.2.6 檢視與下載照片（2026-10-05）
+
+**程式**：`image_message.dart`（點聊天室照片開啟）、`tap_detail_image.dart`（`DetailImage`）
+
+**對照程式的判斷**
+
+| 項目 | 程式現況 | Figma 做法 |
+|---|---|---|
+| 版面 | 與 1.2.4 相同：黑底、`PhotoView` 置中、AppBar `black26` 疊在照片上、白色返回鍵 | 本機元件 `PhotoViewer` |
+| 右上 | 有 `downloadUrl` 時顯示白色 `Icons.file_download_outlined` | 外露的 AppBar 開啟 Has Action，Action Slot 放 IconButton（Ghost Inverse）。圖示暫為 Smiley 佔位，待使用者換成 Phosphor 下載圖示 |
+| 右下 | 沒有傳送鍵 | Has Send 關閉 |
+| 下載結果 | `EasyLoading` 提示「下載成功」或「下載失敗，請稍後再試」 | 依 evidence 併入流程，不另畫 |
+| 示意照片 | 聊天室裡的照片訊息 | 同 1.2.4 的貓咪照片（1.2.4 送出、1.2.6 檢視，資料接得上） |
+
+**本機元件 `PhotoViewer`**：由 1.2.4 的內容做成，393×852，填色 `Base/Black`。屬性 Has Send（右下 FAB）；下載鍵由外露的 AppBar 的 Has Action 控制；照片 `Photo` 設為外露，可換 Image 的 State。1.2.4 同時改為此元件的 instance。
+
+**DS 沒有、由 Claude 自己排的部分**
+
+- 本機元件 `PhotoViewer` 本身（版面同 1.2.4）。
+- 下載鍵用 IconButton（Ghost Inverse），從 AppBar 的返回鍵複製後放進 Action Slot，取代 AppBar 預設的 IconLabelButton（有文字，程式沒有）。
+
+**遇到的問題**
+
+- DS 沒有用過下載圖示，Phosphor 圖示庫也搜尋不到，拿不到 Key，只能放佔位圖示請使用者手動換。換在本機元件裡，1.2.6 就會更新。
+- 元件的布林屬性不能控制子元件內部的圖層（`Cannot set component property references on instance sublayer`），所以「顯示下載鍵」做不成 `PhotoViewer` 的屬性，改為把 AppBar 設成外露子元件，直接切它的 Has Action。
+- AppBar 的 Has Action 關閉時，`findOne` 預設找不到隱藏的 Action Slot 內容，要先設 `figma.skipInvisibleInstanceChildren = false`。

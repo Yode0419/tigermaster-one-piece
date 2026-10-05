@@ -59,12 +59,14 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 | 1. 固定頂部 | AppBar 或 ChatAppBar instance，寬度 Fill |
 | 2. `Content` | 寬高都 Fill，裁切內容，原型捲動方向設為垂直；裡面放實際內容（寬度 Fill） |
 | 3. 固定底部 | BottomNavBar、ChatInputBar 或底部按鈕，寬度 Fill；沒有就省略。BottomNavBar 高 82，中央 Logo 圓圈會往上蓋到 `Content`，所以固定底部要排在 `Content` 之後（圖層在上方） |
-| 浮層 | Dialog、Bottom Sheet、遮罩設為忽略 Auto Layout 的絕對定位，排在最上層。遮罩 `Scrim` 蓋滿整個 Frame（含狀態列），填色綁 `Background/Overlay`，約束 Stretch；BottomSheet 寬 393、貼底，約束左右 Stretch、垂直 Bottom（1.2.3 已驗證；Dialog 置中待 1.3.3 驗證） |
+| 浮層 | Dialog、Bottom Sheet、遮罩設為忽略 Auto Layout 的絕對定位，排在最上層。遮罩 `Scrim` 蓋滿整個 Frame（含狀態列），填色綁 `Background/Overlay`，約束 Stretch；BottomSheet 寬 393、貼底，約束左右 Stretch、垂直 Bottom（1.2.3 已驗證）；Dialog 置中，約束水平、垂直都 Center（1.2.5 已驗證） |
 
 - 內容比畫面長時，只畫第一屏看得到的部分，超出的部分由 `Content` 裁切，Frame 不加高。
 - **聊天室**：背景用 ChatBackground instance，設為絕對定位、約束 Stretch，放在最底層；`Content` 主軸對齊設為頂部（訊息少時貼在上方；訊息超出畫面時，進入聊天室會停在最底部，所以只畫最新的一屏，從頂部排起、最後一則貼近輸入列），左右 padding 綁 `Spacing/16`、訊息間距綁 `Spacing/8`。
 - **浮層畫面的底圖**：沿用打開浮層前的那一格（例如 1.2.3 從 1.2.2 點「傳送照片」打開，底圖複製 1.2.2）。
-- **動作選單（程式的 CupertinoActionSheet）**：BottomSheet 用 hasHeader=false、Footer=Inline、開啟 hasDragHandle；選項用 ListItem（Trailing=None、關閉前方圖示、最後一列關閉分隔線），直接放進 Slot、寬度填滿（元件自帶左右留白），Slot 間距改為 0（Slot 預設 `Spacing/8`，列表項目之間不留間距）；「取消」用按鈕區的 Button，Style 改為 Ghost Neutral。有標題的（例如「重送訊息？」）改用 hasHeader=true 並關閉左右圖示。
+- **動作選單（程式的 CupertinoActionSheet）**：BottomSheet 用 hasHeader=false、Footer=Inline、開啟 hasDragHandle；選項用 ListItem（Trailing=None、關閉前方圖示、最後一列關閉分隔線），直接放進 Slot、寬度填滿（元件自帶左右留白），Slot 間距改為 0（Slot 預設 `Spacing/8`，列表項目之間不留間距）；「取消」用按鈕區的 Button，Style 改為 Ghost Neutral。有標題的選項清單改用 hasHeader=true 並關閉左右圖示。只有一個動作的確認（例如「重送訊息？」＋確認／取消）不是選項清單，要回報使用者是否改用 Dialog（1.2.5 改用 Dialog Standard，因程式該畫面是 bug）。
+- **Dialog**：單句是非題用 Type=Standard。標題直接改 `Title` 文字（不是元件屬性）；沒有內文時隱藏 `Content` Slot；`Actions` 裡兩顆 Button 預設為 Ghost Neutral（次要）與 Ghost Action（主要），只改 Label。
+- **全螢幕照片（程式的 `PhotoView` 加 `extendBodyBehindAppBar`）**：管理員檔案已有本機元件 `PhotoViewer`，Frame 只放一個寬高 Fill 的 instance；其他檔案還沒有，照以下結構排。Frame 填色綁 `Base/Black`，只放 `Content`（寬高 Fill、內容置中），照片用 Image 元件、寬度 Fill、維持照片比例；AppBar 用 Background=Image 並隱藏 `Background Image`、`Title Text` 圖層，絕對定位貼頂、約束左右 Stretch；底部放 HomeIndicator（Light）絕對定位貼底；右下 FAB 照 Flutter `endFloat` 距右 16、距 HomeIndicator 16，約束 Right／Bottom（1.2.4 已驗證，待使用者確認）。
 - **內容短的 BottomSheet 一律用 Footer=Inline**，不要用 Sticky 再手動固定高度。
 - **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，所以每則訊息包一層寬度 Fill 的水平 Auto Layout（無底色），對方訊息靠左、自己的訊息靠右、日期分隔置中。
 - 把既有 Frame 改成 Auto Layout 時，先建立 `Content` 並調整圖層順序，再設 `layoutMode`；最後確認 Frame 的 x、y 沒有跑掉。
@@ -98,7 +100,10 @@ Figma 檔案的 fileKey 見 [reference.md](reference.md)。
 - 在 DS 複製 variant 來新增 variant 時，複製品會遺失所有屬性連結（顯示開關、文字、Slot），Slot 也會變成一般 Frame。要逐一接回 `componentPropertyReferences`；Slot 用 `component.createSlot()` 重建、把內容搬進去、接回原本的 Slot 屬性，再刪掉 `createSlot()` 多產生的屬性。
 - DS 元件發布新版後，目標檔案裡既有的 instance 不一定會馬上更新（ChatInputBar 自動更新了，ListItem 沒有）。用到新版的屬性或結構時，先檢查 instance 是否已是新版，沒有就從 `importComponentSetByKeyAsync` 匯入新版重建。
 - DS 檔案裡看得到、但還沒發布的元件，匯入時會出現「not found」。先用一段只匯入不建立的腳本確認每個 Key 都能匯入，再組畫面；匯入失敗就請使用者發布 DS 元件庫，不要自己複製一份。
+- 示意照片：`use_figma` 不支援 `createImageAsync`，Claude 無法自行放入新照片，只能用 DS Image 元件內建的佔位照片（目前是貓咪）。需要符合情境的照片時，請使用者在 Figma 手動換圖。
 - 元件屬性名稱帶有 `#id` 後綴（例如 `Has Leading#851:0`），用名稱前綴找出完整 key 再 `setProperties`。
 - 綁顏色：`setBoundVariableForPaint` 會回傳新的 paint，要重新指定給 `fills`。
 - 改文字前先載入字型；單行截斷用 `textTruncation = 'ENDING'` 加 `maxLines = 1`，寬度設 Fill。
+- 本機元件的布林屬性只能控制自己的直接圖層，不能控制子元件 instance 內部的圖層。要切換子元件的開關（例如 AppBar 的 Has Action），把該子元件設為外露（`isExposedInstance = true`）。
+- 找 instance 裡被隱藏的圖層（例如 Has Action 關閉時的 Action Slot）前，先設 `figma.skipInvisibleInstanceChildren = false`，否則 `findOne` 找不到。
 - 本機元件的文字屬性用 `componentPropertyReferences` 連到文字圖層；instance 裡要換的子元件（例如 Avatar）設為 exposed instance，或用 `swapComponent`。

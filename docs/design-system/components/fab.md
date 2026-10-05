@@ -1,6 +1,6 @@
 # FAB（Floating Action Button）
 
-浮動於畫面固定位置的主要行動按鈕，用於頁面上最重要、需隨時可觸及的單一行動。分為 `Default`（icon + label）與 `Slot`（預留自訂容器，尚無案例）兩種型態。
+浮動於畫面固定位置的主要行動按鈕，用於頁面上最重要、需隨時可觸及的單一行動。分為 `Default`（icon + label）與 `Slot`（自訂容器，目前用於只有圖示的 FAB）兩種型態。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查 + Figma Component（TigerMaster-Design-System）比對_
 _最後更新：2026-07-14 — 同步 Figma 元件：Content 維度改為 Type（Default／Slot），補上尺寸、圖示色、標籤色 token，新增 Slot 說明_
@@ -11,7 +11,7 @@ _最後更新：2026-07-14 — 同步 Figma 元件：Content 維度改為 Type�
 
 | 維度 | 值 |
 |------|-----|
-| Type | `Default`（固定 icon+label 結構）／`Slot`（預留通用容器，內容不固定，目前無實際使用情境）|
+| Type | `Default`（固定 icon+label 結構）／`Slot`（通用容器，內容不固定，目前用於只有圖示的 FAB）|
 | Position | `endFloat`（右下角）/ `centerDocked`（底部導覽列中央，屬於 Bottom Nav Bar 元件）|
 
 > `centerDocked` 為 Bottom Nav Bar 元件的一部分，不在此規格範圍內。
@@ -63,7 +63,7 @@ FAB 可搭配一次性引導 Tooltip，協助使用者在首次看見 FAB 時理
 - 同一頁面出現兩個以上的 FAB
 - 每個頁面都放 FAB——使用門檻高，不是所有頁面都需要
 
-**Type = Slot**：Figma 上預留的通用容器 variant，目前無實際使用情境，暫不建議用於正式畫面；待有具體需求（例如自訂圖形、複合內容）出現時再定義規則。
+**Type = Slot**：用於 Default 的「圖示＋文字」不適用的情境。目前唯一規則：只有圖示、沒有文字的 FAB 用 Slot，刪掉佔位矩形後放入 24px 圖示並置中（Slot 沒有 Auto Layout，要手動置中）。其他用法待有具體需求再定義。
 
 ## 邊界情況
 
@@ -79,6 +79,13 @@ FAB 可搭配一次性引導 Tooltip，協助使用者在首次看見 FAB 時理
 - **尺寸**：78×78px
 - **動作**：導航至客服聊天室（`/to_admin_chatroom`）
 - **Tooltip 文字**：「使用客服聊天室／解決您的問題」
+
+### SendImageConfirm 傳送鍵（確認傳送照片）
+
+- **出現頁面**：聊天室從圖庫選一張照片後的確認頁（管理員端 1.2.4，客戶端、師傅端同一頁面）
+- **Type**：`Slot`（PaperPlaneRight 實心圖示，與聊天室輸入列的傳送鍵相同，無文字）
+- **尺寸**：78×78px（Flutter 現況為預設 56px，Figma 維持元件尺寸）
+- **動作**：送出照片並回到聊天室
 
 ## Flutter Widget
 

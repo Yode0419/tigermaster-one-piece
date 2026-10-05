@@ -20,7 +20,7 @@
 | stage3.md（本文件） | 決策、分批進度、檢查點 | 每次開始新的一批 |
 | [method.md](method.md) | 每個 Frame 的步驟、Frame 結構、繪製原則、驗收方式、Figma 操作注意事項 | 畫圖前；日後 Skill 的主體 |
 | [reference.md](reference.md) | 常用元件與 token 的 Key、近似對應表 | 畫圖時查表 |
-| [components.md](components.md) | 元件狀況、元件候選 | 遇到沒有元件的區塊；檢查點時 |
+| [components.md](components.md) | 元件狀況、元件候選、DS 待辦 | 遇到沒有元件的區塊；檢查點時 |
 | `batches/` | 一批一份紀錄：Frame 清單與狀態、每個 Frame 的判斷、問題、本機元件 | 畫該批時 |
 
 ---
@@ -44,6 +44,9 @@
 - 2026-10-05：動作選單參考 M3 Modal Bottom Sheet：頂部拖曳把手、選項列表、「取消」接在選項下方（Ghost Neutral 純文字按鈕，不做成選項之一），不用貼底按鈕區。為此擴充 DS 的 BottomSheet（Footer variant Sticky／Inline、hasDragHandle，hasStickyFooter 改名 hasFooter）。Why：短內容用貼底按鈕區時「取消」被隔成另一區、下方多出空白，看起來奇怪；M3 原樣沒有「取消」，但「是否有取消」照 Flutter，所以保留；取消是「不做任何事」，與選項性質不同，用按鈕區分。
 - 2026-10-05：ListItem 補上 State（default／pressed，按下底色同 Button），左右 `Spacing/16` 收進元件，分隔線內縮。Why：DS 原本沒有定義按下樣式；外層包留白會讓按下底色不滿版，且目前只有 1.2.3 用到，現在改影響最小。
 - 2026-10-05：聊天室訊息靠上對齊；訊息超出畫面時只畫進入時看到的最後一屏。Why：與 App 行為一致，訊息少時貼在頂部，訊息多時進入聊天室會停在最底部。
+- 2026-10-05：全螢幕照片畫面的黑底綁原始色 `Base/Black`，不用語意 token `Background/Inverse`。Why：語意 token 沒有純黑，#2A2A2A 底上 AppBar 的 12% 遮罩會看出帶狀，純黑與程式一致。
+- 2026-10-05：只有圖示、沒有文字的 FAB 用 Type=Slot 放圖示，第一個案例是 1.2.4 傳送鍵。Why：Default 一定帶文字，程式沒有文字，內容照 Flutter。
+- 2026-10-05：1.2.5 確認重送訊息改用 Dialog（Standard），不照程式的 iOS 動作選單從底部出現。Why：程式的文字訊息只有網址有點擊事件，失敗訊息點了不會觸發重送，這個畫面現況是 bug、使用者看不到；既然沒有實際畫面可照，就畫預期行為，確認型動作依 DS 用 Dialog。程式有 bug 導致照不到現況時，回報使用者決定畫法。
 - 2026-10-05：不在知識庫建立逐格的畫面索引，畫的期間也不收集 Figma 連結；專案結束時以 `/robin` 把結構表整理成 Page／Section 層級的「畫面地圖」並附三個 Figma 檔案連結，細節由 AI 到 Figma 依 Frame 名稱查找。Why：Figma 是唯一維護來源，逐格索引會多一處要同步；Frame 名稱帶編號，AI 可自行查到。若出現沒有 Figma 權限的使用者，或連不到 Figma 的 AI agent，再重新考慮。
 
 ---
@@ -52,7 +55,7 @@
 
 | 批次 | 角色 | Page | Frame 數 | 狀態 | 紀錄 |
 |---|---|---|---|---|---|
-| 21 | 管理員端 | 1 客服聊天室 | 10 | 進行中（4/10） | [21-admin-chatroom](batches/21-admin-chatroom.md) |
+| 21 | 管理員端 | 1 客服聊天室 | 10 | 進行中（7/10） | [21-admin-chatroom](batches/21-admin-chatroom.md) |
 | 22 | 管理員端 | 2 帳號 | 3 | 未開始 | |
 | ▶ | 檢查點 1 | 檢討流程，整理成 Skill，決定第一批元件候選 | — | 未開始 | |
 | 12 | 師傅端 | 1 首頁與接案 | 11 | 未開始 | |
