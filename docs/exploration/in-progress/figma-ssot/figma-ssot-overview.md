@@ -4,7 +4,7 @@
 
 - **類型**：設計方法論／Design Ops
 - **受影響角色**：設計團隊；間接影響工程與客服查閱畫面的方式
-- **狀態**：進行中（階段 1、2 已完成，階段 3 待開始）
+- **狀態**：進行中（階段 1、2 已完成，階段 3 進行中）
 - **開始**：2026-09-17
 
 ---
@@ -34,7 +34,7 @@
 |---|---|---|---|
 | 1. 盤點與架構制定 | 以 Flutter 程式為依據盤點 App，定出三個角色檔案的 `Page → Section → Frame` 架構，產出給 Figma agent 的建置交接包 | Flutter repo `docs/figma-ssot/`，進度見其 `TODO.md` | 已完成（2026-10-05：三角色架構已確認，共 71 個 Section、270 個 Frame；建置交接包 r01 已確認可交付） |
 | 2. Figma 建立架構 | Figma agent 依交接包建立角色檔案與空白 placeholders | Figma | 已完成（2026-10-05：三個角色檔案都已建完並驗證，名稱、數量、尺寸與佔位文字皆與交接包相符；管理員 6 個 Section、13 個 Frame，師傅端 24 個、78 個，客戶端 41 個、179 個） |
-| 3. 畫面填入 | 用 Design System 元件把現行 App 畫面以 393×852 全部重畫進各 placeholder；接手 frame-size-standard 的舊畫面遷移工作 | Figma；分批方式待定 | 未開始（下一步：決定分批方式） |
+| 3. 畫面填入 | 用 Design System 元件把現行 App 畫面以 393×852 全部重畫進各 placeholder；接手 frame-size-standard 的舊畫面遷移工作 | Figma，進度見 [階段 3 文件](figma-ssot-stage3.md) | 進行中（2026-10-05：做法已定，下一步為管理員端試做） |
 | 4. 上架後維護流程 | 新版上架後從迭代稿更新回主檔的流程；Flutter repo README 第 10 節已有草稿 | 定案後整理進 `docs/design-ops/` | 未開始 |
 
 Flutter repo 本機路徑：`C:\Users\yode0\develop\source_code\android_app_2.6.1\fdtigermaster_app`
@@ -43,6 +43,7 @@ Flutter repo 本機路徑：`C:\Users\yode0\develop\source_code\android_app_2.6.
 
 ## 關聯
 
+- [階段 3：畫面填入](figma-ssot-stage3.md)：分批、繪製原則、元件候選、驗收方式與決策
 - [Figma agent 建置交接包 r01](figma-build-r01.md)：階段 2 的依據，複製自 Flutter repo `docs/figma-ssot/handoff/`；來源有改版時以 Flutter repo 為準，再重新複製
 - Jira：[SCRUM-34](https://tigermaster.atlassian.net/browse/SCRUM-34)
 - [Figma 檔案整理與 Design Ops 方法論](../../completed/figma-organization/decision-summary.md)：本專案的前一步，建立了 File Handbook
