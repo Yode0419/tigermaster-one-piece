@@ -1,6 +1,6 @@
 # Sticky Footer
 
-非模態、置底常駐的操作列，不變暗背景、頁面仍可互動，用於承載頁面主要 CTA（送出報價、確認付款等）。可獨立掛在頁面底部，也可嵌入 [BottomSheet](bottom-sheet.md) 內作為底部操作列（combo 用法，`hasStickyFooter` property）。
+非模態、置底常駐的操作列，不變暗背景、頁面仍可互動，用於承載頁面主要 CTA（送出報價、確認付款等）。可獨立掛在頁面底部，也可嵌入 [BottomSheet](bottom-sheet.md) 內作為底部操作列（combo 用法，`hasFooter` property；BottomSheet 的 `Footer=Sticky` 時貼底、`Footer=Inline` 時排在內容後面且不帶陰影）。
 
 > **元件邊界**：與 BottomSheet（模態、變暗背景、可關閉的置底容器）明確區分；Sticky Footer 不阻斷頁面互動，也不具備開關/關閉行為。
 
