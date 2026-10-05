@@ -51,7 +51,7 @@ Molecules 以 Atoms 為主要組成，部分會依賴其他 Molecule（標註 �
 | [ ] | EmptyState | `EmptyState` | —（需新建） | `Button`（選填） |
 | [x] | [ListItem](components/list-item.md) | `ListItem` | —（需新建；待整併 `SettingTile`、`MemberInfoTile`） | `Icon` |
 | [x] | [MessageBubble](components/message-bubble.md) | `Chatroom` | `TextMessage`, `ImageMessage`, `FileMessage`, `DayMarkMessage`, `CallLogMessage`, `TimeRequestMessage`, `MessageBuilder`, `PendingMessageBuilder` | `Avatar` ★ |
-| [x] | [ChatInputBar](components/chat-input-bar.md) | `Chatroom`（Component Set 已建立） | `ChatroomInputBar`（需整併為共用 widget） | `Sticky Footer` ★, `IconButton`, `IconLabelButton`（文字輸入框為專屬客製，非 TextField） |
+| [x] | [ChatInputBar](components/chat-input-bar.md) | `Chatroom`（Component Set 已建立） | `ChatroomInputBar`（需整併為共用 widget） | `IconButton`, `IconLabelButton`, `HomeIndicator`（容器自繪，token 同 Sticky Footer；文字輸入框為專屬客製，非 TextField） |
 | [x] | [ChatBackground](components/chat-background.md) | `Chatroom` | Type（Default/Watermark）：`to_admin_chatroom.dart`（`DecorationImage` + `to_admin_chatroom_watermark.png`，repeat、透明度 0.05、scale 1.2）＝`Watermark`，僅限與客服對話情境；其餘聊天室頁面純色背景＝`Default` | — |
 | [x] | [PhotoUpload](components/photo-upload.md) | `PhotoUpload` | `GridImageView`, `AccountImageUpload` | `Image`, `IconButton`（取消鈕疊加）|
 | [x] | [SearchBar](components/search-bar.md) | `SearchBar` | Boxed → `search_working_categories.dart`；Lined → `address_select_bottom_sheet.dart`（`MasterShop` 第三種實作暫不處理） | `Icon`, `TextField` ★ |
