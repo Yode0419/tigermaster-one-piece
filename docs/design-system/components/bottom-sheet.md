@@ -45,7 +45,7 @@ _最後更新：2026-10-05（新增 Footer variant 與拖曳把手）_
 - 非阻斷、置底常駐的操作列（不變暗背景）→ 改用 Sticky Footer
 - 非阻斷、非時效性的次要提示（如操作成功通知）→ 用 Snackbar
 - 若內容需要底部固定操作列（按鈕），嵌入 Sticky Footer 元件搭配使用（combo 用法）
-- Action Sheet（無標題純選項清單）不另建元件，`hasHeader=無`、`Footer=Inline`、開啟拖曳把手，Content 放 [ListItem](list-item.md)（外層左右 `Spacing/16`），「取消」用按鈕區的 Button（`Ghost Neutral`）
+- Action Sheet（無標題純選項清單）不另建元件，`hasHeader=無`、`Footer=Inline`、開啟拖曳把手，Content 直接放 [ListItem](list-item.md)（寬度填滿，元件自帶左右留白），「取消」用按鈕區的 Button（`Ghost Neutral`）
 - 內容短、不需要捲動時用 `Footer=Inline`；`Footer=Sticky` 在內容短時會蓋住內容
 
 ## 邊界情況

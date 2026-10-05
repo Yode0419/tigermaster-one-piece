@@ -5,7 +5,7 @@ icon（可選）+ 標題 + 尾端元件組成的通用列表列外殼，用於�
 > **元件邊界**：與 PriceText（純 label:value 金額/數值明細列，無 icon、無互動意圖，未來另立 Pattern）明確區分；ListItem 服務可瀏覽/互動的列表，PriceText 服務財務摘要展示。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`SettingTile`（`lib/component/tile/account_setting_tile.dart`）、`MemberInfoTile`（`lib/component/tile/member_info_tile.dart`）為現況參考實作；Figma 尚未建立_
-_最後更新：2026-07-13_
+_最後更新：2026-10-05（新增 State variant、左右 padding 收進元件）_
 
 ---
 
@@ -16,12 +16,15 @@ _最後更新：2026-07-13_
 | Leading Icon | Boolean property（顯示/隱藏；隱藏時不保留佔位空間，內容直接左移貼齊）|
 | Trailing | Variant，三選一：`Icon`（固定顯示單一圖示，如預設箭頭）／`Slot`（彈性插槽，承接自訂組合內容）／`None`（不顯示）|
 | Divider | Boolean property（底部分隔線）|
+| State | Variant：`default`／`pressed`（比照 Button、IconButton）|
 
 ## Design Tokens
 
 | 屬性 | Token | 備註 |
 |------|-------|------|
-| 上下 padding | `Spacing/16` | 左右無 padding，水平間距由外層容器決定 |
+| 上下 padding | `Spacing/16` | |
+| 左右 padding | `Spacing/16` | 加在元件最外層，文字與分隔線都內縮；外層容器不需再加左右留白，列寬設為填滿 |
+| Pressed 底色 | `Overlay/Pressed/Neutral`，透明度 12% | 整列滿版（不受左右 padding 影響），比照 Button、IconButton |
 | icon-title 間距 | `Spacing/12` | |
 | Icon 尺寸 | Icon 元件 `Size/24` | |
 | Title 文字 | `Title/S` + `Text/Primary` | 16px/500 |
@@ -47,7 +50,8 @@ _最後更新：2026-07-13_
 - **Leading icon 隱藏時** → 不保留佔位空間
 - **Trailing = Slot** → 可同時容納「數值文字 + 互動圖示」組合（現況 `MemberInfoTile`：value + 8px 間距 + 條件顯示箭頭）
 - **多列疊放** → 建議只在最後一項關閉 Divider
-- **Pressed 互動** → 為通用回饋（現況 `InkWell` 包住整列），不做「可點擊/純顯示」variant；有無 onTap 由呼叫端決定
+- **Pressed 互動** → 為通用回饋（現況 `InkWell` 包住整列），以 `State=pressed` 呈現；不做「可點擊/純顯示」variant，有無 onTap 由呼叫端決定
+- **放進 BottomSheet 等容器** → 直接放、寬度填滿，不要再包左右留白，否則留白加倍且按下底色不滿版
 
 ## Flutter Widget
 
@@ -66,4 +70,3 @@ _最後更新：2026-07-13_
 ## 待釐清事項（TBD）
 
 - Divider 用 `Border/Default` 綁定在 `fills`（該 token 於 Figma 定義 scope 為 `STROKE`），視覺結果一致但綁定方式與 token 定義用途不符，待設計確認是否需調整
-- Trailing=Slot 現況為一般 auto-layout frame，非原生 Figma Slot node（Plugin API 限制），功能等效但節點類型與 Dialog/Icon 等元件的 Slot 用法不一致
