@@ -3,7 +3,7 @@
 ## 概述
 
 - **上層專案**：[Figma SSOT 專案總覽](../figma-ssot-overview.md)
-- **狀態**：進行中（管理員端已完成，下一步檢查點 1）
+- **狀態**：進行中（管理員端已完成，檢查點 1 第一部分已完成，下一步檢查點 1 第二部分：檢討流程、整理成 Skill）
 - **開始**：2026-10-05
 - **結構依據**：[建置交接包 r01](../figma-build-r01.md) 的完整結構表
 - **Figma 檔案**：
@@ -52,6 +52,9 @@
 - 2026-10-05：DS 的 Outlined 按鈕（Primary／Secondary／Neutral）一律加白底 `Background/Surface`，規格見 `docs/design-system/components/button.md`。Why：頁面底色是灰色，透明底的 Outlined 在灰色頁面上幾乎看不見；程式在帳號頁等處也是白底。
 - 2026-10-05：DS 的 Button lg 高度由 44 改為 48（內距維持 `Spacing/12`，加最小高度 `Spacing/48`），規格見 `docs/design-system/components/button.md`。Why：使用者指定。
 - 2026-10-05：不在知識庫建立逐格的畫面索引，畫的期間也不收集 Figma 連結；專案結束時以 `/robin` 把結構表整理成 Page／Section 層級的「畫面地圖」並附三個 Figma 檔案連結，細節由 AI 到 Figma 依 Frame 名稱查找。Why：Figma 是唯一維護來源，逐格索引會多一處要同步；Frame 名稱帶編號，AI 可自行查到。若出現沒有 Figma 權限的使用者，或連不到 Figma 的 AI agent，再重新考慮。
+- 2026-10-05：`PhotoViewer` 升級進 DS，下載鍵移出 AppBar、放在元件本身那層疊在右上，做成 Has Download 開關（與 Has Send 並列）。Why：程式的看照片與傳送前確認是三種角色共用的元件，客戶端、師傅端一定會用到；兩顆按鈕都是元件自己的開關，用法一致，也對應程式「有沒有下載網址」的條件。
+- 2026-10-05：`VoiceCallScreen` 升級進 DS，放在 Chatroom 頁，結構照本機元件不改。Why：四種聊天室打電話都開同一個頁面 `IOSCallerControlPage`，客戶端 6.3、師傅端 5.3 與管理員端相同。
+- 2026-10-05：`AdminChatroomListItem` 不升級進 DS，維持管理員檔案的本機元件。Why：客戶端、師傅端沒有聊天室列表（從訂單或客服入口直接進入單一聊天室），整個 App 只有管理員 1.1.1 用到。
 
 ---
 
@@ -61,7 +64,7 @@
 |---|---|---|---|---|---|
 | 21 | 管理員端 | 1 客服聊天室 | 10 | 已完成（10/10，已驗收） | [21-admin-chatroom](batches/21-admin-chatroom.md) |
 | 22 | 管理員端 | 2 帳號 | 3 | 已完成（3/3，已驗收） | [22-admin-account](batches/22-admin-account.md) |
-| ▶ | 檢查點 1 | 檢討流程，整理成 Skill，決定第一批元件候選 | — | 未開始 | |
+| ▶ | 檢查點 1 | 檢討流程，整理成 Skill，決定第一批元件候選 | — | 進行中（第一部分已完成：管理員端 13 個 Frame 驗收通過、PhotoViewer 與 VoiceCallScreen 升級進 DS、375 系統列淘汰；第二部分檢討流程與整理成 Skill 未開始） | |
 | 12 | 師傅端 | 1 首頁與接案 | 11 | 未開始 | |
 | ▶ | 檢查點 2 | 檢討一般資料頁的流程與品質 | — | 未開始 | |
 | 13 | 師傅端 | 2 訂單與報價 | 34 | 未開始 | |

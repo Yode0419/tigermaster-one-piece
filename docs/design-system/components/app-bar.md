@@ -19,7 +19,7 @@ _最後更新：2026-07-17 — 新增 `Reserve Status Bar` Boolean（內嵌 [Sta
 | Leading | 預設返回鍵／自訂／無 |
 | Title（Slot） | `Standard`：與 Leading/Actions 同列，置中，`Title/M`；`Tall`：獨立第二列，左對齊全寬，`Heading/3`；若 `Extension≠None`，其內容為緊接 Title 之下的第三列 |
 | Actions（Slot） | 無／單一 icon／icon+文字按鈕 |
-| Reserve Status Bar（Boolean） | 開＝內嵌 [StatusBar](status-bar.md) instance（固定其中一組 Frame Group，跨尺寸群組需手動更換 instance）；關＝不顯示 |
+| Reserve Status Bar（Boolean） | 開＝內嵌 [StatusBar](status-bar.md) instance；關＝不顯示 |
 
 `Type` 與 `Extension` 相互獨立，任一 `Type` 皆可搭配任一 `Extension`（例：師傅端首頁是 `Standard`+`Brand`+`None`，通知列表是 `Standard`+`Brand`+`Slot`）。實際高度由 `Type`／`Extension` 組合與內容決定，數值以 Figma 元件為準，不在此重複列出。
 

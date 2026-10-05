@@ -3,7 +3,9 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-09-24：layout.md 更新，既有 375×812 畫面不再挑選優先遷移，改由 figma-ssot 專案統一以 393×852 重畫，舊畫面移入 Archive_
+_Last updated: 2026-10-05：新增 PhotoViewer、VoiceCallScreen 元件規格並建立 Figma Component；StatusBar 淘汰 375 變體、HomeIndicator 改為 393 寬_
+
+_2026-09-24 — layout.md 更新，既有 375×812 畫面不再挑選優先遷移，改由 figma-ssot 專案統一以 393×852 重畫，舊畫面移入 Archive_
 
 _2026-07-17 — 新增 layout.md，確立新畫面標準 Frame 尺寸為 393×852（既有 375×812 畫面不強制遷移，僅教學／行銷用途優先遷移），為 AI 生成介面提供唯一尺寸標準；新增 StatusBar／HomeIndicator 元件規格並建立 Figma Component（系統 chrome 裝飾元件，永遠透明無自身背景，Base/White／Base/Black 為刻意 Primitive token 例外）；回頭為 AppBar／Sticky Footer／BottomNavBar 補上 `Reserve Status Bar`／`Reserve Home Indicator` Boolean，直接內嵌 StatusBar／HomeIndicator instance（固定其中一組 Frame Group，跨尺寸群組需手動更換），翻盤 Sticky Footer 原「安全區不進 Figma」舊規則_
 
@@ -56,6 +58,7 @@ design-system/
 - **[Badge](components/badge.md)** — 通知提示元件規格：疊加於其他元件右上角，Content（Dot/Count）variant、9+ 上限規則（現況 'N' 列為技術債）、與 CornerBadge 明確區分 _(2026-07-07)_
 - **[CornerBadge](components/corner-badge.md)** — 卡片/圖片角落強調標記規格：Position（左下/右下，圓角鏡像翻轉）× Content（圖示+文字/純文字）、目前唯一場景為保固天數顯示 _(2026-07-07)_
 - **[Image](components/image.md)** — 遠端圖片顯示規格：State（Loading/Loaded/Error）單一維度、不定義 Shape variant（裁切交給外層元件）、統一 Error 佔位符取代現況不一致的錯誤處理 _(2026-07-07)_
+- **[PhotoViewer](components/photo-viewer.md)** — 全螢幕單張照片檢視：Has Download（右上下載鍵）、Has Send（右下傳送鍵）兩個 Boolean、Photo 外露 Image 可切狀態，底色刻意用 `Base/Black`，對應 `DetailImage`／`SendImageConfirm`，由 figma-ssot 階段 3 本機元件升級、Figma Component 已建立 _(2026-10-05)_
 - **[PhotoUpload](components/photo-upload.md)** — 可增減圖片上傳插槽規格：Type（Photo/Certificate）× State（default/loading/uploaded/disabled）兩維 variant、GridImageView 與 AccountImageUpload 兩處現況整併、圓角設計債（現況 5px 非既有 token）_(2026-07-08)_
 - **[IconLabelButton](components/icon-label-button.md)** — 垂直排列（icon 上、文字下）的圖示+文字按鈕：參照 IconButton 拿掉 size 的 tone(default/inverse/brand) × state 兩維 variant、文字色複用既有 Interactive 群組 token（零新增）、BottomNavBar/聊天室選單/AppBar 客服按鈕三處現況待整併 _(2026-07-08)_
 - **[Rating](components/rating.md)** — 星級評分元件：Size（lg/sm，復用 Icon token）× Rate（0~5 半星 11 階）兩維 variant，唯讀顯示與互動輸入視覺一致、Icon/Brand+Icon/Subtle 零新增 token、Figma 由 5 顆獨立星星 Full/Half/Empty 子元件組成 _(2026-07-09)_
@@ -73,8 +76,9 @@ design-system/
 - **[ChatBackground](components/chat-background.md)** — 聊天室頁面背景層：Type（Default/Watermark）variant，Watermark 僅限與客服對話情境（防假冒／識別客服對話），現況僅 `to_admin_chatroom.dart` 有實作（重複平鋪、透明度 0.05）、Admin Mode 背景色與 Background/Page token 值有微小落差列為技術債、Figma 尚未建立正式 Component _(2026-07-15)_
 - **[SearchBar](components/search-bar.md)** — 頁面內嵌搜尋輸入框規格：Type（Boxed/Lined）× Content（Empty/Filled）兩維 variant，Boxed 為圓角容器（服務搜尋等頁面內嵌情境）、Lined 為底線大字級（BottomSheet 內搜尋輸入，如地址自動完成）、Boxed 搜尋圖示金色與 `Icon/Brand` token 完全吻合、Content=Filled 時出現清除按鈕（`Icon/Subtle`，兩個 Type 共用，比照 TextField 命名慣例、屬本次規格新增非現況功能）、現況兩處各自呼叫原生 TextField/TextFormField 無共用 widget、Figma Component 已建立（Type × Content 共 4 個 variant）_(2026-07-16)_
 - **[ChatInputBar](components/chat-input-bar.md)** — 聊天室頁面底部訊息輸入列規格：State（Collapsed/Expanded）× Content（Empty/Filled）二維 variant + TimeRequest、Reserve Home Indicator 兩個 Boolean、外層為自繪容器（token 同 Sticky Footer，不用 Sticky Footer instance，因插槽內圖層無法綁屬性）、文字輸入框為聊天室專屬客製元素（非 TextField instance）、Toggle/Send 按鈕分別複用 IconLabelButton/IconButton 故不定義獨立 disabled variant、現況單一 `ChatroomInputBar` class 4 角色頁面共用、Figma Component Set 已建立 _(2026-07-16)_
+- **[VoiceCallScreen](components/voice-call-screen.md)** — 語音通話全螢幕畫面：State（Calling/OnCall）、Name／Duration 文字屬性、背景照片與頭像外露，對應四種聊天室共用的 `IOSCallerControlPage`，由 figma-ssot 階段 3 本機元件升級、Figma Component 已建立 _(2026-10-05)_
 - **[BottomNavBar](components/bottom-nav-bar.md)** — App 底部主導覽列規格：Role（Client/Master/Admin）三個變體＝各角色實際 tab 內容組合，分頁項目為專屬子元件 `NavBarItem`（Tab × Toggle on/off），內部沿用 IconLabelButton 視覺、容器底色 `Interactive/Primary` 現況吻合零落差、中央為固定 Logo 並依角色顯示對應文字（Admin 無文字）、不套用 FAB 規格、新增 `Reserve Home Indicator` Boolean（內嵌 HomeIndicator instance）、Figma Component 已建立 _(2026-07-17)_
-- **[StatusBar](components/status-bar.md)** — 系統 chrome 裝飾元件：疊加畫面最上層，Frame Group（375/393）× Style（Light/Dark Content）二維、Base/White／Base/Black 為刻意 Primitive token 例外、作為 AppBar 內嵌 instance（由 `Reserve Status Bar` Boolean 控制）、Figma Component 已建立 _(2026-07-17)_
+- **[StatusBar](components/status-bar.md)** — 系統 chrome 裝飾元件：疊加畫面最上層，Style（Light/Dark Content），2026-10-05 淘汰 375 變體只保留 393、Base/White／Base/Black 為刻意 Primitive token 例外、作為 AppBar 內嵌 instance（由 `Reserve Status Bar` Boolean 控制）、Figma Component 已建立 _(2026-07-17)_
 - **[HomeIndicator](components/home-indicator.md)** — 系統 chrome 裝飾元件：疊加畫面最下層，Style（Light/Dark）一維、134pt 膠囊固定置中、作為 Sticky Footer／BottomNavBar 內嵌 instance、翻盤 Sticky Footer 原「安全區不進 Figma」舊規則、Figma Component 已建立 _(2026-07-17)_
 
 ## Patterns
