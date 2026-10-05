@@ -29,7 +29,13 @@
 | 傳送圖示 | 複製 1.2.1 ChatInputBar 裡的 `SendButton`（`I40:609;1062:466`） | icon（Size=24）換成 PaperPlaneRight 實心、TigerBlue；需要相同圖示時直接 `clone()` |
 | BottomNavBar（Role=Admin） | `044a5acccdfc31ac252a54d9755071ccf09082ae` | 預設已是聊天室選中；寬螢幕時填滿並水平置中 |
 | BottomNavBar（Role=Client／Master） | `167bc7460ac0a4651b7cda4ecebec03f42316652`／`761f43b191c83a8cfa1e2eb1d01838706403e534` | |
-| Avatar 60（custom／default） | `6d1d4632eec37682651f0a69bc040bf590c832b2`／`da7fb7e8f71e1e806f8038ebbf42fb6a8d75fc47` | 其他尺寸見 DS 的 Avatar 頁 |
+| Avatar 60（custom／default） | `6d1d4632eec37682651f0a69bc040bf590c832b2`／`da7fb7e8f71e1e806f8038ebbf42fb6a8d75fc47` | 尺寸有 36／60／75／100／140，見 DS 的 Avatar 頁 |
+| Avatar 140（custom／default） | `829fd483ff3100e2f8fdf873807043655f3cfb0f`／`d055bc845e0990c759c5f39bc3ae7b0e2d24de88` | 通話畫面 |
+| StatusBar（393，Light／Dark Content） | `e14c6629a1ad46b3d402fbf96a7909b40022771e`／`da48caf54a006a7e4a7142c3179a1587f8ef7564` | 高 59。沒有 AppBar 的畫面單獨放；深色背景用 Light |
+| icon（整組） | `3e92f2bfe35a30eaeb557398677d68e18524e14f` | Size（24／20／16）、Icon（Phosphor／Slot）。Phosphor 預設是 Smiley，換圖示見 method.md，改色要改內部 Vector 的填色 |
+| Phosphor 圖示庫 | libraryKey `lk-bf8c530498484244d086dee012c8c3556de272d639976c99d80f0ea2d5131dc1adf34cd2fe9598d5b27790bea4ffa4e29cc0ec42090b5c8847855be3834a95c8` | `search_design_system` 的 `includeLibraryKeys` 填這個，以圖示名稱搜尋（例如 DownloadSimple、PhoneDisconnect）。每個圖示是元件組，variant 為 Format（Outline／Stroke）× Weight（Regular／Thin／Light／Bold／Fill／Duotone），一律用 Outline |
+| DownloadSimple／PhoneDisconnect（元件組） | `25e62441552ff56e6583853a80da89d1c535fa3c`／`9239da56ea75d41615cc45394effcb629a77fac5` | 用 `importComponentSetByKeyAsync` 匯入再挑 variant。下載用 Regular，掛斷用 Fill |
+| IconButton（整組） | `f148e16650e8a647c4f0512a528ccfa145fd002d` | Style（Ghost Default／Ghost Inverse／Filled）、Size（md 48／sm 40）、State。Filled 是白底圓形 |
 | Badge（Dot／Count） | `89064adcc4e7c687617bf0abf4c0530ef7d3f71b`／`2456905712bff8a3265f27e7c36e0f00afda2ed0` | |
 | ChatAppBar（Chat=Admin Mode） | `4fea660ac9636ec206d74056ef3e23856792f3a2` | 整組 `c2c2556aba04f3d8c8d43bcb4004943c80271fb6`，其他 variant：To Client／To Master／To Admin。內含 AppBar 與 StatusBar，高 123；姓名是 `Name` 框裡的文字 |
 | ChatBackground（Type=Default／Watermark） | `31e32722d54c9e7416febe7a00afb54d55d039c2`／`d769913727fccaea131126fade7e17d27cf35380` | Default 只是綁 `Background/Page` 的底色；放進 Frame 時設絕對定位、約束 Stretch |
@@ -57,6 +63,12 @@
 | `Background/Overlay`（浮層遮罩） | `2be39c9de6a074c0b3b0462231ef9a4eb423a5f2` |
 | `Spacing/8`／`Spacing/12` | `8553c60279b7619ca64c897f0d2c58d8c3b66775`／`67a4b5ad236fc440d60d6c73b16e476634956c9f` |
 | `Spacing/16` | `d83cd74d5f15f468c9a0b21f1b921aea1498c990` |
+| `Spacing/2`／`Spacing/32` | `f3e1f7d57728f7edd081803c55856ec51a5a1607`／`197c60a72bcfd6e3f421ea278e69c467c1334fb9` |
+| `Radius/Full` | `b73e8cc968980a0228feb1f7af1ca4f41c10fbe4` |
+| `Status/Error`（#FF2851） | `95cb702e62654b3fab2f169f8a6b19063eda34bf` |
+| `Text/Inverse`／`Icon/Inverse`（白） | `1aa6d7b6c559ffc6cf8829a686fa5da64d9e862b`／`b50ca8e9952006eb895ed1f24032497ed4da5795` |
+| `Heading/2`（28 SemiBold） | `310155252a1686cc122dd3ec3464fc47ef18c5d1` |
+| `Label/L`（16 Medium） | `d350f65bb698bdfb95f7378ee258b555a92e4f75` |
 | `Title/S`（16 Medium） | `4843b58b61eec9235c9023cbb912b2b33872c6ee` |
 | `Label/S`（12 Medium） | `120f52c9dc83d5db4d94defe531f5bf8abebdd35` |
 | `Body/XS`（12 Regular） | `152f397c33be8e2817cd007f46cafebf96f0b647` |
@@ -71,7 +83,11 @@
 |---|---|---|---|---|
 | `#FAFAFA`（Material 2 頁面背景） | `Background/Page`（#F5F5F5） | `Background/Surface`（#FFFFFF） | | 管理員 1.1.1 |
 | 12px Medium 灰（聊天室列表的最後訊息） | `Body/XS`（使用者指定，只限此頁面，不作通用規則） | `Label/S`（數值完全相同） | | 管理員 1.1.1 |
-| 10px（聊天室訊息列表上方 padding） | `Spacing/8` | `Spacing/12` | | 管理員 1.2.1 |
+| 10px（聊天室訊息列表上方 padding） | `Spacing/8` | `Spacing/12` | | 管理員 1.2.1、1.3.1（掛斷鍵到文字） |
+| 36px（通話畫面頭像到姓名） | `Spacing/32` | `Spacing/40` | | 管理員 1.3.1 |
+| `Colors.black54`（通話畫面背景暗化，54%） | `Background/Overlay`（63%） | 無 | | 管理員 1.3.1 |
+| `Colors.red`（#F44336，掛斷鍵） | `Status/Error`（#FF2851） | 無 | | 管理員 1.3.1 |
+| 28px Bold（通話畫面姓名） | `Heading/2`（28 SemiBold） | 無 | | 管理員 1.3.1 |
 | `#000000`（全螢幕照片檢視的黑底，`PhotoView` 預設） | `Base/Black`（原始色，使用者指定；語意 token 沒有純黑） | `Background/Inverse`（#2A2A2A，AppBar 遮罩會看出帶狀） | | 管理員 1.2.4 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。

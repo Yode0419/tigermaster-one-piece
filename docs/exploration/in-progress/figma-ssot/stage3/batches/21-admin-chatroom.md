@@ -16,10 +16,16 @@
 | 1.2.3 選擇照片來源 | 已完成 |
 | 1.2.4 確認傳送照片 | 已完成 |
 | 1.2.5 確認重送訊息 | 已完成 |
-| 1.2.6 檢視與下載照片 | 已完成（下載圖示待換，見 components.md DS 待辦 3） |
-| 1.3.1 撥出中 | 未開始 |
-| 1.3.2 通話中 | 未開始 |
-| 1.3.3 對方正在通話中 | 未開始 |
+| 1.2.6 檢視與下載照片 | 已完成 |
+| 1.3.1 撥出中 | 已完成 |
+| 1.3.2 通話中 | 已完成（同上） |
+| 1.3.3 對方正在通話中 | 已完成 |
+
+**批次驗收（2026-10-05）**
+
+- 結構檢查（腳本）：10 個 Frame 名稱與數量不變、都是 393×852，佔位文字已全部刪除，Frame 與本機元件裡沒有寫死的顏色。腳本列出 1.1.1 有 8 個名為 Avatar 的一般 Frame，查證後是 `AdminChatroomListItem` 裡包住頭像與紅點的外框，頭像本身仍是 DS instance，沒有被拆開的元件。
+- 內容對照：每個 Frame 畫完都已截圖對照程式。
+- 使用者確認：10 個 Frame 都已確認。
 
 ---
 
@@ -27,6 +33,7 @@
 
 - `AdminChatroomListItem`：放在本 Page 右側的「本機元件」Section。屬性：Name、Info、Last Message、Time（文字）、Unread（顯示紅點）；頭像為可切換的 Avatar instance。
 - `PhotoViewer`：全螢幕照片檢視，用於 1.2.4、1.2.6。屬性 Has Send；下載鍵切換外露 AppBar 的 Has Action；`Photo` 外露。
+- `VoiceCallScreen`：通話畫面，用於 1.3.1、1.3.2。variant State（Calling／OnCall）；文字屬性 Name、Duration（只有 OnCall 用到）；背景照片 `Background Photo` 與頭像 Avatar 外露。
 
 ---
 
@@ -206,7 +213,7 @@
 | 項目 | 程式現況 | Figma 做法 |
 |---|---|---|
 | 版面 | 與 1.2.4 相同：黑底、`PhotoView` 置中、AppBar `black26` 疊在照片上、白色返回鍵 | 本機元件 `PhotoViewer` |
-| 右上 | 有 `downloadUrl` 時顯示白色 `Icons.file_download_outlined` | 外露的 AppBar 開啟 Has Action，Action Slot 放 IconButton（Ghost Inverse）。圖示暫為 Smiley 佔位，待使用者換成 Phosphor 下載圖示 |
+| 右上 | 有 `downloadUrl` 時顯示白色 `Icons.file_download_outlined` | 外露的 AppBar 開啟 Has Action，Action Slot 放 IconButton（Ghost Inverse），圖示 Phosphor DownloadSimple（Regular），綁 `Icon/Inverse` |
 | 右下 | 沒有傳送鍵 | Has Send 關閉 |
 | 下載結果 | `EasyLoading` 提示「下載成功」或「下載失敗，請稍後再試」 | 依 evidence 併入流程，不另畫 |
 | 示意照片 | 聊天室裡的照片訊息 | 同 1.2.4 的貓咪照片（1.2.4 送出、1.2.6 檢視，資料接得上） |
@@ -220,6 +227,87 @@
 
 **遇到的問題**
 
-- DS 沒有用過下載圖示，Phosphor 圖示庫也搜尋不到，拿不到 Key，只能放佔位圖示請使用者手動換。換在本機元件裡，1.2.6 就會更新。
+- DS 沒有用過下載圖示，Phosphor 圖示庫也搜尋不到，拿不到 Key，只能放佔位圖示請使用者手動換。Phosphor 重新發布後已換成 DownloadSimple（2026-10-05）。下載鍵放在 1.2.6 外露 AppBar 的 Slot 裡，不在本機元件中，所以是直接換 1.2.6。
 - 元件的布林屬性不能控制子元件內部的圖層（`Cannot set component property references on instance sublayer`），所以「顯示下載鍵」做不成 `PhotoViewer` 的屬性，改為把 AppBar 設成外露子元件，直接切它的 Has Action。
 - AppBar 的 Has Action 關閉時，`findOne` 預設找不到隱藏的 Action Slot 內容，要先設 `figma.skipInvisibleInstanceChildren = false`。
+
+---
+
+## 1.3.1 撥出中（2026-10-05）
+
+**程式**：`from_admin_chatroom.dart`（ChatAppBar 電話鍵直接推入撥出頁，沒有連線延遲提示）、`ios_caller_control_page.dart`（`_buildCallingWidget`）、`caller_callkeep.dart`（`cancelable`）
+
+**對照程式的判斷**
+
+| 項目 | 程式現況 | Figma 做法 |
+|---|---|---|
+| 版面 | 沒有 AppBar，全螢幕 Stack，內容整欄垂直置中 | 三區：StatusBar（Light，393）、`Content`（寬高 Fill、內容置中）、HomeIndicator（Light）。背景與遮罩絕對定位、約束 Stretch |
+| 背景 | 對方頭像撐滿高度，`black54` 暗化，再疊 25 的背景模糊 | Image（Loaded）撐滿 Frame；上方 `Scrim` 填色綁 `Background/Overlay`（63%，近似），加背景模糊 25。Frame 底色綁 `Base/Black` |
+| 頭像 | 140 圓形 | Avatar（custom，140），與 1.1.1 同一張佔位照片 |
+| 姓名 | 對方完整姓名，28 粗體白字 | 「陳怡君」（接 1.2.1），`Heading/2`（28 SemiBold）＋`Text/Inverse` |
+| 撥出狀態 | `SpinKitWave` 白色波形動畫（5 條、高 25），沒有文字 | 5 條白色長條（高 10／17.5／25／17.5／10，寬 3），綁 `Icon/Inverse`，間距 `Spacing/2` |
+| 間距 | 頭像到姓名 36、姓名到波形 32、波形到掛斷鍵為螢幕高 30%、按鈕到文字 10 | 36、32 都用 `Spacing/32`；30% 用固定 256 的 `Spacer`；10 用 `Spacing/8` |
+| 掛斷鍵 | `Colors.red` 圓形、padding 16、白色 `call_end_rounded` 24，下方「結束通話」16 Medium 白字 | 自排：圓形綁 `Status/Error`、`Radius/Full`、padding `Spacing/16`；圖示 Phosphor PhoneDisconnect（Fill），綁 `Icon/Inverse`；文字 `Label/L`＋`Text/Inverse` |
+| 掛斷鍵何時出現 | `cancelable` 在撥出初始化完成後才為 true，之前隱藏 | 畫可以取消的狀態（結構表寫「可取消」） |
+| 示意照片 | 對方的大頭貼 | DS 內建的貓咪照片（同 1.2.4） |
+
+**DS 沒有、由 Claude 自己排的部分**
+
+- 整個通話畫面版面（模糊頭像背景、中央頭像與姓名、下方掛斷鍵）。1.3.2 結構相同，畫 1.3.2 時會做成本機元件。
+- 背景的模糊與暗化：Image 撐滿＋`Scrim` 背景模糊 25。Flutter 的模糊值是 sigma，Figma 的是 radius，兩者定義不同，模糊程度是目測接近。
+- 撥出中的波形：DS 沒有載入中元件，用 5 條長條畫靜態的一格。
+- 掛斷鍵：DS 的 IconButton Filled 是白底，Button 沒有實心紅色或圓形圖示款，所以自己排。
+- 波形到掛斷鍵的 256 間距沒有綁 token（程式是螢幕高的 30%，超出 Spacing 的範圍）。
+
+**遇到的問題**
+
+- 電話相關圖示（掛斷）在 DS 沒有用過，Phosphor 還在重新發布，先放佔位。重新發布後已在本機元件 `VoiceCallScreen` 兩個 State 換成 PhoneDisconnect，1.3.1、1.3.2 跟著更新（2026-10-05）。
+- 畫 1.3.2 時，本格內容做成本機元件 `VoiceCallScreen`（State=Calling），本格改為它的 instance，外觀不變。
+
+---
+
+## 1.3.2 通話中（2026-10-05）
+
+**程式**：`ios_caller_control_page.dart`（`_buildOnCallWidget`）、`timer_text.dart`；接聽方 `ios_callee_control_page.dart` 接通後的畫面相同（依 evidence 引用本格，不另畫）
+
+**對照程式的判斷**
+
+| 項目 | 程式現況 | Figma 做法 |
+|---|---|---|
+| 版面、背景、頭像、姓名、掛斷鍵 | 與撥出中相同 | 本機元件 `VoiceCallScreen`（State=OnCall） |
+| 通話狀態 | 波形換成兩行白字：「通話中」與計時，16 Medium，兩行之間沒有間距 | `Call Status` 兩行文字，都用 `Label/L`＋`Text/Inverse`，間距 0 |
+| 計時 | 接通後從 `00:00` 起每秒加一，格式「分:秒」補零 | 示意「01:23」，做成文字屬性 Duration |
+| 掛斷 | 「結束通話」一定顯示（不像撥出中要等初始化） | 同 1.3.1 |
+| 結束後 | 回到原聊天室 | 只畫畫面本身 |
+
+**本機元件 `VoiceCallScreen`**：由 1.3.1 的內容做成，放在「本機元件」Section。客戶端 6.3、師傅端 5.3 也有同樣的畫面，見 components.md 元件候選。
+
+**DS 沒有、由 Claude 自己排的部分**
+
+- 本機元件 `VoiceCallScreen` 本身（版面同 1.3.1）。
+- 「通話中」與計時兩行的排法（照程式，間距 0）。
+
+**遇到的問題**：沒有。
+
+---
+
+## 1.3.3 對方正在通話中（2026-10-05）
+
+**程式**：`ios_caller_control_page.dart`（`VoiceChatCallerCalleeBusy` 時先關閉撥出頁，再呼叫 `_showCalleeBusyNotice`）
+
+**對照程式的判斷**
+
+| 項目 | 程式現況 | Figma 做法 |
+|---|---|---|
+| 底圖 | 撥出頁先關閉，提示出現在原聊天室上 | 複製 1.2.1（輸入列收合） |
+| 對話框 | Material `AlertDialog`，沒有標題，只有內文 | Dialog（Standard）：依 DS 規格手動隱藏 `Title`，打開 `Content` Slot 放內文 |
+| 內文 | 「對方正在通話中，請稍後再撥」 | `Body/M`＋`Text/Secondary`（DS 的內容文字規格），寬度填滿 |
+| 按鈕 | 只有一顆「知道了」（TextButton，Medium 字重） | 隱藏左側次要按鈕，右側主要按鈕（Ghost Action）改為「知道了」 |
+| 遮罩 | 系統預設半透明黑 | 複製 1.2.5 的 `Scrim` |
+| 忙線查詢失敗 | `voice_chat.dart` 的 `calleeBusy()` 遇到非預期的狀態碼或例外都回傳「忙線」，所以查詢失敗也會出現同一個提示 | 同一張畫面，不另畫 |
+
+**DS 沒有、由 Claude 自己排的部分**
+
+- 沒有新的版面。用法上有兩個判斷：隱藏標題、只留一顆按鈕。DS 規格允許手動隱藏標題，但沒有寫只有一顆按鈕時怎麼做，我隱藏的是次要按鈕，讓「知道了」維持主要按鈕的樣式與靠右的位置。
+
+**遇到的問題**：沒有。
