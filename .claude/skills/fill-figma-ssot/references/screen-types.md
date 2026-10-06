@@ -22,7 +22,7 @@
 - **以內容為主的長頁面才拉長，其他一律 852**。以內容為主指頁面本身就是在讀或填一大段資訊且會捲動（案件詳情、訂單詳情、表單、說明頁、可能超過一屏的帳號頁）；首頁、列表、空狀態、聊天室、浮層畫面都不算。拉長的做法：Frame 寬 393、高度固定（`primaryAxisSizingMode=FIXED`）；`Content` 高度維持 **Fill**（與一般畫面相同），Frame 高度手動設成剛好容納整頁內容：`Frame 高度 = 頂部高度 + Scroll Content 高度 + 底部高度（含 HomeIndicator 的 34）+ 2`（Frame 外框的 1px 描邊算進排版，上下各 1，不加 2 的話 `Content` 會比 `Scroll Content` 少 2，捲動範圍被截），至少 852，之後驗證 `Content` 高度 ≥ `Scroll Content` 高度。這樣固定底部永遠貼在 Frame 最底，整頁內容完整可見。第一個案例：師傅 1.2.1（1140）。
 - **聊天室**維持只畫進入時看到的最後一屏，`Content` 高度 Fill 並裁切（見聊天室一節）。
 - **浮層畫面**（Dialog、BottomSheet）不是主要展示頁，不跟著底圖拉長：Frame 固定高度 852、`Content` 高度 Fill 並裁切，底圖內容被裁掉沒關係；`Scrim` 蓋滿整個 Frame；Dialog 置中（`y = (852 - Dialog 高度) / 2`）。底圖是拉長的內容頁（例如 1.2.1）時，也只顯示第一屏。
-- 重建 Frame 後若背景綁定 `Background/Page` 卻顯示成黑色，把一個正常 Frame 的 `fills` 複製過來。
+- 重建或複製 Frame 後若背景綁定 `Background/Page` 卻顯示成黑色，是存下來的顏色值是黑的（師傅 2.4.2）：把一個正常 Frame 的 `fills` 複製過來，或用 `setBoundVariableForPaint` 重新綁一次。
 - **浮層畫面的底圖**：沿用打開浮層前的那一格（例如從 1.2.2 點「傳送照片」打開，底圖複製 1.2.2）。
 - **沒有 AppBar、頂部跟著內容捲動的頁面**：頂部一樣放在固定頂部區，用 DS 對應的 AppBar variant；捲動行為只在批次紀錄用文字說明。放進 `Content` 會讓 AppBar 內嵌的狀態列一起捲走，與 App 不符。
 - **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，每個項目包一層寬度 Fill 的水平 Auto Layout（無底色），再設主軸對齊。
@@ -153,6 +153,35 @@
 - 區段標題 `Heading/4`、提示文字 `Body/M`＋`Text/Hint`、DS Card 放照片格，格子用 DS `PhotoUpload`（已上傳 State=uploaded，新增格 State=default）。
 - 程式固定 4 欄、格子填滿一列：一列 4 格，間距固定 `Spacing/4`，每格縮小到 (一列寬 − 3×4)／4 填滿（約 78.75），不要用兩端對齊撐滿（間距會被拉得很大）。超過 4 格換行，最多 10 張。
 - 送出鍵 Button Primary Filled lg、寬度 Fill；沒有選照片時程式是半透明的 `DISABLE_STYLE`，兩種輸入狀態合併一格時畫已選照片的狀態。處理中文字不另建格。
+
+---
+
+## 報價總覽頁（頂部分頁＋多張分類卡＋底部金額列）
+
+第一個案例：師傅 2.4.1、2.4.6（程式 `StandardQuotationOverviewSection`、`SimpleQuotationOverviewSection`）。
+
+- 頂部 AppBar（Standard／Slot／Brand）加 `SegmentedControl`，做法同分頁列表頁；浮層畫面的底圖沿用打開前那一格。
+- 每個分類是一張 DS `Card`（Inset／None）放本機元件 `QuotationCategoryRow`（標題＋小字說明＋小計＋箭頭或加號），列高 64（上下 8＋右側點擊區 48，程式用 Material 2 的 `IconButton`，最小 48）。展開的分類在列下方加 1px 分隔線與 Button Secondary Outlined md pill（例如「新增一筆工種工程」）。不要改用 `ListItem`：ListItem 只有單行標題，放不下小字說明。
+- 底部用 DS `Sticky Footer`（Button + Slot），Slot 放本機元件 `QuotationAmountBar`（兩個 DS `Tag` 加提示文字），送出鍵 Button Primary Filled lg。
+- 以內容為主，長頁面高度見三區結構。
+
+## 表單編輯頁（卡片內多個欄位，確認後返回）
+
+第一個案例：師傅 2.4.3、2.4.7、2.4.8（程式 `StandardFeeEditSection`、`SimpleFeeEditSection`、`OtherFeeEditSection`）。
+
+- 每筆資料是一張 DS `Card`（Inset／Standard），Slot 放表單內容的本機元件（例如 `StandardFeeItemForm` 的展開、收合 variant，`OtherFeeItemForm`），欄位用 DS `TextField`。
+- **TextField 沒有說明文字、字數、錯誤訊息時，把 `Show Helper Row` 關掉**，整列才會移除；不關的話每個欄位下方多一列空白，長頁面高度也會算錯。
+- 驗證錯誤（空欄位在按「確認」後一次顯示紅字）不另畫一格，記在批次紀錄；要表示時用 TextField 的 State=Error，唯讀欄位出錯時也改 Error。
+- 「確認」鍵在捲動內容最下方（Button Primary Filled lg、寬度 Fill），沒有固定底部列時底部放 HomeIndicator。長頁面。
+
+## 底部兩顆按鈕的選擇器 BottomSheet
+
+第一個案例：師傅 2.4.4（程式 `UnitPickerBottomSheet`）。
+
+- BottomSheet 有標題與右上 X，高度照程式比例（90% 約 767）；內容用 Slot：分類名稱加一排 DS `Chip`（Tone=info，選中 Selected），列本身自排。
+- 底部「取消」「確認」兩顆並排：把 BottomSheet 內建的 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆 Button（取消 Secondary Outlined lg、確認 Primary Filled lg，間距 `Spacing/16`），DS 待辦 10 處理前的做法。
+- 同一格有多個狀態（例如選「台」與選「式」）時畫資訊較多的那個，不另開 Frame；選「式」的提醒用 DS `Banner`（Tone=Notice、Leading=Icon、Closable 關，圖示換 Phosphor Warning），放在內容下方、左右 `Spacing/16`。
+- 只有標題與選項、沒有底部按鈕、點選項即選定的選項清單（師傅 2.4.2）：BottomSheet Footer=Inline，右上 X，內容放 ListItem，做法同動作選單的「有標題的選項清單」。
 
 ---
 

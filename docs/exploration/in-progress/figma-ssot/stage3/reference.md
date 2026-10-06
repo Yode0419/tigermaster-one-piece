@@ -56,6 +56,12 @@
 | PriceRangeIndicator（整組） | `01ffdc80fadaa053617c33f26a7c0039b08006a0` | variant Position（Low／Mid／High）；Min Price、Max Price、Summary（常見價格那一行）、Description（文字）、Has Description（布林，預設開；師傅案件需求要關）。「件數最多」為固定文字 |
 | WarrantyPill | `3dbb4100105d33276143a80182fe169dbd1f90ff` | 單一元件。Residential、Commercial、Description（文字）、Has Description（布林，預設開）。和 CornerBadge 不同：這是內容區並列兩種保固 |
 | SegmentedControl（整組） | `031923bc6ecb635626bd3711935c3eba3e52fd3e` | variant Segments（2／3）、Selected（First／Second／Third）；Label 1 至 3（文字）。程式的 `TwoTabPreferredSizeTabBar` 用它，放進 AppBar（Standard／Slot）的 `Extension Content`（`appendChild` 後設寬度 Fill） |
+| Sticky Footer（整組） | `5c19eb106789857e6cf78a3f50131eb70db25f2c` | variant Content（Button only／Button + Slot／Flexible Slot）。Button + Slot 的 Slot 放金額列（師傅 2.4）；Flexible Slot 只有 Slot（BottomSheet 內建的 Sticky Footer 換成它，Slot 放兩顆並排 Button）。內含 HomeIndicator，Reserve Home Indicator 布林 |
+| TextField（整組） | `dead407394f14e7557d2a92c8657efdf397a2dc1` | variant Lines（Single／Multi）、State（Default／Disabled／Readonly／Focused／Error）、Content（Filled／Empty）；Label、Value Text、Placeholder Text、Helper Text、Counter Text（文字）、Show Label／Show Helper Row／Show Helper Text／Show Counter／Show Suffix Icon（布林）。Show Helper Row 預設開，沒有說明文字也沒有字數時要關掉，整列才會移除、高度才會縮短（2.4 系列已關）。尾端圖示在 `suffix-icon` 裡，用 `swapIcon` 換 Phosphor |
+| Banner（整組） | `81ff6287277357f06963f6f495aaba4e26b344ea`；Notice／Solid=false／Leading=Icon 變體 `69d811dc89fed5553e048e7308830b916840eab4` | variant Tone（Info／Notice／Error）、Solid、Leading（None／Icon／Slot）；Message（文字）、Closable／Has Action（布林）。單位選「式」的提醒用 Notice 淡色＋Icon，Closable 關，圖示 Smiley 換成 Phosphor Warning |
+| Chip（整組） | `501d1e123c4259e856c2bcb8913f02d5b0ce3bbd` | variant Tone（brand／info）、Selected、Disabled；hasIcon（布林）、Label。單位選擇用 info |
+| Tag（整組） | `77c8f1b0e4de0de8d003b30c8d6cbef61032ba93` | variant Tone（Info／Notice／Success／Emphasis）、Solid、Size（Default／Compact）；Label。Info 底 `Status/InfoContainer`＋`Text/Brand`，Emphasis＋Solid 底 `Status/Error`＋白字；14 Medium，內距 12×4，全圓角 |
+| Phosphor FloppyDisk／PlusCircle／PencilSimple／Warning／X（元件組） | `3cdafa3c1a777cc3f0f4d3a1e0828b0392a7444b`／`5f1f5f94bd1f88e1f4ca6599c7cc08f5e0343de6`／`953d0ad703b16697cdf551119e3206479c774c71`／`b627e5e07e748bdb388b5c66e915887b60a65485`／`e82a7a45eeb09f58f707fedee9b2f3de32df05de` | 程式 `save_outlined`、`add_circle_outline`、`create_outlined`、`warning_rounded`、`close`，Outline／Regular |
 | Button（BottomSheet 內） | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。動作選單的「取消」用 Ghost Neutral |
 
 ---
@@ -102,6 +108,8 @@
 | `Radius/4`／`Radius/8` | `ad61f7f2bfe7abe247524688b7952c8168ebe00e`／`b38dec1c188cdf374088c605831b5edb6a69bdbc` |
 | `Spacing/20`／`Spacing/24`／`Spacing/40` | `4d98dce690ea3d64883dd650d76bcc1139e181bd`／`59ee6610248e15d1ca768de02bd29049a02b8c6a`／`e36fed52983ee661aa218b3b5862e897518c0484` |
 | Phosphor CaretRight／ChatDots／Headset（元件組） | `d7f0bb51360e472eaf4688628e92d3165c0bab23`／`ae283edde49c40eeb524dac605576f04152679f5`／`76f4b9b91e5c44e4d33b67a308659db075aad011`（箭頭、對話氣泡 sms_outlined、客服耳機，Outline／Regular） |
+| `Status/InfoContainer`／`Status/ErrorContainer`／`Background/Notice` | `b7fa6fff58eadf3dc5b38f54bc83cbd3d3b2b7df`／`8a87dd88a3b35d3f4c1cf4daee615412d663aa5a`／`3d4813956348eb7235f2c9e1c545d34a5bc0c17b` | 淺藍、淺紅、淺黃底（Tag 與提醒框用） |
+| `Interactive/OnFilled`／`Chip/InfoSelected` | `cbf5078d3270c00fb293c07a635c65d66abf4ac7`／`318c7e9abe7107fa2279228b6c8724f12383c234` | 實心底上的字色／選中的 info Chip 底色 |
 | Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
 
 ---
@@ -161,6 +169,21 @@
 | 資訊卡文字 20 Bold／18 Medium／16 Regular／14 Medium 灰 | `Heading/4`／`Title/M`／`Body/M`／`Label/M`＋`Text/Hint` | 無 | | 師傅 2.2.1 |
 | 價格與客戶資訊卡內距 20×16、16×12、12×16（`Card` padding） | 照 DS `Card` Standard（16） | 無 | | 師傅 2.2.2 |
 | 地圖 App 圖示（`map_launcher` 套件 SVG，28px） | ListItem 前方圖示留 Smiley 佔位，圖層名稱註明 App，待補 logo | 無 | | 師傅 2.2.3 |
+
+| 報價類別列（`QuotationCategoryCard`）：標題 20 Medium 深藍 (31,40,111)、說明 12 Medium 暖灰 (179,172,162)、「小計」16 Medium 灰 (79,79,84)、金額 20 Bold 深藍 | `Heading/4`＋`Text/Brand`、`Body/XS`＋`Text/Hint`、`Label/L`＋`Text/Secondary`、`Heading/4`＋`Text/Brand`（Bold 對 Medium） | 無 | | 師傅 2.4.1、2.4.3、2.4.6、2.4.8 |
+| 類別列內距 左 16 上下 8、卡片 `Card` margin 4 | 列左 `Spacing/16`、右 `Spacing/4`、上下 `Spacing/8`；卡片外框用 DS `Card`（Inset／None），頁面邊距 `Spacing/16` | 無 | | 師傅 2.4.x |
+| 「報價金額」膠囊底 (240,243,253) 深藍字、「師傅收入」膠囊紅底 (255,40,81) 白字，金額 14 Bold、標籤 14 Medium | DS `Tag`（Info／Emphasis Solid），兩段文字合併成一個 Label，不分粗細 | 自排膠囊（金額加粗） | | 師傅 2.4.1、2.4.6 |
+| 金額列上方「未含客戶端服務費」14 Regular 藍 (58,137,248)、「已預扣…材料費」12 Medium | `Body/S`＋`Text/Link`、`Label/S`＋`Text/Primary` | 無 | | 師傅 2.4.1 |
+| 底部金額列 `ScaffoldBottomSheet`（白底、陰影、上 16 下 28） | DS `Sticky Footer`（Button + Slot），內距照 DS | 無 | | 師傅 2.4.1、2.4.6 |
+| 輸入欄位（Material 底線 `TextFormField`，輸入字 18、提示字 #D1D1D1） | DS `TextField`（Default／Readonly），字級與色彩照 DS | 無 | | 師傅 2.4.3、2.4.5、2.4.7、2.4.8 |
+| 工期卡（標題＋值＋`create_outlined`＋底線） | DS `TextField`（Readonly）＋尾端 Phosphor PencilSimple | 無 | | 師傅 2.4.1、2.4.6 |
+| 單位 `ChoiceChip`（底 #EBF3FF、選中 #BFDAFF＋深藍框、字 20 深藍、間距 12／8） | DS `Chip`（Tone=info，Selected），間距 `Spacing/12`／`Spacing/8` | 無 | | 師傅 2.4.4 |
+| 單位選擇 BottomSheet 高度 90%（`RoundedBottomSheet` 預設） | 固定 767（852×0.9） | 無 | | 師傅 2.4.4 |
+| 底部兩顆按鈕：`OutlinedButton` 藍框、`NORMAL_STYLE` | Button Secondary Outlined lg、Primary Filled lg，間距 `Spacing/16` | 無 | | 師傅 2.4.4 |
+| 紅字提示 (255,40,81) 14 Medium（簡易報價 $5,000 提醒） | `Label/M`＋`Status/Error` | 無 | | 師傅 2.4.6 |
+| 刪除小按鈕 `PillButton` 高 24、藍框透明底 | Button Secondary Outlined sm pill | 無 | | 師傅 2.4.3、2.4.8 |
+| 工種項目名稱 18 Regular 灰 (79,79,84)、金額 18 Bold 深藍 | `Title/M`＋`Text/Secondary`、`Title/M`＋`Text/Brand` | 無 | | 師傅 2.4.3 |
+| 18 Regular（`QuotationCategoryCard` 以外的輸入字、工期值） | `Title/M`（18 Medium） | 無 | | 師傅 2.4.x |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 
