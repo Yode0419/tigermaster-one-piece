@@ -5,7 +5,7 @@
 > **元件邊界**：此規格僅涵蓋「使用者鍵入內容」本身。密碼欄位是獨立元件，見 [PasswordField](password-field.md)；搜尋框（前綴/後綴 icon 組合）屬於未來 `SearchBar` molecule 規格範疇；欄位外部並排的按鈕（如「全部折抵」）屬於版面組合，非 TextField 屬性；標籤列容器（icon + 標籤 + 底線外殼，如訂單詳情頁的欄位顯示）屬於另一獨立元件，非 TextField 範疇。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查_
-_最後更新：2026-07-01_
+_最後更新：2026-10-06_
 
 ---
 
@@ -18,7 +18,8 @@ _最後更新：2026-07-01_
 | 狀態 | default / disabled / readonly / focused / error |
 | 內容顯示 | Filled（使用者已輸入值，`Text/Primary`）/ Empty（空欄位提示文字 Placeholder，`Text/Hint`）——正式 VARIANT 維度，非 BOOLEAN 開關 |
 | 字數顯示器 | 顯示（有 `maxLength` 且無後綴控制項時）/ 隱藏（有後綴控制項時，現況讓位給 icon） |
-| Helper Text 顯示 | 顯示 / 隱藏——`Show Helper Text` BOOLEAN，預設 `true` |
+| Helper 列顯示 | 顯示 / 隱藏——`Show Helper Row` BOOLEAN，預設 `true`；控制整列（含 helper 與字數顯示器），隱藏時整列移除，元件高度跟著縮短。helper 與字數顯示器都不需要時關閉；Error 狀態的錯誤文字使用同一列，此時必須保持開啟 |
+| Helper Text 顯示 | 顯示 / 隱藏——`Show Helper Text` BOOLEAN，預設 `true`；僅在 `Show Helper Row` 開啟時有作用。只要字數顯示器時關閉，字數顯示器會自動靠右 |
 | Label 顯示 | 顯示 / 隱藏——`Show Label` BOOLEAN，預設 `true`；關閉時必須在欄位外部（正上方或區塊標題）另外提供標籤文字，不可完全無標籤，見下方使用規則 |
 
 ## Design Tokens
