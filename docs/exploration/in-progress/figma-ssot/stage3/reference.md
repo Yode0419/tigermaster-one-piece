@@ -1,6 +1,6 @@
 # 階段 3 查表：Key 與近似對應
 
-畫圖時查用。做法見 [method.md](method.md)。新查到的 Key 與新的近似對應，畫完當下就補進來。
+畫圖時查用。做法見 fill-figma-ssot Skill（`.claude/skills/fill-figma-ssot/`）。新查到的 Key 與新的近似對應，畫完當下就補進來。
 
 ---
 
@@ -32,7 +32,7 @@
 | Avatar 60（custom／default） | `6d1d4632eec37682651f0a69bc040bf590c832b2`／`da7fb7e8f71e1e806f8038ebbf42fb6a8d75fc47` | 尺寸有 36／60／75／100／140，見 DS 的 Avatar 頁 |
 | Avatar 140（custom／default） | `829fd483ff3100e2f8fdf873807043655f3cfb0f`／`d055bc845e0990c759c5f39bc3ae7b0e2d24de88` | 通話畫面 |
 | StatusBar（Style=Light／Dark Content） | `e14c6629a1ad46b3d402fbf96a7909b40022771e`／`da48caf54a006a7e4a7142c3179a1587f8ef7564` | 393×59（375 變體已淘汰）。沒有 AppBar 的畫面單獨放；深色背景用 Light |
-| icon（整組） | `3e92f2bfe35a30eaeb557398677d68e18524e14f` | Size（24／20／16）、Icon（Phosphor／Slot）。Phosphor 預設是 Smiley，換圖示見 method.md，改色要改內部 Vector 的填色 |
+| icon（整組） | `3e92f2bfe35a30eaeb557398677d68e18524e14f` | Size（24／20／16）、Icon（Phosphor／Slot）。Phosphor 預設是 Smiley，換圖示見 Skill 的 `screen-types.md`，改色要改內部 Vector 的填色 |
 | Phosphor 圖示庫 | libraryKey `lk-bf8c530498484244d086dee012c8c3556de272d639976c99d80f0ea2d5131dc1adf34cd2fe9598d5b27790bea4ffa4e29cc0ec42090b5c8847855be3834a95c8` | `search_design_system` 的 `includeLibraryKeys` 填這個，以圖示名稱搜尋（例如 DownloadSimple、PhoneDisconnect）。每個圖示是元件組，variant 為 Format（Outline／Stroke）× Weight（Regular／Thin／Light／Bold／Fill／Duotone），一律用 Outline |
 | DownloadSimple／PhoneDisconnect（元件組） | `25e62441552ff56e6583853a80da89d1c535fa3c`／`9239da56ea75d41615cc45394effcb629a77fac5` | 用 `importComponentSetByKeyAsync` 匯入再挑 variant。下載用 Regular，掛斷用 Fill |
 | IconButton（整組） | `f148e16650e8a647c4f0512a528ccfa145fd002d` | Style（Ghost Default／Ghost Inverse／Filled）、Size（md 48／sm 40）、State。Filled 是白底圓形 |
@@ -50,7 +50,7 @@
 | Button（整組） | `86872cf8e34bcd719965b50d7a9ab2abeb291235` | 用 `importComponentSetByKeyAsync` 匯入，依名稱 `Style=…, Size=lg, Shape=rect, State=default` 挑 variant。Label（文字）、hasIconStart、hasIconEnd |
 | PhotoViewer | `038549fe7226b232077c23afd9f97e485dda98c0` | 全螢幕照片。Has Send、Has Download（布林，預設關）；`Photo` 外露 Image。Frame 只放一個寬高 Fill 的 instance |
 | VoiceCallScreen（Calling／OnCall） | `bf39456318e7736d621186872da2a5a3a8258116`／`bf7b5acd7beb8b894c697198d7cfb9a12dabbdc8` | 整組 `01e69e793d03f6de05d8e07e8984a5b42c6cb775`。Name、Duration（文字）；`Background Photo`、`Avatar` 外露。Frame 只放一個寬高 Fill 的 instance |
-| Button（BottomSheet 內） | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。「取消」用 Neutral Outlined |
+| Button（BottomSheet 內） | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。動作選單的「取消」用 Ghost Neutral |
 
 ---
 

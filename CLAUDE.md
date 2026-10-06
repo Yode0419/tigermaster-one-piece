@@ -20,7 +20,7 @@ This repo is the product knowledge base for a home repair matching platform (修
 
 ## Skill Workflow
 
-Eight skills work together to build and evolve this knowledge base:
+Nine skills work together to build and evolve this knowledge base:
 
 | Skill | Purpose |
 |-------|---------|
@@ -32,6 +32,7 @@ Eight skills work together to build and evolve this knowledge base:
 | `/write-doc` | Turns discussion content into a structured Markdown document (supports: 一般知識文件, 流程文件, 決策記錄, 功能規劃文件, 元件規格文件) |
 | `/archive-doc` | Files documents in the right location and maintains `docs/INDEX.md` |
 | `/to-jira` | Turns a requirement or bug into a Jira ticket (tigermaster SCRUM) via a duplicate check, Q&A and a confirmed preview, or rewrites an existing ticket (backed up first); personal API token lives in the gitignored `.claude/skills/to-jira/.env` |
+| `/fill-figma-ssot` | Figma SSOT stage 3 only: draws the current Flutter screens into the placeholder Frames of the three App Figma files with Design System components, one Page per conversation |
 
 ## How to Contribute
 

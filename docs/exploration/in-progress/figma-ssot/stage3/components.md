@@ -1,6 +1,6 @@
 # 階段 3 元件狀況與候選
 
-記錄畫面填入時的元件缺口與重複區塊。到檢查點再決定哪些候選以 `/sanji` 升級進 Design System。
+記錄畫面填入時的元件缺口、重複區塊與重複出現的組合。到檢查點再決定哪些元件候選以 `/sanji` 升級進 Design System，哪些 pattern 候選以 `/sanji pattern` 寫進 `docs/design-system/patterns/`。
 
 ---
 
@@ -35,6 +35,19 @@
 | 通話畫面（`VoiceCallScreen`，撥出中、通話中） | 客戶端 6.3、師傅端 5.3、管理員端 1.3.1、1.3.2 | 已升級進 DS（檢查點 1）。四種聊天室共用同一個頁面 `IOSCallerControlPage`，三個 App 檔案相同 |
 | 全螢幕照片檢視（`PhotoViewer`） | 管理員 1.2.4、1.2.6；客戶 5.1.4、6.1.5、6.1.7；師傅 5.1.5、5.1.7；程式另有 `horizontal_image_list`（可能是訂單照片，不能下載） | 已升級進 DS（檢查點 1），見 DS 待辦 2 |
 | 聊天室列表列（`AdminChatroomListItem`） | 管理員端 1.1.1（同畫面重複 8 次） | 不升級，維持本機元件（檢查點 1）。客戶端、師傅端沒有聊天室列表，只有管理員 1.1.1 用到 |
+
+---
+
+## pattern 候選
+
+畫圖時發現同一種元件組合重複用來解決同一個問題，就記一行；已有的候選只在「出現位置」補上新的 Frame。到檢查點時，跨兩個以上檔案出現的候選以 `/sanji pattern` 寫成文件（見 [stage3.md](stage3.md) 2026-10-06 決策）。做法細節見 fill-figma-ssot Skill 的 `references/screen-types.md`。
+
+| 候選 | 組合 | 解決的問題 | 出現位置 | 狀態 |
+|---|---|---|---|---|
+| 動作選單 | BottomSheet（無標題、Footer=Inline、拖曳把手）＋ ListItem 選項＋ Ghost Neutral「取消」 | 從幾個動作中選一個，可以不選直接取消 | 管理員 1.2.3 | 候選 |
+| 確認對話框 | Dialog（Standard）＋遮罩；次要按鈕在左、主要在右，破壞性動作用 Ghost Danger，只有告知時保留一顆主要按鈕 | 執行單一動作前的確認，或需要使用者知悉的提示 | 管理員 1.2.5、1.3.3、2.2.1、2.3.1 | 候選 |
+| 一般資料頁 | 三區結構＋區段（`Heading/4` 標題＋ Card 包 ListItem 或全寬 Button lg），區段間 `Spacing/16` | 把設定入口與帳號操作分組呈現 | 管理員 2.1.1 | 候選 |
+| 全螢幕媒體 | 單一個撐滿 Frame 的 DS 元件（`PhotoViewer`、`VoiceCallScreen`），黑底或模糊照片背景、控制鍵疊在上方 | 沉浸式的全螢幕內容（看照片、傳照片前確認、通話） | 管理員 1.2.4、1.2.6、1.3.1、1.3.2 | 候選 |
 
 ---
 

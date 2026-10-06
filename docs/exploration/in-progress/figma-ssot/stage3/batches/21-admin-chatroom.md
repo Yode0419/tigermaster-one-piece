@@ -2,7 +2,7 @@
 
 - **Figma**：[APP_管理員 → 1 客服聊天室](https://www.figma.com/design/M5DWva58qmX9Xx3V2O3c3x/APP_管理員)
 - **Evidence**：Flutter repo `docs/figma-ssot/evidence/T-0110.md`（10 個 Frame 都在這份）
-- **紀錄方式**：試做批次，每個 Frame 寫完整對照表（見 [method.md](../method.md)「批次紀錄怎麼寫」）
+- **紀錄方式**：試做批次，每個 Frame 寫完整對照表（見 method.md（已併入 fill-figma-ssot Skill）「批次紀錄怎麼寫」）
 
 ---
 
@@ -41,7 +41,7 @@
 
 **程式**：`admin_main_page.dart`、`admin_chatroom_list.dart`、`admin_chatroom_list_item.dart`
 
-**實際步驟**（第一個 Frame，步驟已整理進 [method.md](../method.md)）
+**實際步驟**（第一個 Frame，步驟已整理進 method.md（已併入 fill-figma-ssot Skill））
 
 1. 讀 evidence index 找到 T-0110，再讀「分析與判斷」表取得程式檔與行號。
 2. 讀程式檔：頁面、列表元件、主題設定（`main.dart`：Material 2、字型、日期語系）。
@@ -92,7 +92,7 @@
 
 **遇到的問題**
 
-- ChatInputBar 在 DS 檔案裡有，但沒有發布到元件庫，匯入失敗。先畫其他部分，使用者發布後補上。已在 [method.md](../method.md) 加上「先試匯入」的步驟。
+- ChatInputBar 在 DS 檔案裡有，但沒有發布到元件庫，匯入失敗。先畫其他部分，使用者發布後補上。已在 method.md（已併入 fill-figma-ssot Skill） 加上「先試匯入」的步驟。
 - 元件與程式有幾處不同（氣泡寬度上限、圓角、頭像間距、已讀與時間的順序、AppBar 陰影），依決策維持元件樣式，只記在上表，沒有覆寫。
 
 ---
@@ -115,7 +115,7 @@
 
 **遇到的問題**
 
-- 複製 1.2.1 的輸入列後用 `setProperties` 切到 Expanded，提示文字「Aa」的寬度沒有重算，超出外框被切掉。DS 元件本身正常，改成刪掉後直接建立 Expanded 的新 instance 就好了。已寫進 [method.md](../method.md)。
+- 複製 1.2.1 的輸入列後用 `setProperties` 切到 Expanded，提示文字「Aa」的寬度沒有重算，超出外框被切掉。DS 元件本身正常，改成刪掉後直接建立 Expanded 的新 instance 就好了。已寫進 method.md（已併入 fill-figma-ssot Skill）。
 
 ---
 

@@ -3,7 +3,7 @@
 ## 概述
 
 - **上層專案**：[Figma SSOT 專案總覽](../figma-ssot-overview.md)
-- **狀態**：進行中（管理員端已完成，檢查點 1 第一部分已完成，下一步檢查點 1 第二部分：檢討流程、整理成 Skill）
+- **狀態**：進行中（管理員端與檢查點 1 已完成，填入流程已整理成 `/fill-figma-ssot` Skill；下一步師傅端批次 12，由 Sonnet 開新對話執行 `/fill-figma-ssot`）
 - **開始**：2026-10-05
 - **結構依據**：[建置交接包 r01](../figma-build-r01.md) 的完整結構表
 - **Figma 檔案**：
@@ -18,10 +18,11 @@
 | 文件 | 內容 | 什麼時候讀 |
 |---|---|---|
 | stage3.md（本文件） | 決策、分批進度、檢查點 | 每次開始新的一批 |
-| [method.md](method.md) | 每個 Frame 的步驟、Frame 結構、繪製原則、驗收方式、Figma 操作注意事項 | 畫圖前；日後 Skill 的主體 |
 | [reference.md](reference.md) | 常用元件與 token 的 Key、近似對應表 | 畫圖時查表 |
-| [components.md](components.md) | 元件狀況、元件候選、DS 待辦 | 遇到沒有元件的區塊；檢查點時 |
+| [components.md](components.md) | 元件狀況、元件候選、pattern 候選、DS 待辦 | 遇到沒有元件的區塊；檢查點時 |
 | `batches/` | 一批一份紀錄：Frame 清單與狀態、每個 Frame 的判斷、問題、本機元件 | 畫該批時 |
+
+填入做法（步驟、繪製原則、畫面類型、程式片段、驗收）在 [fill-figma-ssot Skill](../../../../../.claude/skills/fill-figma-ssot/SKILL.md)，原本的 method.md 已併入並刪除。檢查點時另外交給 `verifier` 依清單完整檢查一次，再檢討流程。
 
 ---
 
@@ -55,6 +56,13 @@
 - 2026-10-05：`PhotoViewer` 升級進 DS，下載鍵移出 AppBar、放在元件本身那層疊在右上，做成 Has Download 開關（與 Has Send 並列）。Why：程式的看照片與傳送前確認是三種角色共用的元件，客戶端、師傅端一定會用到；兩顆按鈕都是元件自己的開關，用法一致，也對應程式「有沒有下載網址」的條件。
 - 2026-10-05：`VoiceCallScreen` 升級進 DS，放在 Chatroom 頁，結構照本機元件不改。Why：四種聊天室打電話都開同一個頁面 `IOSCallerControlPage`，客戶端 6.3、師傅端 5.3 與管理員端相同。
 - 2026-10-05：`AdminChatroomListItem` 不升級進 DS，維持管理員檔案的本機元件。Why：客戶端、師傅端沒有聊天室列表（從訂單或客服入口直接進入單一聊天室），整個 App 只有管理員 1.1.1 用到。
+- 2026-10-06：填入過程順便累積 design pattern：畫圖時發現重複出現的組合，在 components.md 的 pattern 候選記一行（組合、解決的問題、出現位置），到檢查點時，跨兩個以上檔案出現的候選以 `/sanji pattern` 寫進 `docs/design-system/patterns/`。Why：目標是讓未來 AI 協助設計時符合產品的結構與體驗；邊畫邊標記成本低且保留當下判斷脈絡，太早寫成文件容易重寫，等全部畫完再掃則失去脈絡。
+- 2026-10-06：正式填入的確認節奏：Skill 已有做法的畫面，畫完整個 Section 才一起交截圖與「Claude 自己判斷的清單」給使用者確認；遇到沒寫過的畫面類型，先畫那一格並停下來確認，定案的做法補進 Skill 後再繼續。Why：試做時使用者的修改都集中在新類型的第一格，重複類型只有 API 問題，每格確認在 270 格下成本太高。
+- 2026-10-06：正式填入時 Sonnet 不改 DS 檔案：DS 不夠用時先用現有元件或本機排版畫出來，在 components.md 的 DS 待辦記一行（哪一格、缺什麼、建議怎麼改）後繼續；DS 待辦在檢查點或批次之間另開 Opus 對話集中處理，再回頭更新受影響的格子。Why：改 DS 影響三個 App 檔案與 DS 文件，複製 variant、重建 Slot 等操作容易出錯，且每次都要中斷等使用者發布；「小改動」的界線 Sonnet 難以判斷。
+- 2026-10-06：Figma 操作的常用動作（匯入與先試匯入、綁 token、設元件屬性、換圖示、建三區 Frame、批次結構檢查）寫成 Skill 裡的固定程式片段，每次呼叫貼上直接用；複製 variant、外露子元件等少見情況維持文字說明。Why：試做的 API 錯誤多發生在每格都要做的固定動作，寫成片段可從根本避免，Sonnet 自己把文字規則轉成程式容易出錯。
+- 2026-10-06：批次 12 由 Sonnet 照 Skill 跑，批次紀錄仍寫完整對照表，作為檢查點 2 的素材；Sonnet 同一步驟連續失敗兩次時交給 Opus。取代 2026-10-05「試做（批次 21、22、12）用 Opus」中批次 12 的部分。Why：Skill 是寫給 Sonnet 用的，批次 12 只有 11 格且後面緊接檢查點 2，能在小批次就發現 Skill 寫不清楚的地方；新畫面類型有使用者逐格確認把關。
+- 2026-10-06：填入流程的 Skill 命名為 `/fill-figma-ssot`，不用船員角色名。Why：這是針對階段 3 的任務型 Skill，名稱帶 ssot 才不會被誤認為通用的 Figma 填圖工具；未來若有讓 AI 生成畫面的通用 Skill，再參考它的內容並以船員角色命名。
+- 2026-10-06：method.md 的內容搬進 `/fill-figma-ssot` Skill（SKILL.md 放流程與規則、`references/screen-types.md` 放畫面類型做法、`references/figma-notes.md` 放少見的 API 情況、`scripts/snippets.js` 放程式片段）後刪除；Key 與近似對應表、元件、批次紀錄等專案資料留在 `stage3/`。Why：做法只留一處才不會不同步；專案資料每批都會變動，使用者也要在近似對應表上填「改為」，不適合放進 Skill。
 
 ---
 
@@ -64,8 +72,8 @@
 |---|---|---|---|---|---|
 | 21 | 管理員端 | 1 客服聊天室 | 10 | 已完成（10/10，已驗收） | [21-admin-chatroom](batches/21-admin-chatroom.md) |
 | 22 | 管理員端 | 2 帳號 | 3 | 已完成（3/3，已驗收） | [22-admin-account](batches/22-admin-account.md) |
-| ▶ | 檢查點 1 | 檢討流程，整理成 Skill，決定第一批元件候選 | — | 進行中（第一部分已完成：管理員端 13 個 Frame 驗收通過、PhotoViewer 與 VoiceCallScreen 升級進 DS、375 系統列淘汰；第二部分檢討流程與整理成 Skill 未開始） | |
-| 12 | 師傅端 | 1 首頁與接案 | 11 | 未開始 | |
+| ▶ | 檢查點 1 | 檢討流程，整理成 Skill，決定第一批元件候選 | — | 已完成（管理員端 13 個 Frame 驗收通過、PhotoViewer 與 VoiceCallScreen 升級進 DS、375 系統列淘汰；檢討出四項流程調整，整理成 `/fill-figma-ssot` Skill，新增 pattern 候選表） | |
+| 12 | 師傅端 | 1 首頁與接案 | 11 | 下一批（Sonnet 執行 `/fill-figma-ssot`，完整紀錄） | |
 | ▶ | 檢查點 2 | 檢討一般資料頁的流程與品質 | — | 未開始 | |
 | 13 | 師傅端 | 2 訂單與報價 | 34 | 未開始 | |
 | 14 | 師傅端 | 3 收入與撥款 | 6 | 未開始 | |

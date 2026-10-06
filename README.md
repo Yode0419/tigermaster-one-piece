@@ -32,6 +32,7 @@ docs/
 | `/write-doc` | 將討論內容整理成結構化的 Markdown 文件 |
 | `/archive-doc` | 將文件歸檔到適當位置，維護 `docs/INDEX.md` |
 | `/to-jira` | 透過問答把需求或 Bug 整理成 Jira ticket，先檢查有無重複的票，預覽確認後才建立；也能更新既有的票，寫入前自動備份原內容（首次使用需在 `.claude/skills/to-jira/.env` 填入個人 API token，參考同資料夾的 `.env.example`） |
+| `/fill-figma-ssot` | Figma SSOT 階段 3 專用：照 Flutter 現行畫面，以 Design System 元件把三個 App Figma 檔案的空白 Frame 填成畫面，一個 Page 開一個新對話 |
 
 ### 使用流程
 
@@ -46,6 +47,8 @@ docs/
 **功能開發完成**：`/robin`（自動串接 `/write-doc` → `/archive-doc`）
 
 **開 Jira ticket**：`/to-jira`（可單獨使用，也可從 `/luffy` 的規劃文件擬稿）
+
+**填入 Figma SSOT 畫面**：`/fill-figma-ssot`（階段 3 期間使用，進度見 `docs/exploration/in-progress/figma-ssot/stage3/stage3.md`）
 
 ### 設計探索的狀態
 

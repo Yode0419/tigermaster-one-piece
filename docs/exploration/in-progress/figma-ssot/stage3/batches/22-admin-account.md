@@ -2,7 +2,7 @@
 
 - **Figma**：[APP_管理員 → 2 帳號](https://www.figma.com/design/M5DWva58qmX9Xx3V2O3c3x/APP_管理員)
 - **Evidence**：Flutter repo `docs/figma-ssot/evidence/T-0111.md`（2.1.1、2.3.1）、`T-0069.md`（2.2.1）
-- **紀錄方式**：試做批次，每個 Frame 寫完整對照表（見 [method.md](../method.md)「批次紀錄怎麼寫」）
+- **紀錄方式**：試做批次，每個 Frame 寫完整對照表（見 method.md（已併入 fill-figma-ssot Skill）「批次紀錄怎麼寫」）
 
 ---
 
@@ -103,7 +103,7 @@
 
 **遇到的問題**
 
-- Dialog 的標題和按鈕文字不在專案程式裡，要到 Flutter SDK 查 `AboutDialog` 的原始碼與 zh_TW 字串，已寫進 method.md。
+- Dialog 的標題和按鈕文字不在專案程式裡，要到 Flutter SDK 查 `AboutDialog` 的原始碼與 zh_TW 字串，已寫進 method.md（已併入 fill-figma-ssot Skill）。
 
 ---
 
@@ -126,5 +126,5 @@
 
 **遇到的問題**
 
-- 右側按鈕要從 Ghost Action 換成 Ghost Danger。Dialog 內部的按鈕不能刪掉再插入新的（`Cannot move node … inside of an instance`），改用 `swapComponent` 解決，已寫進 method.md。
+- 右側按鈕要從 Ghost Action 換成 Ghost Danger。Dialog 內部的按鈕不能刪掉再插入新的（`Cannot move node … inside of an instance`），改用 `swapComponent` 解決，已寫進 method.md（已併入 fill-figma-ssot Skill）。
 - 標題的半形問號「?」是程式原文；中文句子通常用全形「？」。內容照 Flutter 所以沒改；使用者決定不回報工程。
