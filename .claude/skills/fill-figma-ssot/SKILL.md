@@ -54,7 +54,7 @@ Material 2 defaults are not in the code; judge them yourself (page background `#
 Every turn re-reads the whole conversation, so a long conversation gets expensive fast (batch 12: 142 turns, the conversation grew to 470k tokens). Keep it short:
 
 - Read only what the tables above say. Grep instead of Read whenever you only need a few lines.
-- Components: look in `reference.md` first; if missing, run the DS 名稱查詢 snippet (names and keys only). Use `search_design_system` only for Phosphor icons (its results are about 10k characters each).
+- Components: look in `reference.md` first; if missing, run the DS 名稱查詢 snippet (names and keys only). Use `search_design_system` only for Phosphor icons and for variable Keys not in `reference.md`, and always pass `includeLibraryKeys` (Phosphor's key from `reference.md` for icons, the DS file's `lk-1316b9…` for variables); without it the result mixes in other libraries (one call returned about 30k characters).
 - Build a Frame in one or two `use_figma` calls; for Frames sharing a base (dialogs over the same page), clone the base Frame and change only what differs. If a call fails, rerun only the failed part.
 - One screenshot per Frame, taken inside the build call (`await frame.screenshot()`), reused in the Section-end report. Extra zoomed screenshots only for self-laid blocks.
 - Do not edit the Skill, `screen-types.md` or `stage3.md` while drawing (see "User corrections").
@@ -67,6 +67,10 @@ Every turn re-reads the whole conversation, so a long conversation gets expensiv
 **Content follows Flutter; style follows DS.** Concretely:
 
 - **Follow Flutter**: which options exist, text, order, whether there is a cancel, where it opens from, whether it covers the screen behind. 結構表's 一句情境 says which state to draw.
+- **Cards and data rows**: a card's outer shell is always the DS `Card` (correct shadow and radius), never a self-drawn fill; a repeated card body becomes a local component of the content only, placed in the Card's Slot. In "label + value" rows the value is flush right. See `screen-types.md` 「卡片與資料列」.
+- **HomeIndicator**: a frame with no fixed bottom bar still gets the DS `HomeIndicator` as its fixed bottom (bars like BottomNavBar and ChatInputBar already include one). Stretched long pages: height = top + Scroll Content + bottom (including the 34) + 2 for the frame's 1px stroke.
+- **Sample data stays real and consistent**: lists show every status their query can return, not one. When only one service has real numbers (price, warranty) use it for the whole chain of frames and change the earlier frames (list, home) to match instead of inventing data. No icon asset (e.g. map app logos) means no icon, not a placeholder, unless the user asks.
+- **Scroll structure and bottom padding**: `Content` (fixed Fill size, clips, no padding of its own) holds exactly one `Scroll Content` frame (vertical, width Fill, height Hug). All paddings, item spacing and the real content go in `Scroll Content`, because a fixed-size auto-layout frame does not count its own bottom padding in the scroll range. `Scroll Content` bottom padding is `Spacing/16` by default, 134 (nav 82 + the centre logo's 36 overhang above the nav + 16) when the BottomNavBar floats over it, so content scrolled to the end is neither hidden by nor flush against the bottom bar. `threeZone()` returns `{ frame, content, body }`: fill `body`. The structure check reports any frame that breaks this.
 - **Follow DS**: which component, appearance, radius, color, type size, spacing, page margins. Swapping a Flutter widget for a DS component is fine as long as the Flutter items above stay the same; note the difference in the batch record.
 - When a code value has an exact token but a DS spec says otherwise (e.g. code page margin 8, DS margin `Spacing/16`), follow DS.
 - When a code value has no token or text style: check the 近似對應表 first and reuse the listed choice; otherwise pick the closest one and add a row.

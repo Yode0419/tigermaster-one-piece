@@ -55,6 +55,7 @@
 | EmptyState（整組） | `069b5a9c06814d2eee42df3e9478452794b86e10` | variant Size（Compact 清單區／Page 整頁）；Title、Description（文字）、Has Illustration、Has Description、Has Action（布林，Has Action 預設開，沒有按鈕時要關）。插圖是 `Illustration` Slot：刪掉 `Slot Rectangle` 後貼入插圖；`Action` 外露 Button |
 | PriceRangeIndicator（整組） | `01ffdc80fadaa053617c33f26a7c0039b08006a0` | variant Position（Low／Mid／High）；Min Price、Max Price、Summary（常見價格那一行）、Description（文字）、Has Description（布林，預設開；師傅案件需求要關）。「件數最多」為固定文字 |
 | WarrantyPill | `3dbb4100105d33276143a80182fe169dbd1f90ff` | 單一元件。Residential、Commercial、Description（文字）、Has Description（布林，預設開）。和 CornerBadge 不同：這是內容區並列兩種保固 |
+| SegmentedControl（整組） | `031923bc6ecb635626bd3711935c3eba3e52fd3e` | variant Segments（2／3）、Selected（First／Second／Third）；Label 1 至 3（文字）。程式的 `TwoTabPreferredSizeTabBar` 用它，放進 AppBar（Standard／Slot）的 `Extension Content`（`appendChild` 後設寬度 Fill） |
 | Button（BottomSheet 內） | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。動作選單的「取消」用 Ghost Neutral |
 
 ---
@@ -97,6 +98,10 @@
 | `Blue/400`／`Status/Info`（別名 `Blue/500`）／`Text/Link` | `481b28fe502d136df6bfea8125e762df5d0174c1`／`df2aecc3eea4b34b240922072c51ec5a986ecb61`／`607ca0c6b5b15e3be7c84292e8cfe767e8e2f266` |
 | `Blue/500`（原始色 #3A89F8） | `78389dfd7aec889f768ea7d2d0fc641064b869f3` |
 | `PriceGradient/Light`／`PriceGradient/Deep`（原始色，僅限價格區間） | `5d859c5d4e17528b3c9f32d46c5d5ed212bb2773`／`c014d06c392a9f47e0b79902ae67be3d23871ec4` |
+| `Status/Success`（#1AA354） | `9de14b9eb2da711a02df74dd216927508e2626b2` |
+| `Radius/4`／`Radius/8` | `ad61f7f2bfe7abe247524688b7952c8168ebe00e`／`b38dec1c188cdf374088c605831b5edb6a69bdbc` |
+| `Spacing/20`／`Spacing/24`／`Spacing/40` | `4d98dce690ea3d64883dd650d76bcc1139e181bd`／`59ee6610248e15d1ca768de02bd29049a02b8c6a`／`e36fed52983ee661aa218b3b5862e897518c0484` |
+| Phosphor CaretRight／ChatDots／Headset（元件組） | `d7f0bb51360e472eaf4688628e92d3165c0bab23`／`ae283edde49c40eeb524dac605576f04152679f5`／`76f4b9b91e5c44e4d33b67a308659db075aad011`（箭頭、對話氣泡 sms_outlined、客服耳機，Outline／Regular） |
 | Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
 
 ---
@@ -141,6 +146,21 @@
 | `ScaffoldBottomSheet` 陰影（grey 15%） | 不畫陰影 | 無 | | 師傅 1.2.1 |
 | 按鈕寬 85% 高 45 | Button lg 寬度填滿（照 DS） | 無 | | 師傅 1.2.1 |
 | Phosphor House／Buildings（元件組 Key） | `0408a611f7868ef34a9a0be470492f4070f9d742`／`6405940916f5c3c15b0baf6eaff7c52868153229`，程式 `home`、`business` | 無 | | 師傅 1.2.1 |
+
+| 保固訂單卡的狀態綠 `Color(46,204,113)` #2ECC71 | `Status/Success`（#1AA354） | 原始色 `Green/400` | | 師傅 2.1.3 |
+| 訂單卡資料框的邊框與分隔線 (209,209,209) #D1D1D1 | `Border/Default`（#EDEDED） | `Border/Subtle`（#9E9E9E，太深） | | 師傅 2.1.1、2.1.3 |
+| 訂單卡資料框圓角 5 | `Radius/4` | `Radius/8` | | 師傅 2.1.1、2.1.3 |
+| 訂單卡左右邊距 10、上下 5（`Card` margin）、卡片內距 12 | 頁面邊距 `Spacing/16`、卡片間距 `Spacing/8`、卡片內距照 DS `Card` Standard（16） | 無 | | 師傅 2.1.1、2.1.3 |
+| 分隔線 `Divider` 高 16（線上下各約 8） | 列間距 `Spacing/8`，線 1px | 無 | | 師傅 2.1.1、2.1.3 |
+| 空狀態離頂部 120 | 兩層 `Spacing/48`（96） | `Spacing/40` 加 `Spacing/48`（88） | | 師傅 2.1.2、2.1.4 |
+| 空狀態插圖高 112 | `EmptyState` Compact 的 Slot（60），沿用 DS | `EmptyState` Page（200） | | 師傅 2.1.2、2.1.4 |
+
+| 藍字加箭頭的文字連結「查看需求」「導航」（`Colors.blue`、14 Medium、`arrow_forward_ios`） | Button Ghost Action sm＋後方 Phosphor CaretRight | 無 | | 師傅 2.2.1 |
+| 藍框 `OutlinedButton`（`Colors.blue`，圓角 5） | Button Secondary Outlined lg（#3A89F8，白底） | 無 | | 師傅 2.2.1 |
+| 自家圖片 `chat_with_admin.png`（聯繫客服，36px） | AppBar 動作區 `IconLabelButton`＋Phosphor Headset | 無 | | 師傅 2.2.1 |
+| 資訊卡文字 20 Bold／18 Medium／16 Regular／14 Medium 灰 | `Heading/4`／`Title/M`／`Body/M`／`Label/M`＋`Text/Hint` | 無 | | 師傅 2.2.1 |
+| 價格與客戶資訊卡內距 20×16、16×12、12×16（`Card` padding） | 照 DS `Card` Standard（16） | 無 | | 師傅 2.2.2 |
+| 地圖 App 圖示（`map_launcher` 套件 SVG，28px） | ListItem 前方圖示留 Smiley 佔位，圖層名稱註明 App，待補 logo | 無 | | 師傅 2.2.3 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 

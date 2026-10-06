@@ -93,9 +93,16 @@ function box(direction = 'VERTICAL', props = {}) {
 
 // Turn a placeholder Frame into the three-zone layout:
 // [top] + Content (fills, clips, scrolls vertically) + [bottom]; floating layers go on top later.
-// Removes the placeholder texts. Returns { frame, content }.
+// Removes the placeholder texts. Returns { frame, content, body }.
+// With no BottomNavBar, ChatInputBar or button bar, pass the DS HomeIndicator (Style=Dark, key in reference.md) as `bottom`.
+// Scrolling needs two layers: `content` (fixed Fill size, clips, scrolls, NO padding) holds `body`
+// ("Scroll Content", width Fill, height Hug). Put ALL padding and the real content in `body`, never in `content`:
+// a fixed-size auto-layout frame leaves its own bottom padding out of the scroll range, so content scrolled to
+// the end would sit under the bottom bar. Body's paddingBottom = Spacing/16, or 134 (nav 82 + logo overhang 36 + 16)
+// when a floating BottomNavBar covers it. Set the other paddings on `body`; never overwrite paddingBottom with a smaller value.
 // BottomNavBar exception: pass it as `bottom` and also `navBottom: true`; it becomes a floating
-// layer pinned to the bottom (its centre logo sticks up over Content) and Content gets paddingBottom = its height.
+// layer pinned to the bottom (its centre logo sticks up over Content).
+const NAV_LOGO_OVERHANG = 36; // the centre logo bump sticks 36 above the BottomNavBar's top edge (outside its 82 bounds)
 async function threeZone(frame, { top, bottom, bgKey, navBottom = false } = {}) {
   const { x, y } = frame;
   for (const n of [...frame.children]) n.remove();
@@ -114,16 +121,26 @@ async function threeZone(frame, { top, bottom, bgKey, navBottom = false } = {}) 
   content.layoutSizingVertical = 'FILL';
   content.clipsContent = true;
   content.overflowDirection = 'VERTICAL';
+  const body = figma.createAutoLayout('VERTICAL', { name: 'Scroll Content', fills: [] });
+  body.clipsContent = false;
+  content.appendChild(body);
+  body.layoutSizingHorizontal = 'FILL';
+  body.layoutSizingVertical = 'HUG';
   if (bottom && navBottom) {
     // First on top: put the floating nav before the top bar so it draws above Content.
     frame.insertChild(0, bottom);
     bottom.layoutPositioning = 'ABSOLUTE';
     bottom.constraints = { horizontal: 'STRETCH', vertical: 'MAX' };
     bottom.x = 0; bottom.y = frame.height - bottom.height;
-    content.paddingBottom = bottom.height;
-  } else if (bottom) { frame.appendChild(bottom); bottom.layoutSizingHorizontal = 'FILL'; }
+    // Not a token (nav height + Spacing/16): keeps the last item clear of the floating nav when scrolled to the end.
+    body.paddingBottom = bottom.height + NAV_LOGO_OVERHANG + 16; // 82 + 36 + 16 = 134
+  } else {
+    // Every body keeps breathing room at the bottom, so scrolled-to-end content never touches the bar.
+    await bindNum(body, { paddingBottom: 'd83cd74d5f15f468c9a0b21f1b921aea1498c990' }); // Spacing/16
+    if (bottom) { frame.appendChild(bottom); bottom.layoutSizingHorizontal = 'FILL'; }
+  }
   frame.x = x; frame.y = y;
-  return { frame, content };
+  return { frame, content, body };
 }
 
 // Floating layer (Scrim, Dialog, BottomSheet, chat background) outside Auto Layout.
@@ -224,7 +241,7 @@ const names = frames.map(f => f.name);
 const r = {
   missing: EXPECTED.filter(n => !names.includes(n)),
   extra: names.filter(n => !EXPECTED.includes(n)),
-  size: [], layout: [], order: [], textOverride: [], localNoTextProps: [],
+  size: [], layout: [], order: [], bottomPadding: [], noHomeIndicator: [], textOverride: [], localNoTextProps: [],
   placeholderLeft: [], hardcodedColor: [], clipping: [], texts: {},
 };
 const insideInstance = n => { for (let p = n.parent; p; p = p.parent) if (p.type === 'INSTANCE') return true; return false; };
@@ -245,6 +262,23 @@ for (const f of frames) {
     if (rank < last) r.order.push(`${f.name} > ${k.name} is out of order`);
     last = Math.max(last, rank);
   });
+  // Scroll structure: Content (no padding) > Scroll Content (hug height, holds the paddings and the real content).
+  // Bottom padding of Scroll Content: at least 16, and nav height + logo overhang (36) + 16 = 134 when a BottomNavBar floats over it.
+  const cont = f.children.find(k => k.name === 'Content');
+  const body = cont && cont.children.find(k => k.name === 'Scroll Content');
+  const navEl = f.children.find(k => /^BottomNavBar/.test(k.name));
+  const needPad = navEl ? navEl.height + 36 + 16 : 16;
+  if (cont && !body) r.bottomPadding.push(`${f.name}: Content has no "Scroll Content" frame inside`);
+  else if (cont) {
+    if (cont.children.length !== 1) r.bottomPadding.push(`${f.name}: Content has ${cont.children.length} children, expected only Scroll Content`);
+    if (cont.paddingBottom || cont.paddingTop || cont.paddingLeft || cont.paddingRight) r.bottomPadding.push(`${f.name}: Content itself must have no padding`);
+    if (body.layoutSizingVertical !== 'HUG') r.bottomPadding.push(`${f.name}: Scroll Content height is ${body.layoutSizingVertical}, expected HUG`);
+    if (body.paddingBottom < needPad) r.bottomPadding.push(`${f.name}: Scroll Content paddingBottom=${body.paddingBottom}, need >= ${needPad}`);
+    // Stretched long page: the frame's 1px stroke counts in the layout, so height needs +2 or Content ends up shorter than its content.
+    if (long && cont.height < body.height - 0.5) r.bottomPadding.push(`${f.name}: long page Content ${cont.height} < Scroll Content ${body.height} (add 2 for the frame stroke)`);
+  }
+  // Every frame needs a visible HomeIndicator (bars such as BottomNavBar and ChatInputBar contain one).
+  if (!f.findOne(n => n.name === 'HomeIndicator' && shown(n))) r.noHomeIndicator.push(f.name);
   const texts = [];
   for (const n of [f, ...f.findAll(() => true)]) {
     if (n.type === 'TEXT' && shown(n)) texts.push(n.characters.replace(/\s+/g, ' '));

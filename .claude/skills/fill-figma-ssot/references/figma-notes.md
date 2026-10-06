@@ -18,6 +18,12 @@
 - 找 instance 裡被隱藏的圖層前，先設 `figma.skipInvisibleInstanceChildren = false`（片段的 `find()` 已處理）。
 - Slot（例如 BottomSheet、Card、Dialog 的 `Content`）放內容前先刪掉 `Slot Rectangle`。
 
+- DS `Card` 的 Slot 預設裁切內容。需要凸出 Slot 的元素（例如疊在按鈕右上角、凸出 6px 的未讀標記），把那個 instance 的 Slot `clipsContent` 設為 `false`（可以直接覆寫）。
+- 在 instance 的 Slot 裡新增的絕對定位子圖層（例如 AppBar 動作區的 Badge）可以刪除；但 instance 內建的絕對定位圖層（`Bubble Background`、`Dynamic Island`）不能刪（`Removing this node is not allowed`），用名稱篩選再刪。
+- 失敗的 `use_figma` 呼叫不會留下半成品，同一段程式可以直接修正後重跑。
+- 複製畫面部件到另一個 Page（同一個檔案內）：在來源 Page 對節點 `clone()`，切到目標 Page 後 `appendChild` 即可（會搬過去，來源 Page 不留複本）。複本裡指向本機元件的 instance，要先把主元件 `clone()` 進目標 Page 的「本機元件」Section，再對 instance `swapComponent`。
+- 改 instance 尺寸：`resize()` 可用（例如 `PhotoUpload` 預設 80×80，縮到 78.75 填滿一列），內部的圖片會跟著，圖示維持原尺寸。
+
 ## 本機元件
 
 - 本機元件放在該 Page 右側的「本機元件」Section。
