@@ -8,7 +8,9 @@
 
 **管理員端需要的元件，Figma 都已有**：BottomNavBar（Admin）、AppBar、ListItem、Avatar、Badge、ChatAppBar、ChatBackground、MessageBubble、ChatInputBar、BottomSheet、Dialog、StatusBar、HomeIndicator。
 
-**Design System 檔案中的空白頁**：EmptyState、Carousel、StepIndicator 三頁目前沒有元件。客戶端的「1.2 首次介紹」和訂單進度相關畫面可能需要用到，輪到這些 Page 之前要先確認是否補建。
+**Design System 檔案中的空白頁**：只剩 StepIndicator 頁沒有元件，訂單進度相關畫面可能需要用到，輪到這些 Page 之前要先確認是否補建。EmptyState、Carousel 兩頁已在 DS 升級補建（2026-10-06）。
+
+**DS 升級（2026-10-06）**：`Carousel`、`EmptyState`、`PriceRangeIndicator`、`WarrantyPill` 升級進 DS（後兩者放新增的 Service 頁），新增原始色 `PriceGradient/Light`、`PriceGradient/Deep`。師傅 1.1.x、1.2.x、1.3.1 已換成 DS 版本，舊的本機元件已刪除。規格見 `docs/design-system/components/` 的 carousel.md、empty-state.md、price-range-indicator.md、warranty-pill.md。
 
 **BottomSheet 已擴充（2026-10-05）**：原本底部按鈕區只能絕對定位貼底，內容短時會蓋住內容。已新增 Footer variant（Sticky／Inline）與 hasDragHandle，`hasStickyFooter` 改名為 `hasFooter`，規格見 `docs/design-system/components/bottom-sheet.md`。
 
@@ -38,9 +40,9 @@
 | 適合案件卡（`MasterSuitableOrderCard`，左側黃條） | 師傅端 1.1.1、1.1.3 | 維持本機元件（檢查點 2）。程式只有師傅首頁用到；客戶端是否有同樣的案件摘要卡，客戶端批次再判斷 |
 | 進行中案件卡（`MasterInProgressOrderCard`，左側藍條＋紅色狀態＋未讀點） | 師傅端 1.1.1、1.1.2 | 維持本機元件（檢查點 2）。訂單列表（師傅端 2.1.1）用的是另一個 widget `MasterOnGoingOrderCard`，批次 13a 畫到時比較是否合併 |
 | 案件分類卡（`OrderCategoryCard`，黃色直條＋類別名＋保固徽章） | 師傅 1.2.1 至 1.2.5 | 維持本機元件（檢查點 2）。客戶端服務詳情頁（`WorkingCategoryDetail`）頂部有類似版本但多一段描述，客戶端批次再判斷是否合併 |
-| 價格區間指示條（`PriceRangeIndicator`）、保固膠囊（`WarrantyPill`） | 師傅 1.2.1 至 1.2.5；程式另用在客戶端服務詳情（`WorkingCategoryDetail`，確認與查看工項兩頁），保固膠囊也用在客戶端保固訂單卡 | **升級進 DS**（檢查點 2），分成兩個元件放 DS 的 Service 頁，見 DS 待辦 6 |
-| 輪播 Banner（`CarouselBanner`） | 師傅 1.1.1 至 1.1.5、1.3.1；程式的 `CarouselBannerSwiper` 也用在客戶端首頁 | **升級進 DS**（檢查點 2），放 DS 的 Carousel 頁，見 DS 待辦 7。DS 既有的 `Banner` 是通知提示框，不能取代 |
-| 首頁空狀態（`MasterHomeEmptyState`，圖示＋標題＋提示） | 師傅端 1.1.2、1.1.3；程式另有師傅收入頁、客戶端媒合失敗頁兩處空狀態 | **改做成通用的 DS `EmptyState`**（檢查點 2），見 DS 待辦 8 |
+| 價格區間指示條（`PriceRangeIndicator`）、保固膠囊（`WarrantyPill`） | 師傅 1.2.1 至 1.2.5；程式另用在客戶端服務詳情（`WorkingCategoryDetail`，確認與查看工項兩頁），保固膠囊也用在客戶端保固訂單卡 | 已升級進 DS（DS 升級，2026-10-06），分成兩個元件放 DS 的 Service 頁，見 DS 待辦 6 |
+| 輪播 Banner（`CarouselBanner`） | 師傅 1.1.1 至 1.1.5、1.3.1；程式的 `CarouselBannerSwiper` 也用在客戶端首頁 | 已升級進 DS 為 `Carousel`（DS 升級，2026-10-06），放 DS 的 Carousel 頁，見 DS 待辦 7。DS 既有的 `Banner` 是通知提示框，不能取代 |
+| 首頁空狀態（`MasterHomeEmptyState`，圖示＋標題＋提示） | 師傅端 1.1.2、1.1.3；程式另有師傅收入頁、客戶端媒合失敗頁兩處空狀態 | 已改做成通用的 DS `EmptyState`（DS 升級，2026-10-06），Size=Compact 涵蓋師傅首頁與收入頁，Page 涵蓋客戶端媒合失敗頁，見 DS 待辦 8 |
 
 ---
 
@@ -69,6 +71,6 @@
 | 3 | 1.2.6 下載鍵換圖示 | 已把 1.2.6 下載鍵的 Smiley 佔位換成 Phosphor DownloadSimple（Regular、`Icon/Inverse`）。下載鍵在外露 AppBar 的 Slot 裡，不在 `PhotoViewer` 元件中；2 升級時若採做法 B，要把這顆鍵移進元件 | 已完成 |
 | 4 | 375 系統列淘汰 | 依 [layout.md](../../../../design-system/tokens/layout.md)，目標全面使用 393。StatusBar 刪除 Frame Group=375 兩個變體並拿掉只剩一個值的 Frame Group 屬性；HomeIndicator 目前只有 375 寬，改為 393（現在每次放入都要手動拉寬）。刪除前已確認 DS 與三個 App 檔案（含 Archive、舊檔案頁）都沒有引用 375 變體；兩個 375 變體已刪除、Frame Group 屬性已拿掉，HomeIndicator 已改 393 寬 | 已完成 |
 | 5 | 通話畫面換圖示 | 已在本機元件 `VoiceCallScreen` 兩個 State 把掛斷鍵的 Smiley 佔位換成 Phosphor PhoneDisconnect（Fill，對應程式 `call_end_rounded`，`Icon/Inverse`），1.3.1、1.3.2 跟著更新 | 已完成 |
-| 6 | 價格區間指示條（含「件數最多」標籤）與保固膠囊 | 師傅 1.2.1 自己排：漸層條加向下尖角的標籤、灰色膠囊放兩組圖示加天數。DS 沒有對應元件。**做法已定（檢查點 2）**：分成 `PriceRangeIndicator` 與 `WarrantyPill` 兩個元件，放新增的 Service 頁；以本機元件的屬性為基礎（Position Low／Mid／High、Min Price、Max Price、Marker Label；Residential、Commercial），都加是否顯示說明文字的開關與說明文字屬性（程式 `PriceRange` 的 `showDescription`、`WarrantyDate` 預設顯示說明）；價格區間的三個程式原色 #40AEFE、#3449FF、#3A89F8 新增為 DS 原始色並綁定（命名寫規格時提案）。完成後更新 reference.md 近似對應表的價格區間特例 | 待處理（DS 升級對話） |
-| 7 | 輪播 Banner | 師傅 1.1.1 首頁已做成本機元件 `CarouselBanner`（Image 佔位照加三個分頁圓點）。**做法已定（檢查點 2）**：升級為 DS `Carousel`，放既有的 Carousel 頁；結構照本機元件（外露 Image、variant 決定選中第幾顆），圓點固定 3 顆，客戶端首次介紹頁若有相同圓點再拆成獨立元件 | 待處理（DS 升級對話） |
-| 8 | 通用空狀態 | 師傅 1.1.2、1.1.3 的 `MasterHomeEmptyState` 改做成通用的 DS `EmptyState`，放既有的 EmptyState 頁：插圖佔位（之後可從 Illustration 頁取用）＋標題＋說明＋可選按鈕。先看程式另外兩處空狀態（`master_income_page.dart`、`order_detail_match_fail_page.dart`），確認通用版能涵蓋。完成後師傅 1.1.2、1.1.3 改用 DS 版本 | 待處理（DS 升級對話） |
+| 6 | 價格區間指示條（含「件數最多」標籤）與保固膠囊 | 師傅 1.2.1 自己排：漸層條加向下尖角的標籤、灰色膠囊放兩組圖示加天數。DS 沒有對應元件。**做法已定（檢查點 2）**：分成 `PriceRangeIndicator` 與 `WarrantyPill` 兩個元件，放新增的 Service 頁；以本機元件的屬性為基礎（Position Low／Mid／High、Min Price、Max Price、Marker Label；Residential、Commercial），都加是否顯示說明文字的開關與說明文字屬性（程式 `PriceRange` 的 `showDescription`、`WarrantyDate` 預設顯示說明）；價格區間的三個程式原色 #40AEFE、#3449FF、#3A89F8 新增為 DS 原始色並綁定（命名寫規格時提案）。完成後更新 reference.md 近似對應表的價格區間特例。**結果**：#3A89F8 等於既有 `Blue/500`，只新增 `PriceGradient/Light`、`PriceGradient/Deep`；`PriceRangeIndicator` 收進常見價格行（Summary）與說明（Has Description），師傅 1.2.1 至 1.2.5 已換成 DS 版本（關說明），reference.md 已更新 | 已完成 |
+| 7 | 輪播 Banner | 師傅 1.1.1 首頁已做成本機元件 `CarouselBanner`（Image 佔位照加三個分頁圓點）。**做法已定（檢查點 2）**：升級為 DS `Carousel`，放既有的 Carousel 頁；結構照本機元件（外露 Image、variant 決定選中第幾顆），圓點固定 3 顆，客戶端首次介紹頁若有相同圓點再拆成獨立元件。**結果**：已建 DS `Carousel`，師傅 1.1.1 至 1.1.5、1.3.1 已換成 DS 版本 | 已完成 |
+| 8 | 通用空狀態 | 師傅 1.1.2、1.1.3 的 `MasterHomeEmptyState` 改做成通用的 DS `EmptyState`，放既有的 EmptyState 頁：插圖佔位（之後可從 Illustration 頁取用）＋標題＋說明＋可選按鈕。先看程式另外兩處空狀態（`master_income_page.dart`、`order_detail_match_fail_page.dart`），確認通用版能涵蓋。完成後師傅 1.1.2、1.1.3 改用 DS 版本。**結果**：已建 DS `EmptyState`（Size Compact／Page，插圖為 Slot），三處都能涵蓋；師傅 1.1.2、1.1.3 已換成 DS 版本，插圖沿用原本的向量 | 已完成 |

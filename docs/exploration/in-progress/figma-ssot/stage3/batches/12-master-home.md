@@ -39,6 +39,8 @@
 
 放在該 Page 右側的「本機元件」Section。
 
+**2026-10-06 DS 升級後**：`CarouselBanner`、`MasterHomeEmptyState`、`PriceRangeIndicator`、`WarrantyPill` 已換成 DS 的 `Carousel`、`EmptyState`、`PriceRangeIndicator`、`WarrantyPill` 並刪除，下表只留作紀錄，Key 與用法查 [reference.md](../reference.md)。Section 現在只剩兩種案件卡與 `OrderCategoryCard`。
+
 | 元件 | 用在 | 內容 |
 |---|---|---|
 | `MasterSuitableOrderCard` | 1.1.1、1.1.3 | 白底圓角卡，左側黃條；類別（`Title/S`）＋預約或立即（`Label/S`）、地址、日期。文字都是元件屬性：Category、Mode、Address、Date（使用者指示，不要覆寫圖層文字） |

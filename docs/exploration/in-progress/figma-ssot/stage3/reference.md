@@ -51,6 +51,10 @@
 | Button（整組） | `86872cf8e34bcd719965b50d7a9ab2abeb291235` | 用 `importComponentSetByKeyAsync` 匯入，依名稱 `Style=…, Size=lg, Shape=rect, State=default` 挑 variant。Label（文字）、hasIconStart、hasIconEnd |
 | PhotoViewer | `038549fe7226b232077c23afd9f97e485dda98c0` | 全螢幕照片。Has Send、Has Download（布林，預設關）；`Photo` 外露 Image。Frame 只放一個寬高 Fill 的 instance |
 | VoiceCallScreen（Calling／OnCall） | `bf39456318e7736d621186872da2a5a3a8258116`／`bf7b5acd7beb8b894c697198d7cfb9a12dabbdc8` | 整組 `01e69e793d03f6de05d8e07e8984a5b42c6cb775`。Name、Duration（文字）；`Background Photo`、`Avatar` 外露。Frame 只放一個寬高 Fill 的 instance |
+| Carousel（整組） | `660324fea70b872a40c347fa093a021b12796245` | 首頁輪播 Banner。variant Page（1／2／3，第幾顆圓點選中）；`Banner Image` 外露 Image。寬度 Fill、高 200 |
+| EmptyState（整組） | `069b5a9c06814d2eee42df3e9478452794b86e10` | variant Size（Compact 清單區／Page 整頁）；Title、Description（文字）、Has Illustration、Has Description、Has Action（布林，Has Action 預設開，沒有按鈕時要關）。插圖是 `Illustration` Slot：刪掉 `Slot Rectangle` 後貼入插圖；`Action` 外露 Button |
+| PriceRangeIndicator（整組） | `01ffdc80fadaa053617c33f26a7c0039b08006a0` | variant Position（Low／Mid／High）；Min Price、Max Price、Summary（常見價格那一行）、Description（文字）、Has Description（布林，預設開；師傅案件需求要關）。「件數最多」為固定文字 |
+| WarrantyPill | `3dbb4100105d33276143a80182fe169dbd1f90ff` | 單一元件。Residential、Commercial、Description（文字）、Has Description（布林，預設開）。和 CornerBadge 不同：這是內容區並列兩種保固 |
 | Button（BottomSheet 內） | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。動作選單的「取消」用 Ghost Neutral |
 
 ---
@@ -91,6 +95,8 @@
 | `Radius/12`／`Spacing/4` | `eb22a1b5d208fc1a74838aab28a99fec20d83a2a`／`0e5c80bc92a0d5cda616f6739174c390fbba548c` |
 | `Heading/3`（24 Medium）／`Title/S`／`Title/M` | `6eb54c54e1c60c5d8263d636f4636d78dd8680d8`／`4843b58b61eec9235c9023cbb912b2b33872c6ee`／`2dcf2a4950a1086708863ecacb4b3311ffce3bb9` |
 | `Blue/400`／`Status/Info`（別名 `Blue/500`）／`Text/Link` | `481b28fe502d136df6bfea8125e762df5d0174c1`／`df2aecc3eea4b34b240922072c51ec5a986ecb61`／`607ca0c6b5b15e3be7c84292e8cfe767e8e2f266` |
+| `Blue/500`（原始色 #3A89F8） | `78389dfd7aec889f768ea7d2d0fc641064b869f3` |
+| `PriceGradient/Light`／`PriceGradient/Deep`（原始色，僅限價格區間） | `5d859c5d4e17528b3c9f32d46c5d5ed212bb2773`／`c014d06c392a9f47e0b79902ae67be3d23871ec4` |
 | Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
 
 ---
@@ -117,6 +123,7 @@
 
 | 師傅首頁 AppBar 背景（黃色漸層圖 `appbar_bg.png`） | AppBar（Standard／None／Brand） | 無 | | 師傅 1.1.1 |
 | 首頁輪播 Banner 圖（網路圖片） | DS 的 Image（Loaded）內建貓咪佔位照，拉成 393×200 | 無 | | 師傅 1.1.1 |
+| 輪播分頁圓點：10px、間距 6、距底 10，未選中 (179,172,162) #B3ACA2 | `Carousel` 照本機元件：8px、`Spacing/8`、距底 8，未選中 `Border/Default`（#EDEDED） | `Neutral/400`（#BABABA）、`Icon/Subtle`（#9E9E9E） | | 師傅 1.1.1 |
 | 14 Medium 灰（案件卡的日期、狀態） | `Label/M`（14 Medium） | 無 | | 師傅 1.1.1 |
 | 14 Regular 灰（案件卡的地址） | `Body/S`＋`Text/Secondary` | 無 | | 師傅 1.1.1 |
 | 20 Bold（首頁「適合您的案件」標題） | `Heading/4`（20 Medium） | 無 | | 師傅 1.1.1 |
@@ -124,10 +131,10 @@
 | 案件卡圓角 10 | `Radius/12` | `Radius/8` | | 師傅 1.1.1 |
 | 案件卡左側黃條、藍條 8px | 原始色 `Brand/TigerYellow`、`Brand/TigerBlue`（沒有對應語意 token） | 無 | | 師傅 1.1.1 |
 | 空狀態灰 (145,145,151)、(179,179,179) | 兩行都用 `Text/Hint` | 無 | | 師傅 1.1.2 |
-| 空狀態插圖（`empty_suitable_order.png` 等） | 60 圓形佔位 | 無 | | 師傅 1.1.2、1.1.3 |
+| 空狀態插圖（`empty_suitable_order.png` 等） | `EmptyState` 的 `Illustration` Slot 放入插圖（師傅 1.1.2、1.1.3 沿用原本畫好的插圖向量） | 無 | | 師傅 1.1.2、1.1.3 |
+| 空狀態標題 14 Regular 灰（師傅收入頁「尚無已完成案件」） | `EmptyState` Compact 標題 `Label/S`＋`Text/Hint` | `Body/S` | | 師傅收入頁（批次 14） |
 
-| 價格區間藍色漸層條 (64,174,254)→(52,73,255)→(64,174,254) | 漸層色標綁變數：兩端 `Blue/400`、中間 `Status/Info`（`Blue/500`，比程式的靛藍淺） | 無 | | 師傅 1.2.1 |
-| 價格區間漸層與標籤：(64,174,254)、(52,73,255)、價格文字 (58,137,248) | **特例：直接用程式原色，不綁 token**（使用者指定，只限 `PriceRangeIndicator`，不作通用規則） | `Blue/400`、`Blue/500`、`Blue/600`（較淺） | | 師傅 1.2.1 |
+| 價格區間漸層與標籤：(64,174,254)、(52,73,255)、價格文字 (58,137,248) | **特例：綁原始色**，漸層兩端 `PriceGradient/Light`、最深處與標籤底 `PriceGradient/Deep`（DS 升級新增，與程式完全一致，只限 `PriceRangeIndicator`），價格文字 `Blue/500`（值相同但語意不符的 `Text/Link`、`Status/Info` 不用）。先前「直接用程式原色、不綁 token」的特例已取代 | 無 | | 師傅 1.2.1 |
 | 灰色保固膠囊底色 (238,238,238) | `Background/Page`（#F5F5F5） | 無 | | 師傅 1.2.1 |
 | 24 Bold（案件類別名稱） | `Heading/3`（24 Medium） | 無 | | 師傅 1.2.1 |
 | 18 Bold（段落標題） | `Title/M`（18 Medium） | 無 | | 師傅 1.2.1 |

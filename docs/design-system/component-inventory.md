@@ -4,7 +4,9 @@
 `完成` 打勾後，元件名稱改為連結指向 spec 文件。
 
 _Flutter codebase：`C:\Users\yode0\develop\source_code\android_app_2.6.1\fdtigermaster_app`_
-_最後更新：2026-07-17 — StatusBar／HomeIndicator 完成備料並建立 Figma Component（系統 chrome 裝飾元件，Frame Group×Style／Style 二維，Base/White／Base/Black 為刻意 Primitive token 例外），並回頭補上 AppBar／Sticky Footer／BottomNavBar 的 `Reserve Status Bar`／`Reserve Home Indicator` Boolean（直接內嵌 instance，ChatInputBar 透過 Sticky Footer 曝露的屬性沿用），翻盤 Sticky Footer 原「安全區不進 Figma」舊規則_
+_最後更新：2026-10-06 — figma-ssot 階段 3 DS 升級：Carousel、EmptyState、PriceRangeIndicator、WarrantyPill 完成備料並建立 Figma Component（後兩者放新增的 Service 頁），新增原始色 PriceGradient/Light、Deep_
+
+_2026-07-17 — StatusBar／HomeIndicator 完成備料並建立 Figma Component（系統 chrome 裝飾元件，Frame Group×Style／Style 二維，Base/White／Base/Black 為刻意 Primitive token 例外），並回頭補上 AppBar／Sticky Footer／BottomNavBar 的 `Reserve Status Bar`／`Reserve Home Indicator` Boolean（直接內嵌 instance，ChatInputBar 透過 Sticky Footer 曝露的屬性沿用），翻盤 Sticky Footer 原「安全區不進 Figma」舊規則_
 
 _2026-07-16 — BottomNavBar 完成備料（Role：Client/Master/Admin 三個變體，分頁項目改為直接複用 IconLabelButton 的 tone，相依元件從 Badge 修正為 IconLabelButton，Figma 尚未建立正式 Component）；ChatInputBar 完成備料並建立 Figma Component（State × Content 二維，TimeRequest 因 Figma 平台限制無法實際綁定顯示/隱藏，需手動處理，外層容器複用 Sticky Footer）；SearchBar 完成備料（Type：Boxed/Lined，僅涵蓋全螢幕大標題搜尋與地址自動完成搜尋兩種，MasterShop 緊湊型搜尋暫不處理，Figma 尚未建立正式 Component）_
 
@@ -48,7 +50,9 @@ Molecules 以 Atoms 為主要組成，部分會依賴其他 Molecule（標註 �
 | [x] | [Sticky Footer](components/sticky-footer.md) | `Sticky Footer`（獨立頁面） | `ScaffoldBottomSheet`, `QuotationSubmitBottomSection` | — |
 | [x] | [Card](components/card.md) | `Card` | —（需新建 `AppCard`；待整併 `L2Card`、`L3Card`、`ClientOnGoingOrderCard`、`MasterOnGoingOrderCard`、`MasterSuitableOrderCard`、`MasterInProgressOrderCard`、`ProMemberFaqCard`） | — |
 | [x] | [Dialog](components/dialog.md) | `Dialog` | `PlatformAlertDialog`, `ImportantOrderActionDialog` | `Button` |
-| [ ] | EmptyState | `EmptyState` | —（需新建） | `Button`（選填） |
+| [x] | [EmptyState](components/empty-state.md) | `EmptyState` | —（需新建；待整併師傅首頁、師傅收入頁、客戶端媒合失敗頁三處各自的 `Column`） | `Button`（選填） |
+| [x] | [PriceRangeIndicator](components/price-range-indicator.md) | `Service` | `PriceRange`, `PriceRangeIndicator` | — |
+| [x] | [WarrantyPill](components/warranty-pill.md) | `Service` | `WarrantyDate` | `Icon` |
 | [x] | [ListItem](components/list-item.md) | `ListItem` | —（需新建；待整併 `SettingTile`、`MemberInfoTile`） | `Icon` |
 | [x] | [MessageBubble](components/message-bubble.md) | `Chatroom` | `TextMessage`, `ImageMessage`, `FileMessage`, `DayMarkMessage`, `CallLogMessage`, `TimeRequestMessage`, `MessageBuilder`, `PendingMessageBuilder` | `Avatar` ★ |
 | [x] | [ChatInputBar](components/chat-input-bar.md) | `Chatroom`（Component Set 已建立） | `ChatroomInputBar`（需整併為共用 widget） | `IconButton`, `IconLabelButton`, `HomeIndicator`（容器自繪，token 同 Sticky Footer；文字輸入框為專屬客製，非 TextField） |
@@ -76,7 +80,7 @@ Organisms 由 Atoms 與 Molecules 混合組成，或佔據固定版面位置。
 | [x] | [AppBar](components/app-bar.md) | `Navigation` | Type（Standard/Tall）× Background（Solid/Brand/Image）× Extension（None/Slot/Overlay）三個完全獨立的正交屬性：Standard 與 Tall+Slot 用原生 `AppBar`（41+ 處各自實作）；Tall+Overlay（捲動收合）用 `StackSliverAppBar` + 2 套獨立原生 `SliverAppBar` 實作（3 套待整併，屬工程排程議題）；Tall+Overlay（靜態不收合）為帳號頁自訂高頭部（不用 `Scaffold.appBar`）；捲動收合純屬互動行為不做 variant。Figma Component 已建立 | `Icon`, `Button` |
 | [x] | [ChatAppBar](components/chat-app-bar.md) | `Chatroom` | Chat（情境）：`to_client_chatroom.dart`、`to_master_chatroom.dart`、`to_admin_chatroom.dart`、`from_admin_chatroom.dart` 四個獨立 class 各自手刻，無共用元件，待整併 | `IconButton`, `IconLabelButton`（顏色覆寫） |
 | [x] | [BottomNavBar](components/bottom-nav-bar.md) | `Navigation` | `FABBottomNavBar` | `IconLabelButton` |
-| [ ] | Carousel | `Carousel` | `CarouselBannerSwiper` | `Image`（Slot）, `Icon` |
+| [x] | [Carousel](components/carousel.md) | `Carousel` | `CarouselBannerSwiper` | `Image`（外露） |
 | [ ] | CategoryCard | `Card` | `L2Card`（Row）, `L3Card`（Stacked） | `Image`, `Badge`（選填） |
 | [ ] | CompactOrderCard | `Card` | `MasterSuitableOrderCard` | — |
 | [ ] | OrderCard | `Card` | `ClientOnGoingOrderCard`, `ClientWarrantyOrderCard`, `MasterOnGoingOrderCard`, `MasterInProgressOrderCard`, `MasterWarrantyOrderCard` | `Badge`, `Tag`, `Avatar` ★, `Button`（選填） |

@@ -3,7 +3,9 @@
 TigerMaster App 的設計系統文件，供 AI 與設計師理解視覺語言、元件規格與使用規則。
 
 _Figma 來源：[TigerMaster-Design-System](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System)_
-_Last updated: 2026-10-05：新增 PhotoViewer、VoiceCallScreen 元件規格並建立 Figma Component；StatusBar 淘汰 375 變體、HomeIndicator 改為 393 寬_
+_Last updated: 2026-10-06：新增 Carousel、EmptyState、PriceRangeIndicator、WarrantyPill 元件規格並建立 Figma Component（後兩者放新增的 Service 頁）；colors.md 新增 PriceGradient 原始色組_
+
+_2026-10-05 — 新增 PhotoViewer、VoiceCallScreen 元件規格並建立 Figma Component；StatusBar 淘汰 375 變體、HomeIndicator 改為 393 寬_
 
 _2026-09-24 — layout.md 更新，既有 375×812 畫面不再挑選優先遷移，改由 figma-ssot 專案統一以 393×852 重畫，舊畫面移入 Archive_
 
@@ -28,7 +30,7 @@ design-system/
 
 ## Tokens
 
-- [colors.md](tokens/colors.md) — Primitive 色票（品牌色、中性色、功能色）+ Component Tokens 第三層說明 _(2026-07-07)_
+- [colors.md](tokens/colors.md) — Primitive 色票（品牌色、中性色、功能色、僅限價格區間的 PriceGradient）+ Component Tokens 第三層說明 _(2026-10-06)_
 - [semantic-colors.md](tokens/semantic-colors.md) — Semantic 顏色 token（Text / Background / Icon / Border / Interactive / Status）_(2026-07-07)_
 - [typography.md](tokens/typography.md) — 字型層級（Display / Heading / Title / Body / Label）_(2026-07-03)_
 - [spacing.md](tokens/spacing.md) — 間距 token（2–48px）_(2026-06-25)_
@@ -77,6 +79,10 @@ design-system/
 - **[SearchBar](components/search-bar.md)** — 頁面內嵌搜尋輸入框規格：Type（Boxed/Lined）× Content（Empty/Filled）兩維 variant，Boxed 為圓角容器（服務搜尋等頁面內嵌情境）、Lined 為底線大字級（BottomSheet 內搜尋輸入，如地址自動完成）、Boxed 搜尋圖示金色與 `Icon/Brand` token 完全吻合、Content=Filled 時出現清除按鈕（`Icon/Subtle`，兩個 Type 共用，比照 TextField 命名慣例、屬本次規格新增非現況功能）、現況兩處各自呼叫原生 TextField/TextFormField 無共用 widget、Figma Component 已建立（Type × Content 共 4 個 variant）_(2026-07-16)_
 - **[ChatInputBar](components/chat-input-bar.md)** — 聊天室頁面底部訊息輸入列規格：State（Collapsed/Expanded）× Content（Empty/Filled）二維 variant + TimeRequest、Reserve Home Indicator 兩個 Boolean、外層為自繪容器（token 同 Sticky Footer，不用 Sticky Footer instance，因插槽內圖層無法綁屬性）、文字輸入框為聊天室專屬客製元素（非 TextField instance）、Toggle/Send 按鈕分別複用 IconLabelButton/IconButton 故不定義獨立 disabled variant、現況單一 `ChatroomInputBar` class 4 角色頁面共用、Figma Component Set 已建立 _(2026-07-16)_
 - **[VoiceCallScreen](components/voice-call-screen.md)** — 語音通話全螢幕畫面：State（Calling/OnCall）、Name／Duration 文字屬性、背景照片與頭像外露，對應四種聊天室共用的 `IOSCallerControlPage`，由 figma-ssot 階段 3 本機元件升級、Figma Component 已建立 _(2026-10-05)_
+- **[Carousel](components/carousel.md)** — 首頁頂部輪播廣告圖：Page（1/2/3）variant 決定選中圓點、圓點固定 3 顆、Banner Image 外露可換圖，對應 `CarouselBannerSwiper`（客戶端與師傅首頁共用），由 figma-ssot 階段 3 本機元件升級、Figma Component 已建立 _(2026-10-06)_
+- **[EmptyState](components/empty-state.md)** — 清單或頁面沒有資料時的說明：Size（Compact 清單區／Page 整頁結果）、插圖為 Slot、標題／說明／按鈕可開關，排列固定為插圖在上，涵蓋師傅首頁、師傅收入頁、客戶端媒合失敗頁三處、Figma Component 已建立 _(2026-10-06)_
+- **[PriceRangeIndicator](components/price-range-indicator.md)** — 服務價格區間：Position（Low/Mid/High）標出件數最多的價位、常見價格行與可開關的說明，顏色刻意綁原始色（新增 `PriceGradient/Light`、`Deep`，價格文字 `Blue/500`），對應 `PriceRange`、Figma Component 已建立（Service 頁）_(2026-10-06)_
+- **[WarrantyPill](components/warranty-pill.md)** — 服務保固天數膠囊：一般住家與營業用兩半等寬並列、可開關的保固說明，與 CornerBadge 區分，對應 `WarrantyDate`、Figma Component 已建立（Service 頁）_(2026-10-06)_
 - **[BottomNavBar](components/bottom-nav-bar.md)** — App 底部主導覽列規格：Role（Client/Master/Admin）三個變體＝各角色實際 tab 內容組合，分頁項目為專屬子元件 `NavBarItem`（Tab × Toggle on/off），內部沿用 IconLabelButton 視覺、容器底色 `Interactive/Primary` 現況吻合零落差、中央為固定 Logo 並依角色顯示對應文字（Admin 無文字）、不套用 FAB 規格、新增 `Reserve Home Indicator` Boolean（內嵌 HomeIndicator instance）、Figma Component 已建立 _(2026-07-17)_
 - **[StatusBar](components/status-bar.md)** — 系統 chrome 裝飾元件：疊加畫面最上層，Style（Light/Dark Content），2026-10-05 淘汰 375 變體只保留 393、Base/White／Base/Black 為刻意 Primitive token 例外、作為 AppBar 內嵌 instance（由 `Reserve Status Bar` Boolean 控制）、Figma Component 已建立 _(2026-07-17)_
 - **[HomeIndicator](components/home-indicator.md)** — 系統 chrome 裝飾元件：疊加畫面最下層，Style（Light/Dark）一維、134pt 膠囊固定置中、作為 Sticky Footer／BottomNavBar 內嵌 instance、翻盤 Sticky Footer 原「安全區不進 Figma」舊規則、Figma Component 已建立 _(2026-07-17)_

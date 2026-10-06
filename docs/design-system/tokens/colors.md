@@ -116,6 +116,15 @@ _最後同步：2026-06-25_
 | `ProGradient/MidBlue` | `#1438BB` |
 | `ProGradient/LightBlue` | `#3090E4` |
 
+### PriceGradient
+
+僅限 [PriceRangeIndicator](../components/price-range-indicator.md) 使用的漸層色組，與程式原色完全一致 _(2026-10-06 新增)_。
+
+| Token | 色值 | 說明 |
+|-------|------|------|
+| `PriceGradient/Light` | `#40AEFE` | 漸層條兩端 |
+| `PriceGradient/Deep` | `#3449FF` | 漸層條最深處、件數最多標籤底色 |
+
 ---
 
 ## Semantic Color Tokens

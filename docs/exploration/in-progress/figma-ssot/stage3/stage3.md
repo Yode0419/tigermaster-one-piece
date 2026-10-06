@@ -3,7 +3,7 @@
 ## 概述
 
 - **上層專案**：[Figma SSOT 專案總覽](../figma-ssot-overview.md)
-- **狀態**：進行中（管理員端、檢查點 1、師傅端批次 12 與檢查點 2 已完成；下一步另開 Opus 對話做 DS 升級（見進度表），發布後才由 Sonnet 接批次 13a）
+- **狀態**：進行中（管理員端、檢查點 1、師傅端批次 12、檢查點 2 與 DS 升級已完成；下一步由 Sonnet 接批次 13a）
 - **開始**：2026-10-05
 - **結構依據**：[建置交接包 r01](../figma-build-r01.md) 的完整結構表
 - **Figma 檔案**：
@@ -76,6 +76,11 @@
 - 2026-10-06：（檢查點 2）DS 檔新增「Service」頁，放 `PriceRangeIndicator` 與 `WarrantyPill`；`Carousel`、`EmptyState` 放進既有的同名空白頁。Why：兩者只在服務與工項資訊的情境出現，程式也在同一個資料夾（`component/service/`），比照 `Chatroom` 頁同情境元件放一起的慣例。
 - 2026-10-06：（檢查點 2）pattern 的達標條件改為「跨兩個以上 App 檔案，且是兩個以上元件的組合」；單一元件的用法規則補進該元件的規格文件。這次沒有候選達標，確認對話框的按鈕配置規則補進 `docs/design-system/components/dialog.md`。Why：確認對話框只有 Dialog 加遮罩，寫成 pattern 會和元件規格重疊；AI 查 Dialog 時一定會讀到元件規格。一般資料頁、動作選單、全螢幕媒體預計在師傅端批次 15、16 跨進第二個檔案，到時一起寫。
 - 2026-10-06：（檢查點 2）批次 13 切成 4 個對話：13a（2.1 至 2.3，9 格）、13b（2.4，11 格）、13c（2.5、2.6，6 格）、13d（2.7、2.8，8 格）；DS 升級做完並發布後才開始 13a。Why：批次 12 只有 11 格就讓對話長到 47 萬 token，批次 13 的新畫面類型更多；2.4 報價編輯最重所以單獨一段；2.1.2、2.1.4 是空狀態、2.2.2 可能用到價格區間與保固膠囊，DS 沒先做好 Sonnet 會再畫出本機版本。
+- 2026-10-06：（DS 升級）`Carousel` 的分頁圓點照本機元件（8px、間距 `Spacing/8`、距底 8，未選中 `Border/Default`），不照程式的 10px、間距 6、暖灰 #B3ACA2，差異記進 reference.md 近似對應表。Why：本機元件已在檢查點 2 驗收，數值都有 token；淺灰在照片上是否看不清楚要等真實 Banner 圖才知道。
+- 2026-10-06：（DS 升級）`EmptyState` 涵蓋程式三處空狀態，分 Size=Compact（清單區，照本機元件數值）與 Page（整頁結果，插圖 200、`Heading/2` 標題）；排列一律插圖在上、標題在下，客戶端媒合失敗頁的標題在插圖上方也照此統一。Why：檢查點 2 已決定涵蓋三處，固定順序是通用元件的意義；文字內容不變，排列屬於樣式照 DS。
+- 2026-10-06：（DS 升級）`EmptyState` 的插圖做成 Slot（粉紅 `Slot Rectangle` 佔位，比照 Card），不用圓形佔位；Has Action 預設開啟。Why：使用者指定，之後要能放入任意插圖；DS 的 Illustration 頁目前是一般 Frame 不是元件，無法做成下拉替換。
+- 2026-10-06：（DS 升級）DS 元件的文字屬性預設值用通用佔位字（比照 Button「Button」、Dialog「Title」），不用實際產品文案；真實文案只出現在 App 檔案的畫面裡。Why：使用者指定；DS 是元件規格，實際文案屬於畫面內容。
+- 2026-10-06：（DS 升級）價格區間只新增兩個原始色 `PriceGradient/Light`（#40AEFE）、`PriceGradient/Deep`（#3449FF），放 `Color/Primitive` 並註明僅限 `PriceRangeIndicator`；價格文字 #3A89F8 等於既有 `Blue/500`，直接綁原始色，不綁值相同但語意不符的 `Text/Link`、`Status/Info`。元件收進程式 `PriceRange` 的常見價格行與說明文字（Has Description），「件數最多」維持固定文字。取代檢查點 2「新增三個原始色」的部分。Why：比照既有 `ProGradient` 的功能專用漸層色組；開新色相群組只有一個顏色會變孤兒色票，塞進 Blue 色階則色相不連續。
 ---
 
 ## 分批與進度
@@ -87,7 +92,7 @@
 | ▶ | 檢查點 1 | 檢討流程，整理成 Skill，決定第一批元件候選 | — | 已完成（管理員端 13 個 Frame 驗收通過、PhotoViewer 與 VoiceCallScreen 升級進 DS、375 系統列淘汰；檢討出四項流程調整，整理成 `/fill-figma-ssot` Skill，新增 pattern 候選表） | |
 | 12 | 師傅端 | 1 首頁與接案 | 11 | 已完成（11/11，已驗收） | [12-master-home](batches/12-master-home.md) |
 | ▶ | 檢查點 2 | 檢討一般資料頁的流程與品質 | — | 已完成（另開代理驗收師傅端 1 首頁與接案，修正日期與 1.1.4 狀態；Skill 補三項檢查與省 token 規則；決定 4 個元件升級進 DS、pattern 達標條件、批次 13 切 4 段） | |
-| ▶ | DS 升級 | `Carousel`、`EmptyState`、`PriceRangeIndicator`（含三個新原始色）、`WarrantyPill`，以 `/sanji` 寫規格並建進 DS（新增 Service 頁）；發布後把師傅端 1.1.x、1.2.x 的本機元件換成 DS 版本並刪除，更新 reference.md 的 Key 與近似對應表（價格區間特例改為綁新原始色） | — | 未開始（另開 Opus 對話） | |
+| ▶ | DS 升級 | `Carousel`、`EmptyState`、`PriceRangeIndicator`（含三個新原始色）、`WarrantyPill`，以 `/sanji` 寫規格並建進 DS（新增 Service 頁）；發布後把師傅端 1.1.x、1.2.x 的本機元件換成 DS 版本並刪除，更新 reference.md 的 Key 與近似對應表（價格區間特例改為綁新原始色） | — | 已完成（四個元件建進 DS 並發布，新增 Service 頁與 `PriceGradient/Light`、`Deep` 兩個原始色；師傅 1.1.x、1.2.x、1.3.1 共 18 處換成 DS 版本，舊本機元件已刪除；規格見 `docs/design-system/components/`） | |
 | 13a | 師傅端 | 2 訂單與報價：2.1 訂單列表、2.2 訂單資訊與客戶需求、2.3 施工前照片 | 9 | 未開始 | [13-master-order](batches/13-master-order.md) |
 | 13b | 師傅端 | 2 訂單與報價：2.4 報價編輯與送出 | 11 | 未開始 | 同上 |
 | 13c | 師傅端 | 2 訂單與報價：2.5 報價資訊與等待確認、2.6 施工與完工照片 | 6 | 未開始 | 同上 |
