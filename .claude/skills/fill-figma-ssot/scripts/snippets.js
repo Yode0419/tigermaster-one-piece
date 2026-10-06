@@ -94,13 +94,16 @@ function box(direction = 'VERTICAL', props = {}) {
 // Turn a placeholder Frame into the three-zone layout:
 // [top] + Content (fills, clips, scrolls vertically) + [bottom]; floating layers go on top later.
 // Removes the placeholder texts. Returns { frame, content }.
-async function threeZone(frame, { top, bottom, bgKey } = {}) {
+// BottomNavBar exception: pass it as `bottom` and also `navBottom: true`; it becomes a floating
+// layer pinned to the bottom (its centre logo sticks up over Content) and Content gets paddingBottom = its height.
+async function threeZone(frame, { top, bottom, bgKey, navBottom = false } = {}) {
   const { x, y } = frame;
   for (const n of [...frame.children]) n.remove();
   frame.layoutMode = 'VERTICAL';
   frame.primaryAxisSizingMode = 'FIXED';
   frame.counterAxisSizingMode = 'FIXED';
   frame.itemSpacing = 0;
+  frame.itemReverseZIndex = true; // "First on top" (user rule): earlier children draw above later ones
   frame.paddingTop = frame.paddingBottom = frame.paddingLeft = frame.paddingRight = 0;
   frame.resize(393, 852);
   if (bgKey) await bindFill(frame, bgKey);
@@ -111,14 +114,23 @@ async function threeZone(frame, { top, bottom, bgKey } = {}) {
   content.layoutSizingVertical = 'FILL';
   content.clipsContent = true;
   content.overflowDirection = 'VERTICAL';
-  if (bottom) { frame.appendChild(bottom); bottom.layoutSizingHorizontal = 'FILL'; }
+  if (bottom && navBottom) {
+    // First on top: put the floating nav before the top bar so it draws above Content.
+    frame.insertChild(0, bottom);
+    bottom.layoutPositioning = 'ABSOLUTE';
+    bottom.constraints = { horizontal: 'STRETCH', vertical: 'MAX' };
+    bottom.x = 0; bottom.y = frame.height - bottom.height;
+    content.paddingBottom = bottom.height;
+  } else if (bottom) { frame.appendChild(bottom); bottom.layoutSizingHorizontal = 'FILL'; }
   frame.x = x; frame.y = y;
   return { frame, content };
 }
 
 // Floating layer (Scrim, Dialog, BottomSheet, chat background) outside Auto Layout.
+// With "First on top", floating layers must be the FIRST children to draw on top
+// (stack them so the Dialog is first, then the Scrim: float the Scrim, then the Dialog).
 function float(frame, node, { h = 'STRETCH', v = 'STRETCH' } = {}) {
-  frame.appendChild(node);
+  frame.insertChild(0, node);
   node.layoutPositioning = 'ABSOLUTE';
   node.constraints = { horizontal: h, vertical: v };
   return node;
@@ -185,12 +197,15 @@ const EXPECTED = [];
 const page = figma.root.children.find(p => p.name === PAGE_NAME);
 await figma.setCurrentPageAsync(page);
 figma.skipInvisibleInstanceChildren = true;
-const frames = page.findAll(n => n.type === 'FRAME' && n.parent.type === 'SECTION' && /^\d+\.\d+\.\d+ /.test(n.name));
+// Extra "（完整內容）" frames (full view of a long BottomSheet) are not in the structure table.
+const frames = page.findAll(n => n.type === 'FRAME' && n.parent.type === 'SECTION' && /^\d+\.\d+\.\d+ /.test(n.name) && !n.name.endsWith('（完整內容）'));
 const names = frames.map(f => f.name);
 const report = {
   missing: EXPECTED.filter(n => !names.includes(n)),
   extra: names.filter(n => !EXPECTED.includes(n)),
-  wrongSize: frames.filter(f => f.width !== 393 || f.height !== 852).map(f => `${f.name} ${f.width}x${f.height}`),
+  // Long pages grow taller than 852 on purpose; only width and a height below 852 are errors.
+  wrongSize: frames.filter(f => f.width !== 393 || f.height < 852).map(f => `${f.name} ${f.width}x${f.height}`),
+  longPages: frames.filter(f => f.height > 852).map(f => `${f.name} ${f.height}`),
   placeholderLeft: [], hardcodedColor: [], notAutoLayout: [], clipping: [],
 };
 const insideInstance = n => { for (let p = n.parent; p; p = p.parent) if (p.type === 'INSTANCE') return true; return false; };

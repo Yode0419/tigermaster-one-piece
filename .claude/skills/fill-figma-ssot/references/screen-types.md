@@ -12,13 +12,17 @@
 
 | 圖層 | 設定 |
 |---|---|
-| Frame | 垂直 Auto Layout，固定 393×852，間距與 padding 為 0，背景綁 token |
+| Frame | 垂直 Auto Layout，固定 393×852，間距與 padding 為 0，背景綁 token，堆疊順序 First on top（`itemReverseZIndex = true`，使用者指定） |
 | 1. 固定頂部 | AppBar 或 ChatAppBar instance，寬度 Fill |
 | 2. `Content` | 寬高都 Fill，裁切內容，原型捲動方向垂直；裡面放實際內容（寬度 Fill） |
-| 3. 固定底部 | BottomNavBar、ChatInputBar 或底部按鈕，寬度 Fill；沒有就省略。BottomNavBar 高 82，中央 Logo 圓圈會往上蓋到 `Content`，所以固定底部要排在 `Content` 之後（圖層在上方） |
-| 浮層 | Dialog、BottomSheet、遮罩用 `float()` 設為絕對定位，排在最上層。遮罩用 `scrim()`，蓋滿整個 Frame（含狀態列）、約束 Stretch；BottomSheet 寬 393、貼底，約束左右 Stretch、垂直 Bottom；Dialog 置中，約束水平、垂直都 Center |
+| 3. 固定底部 | BottomNavBar、ChatInputBar 或底部按鈕，寬度 Fill；沒有就省略。**BottomNavBar 例外**（使用者決定）：高 82，中央 Logo 圓圈會往上蓋到 `Content`，所以 BottomNavBar 不放在自動排列裡，改成浮層：絕對定位、約束水平 Stretch、垂直 Bottom、`y = Frame 高度 - 82`，排在 `AppBar` 之前（第一層浮層之下、`Scrim` 與 Dialog 之下），同時 `Content` 底部 padding 設 82，讓內容不被導覽列蓋住。其他固定底部（ChatInputBar、底部按鈕區）沒有凸起，維持在自動排列最後 |
+| 浮層 | Dialog、BottomSheet、遮罩用 `float()` 設為絕對定位，因為 First on top，要放在最前面（Dialog 第一、`Scrim` 第二）才會在最上層。遮罩用 `scrim()`，蓋滿整個 Frame（含狀態列）、約束 Stretch；BottomSheet 寬 393、貼底，約束左右 Stretch、垂直 Bottom；Dialog 置中，約束水平、垂直都 Center |
 
-- 內容比畫面長時，只畫第一屏看得到的部分，超出的部分由 `Content` 裁切，Frame 不加高。
+- 圖層順序（First on top，由上到下）：Dialog、`Scrim`、BottomNavBar（如有）、`AppBar`、`Content`、其他固定底部。
+- **以內容為主的長頁面才拉長，其他一律 852**。以內容為主指頁面本身就是在讀或填一大段資訊且會捲動（案件詳情、訂單詳情、表單、說明頁、可能超過一屏的帳號頁）；首頁、列表、空狀態、聊天室、浮層畫面都不算。拉長的做法：Frame 寬 393、高度固定（`primaryAxisSizingMode=FIXED`）；`Content` 高度維持 **Fill**（與一般畫面相同），Frame 高度手動設成剛好容納整頁內容：`Frame 高度 = 頂部高度 + Content 內所有子項目高度總和 + 底部高度`，至少 852，之後驗證 `Content` 高度 ≥ 子項目總和。這樣固定底部永遠貼在 Frame 最底，整頁內容完整可見。第一個案例：師傅 1.2.1（1140）。
+- **聊天室**維持只畫進入時看到的最後一屏，`Content` 高度 Fill 並裁切（見聊天室一節）。
+- **浮層畫面**（Dialog、BottomSheet）不是主要展示頁，不跟著底圖拉長：Frame 固定高度 852、`Content` 高度 Fill 並裁切，底圖內容被裁掉沒關係；`Scrim` 蓋滿整個 Frame；Dialog 置中（`y = (852 - Dialog 高度) / 2`）。底圖是拉長的內容頁（例如 1.2.1）時，也只顯示第一屏。
+- 重建 Frame 後若背景綁定 `Background/Page` 卻顯示成黑色，把一個正常 Frame 的 `fills` 複製過來。
 - **浮層畫面的底圖**：沿用打開浮層前的那一格（例如從 1.2.2 點「傳送照片」打開，底圖複製 1.2.2）。
 - **沒有 AppBar、頂部跟著內容捲動的頁面**：頂部一樣放在固定頂部區，用 DS 對應的 AppBar variant；捲動行為只在批次紀錄用文字說明。放進 `Content` 會讓 AppBar 內嵌的狀態列一起捲走，與 App 不符。
 - **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，每個項目包一層寬度 Fill 的水平 Auto Layout（無底色），再設主軸對齊。
@@ -61,6 +65,7 @@
 - 「取消」用按鈕區的 Button，Style 改為 Ghost Neutral，接在選項下方，不做成選項之一。
 - 有標題的選項清單：hasHeader=true，關閉左右圖示。
 - 遮罩：`scrim()`。
+- **長內容、需要捲動的 BottomSheet**（使用者決定）：原本那一格畫第一屏，也就是使用者打開時看到的畫面（Frame 852，BottomSheet 用元件的最大高度，內容超出的部分裁切）；再在它**右邊旁邊加一格完整的長畫面**，採用 BottomSheet 外殼，內容完整顯示：Frame 拉長，底圖與遮罩照第一格，BottomSheet 往上長到內容完整、貼在底部。額外這一格命名為「<原本編號> <原本名稱>（完整內容）」，不編新號碼、不算在結構表的 Frame 數，結構檢查要略過名稱以「（完整內容）」結尾的 Frame。批次紀錄用一句話說明哪一格有加。
 - **只有一個動作的確認**（例如「重送訊息？」＋確認／取消）不是選項清單，改用 Dialog（見下節）。
 
 ---

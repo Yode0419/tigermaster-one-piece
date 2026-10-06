@@ -31,6 +31,9 @@
 - 絕對定位的座標不能綁變數，照程式的預設邊距寫數值，並在批次紀錄註明。
 - 單行截斷：`textTruncation = 'ENDING'` 加 `maxLines = 1`，寬度設 Fill。
 
+- 漸層填色的色標也能綁變數：`gradientStops` 每一項加 `boundVariables: { color: figma.variables.createVariableAlias(variable) }`（`color` 仍要給解析後的色值）。
+- 重建 Frame 後背景綁定 `Background/Page` 卻顯示黑色（備援色未解析）時，把一個正常 Frame 的 `fills` 深拷貝過來。原因未查明。
+
 ## 照片
 
 - `use_figma` 不支援 `createImageAsync`，無法放入新照片，只能用 DS Image 元件內建的佔位照片。需要符合情境的照片時，在回報中請使用者手動換圖。

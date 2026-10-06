@@ -61,9 +61,11 @@ Material 2 defaults are not in the code; judge them yourself (page background `#
 - When a code value has no token or text style: check the 近似對應表 first and reuse the listed choice; otherwise pick the closest one and add a row.
 - Use component instances; keep their own style (size, shadow, type); only override content (text, booleans, variants). Never detach.
 - Where there is no component: lay out yourself, bind every color, type, spacing and radius to tokens. No hard-coded colors.
-- A self-laid block that appears a second time becomes a local component in the Page's 「本機元件」 Section, plus a row in components.md 元件候選.
-- Keep Frame size 393×852, name and position unchanged. Delete the placeholder texts.
-- Sample data: common Taiwanese names, times from newest to oldest relative to today, real formats. A screen opened from the previous Frame reuses the same record (same person, same last message).
+- A self-laid block that appears a second time becomes a local component in the Page's 「本機元件」 Section, plus a row in components.md 元件候選. Build it with properties from the start: changing text as TEXT properties, optional parts as BOOLEAN properties, different content as variants; instances change properties, never override layer text. Where the user will add assets later (e.g. an illustration), leave a clearly named placeholder layer.
+- Keep Frame width 393, name and position unchanged. Height is 852 for every screen, except content-focused long pages (detail pages, forms, explanation pages, an account page that runs past one screen), which are stretched to show the whole page: fixed height set to exactly fit it (top + all content + bottom, at least 852), `Content` stays Fill so the bottom bar stays pinned; see `screen-types.md`. Home, lists, empty states, chatrooms and overlay screens (Dialog, BottomSheet) stay 852 and `Content` clips what does not fit. Delete the placeholder texts.
+- Before laying out any block yourself, search the DS file for a matching component (by name and by purpose). Example: the warranty badge is the DS `CornerBadge`.
+- Sample data: prefer real data from the official site (`fdtigermaster-offical-site/src/config/WorkingCategory.json` for service names) and from actual screens the user shows you; otherwise common Taiwanese names, times from newest to oldest relative to today, real formats. A screen opened from the previous Frame reuses the same record (same person, same last message).
+- Text the app shows may already be transformed by the backend (for example addresses of unreceived orders are masked down to city and district). Trace it before writing sample data.
 - Do not use old Figma drafts as a source.
 
 **You never edit the DS file.** If the DS is not enough, draw with existing components or your own layout, add a row to components.md DS 待辦 (which Frame, what is missing, suggested change), and continue. DS work happens later in a separate Opus session.

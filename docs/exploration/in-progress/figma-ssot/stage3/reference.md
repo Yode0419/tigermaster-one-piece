@@ -23,7 +23,7 @@
 |---|---|---|
 | AppBar（Standard／None／Solid） | `429b562349bd543539bd47c05de939f8dc3b04d2` | 布林屬性 Has Leading、Has Action、Reserve Status Bar；標題是 Slot 內的 `Title Text`；寬螢幕時填滿並水平置中 |
 | AppBar（Standard／None／Image） | `2ccf997e12bce107ab0b65a18589bfd3a9dc3ce4` | 疊在照片上的頂部列：白色狀態列與返回鍵、自帶 12% 暗化遮罩。全螢幕照片畫面隱藏 `Background Image` 與 `Title Text` 圖層。整組 `b64b4a3590ccbbe7a0385f35c6900e23dc6e16e1` |
-| FAB（整組） | `814f448a2def64884f0b4882f73be0954fe2f33c` | Type（Default 圖示＋文字／Slot），78px。只有圖示時用 Slot：刪掉 `Slot Rectangle`，放入圖示後手動設 x、y 置中（Slot 沒有 Auto Layout） |
+| FAB（整組，用 `importComponentSetByKeyAsync`） | `814f448a2def64884f0b4882f73be0954fe2f33c` | Type（Default 圖示＋文字／Slot），78px。只有圖示時用 Slot：刪掉 `Slot Rectangle`，放入圖示後手動設 x、y 置中（Slot 沒有 Auto Layout） |
 | Image（State=Loaded） | `9e6be81d61b6fac917f0de433ca9e851f96bc138` | 內建貓咪佔位照片；Loading／Error 見 DS 的 Image 頁 |
 | HomeIndicator（Style=Light／Dark） | `9cb03ac1b7d42ecdc675aa1340ce88df1f0793ca`／`21b4309f38d5179ef12851dea605b27fdd83270f` | 寬 393；深色背景用 Light |
 | 傳送圖示 | 複製 1.2.1 ChatInputBar 裡的 `SendButton`（`I40:609;1062:466`） | icon（Size=24）換成 PaperPlaneRight 實心、TigerBlue；需要相同圖示時直接 `clone()` |
@@ -32,10 +32,11 @@
 | Avatar 60（custom／default） | `6d1d4632eec37682651f0a69bc040bf590c832b2`／`da7fb7e8f71e1e806f8038ebbf42fb6a8d75fc47` | 尺寸有 36／60／75／100／140，見 DS 的 Avatar 頁 |
 | Avatar 140（custom／default） | `829fd483ff3100e2f8fdf873807043655f3cfb0f`／`d055bc845e0990c759c5f39bc3ae7b0e2d24de88` | 通話畫面 |
 | StatusBar（Style=Light／Dark Content） | `e14c6629a1ad46b3d402fbf96a7909b40022771e`／`da48caf54a006a7e4a7142c3179a1587f8ef7564` | 393×59（375 變體已淘汰）。沒有 AppBar 的畫面單獨放；深色背景用 Light |
-| icon（整組） | `3e92f2bfe35a30eaeb557398677d68e18524e14f` | Size（24／20／16）、Icon（Phosphor／Slot）。Phosphor 預設是 Smiley，換圖示見 Skill 的 `screen-types.md`，改色要改內部 Vector 的填色 |
+| icon（整組，用 `importComponentSetByKeyAsync`） | `3e92f2bfe35a30eaeb557398677d68e18524e14f` | Size（24／20／16）、Icon（Phosphor／Slot）。Phosphor 預設是 Smiley，換圖示見 Skill 的 `screen-types.md`，改色要改內部 Vector 的填色 |
 | Phosphor 圖示庫 | libraryKey `lk-bf8c530498484244d086dee012c8c3556de272d639976c99d80f0ea2d5131dc1adf34cd2fe9598d5b27790bea4ffa4e29cc0ec42090b5c8847855be3834a95c8` | `search_design_system` 的 `includeLibraryKeys` 填這個，以圖示名稱搜尋（例如 DownloadSimple、PhoneDisconnect）。每個圖示是元件組，variant 為 Format（Outline／Stroke）× Weight（Regular／Thin／Light／Bold／Fill／Duotone），一律用 Outline |
 | DownloadSimple／PhoneDisconnect（元件組） | `25e62441552ff56e6583853a80da89d1c535fa3c`／`9239da56ea75d41615cc45394effcb629a77fac5` | 用 `importComponentSetByKeyAsync` 匯入再挑 variant。下載用 Regular，掛斷用 Fill |
 | IconButton（整組） | `f148e16650e8a647c4f0512a528ccfa145fd002d` | Style（Ghost Default／Ghost Inverse／Filled）、Size（md 48／sm 40）、State。Filled 是白底圓形 |
+| CornerBadge（保固徽章，整組） | `85657b343c321532eebcb4fa1e46aa704254301e` | 用 `importComponentSetByKeyAsync`。variant Position（BottomRight／BottomLeft）；hasIcon（布林）、Label（文字）。程式的 `WarrantyDayBadge`，貼在卡片右下角時設絕對定位、約束右下 |
 | Badge（Dot／Count） | `89064adcc4e7c687617bf0abf4c0530ef7d3f71b`／`2456905712bff8a3265f27e7c36e0f00afda2ed0` | |
 | ChatAppBar（Chat=Admin Mode） | `4fea660ac9636ec206d74056ef3e23856792f3a2` | 整組 `c2c2556aba04f3d8c8d43bcb4004943c80271fb6`，其他 variant：To Client／To Master／To Admin。內含 AppBar 與 StatusBar，高 123；姓名是 `Name` 框裡的文字 |
 | ChatBackground（Type=Default／Watermark） | `31e32722d54c9e7416febe7a00afb54d55d039c2`／`d769913727fccaea131126fade7e17d27cf35380` | Default 只是綁 `Background/Page` 的底色；放進 Frame 時設絕對定位、約束 Stretch |
@@ -82,6 +83,15 @@
 | `Title/S`（16 Medium） | `4843b58b61eec9235c9023cbb912b2b33872c6ee` |
 | `Label/S`（12 Medium） | `120f52c9dc83d5db4d94defe531f5bf8abebdd35` |
 | `Body/XS`（12 Regular） | `152f397c33be8e2817cd007f46cafebf96f0b647` |
+| `Body/M`（16 Regular） | `ac01a9fbb6ef66b66d47e26bbd75e527884390cb` |
+| `Label/M`（14 Medium） | `bcf19c9f818adf3ce00ff1a7c2fdba3a421a1082` |
+| `Text/Brand`／`Text/Secondary` | `02dbe31a4ef5ce159871f07911a82d9f7736f40b`／`9b54cce6196f8a95be8e4ae8659aa2661c368e07` |
+| `Brand/TigerYellow`／`Brand/TigerBlue`（原始色） | `ebf2c3fa28bb7207313c8650b8a23c94c7de1908`／`98b1177ce8bc0e22a51038c6330d1bbf6165c5f9` |
+| `Border/Default`（stroke） | `86042c2ee2e589c6bcdab2724eca23d8227b20c2` |
+| `Radius/12`／`Spacing/4` | `eb22a1b5d208fc1a74838aab28a99fec20d83a2a`／`0e5c80bc92a0d5cda616f6739174c390fbba548c` |
+| `Heading/3`（24 Medium）／`Title/S`／`Title/M` | `6eb54c54e1c60c5d8263d636f4636d78dd8680d8`／`4843b58b61eec9235c9023cbb912b2b33872c6ee`／`2dcf2a4950a1086708863ecacb4b3311ffce3bb9` |
+| `Blue/400`／`Status/Info`（別名 `Blue/500`）／`Text/Link` | `481b28fe502d136df6bfea8125e762df5d0174c1`／`df2aecc3eea4b34b240922072c51ec5a986ecb61`／`607ca0c6b5b15e3be7c84292e8cfe767e8e2f266` |
+| Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
 
 ---
 
@@ -104,6 +114,26 @@
 | 30px（帳號頁版本文字下方） | `Spacing/32` | `Spacing/24` | | 管理員 2.1.1 |
 | `(190,190,190)` #BEBEBE（版本文字灰） | `Text/Hint`（#727276） | 原始色 `Neutral/400`（#BABABA，較接近但不是語意 token） | | 管理員 2.1.1 |
 | `#000000`（全螢幕照片檢視的黑底，`PhotoView` 預設） | `Base/Black`（原始色，使用者指定；語意 token 沒有純黑） | `Background/Inverse`（#2A2A2A，AppBar 遮罩會看出帶狀） | | 管理員 1.2.4 |
+
+| 師傅首頁 AppBar 背景（黃色漸層圖 `appbar_bg.png`） | AppBar（Standard／None／Brand） | 無 | | 師傅 1.1.1 |
+| 首頁輪播 Banner 圖（網路圖片） | DS 的 Image（Loaded）內建貓咪佔位照，拉成 393×200 | 無 | | 師傅 1.1.1 |
+| 14 Medium 灰（案件卡的日期、狀態） | `Label/M`（14 Medium） | 無 | | 師傅 1.1.1 |
+| 14 Regular 灰（案件卡的地址） | `Body/S`＋`Text/Secondary` | 無 | | 師傅 1.1.1 |
+| 20 Bold（首頁「適合您的案件」標題） | `Heading/4`（20 Medium） | 無 | | 師傅 1.1.1 |
+| 28 Bold 藍（本月接案數） | `Heading/2`（28 SemiBold）＋`Text/Brand` | 無 | | 師傅 1.1.1 |
+| 案件卡圓角 10 | `Radius/12` | `Radius/8` | | 師傅 1.1.1 |
+| 案件卡左側黃條、藍條 8px | 原始色 `Brand/TigerYellow`、`Brand/TigerBlue`（沒有對應語意 token） | 無 | | 師傅 1.1.1 |
+| 空狀態灰 (145,145,151)、(179,179,179) | 兩行都用 `Text/Hint` | 無 | | 師傅 1.1.2 |
+| 空狀態插圖（`empty_suitable_order.png` 等） | 60 圓形佔位 | 無 | | 師傅 1.1.2、1.1.3 |
+
+| 價格區間藍色漸層條 (64,174,254)→(52,73,255)→(64,174,254) | 漸層色標綁變數：兩端 `Blue/400`、中間 `Status/Info`（`Blue/500`，比程式的靛藍淺） | 無 | | 師傅 1.2.1 |
+| 價格區間漸層與標籤：(64,174,254)、(52,73,255)、價格文字 (58,137,248) | **特例：直接用程式原色，不綁 token**（使用者指定，只限 `PriceRangeIndicator`，不作通用規則） | `Blue/400`、`Blue/500`、`Blue/600`（較淺） | | 師傅 1.2.1 |
+| 灰色保固膠囊底色 (238,238,238) | `Background/Page`（#F5F5F5） | 無 | | 師傅 1.2.1 |
+| 24 Bold（案件類別名稱） | `Heading/3`（24 Medium） | 無 | | 師傅 1.2.1 |
+| 18 Bold（段落標題） | `Title/M`（18 Medium） | 無 | | 師傅 1.2.1 |
+| `ScaffoldBottomSheet` 陰影（grey 15%） | 不畫陰影 | 無 | | 師傅 1.2.1 |
+| 按鈕寬 85% 高 45 | Button lg 寬度填滿（照 DS） | 無 | | 師傅 1.2.1 |
+| Phosphor House／Buildings（元件組 Key） | `0408a611f7868ef34a9a0be470492f4070f9d742`／`6405940916f5c3c15b0baf6eaff7c52868153229`，程式 `home`、`business` | 無 | | 師傅 1.2.1 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 

@@ -3,7 +3,7 @@
 ## 概述
 
 - **上層專案**：[Figma SSOT 專案總覽](../figma-ssot-overview.md)
-- **狀態**：進行中（管理員端與檢查點 1 已完成，填入流程已整理成 `/fill-figma-ssot` Skill；下一步師傅端批次 12，由 Sonnet 開新對話執行 `/fill-figma-ssot`）
+- **狀態**：進行中（管理員端、檢查點 1 與師傅端批次 12 已完成；下一步檢查點 2，檢討一般資料頁的流程與品質，再接批次 13）
 - **開始**：2026-10-05
 - **結構依據**：[建置交接包 r01](../figma-build-r01.md) 的完整結構表
 - **Figma 檔案**：
@@ -63,6 +63,12 @@
 - 2026-10-06：批次 12 由 Sonnet 照 Skill 跑，批次紀錄仍寫完整對照表，作為檢查點 2 的素材；Sonnet 同一步驟連續失敗兩次時交給 Opus。取代 2026-10-05「試做（批次 21、22、12）用 Opus」中批次 12 的部分。Why：Skill 是寫給 Sonnet 用的，批次 12 只有 11 格且後面緊接檢查點 2，能在小批次就發現 Skill 寫不清楚的地方；新畫面類型有使用者逐格確認把關。
 - 2026-10-06：填入流程的 Skill 命名為 `/fill-figma-ssot`，不用船員角色名。Why：這是針對階段 3 的任務型 Skill，名稱帶 ssot 才不會被誤認為通用的 Figma 填圖工具；未來若有讓 AI 生成畫面的通用 Skill，再參考它的內容並以船員角色命名。
 - 2026-10-06：method.md 的內容搬進 `/fill-figma-ssot` Skill（SKILL.md 放流程與規則、`references/screen-types.md` 放畫面類型做法、`references/figma-notes.md` 放少見的 API 情況、`scripts/snippets.js` 放程式片段）後刪除；Key 與近似對應表、元件、批次紀錄等專案資料留在 `stage3/`。Why：做法只留一處才不會不同步；專案資料每批都會變動，使用者也要在近似對應表上填「改為」，不適合放進 Skill。
+- 2026-10-06：製作本機元件時一律有 properties 的概念：會變的文字做成 TEXT 屬性、有或沒有的部分做成布林屬性、不同內容做成 variant，使用時直接改屬性，不覆寫圖層文字。需要使用者之後補素材（例如插圖）的位置，留一個命名清楚的佔位圖層。第一個案例：師傅端案件卡（Category、Mode、Address、Date、Status、Has Unread、Unread Count）與首頁空狀態（Type=Suitable／InProgress）。Why：使用者要在 Figma 自行維護與補素材，屬性比覆寫圖層文字好用，也方便日後升級進 DS。
+- 2026-10-06：以內容為主的長頁面才拉長 Frame，其他畫面一律維持標準高度 852。以內容為主的長頁面指頁面本身就是在讀或填一大段資訊、而且會捲動，例如案件詳情、訂單詳情、表單、說明頁、可能超過一屏的帳號頁。這類頁面 Frame 寬維持 393，高度固定、手動拉長到剛好容納整頁內容（頂部＋內容總和＋底部，至少 852），`Content` 維持 Fill，所以固定底部（按鈕區、導覽列）永遠貼在最底。首頁、列表、空狀態、聊天室、浮層畫面（Dialog、BottomSheet）都維持 852，內容超出的部分由 `Content` 裁切。聊天室維持原決策（只畫進入時看到的最後一屏）。Why：使用者要在以讀內容為主的頁面看到整頁內容；其他畫面的重點不在內容，維持標準尺寸讓同一個 Section 內的畫面大小一致。第一個案例：師傅 1.2.1（高 1140）。取代「內容比畫面長時只畫第一屏」的做法。
+- 2026-10-06：示意資料（服務名稱、價格、保固、案件內容）優先用官網與實際畫面的真實資料，不自己編。Why：使用者指示，讓 Figma 呈現真實產品。服務名稱來源：官網 repo `src/config/WorkingCategory.json`。
+- 2026-10-06：自排任何區塊前，先到 DS 搜尋有沒有對應元件（含名稱查不到時用用途或文件搜尋）。Why：師傅 1.2.1 的保固徽章 DS 已有（`CornerBadge`），第一版誤用 Tag；使用者指出才改正。
+- 2026-10-06：Frame 的 Auto Layout 堆疊順序採 First on top（`itemReverseZIndex = true`）。連帶影響：浮層（Dialog、`Scrim`）要放在最前面才會在最上層；BottomNavBar 排在 `Content` 之後時，中央 Logo 凸起的部分會被內容蓋住，所以 BottomNavBar 改成浮層（絕對定位貼底，排在 `AppBar` 之前），`Content` 底部 padding 設 82 讓內容不被蓋住（使用者選的做法，與程式裡 Logo 是浮在內容上的 FAB 一致）。其他固定底部（ChatInputBar、底部按鈕區）沒有凸起，維持在自動排列最後。Why：使用者指定的 Auto Layout 慣例（與 Figma 的 Auto Layout 面板選項一致）。
+- 2026-10-06：長內容、需要捲動的 BottomSheet，原本那一格畫第一屏（852），並在旁邊加一格完整的長畫面，採用 BottomSheet 外殼、內容完整顯示。額外的一格命名為「<原本編號> <原本名稱>（完整內容）」，不編新號碼、不算在結構表的 Frame 數，結構檢查略過。Why：打開時看到的是第一屏，但完整內容也要能在 Figma 看到；加一格比拉長原本那一格更貼近實際畫面。
 
 ---
 
@@ -73,7 +79,7 @@
 | 21 | 管理員端 | 1 客服聊天室 | 10 | 已完成（10/10，已驗收） | [21-admin-chatroom](batches/21-admin-chatroom.md) |
 | 22 | 管理員端 | 2 帳號 | 3 | 已完成（3/3，已驗收） | [22-admin-account](batches/22-admin-account.md) |
 | ▶ | 檢查點 1 | 檢討流程，整理成 Skill，決定第一批元件候選 | — | 已完成（管理員端 13 個 Frame 驗收通過、PhotoViewer 與 VoiceCallScreen 升級進 DS、375 系統列淘汰；檢討出四項流程調整，整理成 `/fill-figma-ssot` Skill，新增 pattern 候選表） | |
-| 12 | 師傅端 | 1 首頁與接案 | 11 | 下一批（Sonnet 執行 `/fill-figma-ssot`，完整紀錄） | |
+| 12 | 師傅端 | 1 首頁與接案 | 11 | 已完成（11/11，已驗收） | [12-master-home](batches/12-master-home.md) |
 | ▶ | 檢查點 2 | 檢討一般資料頁的流程與品質 | — | 未開始 | |
 | 13 | 師傅端 | 2 訂單與報價 | 34 | 未開始 | |
 | 14 | 師傅端 | 3 收入與撥款 | 6 | 未開始 | |
