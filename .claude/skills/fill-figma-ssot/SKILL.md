@@ -1,11 +1,11 @@
 ---
 name: fill-figma-ssot
-description: Only for Figma SSOT stage 3 in tigermaster-one-piece. Fills the blank 393×852 placeholder Frames in the three App Figma files (客戶端, 師傅端, 管理員端) with the current Flutter screens, built from Design System components and tokens, one Page (batch) per conversation. Invoke when the user runs /fill-figma-ssot, or says things like 「開始畫批次 12」「繼續填 Figma」「下一批 SSOT」. Not a general Figma drawing tool.
+description: Only for Figma SSOT stage 3 in tigermaster-one-piece. Fills the blank 393×852 placeholder Frames in the three App Figma files (客戶端, 師傅端, 管理員端) with the current Flutter screens, built from Design System components and tokens, one batch (or one session row of a large batch) per conversation. Invoke when the user runs /fill-figma-ssot, or says things like 「開始畫批次 12」「繼續填 Figma」「下一批 SSOT」. Not a general Figma drawing tool.
 ---
 
 # fill-figma-ssot：Figma SSOT 階段 3 畫面填入
 
-You read the Flutter app's code and draw each current screen into its Figma placeholder Frame, using Design System (DS) components and tokens. One conversation covers one Page (one batch), or a few Sections of a large Page.
+You read the Flutter app's code and draw each current screen into its Figma placeholder Frame, using Design System (DS) components and tokens. One conversation covers one Page (one batch), or one session row of a large Page (a few Sections, e.g. 13a).
 
 **Always talk to the user in Traditional Chinese (繁體中文).** Records you write into the docs are in Traditional Chinese too. Never use em dashes; use 句號, 逗號, 冒號 or 括號 instead.
 
@@ -18,12 +18,12 @@ Project folder: `docs/exploration/in-progress/figma-ssot/` (below: `ssot/`).
 | File | What it holds | When to read |
 |---|---|---|
 | `ssot/stage3/stage3.md` | Decisions and the batch progress table | Session start, in full |
-| `ssot/stage3/batches/<batch>.md` | This batch's record | Session start; create it if missing |
+| `ssot/stage3/batches/<batch>.md` | This batch's record | Session start; create it if missing. Never read other batches' records (the template is at the end of this file) |
 | `ssot/stage3/reference.md` | Figma fileKeys, component Keys, token Keys, 近似對應表 | Session start, in full |
 | `references/screen-types.md` (this skill) | Recipes per screen type | Session start, in full |
 | `scripts/snippets.js` (this skill) | Helper code pasted into every `use_figma` call | Session start, in full |
 | `references/figma-notes.md` (this skill) | Rare Plugin API situations | When an operation is not covered by the snippets |
-| `ssot/figma-build-r01.md` | 完整結構表: Frame names, 一句情境, 去向 | Grep only this Page's rows |
+| `ssot/figma-build-r01.md` | 完整結構表: Frame names, 一句情境, 去向 | **Grep only** this session's rows (e.g. `^\| 師傅端 \| Frame \| 2\.1\.`). Never Read the whole file (79 KB) |
 | `ssot/stage3/components.md` | 元件候選, DS 待辦, pattern 候選 | Only when you add a row |
 
 Before the first `use_figma` call, load the `figma-use` skill (mandatory).
@@ -44,10 +44,21 @@ Material 2 defaults are not in the code; judge them yourself (page background `#
 
 ## Session start
 
-1. Read `stage3.md`. The next batch is the first row in the progress table that is not 已完成. Confirm with the user in one line which batch (and which Sections, for a large Page) this session covers.
-2. Read the batch record (create it from the template below if missing), `reference.md`, `screen-types.md`, `snippets.js`.
-3. Grep `figma-build-r01.md` for this Page's Frame rows. Look up each Frame's T file in the evidence index.
-4. Load `figma-use`. Run the 試匯入 snippet with every Key this Section needs. If anything fails with "not found", ask the user to publish the DS library before building.
+1. Read `stage3.md`. The next batch is the first row in the progress table that is not 已完成; a large Page is split into session rows (e.g. 13a to 13d), each listing its Sections. Confirm with the user in one line which batch and Sections this session covers. If an unfinished ▶ row (checkpoint or DS work) comes before it, stop: that work belongs to a separate Opus session and must be done first.
+2. Read the batch record (create it from the template below if missing), `reference.md`, `screen-types.md`, `snippets.js`. Nothing else at startup.
+3. Grep `figma-build-r01.md` for this session's Frame rows only. Look up each Frame's T file in the evidence index.
+4. Load `figma-use`. Run the 試匯入 snippet with every Key this session needs. If anything fails with "not found", ask the user to publish the DS library before building.
+
+## Token budget
+
+Every turn re-reads the whole conversation, so a long conversation gets expensive fast (batch 12: 142 turns, the conversation grew to 470k tokens). Keep it short:
+
+- Read only what the tables above say. Grep instead of Read whenever you only need a few lines.
+- Components: look in `reference.md` first; if missing, run the DS 名稱查詢 snippet (names and keys only). Use `search_design_system` only for Phosphor icons (its results are about 10k characters each).
+- Build a Frame in one or two `use_figma` calls; for Frames sharing a base (dialogs over the same page), clone the base Frame and change only what differs. If a call fails, rerun only the failed part.
+- One screenshot per Frame, taken inside the build call (`await frame.screenshot()`), reused in the Section-end report. Extra zoomed screenshots only for self-laid blocks.
+- Do not edit the Skill, `screen-types.md` or `stage3.md` while drawing (see "User corrections").
+- When the session's Sections are done, or `/context` passes about 250k, finish the current Frame, record, and tell the user to start a new conversation.
 
 ---
 
@@ -64,7 +75,8 @@ Material 2 defaults are not in the code; judge them yourself (page background `#
 - A self-laid block that appears a second time becomes a local component in the Page's 「本機元件」 Section, plus a row in components.md 元件候選. Build it with properties from the start: changing text as TEXT properties, optional parts as BOOLEAN properties, different content as variants; instances change properties, never override layer text. Where the user will add assets later (e.g. an illustration), leave a clearly named placeholder layer.
 - Keep Frame width 393, name and position unchanged. Height is 852 for every screen, except content-focused long pages (detail pages, forms, explanation pages, an account page that runs past one screen), which are stretched to show the whole page: fixed height set to exactly fit it (top + all content + bottom, at least 852), `Content` stays Fill so the bottom bar stays pinned; see `screen-types.md`. Home, lists, empty states, chatrooms and overlay screens (Dialog, BottomSheet) stay 852 and `Content` clips what does not fit. Delete the placeholder texts.
 - Before laying out any block yourself, search the DS file for a matching component (by name and by purpose). Example: the warranty badge is the DS `CornerBadge`.
-- Sample data: prefer real data from the official site (`fdtigermaster-offical-site/src/config/WorkingCategory.json` for service names) and from actual screens the user shows you; otherwise common Taiwanese names, times from newest to oldest relative to today, real formats. A screen opened from the previous Frame reuses the same record (same person, same last message).
+- Sample data: prefer real data from the official site (`fdtigermaster-offical-site/src/config/WorkingCategory.json` for service names) and from actual screens the user shows you; otherwise common Taiwanese names, times from newest to oldest relative to today, real formats. A screen opened from the previous Frame reuses the same record (same person, same last message). Sample data must also match the state that triggers the screen (e.g. a Dialog that only opens for 「等待支付派遣費」 orders sits over a card in that status).
+- Dates follow the code's `DateFormat` pattern rendered in zh_TW (intl `date_symbol_data_local.dart`): `EEE` is 「週三」 (not 「三」), `EEEE` is 「星期三」, `a` is 「上午」／「下午」. Example: `MM/dd(EEE) a hh:mm` → 「10/08(週四) 下午 02:00」. Get the weekday from a real calendar (e.g. `python -c "import datetime; print(datetime.date(2026,10,8).strftime('%a'))"`), never by counting in your head.
 - Text the app shows may already be transformed by the backend (for example addresses of unreceived orders are masked down to city and district). Trace it before writing sample data.
 - Do not use old Figma drafts as a source.
 
@@ -75,11 +87,14 @@ Material 2 defaults are not in the code; judge them yourself (page background `#
 ## Per Frame
 
 1. **Locate evidence**: T file → code files and line numbers.
-2. **Read code**: split the screen into fixed top, content, fixed bottom, floating layers; list copy, states and data fields per zone. Trace backend-composed text to the backend or test data.
+2. **Read code and write the content list**: split the screen into fixed top, content, fixed bottom, floating layers. In your reply (not in the docs), list every text and element visible in this state, per zone. Follow each custom child widget into its own file and check:
+   - default parameter values (e.g. `WarrantyDate` shows its description text unless told not to; `PriceRange` is called with `showDescription: false`)
+   - conditional branches (`if`, ternaries, `FutureBuilder` states): which branch this Frame's 一句情境 is in
+   - text composed or transformed by the backend (e.g. unreceived orders' addresses are masked to city and district): trace it to the backend or test data
 3. **Match the screen type** in `screen-types.md`. Not listed → see "When to stop".
-4. **Map components**: Keys from `reference.md`; otherwise search the DS file.
-5. **Build** with the snippets: `threeZone()` for the frame, components for each zone, own layout for the rest. Every `use_figma` call starts on the file's first page, so each call begins with `await figma.setCurrentPageAsync(<target Page>)`.
-6. **Check**: temporarily resize the Frame to 430×932, confirm `Content` stretches and the bottom stays at the bottom, resize back to 393×852, take one screenshot and compare with the code.
+4. **Map components**: Keys from `reference.md`; otherwise the DS 名稱查詢 snippet. Before laying out any block yourself, check the DS by name and by purpose.
+5. **Build** with the snippets: `threeZone()` for the frame, components for each zone, own layout for the rest. Every `use_figma` call starts on the file's first page, so each call begins with `await figma.setCurrentPageAsync(<target Page>)`. At the end of the build call, resize the Frame to 430×932, return `Content` height and the bottom bar's y, resize back, and return `await frame.screenshot()`.
+6. **Check** the screenshot against the content list: nothing missing, nothing extra.
 7. **Record** (see "Recording").
 
 ---
@@ -96,14 +111,18 @@ Stop and wait for the user only when:
 
 Everything else: decide, record, and keep going.
 
-**Section end**: after all Frames of a Section are drawn, send the user one message with a screenshot per Frame and a list of your judgments for the Section:
+**Section end**: after all Frames of a Section are drawn:
 
-- new 近似對應 rows
-- parts the DS does not cover that you laid out yourself (or 「沒有」)
-- new DS 待辦 and pattern 候選 rows
-- anything drawn differently from the code and why
+1. Run the 結構檢查 snippet with this Section's Frame names. Fix every issue it lists, or explain it. Compare its text dump with your content lists from step 2.
+2. Send the user one message with the screenshot per Frame and your judgments for the Section:
+   - new 近似對應 rows
+   - parts the DS does not cover that you laid out yourself (or 「沒有」). For each self-laid block: the DS search terms you tried, a zoomed screenshot of the block, and a small table of code value vs Figma value (colors and gradient stops, position or ratio formulas, radius, type size)
+   - new DS 待辦 and pattern 候選 rows
+   - anything drawn differently from the code and why
 
-Wait for the user's confirmation before the next Section. Apply corrections, and if a correction is a general rule, update `screen-types.md` or ask whether it should become a decision in `stage3.md`.
+Wait for the user's confirmation before the next Section.
+
+**User corrections**: apply them to Figma right away. If a correction is a general rule, do not edit the Skill, `screen-types.md` or `stage3.md` mid-session; add one line to the batch record's 「待寫規則」 list. At session end, write the 待寫規則 into `screen-types.md` or this Skill in one pass, and ask the user which ones should also become decisions in `stage3.md`. A new screen-type recipe the user confirmed counts as a 待寫規則 too; until session end, follow it from memory.
 
 ---
 
@@ -118,7 +137,7 @@ Write right after each Frame, not at the end of the session.
 - **components.md**:
   - 元件候選: a self-laid block that repeats. At checkpoints the user decides which ones `/sanji` upgrades into the DS.
   - DS 待辦: the DS is not enough.
-  - **pattern 候選**: when a combination of components recurs as a solution to the same problem (it already exists in `screen-types.md` or you see it a second time), add or update one row: 組合, 解決的問題, 出現位置 (role + Frame numbers). If the row exists, append the new location. At checkpoints, candidates seen in two or more files are written up with `/sanji pattern`.
+  - **pattern 候選**: when a combination of **two or more components** recurs as a solution to the same problem (it already exists in `screen-types.md` or you see it a second time), add or update one row: 組合, 解決的問題, 出現位置 (role + Frame numbers). If the row exists, append the new location. At checkpoints, candidates seen in two or more files are written up with `/sanji pattern`. A usage rule of a single component (e.g. Dialog button placement) is not a pattern: add a DS 待辦 row to put it in that component's spec.
 - **screen-types.md**: a new recipe after the user confirms it.
 - Do not write to the root `DECISIONS.md`; stage 3 decisions go in `stage3.md` (only when the user makes or confirms a decision).
 - Do not collect Figma links in the docs.
@@ -127,10 +146,12 @@ Write right after each Frame, not at the end of the session.
 
 ## Batch end
 
-1. Run the 結構檢查 snippet for the Page with the Frame names from 結構表. Investigate every item it lists; fix it or explain it in the record.
-2. Write the 批次驗收 paragraph in the batch record (structure check result, content check, user confirmation).
-3. Update `stage3.md`: the batch row's status (已完成（n/n，已驗收）), and the next step in 概述's 狀態 line.
-4. Tell the user the batch is done, what is left in DS 待辦 and pattern 候選, and remind them to start a new conversation for the next batch.
+For a batch split into session rows, steps 1 to 3 run at the end of each session for its Sections, and the 批次驗收 paragraph is written when the last session row is done.
+
+1. Run the 結構檢查 snippet with all Frame names of this session (the Section-end runs already passed, so this is a final confirmation). Investigate every item it lists; fix it or explain it in the record.
+2. Write the 待寫規則 (see "User corrections"), then the 批次驗收 paragraph in the batch record (structure check result, content check, user confirmation).
+3. Update `stage3.md`: the row's status (已完成（n/n，已驗收）), and the next step in 概述's 狀態 line.
+4. Tell the user what is done, what is left in DS 待辦 and pattern 候選, and remind them to start a new conversation for the next session.
 
 ---
 
@@ -154,6 +175,14 @@ Write right after each Frame, not at the end of the session.
 ---
 
 ## 本機元件
+
+沒有。
+
+---
+
+## 待寫規則
+
+使用者修正中屬於通則的部分，每個對話結束時一次寫進 Skill，寫完標「已寫入」。
 
 沒有。
 

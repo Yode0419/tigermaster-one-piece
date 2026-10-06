@@ -35,25 +35,26 @@
 | 通話畫面（`VoiceCallScreen`，撥出中、通話中） | 客戶端 6.3、師傅端 5.3、管理員端 1.3.1、1.3.2 | 已升級進 DS（檢查點 1）。四種聊天室共用同一個頁面 `IOSCallerControlPage`，三個 App 檔案相同 |
 | 全螢幕照片檢視（`PhotoViewer`） | 管理員 1.2.4、1.2.6；客戶 5.1.4、6.1.5、6.1.7；師傅 5.1.5、5.1.7；程式另有 `horizontal_image_list`（可能是訂單照片，不能下載） | 已升級進 DS（檢查點 1），見 DS 待辦 2 |
 | 聊天室列表列（`AdminChatroomListItem`） | 管理員端 1.1.1（同畫面重複 8 次） | 不升級，維持本機元件（檢查點 1）。客戶端、師傅端沒有聊天室列表，只有管理員 1.1.1 用到 |
-| 適合案件卡（`MasterSuitableOrderCard`，左側黃條） | 師傅端 1.1.1、1.1.3 | 本機元件（批次 12）。客戶端是否有同樣的案件摘要卡，客戶端批次再判斷 |
-| 進行中案件卡（`MasterInProgressOrderCard`，左側藍條＋紅色狀態＋未讀點） | 師傅端 1.1.1、1.1.2 | 本機元件（批次 12）。訂單列表（師傅端 2.1.1）可能有相近卡片，畫到時一起看 |
-| 價格區間指示條（`PriceRangeIndicator`）、保固膠囊（`WarrantyPill`） | 師傅 1.2.1 至 1.2.5；客戶端 2.4 工項詳情、師傅端 2 訂單需求參考預期會再出現 | 本機元件（批次 12，使用者指示）。指示條 variant Position（Low／Mid／High）＋屬性 Min Price、Max Price、Marker Label；膠囊屬性 Residential、Commercial。檢查點再決定是否進 DS，見 DS 待辦 6 |
-| 輪播 Banner（`CarouselBanner`） | 師傅 1.1.1 至 1.1.5、1.3.1；客戶端首頁預期會再用到 | 本機元件（批次 12，使用者指示）。variant Page（1／2／3）、外露圖片 instance。見 DS 待辦 7 |
-| 首頁空狀態（`MasterHomeEmptyState`，圖示＋標題＋提示） | 師傅端 1.1.2、1.1.3 | 本機元件（批次 12）。圖示用佔位圓形，程式的插圖 DS 沒有 |
+| 適合案件卡（`MasterSuitableOrderCard`，左側黃條） | 師傅端 1.1.1、1.1.3 | 維持本機元件（檢查點 2）。程式只有師傅首頁用到；客戶端是否有同樣的案件摘要卡，客戶端批次再判斷 |
+| 進行中案件卡（`MasterInProgressOrderCard`，左側藍條＋紅色狀態＋未讀點） | 師傅端 1.1.1、1.1.2 | 維持本機元件（檢查點 2）。訂單列表（師傅端 2.1.1）用的是另一個 widget `MasterOnGoingOrderCard`，批次 13a 畫到時比較是否合併 |
+| 案件分類卡（`OrderCategoryCard`，黃色直條＋類別名＋保固徽章） | 師傅 1.2.1 至 1.2.5 | 維持本機元件（檢查點 2）。客戶端服務詳情頁（`WorkingCategoryDetail`）頂部有類似版本但多一段描述，客戶端批次再判斷是否合併 |
+| 價格區間指示條（`PriceRangeIndicator`）、保固膠囊（`WarrantyPill`） | 師傅 1.2.1 至 1.2.5；程式另用在客戶端服務詳情（`WorkingCategoryDetail`，確認與查看工項兩頁），保固膠囊也用在客戶端保固訂單卡 | **升級進 DS**（檢查點 2），分成兩個元件放 DS 的 Service 頁，見 DS 待辦 6 |
+| 輪播 Banner（`CarouselBanner`） | 師傅 1.1.1 至 1.1.5、1.3.1；程式的 `CarouselBannerSwiper` 也用在客戶端首頁 | **升級進 DS**（檢查點 2），放 DS 的 Carousel 頁，見 DS 待辦 7。DS 既有的 `Banner` 是通知提示框，不能取代 |
+| 首頁空狀態（`MasterHomeEmptyState`，圖示＋標題＋提示） | 師傅端 1.1.2、1.1.3；程式另有師傅收入頁、客戶端媒合失敗頁兩處空狀態 | **改做成通用的 DS `EmptyState`**（檢查點 2），見 DS 待辦 8 |
 
 ---
 
 ## pattern 候選
 
-畫圖時發現同一種元件組合重複用來解決同一個問題，就記一行；已有的候選只在「出現位置」補上新的 Frame。到檢查點時，跨兩個以上檔案出現的候選以 `/sanji pattern` 寫成文件（見 [stage3.md](stage3.md) 2026-10-06 決策）。做法細節見 fill-figma-ssot Skill 的 `references/screen-types.md`。
+畫圖時發現**兩個以上元件**的組合重複用來解決同一個問題，就記一行；已有的候選只在「出現位置」補上新的 Frame。到檢查點時，跨兩個以上檔案出現的候選以 `/sanji pattern` 寫成文件（見 [stage3.md](stage3.md) 2026-10-06 決策與檢查點 2 的修正）。單一元件的用法規則不算 pattern，補進該元件的規格文件。做法細節見 fill-figma-ssot Skill 的 `references/screen-types.md`。
 
 | 候選 | 組合 | 解決的問題 | 出現位置 | 狀態 |
 |---|---|---|---|---|
 | 動作選單 | BottomSheet（無標題、Footer=Inline、拖曳把手）＋ ListItem 選項＋ Ghost Neutral「取消」 | 從幾個動作中選一個，可以不選直接取消 | 管理員 1.2.3 | 候選 |
-| 確認對話框 | Dialog（Standard）＋遮罩；次要按鈕在左、主要在右，破壞性動作用 Ghost Danger，只有告知時保留一顆主要按鈕 | 執行單一動作前的確認，或需要使用者知悉的提示 | 管理員 1.2.5、1.3.3、2.2.1、2.3.1；師傅 1.1.4、1.1.5、1.2.2 至 1.2.5、1.3.1 | 候選 |
+| 確認對話框 | Dialog（Standard）＋遮罩；次要按鈕在左、主要在右，破壞性動作用 Ghost Danger，只有告知時保留一顆主要按鈕 | 執行單一動作前的確認，或需要使用者知悉的提示 | 管理員 1.2.5、1.3.3、2.2.1、2.3.1；師傅 1.1.4、1.1.5、1.2.2 至 1.2.5、1.3.1 | 不寫成 pattern（檢查點 2）：只有單一元件，規則已補進 `docs/design-system/components/dialog.md` |
 | 一般資料頁 | 三區結構＋區段（`Heading/4` 標題＋ Card 包 ListItem 或全寬 Button lg），區段間 `Spacing/16` | 把設定入口與帳號操作分組呈現 | 管理員 2.1.1 | 候選 |
 | 全螢幕媒體 | 單一個撐滿 Frame 的 DS 元件（`PhotoViewer`、`VoiceCallScreen`），黑底或模糊照片背景、控制鍵疊在上方 | 沉浸式的全螢幕內容（看照片、傳照片前確認、通話） | 管理員 1.2.4、1.2.6、1.3.1、1.3.2 | 候選 |
-| 空狀態 | 置中圖示＋一行標題＋一行提示文字（`Label/S`＋`Text/Hint`） | 清單區沒有資料時，說明原因與下一步 | 師傅 1.1.2、1.1.3 | 候選 |
+| 空狀態 | 置中圖示＋一行標題＋一行提示文字（`Label/S`＋`Text/Hint`） | 清單區沒有資料時，說明原因與下一步 | 師傅 1.1.2、1.1.3 | 改做成 DS 元件 `EmptyState`（檢查點 2），不再列為 pattern |
 
 ---
 
@@ -68,5 +69,6 @@
 | 3 | 1.2.6 下載鍵換圖示 | 已把 1.2.6 下載鍵的 Smiley 佔位換成 Phosphor DownloadSimple（Regular、`Icon/Inverse`）。下載鍵在外露 AppBar 的 Slot 裡，不在 `PhotoViewer` 元件中；2 升級時若採做法 B，要把這顆鍵移進元件 | 已完成 |
 | 4 | 375 系統列淘汰 | 依 [layout.md](../../../../design-system/tokens/layout.md)，目標全面使用 393。StatusBar 刪除 Frame Group=375 兩個變體並拿掉只剩一個值的 Frame Group 屬性；HomeIndicator 目前只有 375 寬，改為 393（現在每次放入都要手動拉寬）。刪除前已確認 DS 與三個 App 檔案（含 Archive、舊檔案頁）都沒有引用 375 變體；兩個 375 變體已刪除、Frame Group 屬性已拿掉，HomeIndicator 已改 393 寬 | 已完成 |
 | 5 | 通話畫面換圖示 | 已在本機元件 `VoiceCallScreen` 兩個 State 把掛斷鍵的 Smiley 佔位換成 Phosphor PhoneDisconnect（Fill，對應程式 `call_end_rounded`，`Icon/Inverse`），1.3.1、1.3.2 跟著更新 | 已完成 |
-| 6 | 價格區間指示條（含「件數最多」標籤）與保固膠囊 | 師傅 1.2.1 自己排：漸層條加向下尖角的標籤、灰色膠囊放兩組圖示加天數。DS 沒有對應元件。建議升級成 DS 元件，屬性：最低價、最高價、常見價位比例（標籤位置）、一般住家天數、營業用天數，並可選是否顯示說明文字；客戶端 2.4 工項詳情會再用到 | 待處理 |
-| 7 | 輪播 Banner | 師傅 1.1.1 首頁已做成本機元件 `CarouselBanner`（Image 佔位照加三個分頁圓點）。DS 沒有輪播元件，客戶端首頁應該也會用到，建議升級進 DS | 待處理 |
+| 6 | 價格區間指示條（含「件數最多」標籤）與保固膠囊 | 師傅 1.2.1 自己排：漸層條加向下尖角的標籤、灰色膠囊放兩組圖示加天數。DS 沒有對應元件。**做法已定（檢查點 2）**：分成 `PriceRangeIndicator` 與 `WarrantyPill` 兩個元件，放新增的 Service 頁；以本機元件的屬性為基礎（Position Low／Mid／High、Min Price、Max Price、Marker Label；Residential、Commercial），都加是否顯示說明文字的開關與說明文字屬性（程式 `PriceRange` 的 `showDescription`、`WarrantyDate` 預設顯示說明）；價格區間的三個程式原色 #40AEFE、#3449FF、#3A89F8 新增為 DS 原始色並綁定（命名寫規格時提案）。完成後更新 reference.md 近似對應表的價格區間特例 | 待處理（DS 升級對話） |
+| 7 | 輪播 Banner | 師傅 1.1.1 首頁已做成本機元件 `CarouselBanner`（Image 佔位照加三個分頁圓點）。**做法已定（檢查點 2）**：升級為 DS `Carousel`，放既有的 Carousel 頁；結構照本機元件（外露 Image、variant 決定選中第幾顆），圓點固定 3 顆，客戶端首次介紹頁若有相同圓點再拆成獨立元件 | 待處理（DS 升級對話） |
+| 8 | 通用空狀態 | 師傅 1.1.2、1.1.3 的 `MasterHomeEmptyState` 改做成通用的 DS `EmptyState`，放既有的 EmptyState 頁：插圖佔位（之後可從 Illustration 頁取用）＋標題＋說明＋可選按鈕。先看程式另外兩處空狀態（`master_income_page.dart`、`order_detail_match_fail_page.dart`），確認通用版能涵蓋。完成後師傅 1.1.2、1.1.3 改用 DS 版本 | 待處理（DS 升級對話） |

@@ -5,7 +5,7 @@
 > **元件邊界**：與 BottomSheet（從螢幕底部滑出的容器，機制與適用情境不同）明確區分，詳見下方使用規則。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`PlatformAlertDialog`（`lib/component/dialog/platform_alert_dialog.dart`）、`ImportantOrderActionDialog`（`lib/component/dialog/important_order_action_dialog.dart`）為代表案例，另比對 14 個其他 dialog class（`AtmDialog`、`ProMemberUpgradeSuccessDialog` 等）；Figma component 已建立_
-_最後更新：2026-07-14 — 圓角依 Type 拆分：Standard 改用 Radius/8、Emphasis 維持 Radius/16，呼應兩者風格差異（俐落提示 vs 慎重強調）_
+_最後更新：2026-10-06，使用規則補上 `Standard` 的按鈕與內容配置（來自 Figma SSOT 階段 3 檢查點 2）_
 
 ---
 
@@ -47,6 +47,16 @@ _最後更新：2026-07-14 — 圓角依 Type 拆分：Standard 改用 Radius/8�
 - 非阻斷、非時效性的次要提示（如操作成功通知）→ 用 Snackbar
 - 同時疊加兩個以上 Dialog
 - 背景是否可點擊關閉不在本規格定義範圍，交由使用場景自行決定
+
+**按鈕與內容配置（`Standard`）：**
+- 兩顆按鈕：次要在左（`Ghost Neutral`，例如「取消」）、主要在右（`Ghost Action`，例如「確定接案」）
+- 破壞性動作（例如登出、刪除）：右側主要按鈕改用 `Ghost Danger`
+- 只是告知、不需要選擇：隱藏左側次要按鈕，只保留右側一顆主要按鈕（例如「確定」「知道了」）
+- 沒有標題、只有內文（Material `AlertDialog` 只給 content）：隱藏 `Title`，內文放進 `Content`，`Body/M`＋`Text/Secondary`
+- 只有標題、沒有內文：隱藏 `Content`
+- 一律搭配 `Background/Overlay` 遮罩，對話框置中
+
+_以上整理自 Figma SSOT 階段 3 管理員端與師傅端的畫面（管理員 1.2.5、1.3.3、2.2.1、2.3.1；師傅 1.1.4、1.1.5、1.2.2 至 1.2.5、1.3.1）_
 
 ## 邊界情況
 
