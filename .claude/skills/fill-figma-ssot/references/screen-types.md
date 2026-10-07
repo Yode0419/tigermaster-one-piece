@@ -65,7 +65,7 @@
 - 「取消」用按鈕區的 Button，Style 改為 Ghost Neutral，接在選項下方，不做成選項之一。
 - 有標題的選項清單：hasHeader=true，關閉左右圖示。
 - 遮罩：`scrim()`。
-- **長內容、需要捲動的 BottomSheet**（使用者決定）：原本那一格畫第一屏，也就是使用者打開時看到的畫面（Frame 852，BottomSheet 用元件的最大高度，內容超出的部分裁切）；再在它**右邊旁邊加一格完整的長畫面**，採用 BottomSheet 外殼，內容完整顯示：Frame 拉長，底圖與遮罩照第一格，BottomSheet 往上長到內容完整、貼在底部。額外這一格命名為「<原本編號> <原本名稱>（完整內容）」，不編新號碼、不算在結構表的 Frame 數，結構檢查要略過名稱以「（完整內容）」結尾的 Frame。批次紀錄用一句話說明哪一格有加。
+- **長內容、需要捲動的 BottomSheet**（使用者決定）：原本那一格畫第一屏，也就是使用者打開時看到的畫面（Frame 852，BottomSheet 用元件的最大高度，內容超出的部分裁切）；再在它**右邊旁邊加一格完整的長畫面**，採用 BottomSheet 外殼，內容完整顯示：Frame 拉長，底圖與遮罩照第一格，BottomSheet 往上長到內容完整、貼在底部。額外這一格命名為「<原本編號> <原本名稱>（完整內容）」，不編新號碼、不算在結構表的 Frame 數，結構檢查要略過名稱以「（完整內容）」結尾的 Frame。批次紀錄用一句話說明哪一格有加。**兩格的內容框設定不同**（師傅 4.5.1）：第一屏（852）要把 BottomSheet 內建的 `Content` 框與內層 Slot 都設 Fill 高度並開裁切，內建 HomeIndicator 才會貼在 Sheet 底部（不設的話 `Content` 框會跟著內容撐到數千高，把 HomeIndicator 擠到 Sheet 外面）；「（完整內容）」那格相反，`Content` 框與 Slot 設 Hug、關裁切，Sheet 高度＝標題列＋`Content` 框＋HomeIndicator（先把 Sheet 暫設很高再量），Frame 高度再加 85（露出底圖頂部），Scrim 與導覽列跟著調整，所在 Section 也要拉高、下方 Section 往下移。內容裡的插圖若使用者已做成本機元件，直接用元件 instance，寬度 Fill。
 - **只有一個動作的確認**（例如「重送訊息？」＋確認／取消）不是選項清單，改用 Dialog（見下節）。
 - **沒有標題、沒有取消的選項清單**（師傅 2.2.3 選擇導航 App）：hasHeader=false、Footer=Inline、關閉 hasFooter、開 hasDragHandle，選項用 ListItem。選項的圖示若沒有素材（例如地圖 App 的 logo），使用者決定先不放：關閉 ListItem 的 Has Leading Icon，不留 Smiley 佔位。
 
@@ -220,6 +220,15 @@
 
 ---
 
+## 證照／大張照片上傳頁
+
+第一個案例：師傅 4.3.1（程式 `AccountImageUpload`）。
+
+- 整寬白底帶用 Card Layout=Fill／Standard（見「卡片與資料列」）；照片格用 DS `PhotoUpload` Type=Certificate（16:9，已選 State=uploaded 帶刪除圖示、新增格 State=default），寬度 Fill 後高度手動設為寬的 9/16。畫已選兩張加新增格的狀態；上傳中不另畫。
+- 底部 `Sticky Footer`（Button only）「上傳證照」。程式為了避開底部按鈕留的大空白（110）不照抄，Scroll Content 底部用 `Spacing/16`。以內容為主，長頁面。
+
+---
+
 ## 底部可拖曳面板（程式的 `SlidingUpPanel`）
 
 第一個案例：師傅 3.1.1、3.1.3、3.2.1（我的收入頁的「訂單明細」面板）。
@@ -243,6 +252,7 @@
 ## 圖示
 
 - **換圖示**：建立 icon 元件（Icon=Phosphor）的 instance（預設是 Smiley），用 `search_design_system` 限定 Phosphor 圖示庫（libraryKey 見 reference.md）以圖示名稱搜尋，拿元件組 Key，再用 `swapIcon()`（一律 Format=Outline，Weight 依程式：一般 Regular、實心 Fill）。需要白色時傳 `Icon/Inverse`。新查到的圖示 Key 補進 reference.md。
+- **程式用自家彩色圖片（`assets/images/icons/colored_*.png`、`camera.png` 等）的圖示**（使用者決定，師傅 4.1.1、4.2.1）：換成 Phosphor 對應圖示，Weight 用 Duotone，淡色那層（`opacity` 0.2 的 Vector）改綁 `Brand/TigerYellow` 並把 opacity 設 1（不透明），深色線條維持原本綁定的圖示色。帶底色的圓形小圖示（頭像右下的相機）自排：藍色圓（`Brand/TigerBlue`，24）加白色 Phosphor Fill 圖示（16）。
 - **缺圖示**：Phosphor 搜尋不到時保留 Smiley，圖層名稱寫上要換成的圖示，並記入 components.md 的 DS 待辦。
 - **只有圖示、沒有文字的 FAB**：用 FAB Type=Slot，刪掉 `Slot Rectangle` 放圖示，手動設 x、y 置中（Slot 沒有 Auto Layout）。
 

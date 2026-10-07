@@ -114,6 +114,7 @@
 | `Status/InfoContainer`／`Status/ErrorContainer`／`Background/Notice` | `b7fa6fff58eadf3dc5b38f54bc83cbd3d3b2b7df`／`8a87dd88a3b35d3f4c1cf4daee615412d663aa5a`／`3d4813956348eb7235f2c9e1c545d34a5bc0c17b` | 淺藍、淺紅、淺黃底（Tag 與提醒框用） |
 | `Interactive/OnFilled`／`Chip/InfoSelected` | `cbf5078d3270c00fb293c07a635c65d66abf4ac7`／`318c7e9abe7107fa2279228b6c8724f12383c234` | 實心底上的字色／選中的 info Chip 底色 |
 | `Border/Subtle`（#9E9E9E） | `189f9120d0ad0cc3feff78704618c3b481d6a45b` | 與程式 `Colors.grey` 相同；提醒框外框（師傅 2.8.1） |
+| Switch（整組，variant State × Selected）／Phosphor UserGear（元件組） | `725b56a0b9d2298034ea4f3f37db10201d0e2abb`／`5a6a2905efce7a71f92884d380d50ae1756388ea` | Switch 40×20，放 ListItem 的 Trailing Slot；UserGear 對應 `colored_user_gear.png`，帳號首頁用 Outline／Duotone |
 | Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
 
 ---
@@ -202,6 +203,10 @@
 | 收入明細列文字 12 Medium、表頭 14 Medium | `Label/S`、`Label/M`；狀態色紅綠用 `Status/Error`、`Status/Success` | 無 | | 師傅 3.1.1、3.2.1 |
 | 收入頁推薦獎勵紅字 18 Light (236,13,13) | `Title/M`＋`Status/Error` | 無 | | 師傅 3.1.1 |
 | 說明文字未設字級（Material 2 預設 14） | `Body/S`＋`Text/Primary` | 無 | | 師傅 3.3.1 |
+
+| 師傅資料總分 48 Bold 深藍 (31,40,111) | `Heading/2`（28 SemiBold）＋`Text/Brand` | 無 | | 師傅 4.1.2 |
+| 評分星星 30／20（`RatingBarIndicator`） | `Rating` lg（24）／sm（16），只有半星刻度，4.8 顯示 5 顆 | 無 | | 師傅 4.1.2 |
+| 帳號頁 `colored_user_gear.png`、`colored_bell.png`（自家彩色圖片） | Phosphor UserGear、Bell（Outline／**Duotone**，淡色層綁 `Brand/TigerYellow` 且不透明，使用者指定） | 無 | | 師傅 4.1.1 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 
