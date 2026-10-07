@@ -22,7 +22,7 @@ _最後更新：2026-10-06_
 
 | 部位 | 做法 | 備註 |
 |------|------|------|
-| 膠囊 | `Background/Page` 底、`Radius/Full`，上下 `Spacing/8` | 程式底色 #EEEEEE，近似對應記在 figma-ssot 階段 3 的 reference.md |
+| 膠囊 | `Background/Page` 底、`Radius/Full`，上下 `Spacing/8` | 程式底色 #EEEEEE，近似對應記在 figma-ssot 階段 3 的 approximations.md |
 | 左右兩半 | 等寬、內容置中，圖示與文字間距 `Spacing/8` | |
 | 圖示 | 20 的 Phosphor `House`、`Buildings`（Fill、`Icon/Default`） | 對應程式 `Icons.home`、`Icons.business` |
 | 天數文字 | `Label/M`＋`Text/Primary` | 與程式 14 Medium 一致 |

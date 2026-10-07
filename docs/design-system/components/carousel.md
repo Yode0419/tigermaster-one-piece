@@ -24,7 +24,7 @@ _最後更新：2026-10-06_
 | 圖片 | Image，寬度填滿、高 200 | 外露，對應程式 `BoxFit.cover` |
 | 分頁圓點 | 8×8 圓形，間距 `Spacing/8`，水平置中、距底 8 | 程式為 10px、間距 6、距底 10，沿用本機元件數值 |
 | 選中圓點 | `Brand/TigerYellow` | 與程式 #FABF13 一致 |
-| 未選中圓點 | `Border/Default` | 程式為暖灰 #B3ACA2，近似對應記在 figma-ssot 階段 3 的 reference.md |
+| 未選中圓點 | `Border/Default` | 程式為暖灰 #B3ACA2，近似對應記在 figma-ssot 階段 3 的 approximations.md |
 
 ## 使用規則
 

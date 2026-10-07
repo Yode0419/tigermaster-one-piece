@@ -33,7 +33,7 @@ _Last updated: 2026-10-01_
 ### figma-ssot/：Figma SSOT：App 正式畫面的唯一維護來源
 
 - **[Figma SSOT 專案總覽](in-progress/figma-ssot/figma-ssot-overview.md)**：讓 Figma 成為 App 正式畫面的唯一維護來源，分四階段：盤點與架構制定、Figma 建立架構（兩者已完成）、畫面填入（進行中）、上架後維護流程；本處只記階段狀態，階段內進度看各自位置 _(2026-10-05)_
-- **[階段 3：畫面填入](in-progress/figma-ssot/stage3/stage3.md)**：由 Claude Code 照現行 App（Flutter repo）以 Design System 元件重畫 270 個 Frame；管理員 → 師傅 → 客戶分批並設兩個檢查點；本文件記決策與進度，填入做法在 `/fill-figma-ssot` Skill；同資料夾的 `reference.md`（Key 與近似對應表）、`components.md`（元件候選、pattern 候選）、`batches/`（各批紀錄）分開維護 _(2026-10-05)_
+- **[階段 3：畫面填入](in-progress/figma-ssot/stage3/stage3.md)**：由 Claude Code 照現行 App（Flutter repo）以 Design System 元件重畫 270 個 Frame；管理員 → 師傅 → 客戶分批並設兩個檢查點；本文件記進度與客戶端待判斷，填入做法在 `/fill-figma-ssot` Skill；同資料夾的 `decisions.md`（決策原文）、`reference.md`（Key）、`approximations.md`（近似對應表）、`components.md`（元件候選、pattern 候選）、`batches/`（各批紀錄）分開維護 _(2026-10-05)_
 
 ### hardware-store-partnership/：師傅材料採購：振宇五金合作
 

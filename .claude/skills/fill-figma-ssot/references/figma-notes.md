@@ -28,6 +28,7 @@
 
 - 本機元件放在該 Page 右側的「本機元件」Section。
 - 本機元件的布林屬性只能控制自己的直接圖層，不能控制子元件 instance 內部的圖層（`Cannot set component property references on instance sublayer`）。要切換子元件的開關，把該子元件設為外露（`isExposedInstance = true`）。
+- 本機元件裡放 DS 巢狀 instance（Tag、TextField 等）時，巢狀 instance 內的文字不能連到本元件的屬性，值要在巢狀 instance 的屬性上改；本元件另外至少要有一個自己的 TEXT 屬性，結構檢查才不會報「沒有文字屬性」（批次 13b）。
 - 文字屬性用 `componentPropertyReferences` 連到文字圖層；instance 裡要換的子元件（例如 Avatar）設為外露，或用 `swapComponent`。
 - 把畫好的 Frame 內容做成本機元件後，原本那一格改成它的 instance，外觀要不變。
 

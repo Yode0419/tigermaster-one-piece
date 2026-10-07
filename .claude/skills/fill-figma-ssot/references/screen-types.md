@@ -1,8 +1,32 @@
-# 畫面類型做法
+# 畫面類型做法：通則與索引
 
-每種畫面類型的元件組合與關鍵設定。元件 Key 見 `docs/exploration/in-progress/figma-ssot/stage3/reference.md`，程式片段見 `../scripts/snippets.js`。
+本檔是每個畫面都適用的通則，開場整份讀。各畫面類型的做法在 `types/`，**畫到該類型時才讀那一份**（同一個對話讀過就不必重讀）。元件 Key 見 `docs/exploration/in-progress/figma-ssot/stage3/reference.md`，程式片段見 `../scripts/snippets.js`。
 
-**這份清單沒有的畫面類型**：先畫那一格、停下來給使用者確認，定案後依文末格式補一節，再繼續畫。
+**索引沒有的畫面類型**：先畫那一格、停下來給使用者確認，定案後（對話結束時）依文末格式補進最接近的 `types/` 檔案，並在下表加一列。
+
+| 畫面類型 | 檔案 | 第一個案例 |
+|---|---|---|
+| 一般資料頁（帳號頁、設定入口） | `types/pages.md` | 管理員 2.1.1 |
+| 分頁列表頁（頂部分頁＋卡片列表＋空狀態） | `types/pages.md` | 師傅 2.1.1 |
+| 通知列表 | `types/pages.md` | 師傅 6.1.1 |
+| 沒有 AppBar 的全頁（結果頁、評價表單） | `types/pages.md` | 師傅 2.8.1 |
+| 底部可拖曳面板（`SlidingUpPanel`） | `types/pages.md` | 師傅 3.1.1 |
+| 系統畫面邊界（推播橫幅等系統畫面） | `types/pages.md` | 師傅 6.1.4 |
+| 訂單詳情頁（AppBar 疊資訊卡、訂單階段內容） | `types/order-and-forms.md` | 師傅 2.2.1 |
+| 唯讀資料頁（價格與保固、客戶資訊） | `types/order-and-forms.md` | 師傅 2.2.2 |
+| 報價總覽頁（分類卡＋底部金額列） | `types/order-and-forms.md` | 師傅 2.4.2 |
+| 表單編輯頁（卡片內多個欄位） | `types/order-and-forms.md` | 師傅 2.4.4 |
+| 上傳照片表單（4 欄照片格） | `types/order-and-forms.md` | 師傅 2.3.1 |
+| 證照／大張照片上傳頁 | `types/order-and-forms.md` | 師傅 4.3.1 |
+| 動作選單、選項清單、長內容 BottomSheet | `types/bottom-sheets.md` | 管理員 1.2.3 |
+| 底部兩顆按鈕的選擇器 BottomSheet | `types/bottom-sheets.md` | 師傅 2.4.5 |
+| 相機與簽名 BottomSheet | `types/bottom-sheets.md` | 師傅 2.7.3 |
+| 日期時間選擇 BottomSheet | `types/bottom-sheets.md` | 師傅 5.1.7 |
+| 聊天室 | `types/chat.md` | 管理員 1.2.1 |
+| 約施工時間訊息 | `types/chat.md` | 師傅 5.1.8 |
+| 全螢幕照片（`PhotoViewer`） | `types/chat.md` | 管理員 1.2.4 |
+| 通話畫面（`VoiceCallScreen`） | `types/chat.md` | 管理員 1.3.1 |
+| Dialog、提示 Dialog、資訊提示（Tooltip） | 本檔 | 管理員 1.2.5 |
 
 ---
 
@@ -20,89 +44,12 @@
 
 - 圖層順序（First on top，由上到下）：Dialog、`Scrim`、BottomNavBar（如有）、`AppBar`、`Content`、其他固定底部。
 - **以內容為主的長頁面才拉長，其他一律 852**。以內容為主指頁面本身就是在讀或填一大段資訊且會捲動（案件詳情、訂單詳情、表單、說明頁、可能超過一屏的帳號頁）；首頁、列表、空狀態、聊天室、浮層畫面都不算。拉長的做法：Frame 寬 393、高度固定（`primaryAxisSizingMode=FIXED`）；`Content` 高度維持 **Fill**（與一般畫面相同），Frame 高度手動設成剛好容納整頁內容：`Frame 高度 = 頂部高度 + Scroll Content 高度 + 底部高度（含 HomeIndicator 的 34）+ 2`（Frame 外框的 1px 描邊算進排版，上下各 1，不加 2 的話 `Content` 會比 `Scroll Content` 少 2，捲動範圍被截），至少 852，之後驗證 `Content` 高度 ≥ `Scroll Content` 高度。這樣固定底部永遠貼在 Frame 最底，整頁內容完整可見。第一個案例：師傅 1.2.1（1140）。
-- **聊天室**維持只畫進入時看到的最後一屏，`Content` 高度 Fill 並裁切（見聊天室一節）。
+- **聊天室**維持只畫進入時看到的最後一屏，`Content` 高度 Fill 並裁切（見 `types/chat.md`）。
 - **浮層畫面**（Dialog、BottomSheet）不是主要展示頁，不跟著底圖拉長：Frame 固定高度 852、`Content` 高度 Fill 並裁切，底圖內容被裁掉沒關係；`Scrim` 蓋滿整個 Frame；Dialog 置中（`y = (852 - Dialog 高度) / 2`）。底圖是拉長的內容頁（例如 1.2.1）時，也只顯示第一屏。
 - 重建或複製 Frame 後若背景綁定 `Background/Page` 卻顯示成黑色，是存下來的顏色值是黑的（師傅 2.4.3）：把一個正常 Frame 的 `fills` 複製過來，或用 `setBoundVariableForPaint` 重新綁一次。
 - **浮層畫面的底圖**：沿用打開浮層前的那一格（例如從 1.2.2 點「傳送照片」打開，底圖複製 1.2.2）。
 - **沒有 AppBar、頂部跟著內容捲動的頁面**：頂部一樣放在固定頂部區，用 DS 對應的 AppBar variant；捲動行為只在批次紀錄用文字說明。放進 `Content` 會讓 AppBar 內嵌的狀態列一起捲走，與 App 不符。
 - **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，每個項目包一層寬度 Fill 的水平 Auto Layout（無底色），再設主軸對齊。
-
----
-
-## 一般資料頁
-
-列表、卡片、按鈕組成的頁面（例如帳號頁）。第一個案例：管理員 2.1.1。
-
-- `Scroll Content` 左右與上方 padding `Spacing/16`（DS 規定的頁面邊距，程式是其他值也照 DS），底部 padding 見三區結構。
-- 內容依程式分成區段（例如「幫助」「其他」），每個區段是一個 `box()`（區段標題＋內容，間距 `Spacing/8`），區段之間 `Spacing/16`。
-- 區段標題 `Heading/4`。
-- 設定入口：Card（Layout=Inset、Padding=None）包 ListItem（ListItem 自帶左右與上下 16，Card 不加內距）。
-- 全寬按鈕：Button lg、寬度 Fill。Outlined 已自帶白底。
-
-**帳號頁頁首**：AppBar（Tall／None／Brand），關閉 Has Leading、Has Action；刪掉 `Title` Slot 裡的 `Title Text`，放 `Profile`（水平、間距 `Spacing/16`、垂直置中）：Avatar 75＋姓名 `Title/L`／Email `Body/XS`（單行截斷）。
-
----
-
-## 聊天室
-
-第一個案例：管理員 1.2.1。
-
-- 背景用 ChatBackground instance，`float()` 放在最底層、約束 Stretch。
-- 頂部 ChatAppBar（依角色選 variant），底部 ChatInputBar。
-- `Scroll Content` 主軸對齊設為頂部：訊息少時貼在上方；訊息超出畫面時，進入聊天室會停在最底部，所以只畫最新的一屏，從頂部排起、最後一則貼近輸入列。
-- `Scroll Content` 左右 padding `Spacing/16`、訊息間距 `Spacing/8`、上方 padding `Spacing/8`（底部 padding 見三區結構）。
-- 每則訊息包一層寬度 Fill 的水平 Auto Layout：對方的訊息靠左、自己的訊息靠右、日期分隔置中。
-- 同一聊天室的不同狀態（例如展開輸入列），複製上一格的子圖層，只換有變化的部分。
-- **客戶聊天室**（師傅 5.1，程式 `ToClientChatroom`）頂部多一條可關閉的提醒：DS `Banner`（Tone=Error、Solid=false、Leading=None、Closable 開），**文字與關閉圖示綁 `Status/Error`**（使用者指定），放在 ChatAppBar 與 `Content` 之間（固定區，不隨訊息捲動），左右 `Spacing/8`。ChatAppBar 用 To Client variant，姓名改 `Name` 框裡的文字（後端 `obscureName`，姓氏加先生／小姐）。客服聊天室（To Admin variant）沒有這條提醒，背景用 ChatBackground（Watermark）。
-- 對話最上方的說明文字（程式 `topInsert`，`Body/S`＋`Text/Hint`，左右 `Spacing/32` 合計）放在 `Scroll Content` 第一項。訊息超出一屏時它會被捲出畫面，該狀態省略它，只畫最新一屏。
-- **每個狀態都要驗證**：展開輸入列後內容區縮短 64，最後一則訊息不能被切到（必要時把示意訊息縮成一行）；`Content` 高度與 `Scroll Content` 高度要比對。
-- 失敗狀態的自己訊息：`Status` 子實例的 `State` 屬性設 Failed（Meta 內名為 `Status` 的 instance）。
-
----
-
-## 動作選單（程式的 CupertinoActionSheet）
-
-第一個案例：管理員 1.2.3。
-
-- BottomSheet：hasHeader=false、Footer=Inline、開啟 hasDragHandle。內容短的 BottomSheet 一律用 Inline，不要用 Sticky 再手動固定高度。
-- 選項：ListItem（Trailing=None、關閉前方圖示、最後一列關閉分隔線），直接放進 `Content` Slot、寬度 Fill；Slot 間距改為 0。
-- 「取消」用按鈕區的 Button，Style 改為 Ghost Neutral，接在選項下方，不做成選項之一。
-- 有標題的選項清單：hasHeader=true，關閉左右圖示。
-- 遮罩：`scrim()`。
-- **長內容、需要捲動的 BottomSheet**（使用者決定）：原本那一格畫第一屏，也就是使用者打開時看到的畫面（Frame 852，BottomSheet 用元件的最大高度，內容超出的部分裁切）；再在它**右邊旁邊加一格完整的長畫面**，採用 BottomSheet 外殼，內容完整顯示：Frame 拉長，底圖與遮罩照第一格，BottomSheet 往上長到內容完整、貼在底部。額外這一格命名為「<原本編號> <原本名稱>（完整內容）」，不編新號碼、不算在結構表的 Frame 數，結構檢查要略過名稱以「（完整內容）」結尾的 Frame。批次紀錄用一句話說明哪一格有加。**兩格的內容框設定不同**（師傅 4.5.1）：第一屏（852）要把 BottomSheet 內建的 `Content` 框與內層 Slot 都設 Fill 高度並開裁切，內建 HomeIndicator 才會貼在 Sheet 底部（不設的話 `Content` 框會跟著內容撐到數千高，把 HomeIndicator 擠到 Sheet 外面）；「（完整內容）」那格相反，`Content` 框與 Slot 設 Hug、關裁切，Sheet 高度＝標題列＋`Content` 框＋HomeIndicator（先把 Sheet 暫設很高再量），Frame 高度再加 85（露出底圖頂部），Scrim 與導覽列跟著調整，所在 Section 也要拉高、下方 Section 往下移。內容裡的插圖若使用者已做成本機元件，直接用元件 instance，寬度 Fill。
-- **只有一個動作的確認**（例如「重送訊息？」＋確認／取消）不是選項清單，改用 Dialog（見下節）。
-- **沒有標題、沒有取消的選項清單**（師傅 2.2.3 選擇導航 App）：hasHeader=false、Footer=Inline、關閉 hasFooter、開 hasDragHandle，選項用 ListItem。選項的圖示若沒有素材（例如地圖 App 的 logo），使用者決定先不放：關閉 ListItem 的 Has Leading Icon，不留 Smiley 佔位。
-
----
-
-## Dialog
-
-第一個案例：管理員 1.2.5、1.3.3、2.2.1、2.3.1。
-
-- 單句是非題用 Type=Standard，置中，加 `scrim()`。
-- 標題直接改 `Title` 文字（不是元件屬性）；沒有內文時隱藏 `Content` Slot。
-- `Actions` 兩顆 Button 預設為 Ghost Neutral（次要，左）與 Ghost Action（主要，右），只改 Label。破壞性確認（例如登出）右側換成 Ghost Danger：內部按鈕不能刪掉再插入，用 `swapComponent` 換 variant。
-- 程式沒有標題、只有內文（Material `AlertDialog` 只給 content）：隱藏 `Title`，打開 `Content` Slot（刪掉 `Slot Rectangle`）放文字，`Body/M`＋`Text/Secondary`、寬度 Fill。
-- 只有一顆按鈕：隱藏左側次要按鈕，保留右側主要按鈕。
-- Flutter 內建對話框（`showAboutDialog` 等）的文字在 SDK，查法見 SKILL.md「來源」。
-
----
-
-## 全螢幕照片（程式的 `DetailImage`、`SendImageConfirm`）
-
-第一個案例：管理員 1.2.4、1.2.6。
-
-- 用 DS 的 `PhotoViewer`，Frame 只放一個寬高 Fill 的 instance。
-- 看照片且程式有下載網址時開 Has Download；傳送前確認開 Has Send。
-- 黑底是 `Base/Black`（元件已內建）。
-
----
-
-## 通話畫面（程式的 `IOSCallerControlPage`）
-
-第一個案例：管理員 1.3.1、1.3.2。
-
-- 用 DS 的 `VoiceCallScreen`（State=Calling／OnCall），Frame 只放一個寬高 Fill 的 instance，改 Name 與 Duration。
 
 ---
 
@@ -118,82 +65,16 @@
 - **同一組內容在三個以上畫面重複**（例如訂單資訊卡）：做成本機元件，不要每格複製貼上（使用者提議，`OrderBasicInfo`）。
 - **同一個 Page 內重複的共用 Dialog**（照片上傳失敗、刪除照片確認）：只畫最早出現的位置，其他畫面在結構表去向引用；不同 Page 因為是獨立畫面頁，各自有一份（使用者決定，師傅 2.3.2、2.3.3，2.6.3 引用）。
 
----
+## Dialog
 
-## 分頁列表頁
+第一個案例：管理員 1.2.5、1.3.3、2.2.1、2.3.1。
 
-第一個案例：師傅 2.1.1 至 2.1.4（程式 `MasterOrderListPage`，頂部是 `TwoTabPreferredSizeTabBar`）。
-
-- AppBar（Standard／Slot／Brand），關閉 Has Leading、Has Action，標題照程式；頂部的兩個分頁用 DS `SegmentedControl`（Segments=2，Selected 依分頁）放進 `Extension Content`，並設寬度 Fill；刪掉 `Extension Content` 裡殘留的 `Slot Rectangle`。
-- 浮動 BottomNavBar（Role=Master）選中對應分頁：對 Tab instance 設 `Toggle`（原本選中的關、目標的開）。
-- 列表是卡片（見上節），`Scroll Content` 左右與上方 `Spacing/16`、卡片間距 `Spacing/8`。**示意資料要涵蓋該列表查詢條件下會出現的各種狀態**，例如保固中清單包含保固中、登記保固中、訂單結束、訂單終止（程式的查詢是狀態範圍，不只一種），不要只畫一種。
-- 空狀態：`EmptyState`（Size=Compact，關說明、開按鈕）放進 `Scroll Content`，寬度 Fill；插圖沒有向量時留 Slot 的粉紅佔位並改名「插圖佔位（待補）」。
-
----
-
-## 訂單詳情頁（AppBar 疊一張資訊卡）
-
-第一個案例：師傅 2.2.1、2.3.1（程式 `MasterOrderDetail`＋`StackSliverAppBar`）。
-
-- AppBar（Standard／Overlay／Brand），開啟 Has Leading；有動作鍵時開 Has Action，放 `IconLabelButton`（例如「聯繫客服」，圖示 Phosphor）。資訊卡用 DS `Card`（Inset／Standard）放進 `Extension Content`，寬度 Fill，並刪掉殘留的 `Slot Rectangle`。
-- `Scroll Content` 上方 padding ＝ 卡片高 − 延伸列高（32）＋ 8 到 16，讓下方內容接在卡片之後。卡片下方的階段內容（報價、施工、驗收…）屬各自的 Section，這一格只畫共用資訊區時下方留灰底。
-- 標題用程式 `titleParser` 對該訂單狀態的輸出。
-- 未讀標記用 DS `Badge`（Count），絕對定位疊在目標右上角；要凸出 Card 的 Slot 時，把那個 instance 的 Slot `clipsContent` 關掉。該訂單沒有未讀就不放。
-- 同一訂單的不同 Frame（2.2.1、2.3.1）頂部從已畫好的那格 `clone()` 再改字，不重建。資訊卡內容用本機元件 `OrderBasicInfo`（改 Category、Date、Customer Name、Address、Has Unread，巢狀按鈕的 Label 與未讀數字在巢狀 instance 上改）。
-- **訂單階段內容**（卡片下方，依訂單狀態映射，師傅端 `master_order_detail_bloc.dart`）：金額與工期摘要（`OrderQuoteTimeSummary`，放 Card Fill／Standard）加該階段的內容：等待提交報價（狀態 30、35，2.4.1）是「請點選下方按鍵以進行報價」加 Button Secondary Filled md pill「開始報價」；等待客戶確認（40、45、50，2.5.1）是 ListItem「查看報價資訊」加等待說明加「先看其他案件」；施工中（55、58，2.6.1）是「查看報價資訊」、「新增一筆報價」pill、完工提醒文字、Button Primary Filled lg「上傳施工照片並驗收」；有未同意報價時兩顆按鈕改 State=disabled，文字「有未同意報價」（2.6.2）。按下「上傳施工照片並驗收」後同一個區塊換成上傳表單（2.6.3）；照片送出後狀態變 58，再進上傳表單會多一顆 Primary Filled lg「開始驗收」，送出鍵文字變「繼續上傳施工照片」並停用、照片格只剩「＋」（2.6.4）。驗收中（狀態 60，2.7.1）是金額與工期摘要＋「查看報價資訊」列＋提示文字（`Label/L`＋`Text/Brand`、`Body/XS`＋`Text/Hint`，置中）＋Button Secondary Filled md pill「完成驗收」（客戶還沒選驗收方式時停用，實機確認）＋代理人說明文字。
-- **同一入口依客戶選項走不同流程**（例如驗收方式 QR、簽名、直接）時，每個流程各自成 Frame，包括進入時自動跳出、只差文字的提示 Dialog（使用者決定，師傅 2.7.2、2.7.6、2.7.9）。與「同一畫面多個狀態不拆 Frame」的差別：後者是同一版型的內容變體，前者是不同的後續畫面與去向。
-- **畫階段內容的畫面前，先對照程式的狀態映射（bloc 的 `checkOrderStatus`）列出每個階段會看到的畫面，再核對結構表有沒有漏格**（13c 因為這樣查出漏了 2.4.1 上傳報價單與 2.6.1 施工進行中）；漏了就停下來回報使用者，由使用者決定編號。
-
----
-
-## 唯讀資料頁（價格與保固、客戶資訊、問題描述）
-
-第一個案例：師傅 2.2.2（結構與 1.2.1 相同）。
-
-- 頂部 AppBar（Standard／Overlay／Brand）加 `OrderCategoryCard`；`Scroll Content` 上方 padding 48、左右 `Spacing/16`、區段間距 `Spacing/16`；每個區段是「`Title/M` 標題＋DS Card」。
-- 直接從已畫好的同類畫面（例如 1.2.1）`clone()` 頂部與各區段，只改字。跨 Page 複製：在來源 Page 複製、切到目標 Page 後 `appendChild`；本機元件的 instance 要先把主元件複製進目標 Page 的「本機元件」再 `swapComponent`。
-- 以內容為主，是長頁面，高度見三區結構。
-
----
-
-## 上傳照片表單
-
-第一個案例：師傅 2.3.1（程式 `MasterOrderUploadImageSection`、`GridImageView`）。
-
-- 區段標題 `Heading/4`、提示文字 `Body/M`＋`Text/Hint`、DS Card 放照片格，格子用 DS `PhotoUpload`（已上傳 State=uploaded，新增格 State=default）。
-- 程式固定 4 欄、格子填滿一列：一列 4 格，間距固定 `Spacing/4`，每格縮小到 (一列寬 − 3×4)／4 填滿（約 78.75），不要用兩端對齊撐滿（間距會被拉得很大）。超過 4 格換行，最多 10 張。
-- 送出鍵 Button Primary Filled lg、寬度 Fill；沒有選照片時程式是半透明的 `DISABLE_STYLE`，兩種輸入狀態合併一格時畫已選照片的狀態。處理中文字不另建格。
-
----
-
-## 報價總覽頁（頂部分頁＋多張分類卡＋底部金額列）
-
-第一個案例：師傅 2.4.2、2.4.7（程式 `StandardQuotationOverviewSection`、`SimpleQuotationOverviewSection`）。
-
-- 頂部 AppBar（Standard／Slot／Brand）加 `SegmentedControl`，做法同分頁列表頁；浮層畫面的底圖沿用打開前那一格。
-- 每個分類是一張 DS `Card`（Inset／None）放本機元件 `QuotationCategoryRow`（標題＋小字說明＋小計＋箭頭或加號），列高 64（上下 8＋右側點擊區 48，程式用 Material 2 的 `IconButton`，最小 48）。展開的分類在列下方加 1px 分隔線與 Button Secondary Outlined md pill（例如「新增一筆工種工程」）。不要改用 `ListItem`：ListItem 只有單行標題，放不下小字說明。
-- 底部用 DS `Sticky Footer`（Button + Slot），Slot 放本機元件 `QuotationAmountBar`（兩個 DS `Tag` 加提示文字），送出鍵 Button Primary Filled lg。
-- 以內容為主，長頁面高度見三區結構。
-
-## 表單編輯頁（卡片內多個欄位，確認後返回）
-
-第一個案例：師傅 2.4.4、2.4.8、2.4.9（程式 `StandardFeeEditSection`、`SimpleFeeEditSection`、`OtherFeeEditSection`）。
-
-- 每筆資料是一張 DS `Card`（Inset／Standard），Slot 放表單內容的本機元件（例如 `StandardFeeItemForm` 的展開、收合 variant，`OtherFeeItemForm`），欄位用 DS `TextField`。
-- **TextField 沒有說明文字、字數、錯誤訊息時，把 `Show Helper Row` 關掉**，整列才會移除；不關的話每個欄位下方多一列空白，長頁面高度也會算錯。
-- 驗證錯誤（空欄位在按「確認」後一次顯示紅字）不另畫一格，記在批次紀錄；要表示時用 TextField 的 State=Error，唯讀欄位出錯時也改 Error。
-- 「確認」鍵在捲動內容最下方（Button Primary Filled lg、寬度 Fill），沒有固定底部列時底部放 HomeIndicator。長頁面。
-
-## 底部兩顆按鈕的選擇器 BottomSheet
-
-第一個案例：師傅 2.4.5（程式 `UnitPickerBottomSheet`）。
-
-- BottomSheet 有標題與右上 X，高度照程式比例（90% 約 767）；內容用 Slot：分類名稱加一排 DS `Chip`（Tone=info，選中 Selected），列本身自排。
-- 底部「取消」「確認」兩顆並排：把 BottomSheet 內建的 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆 Button（取消 Secondary Outlined lg、確認 Primary Filled lg，間距 `Spacing/16`），DS 待辦 10 處理前的做法。
-- 同一格有多個狀態（例如選「台」與選「式」）時畫資訊較多的那個，不另開 Frame；選「式」的提醒用 DS `Banner`（Tone=Notice、Leading=Icon、Closable 關，圖示換 Phosphor Warning），放在內容下方、左右 `Spacing/16`。
-- 只有標題與選項、沒有底部按鈕、點選項即選定的選項清單（師傅 2.4.3）：BottomSheet Footer=Inline，右上 X，內容放 ListItem，做法同動作選單的「有標題的選項清單」。
-
----
+- 單句是非題用 Type=Standard，置中，加 `scrim()`。
+- 標題直接改 `Title` 文字（不是元件屬性）；沒有內文時隱藏 `Content` Slot。
+- `Actions` 兩顆 Button 預設為 Ghost Neutral（次要，左）與 Ghost Action（主要，右），只改 Label。破壞性確認（例如登出）右側換成 Ghost Danger：內部按鈕不能刪掉再插入，用 `swapComponent` 換 variant。
+- 程式沒有標題、只有內文（Material `AlertDialog` 只給 content）：隱藏 `Title`，打開 `Content` Slot（刪掉 `Slot Rectangle`）放文字，`Body/M`＋`Text/Secondary`、寬度 Fill。
+- 只有一顆按鈕：隱藏左側次要按鈕，保留右側主要按鈕。
+- Flutter 內建對話框（`showAboutDialog` 等）的文字在 SDK，查法見 SKILL.md「Sources for screen content」。
 
 ## 提示 Dialog（只有標題與一顆按鈕）
 
@@ -202,49 +83,6 @@
 - 複製已畫好的 Dialog（例如 2.4.12）與它的 `Scrim`：改 `Title` 文字，內文槽維持隱藏，左側按鈕隱藏，右側 Label 改「知道了」；Dialog 置中，`y = (852 − 高) / 2`。底圖沿用打開前那一格。
 - 疊在 BottomSheet 上的 Dialog（師傅 2.7.4、2.7.5、2.7.8）：底圖保留 BottomSheet 與它的遮罩，再疊第二層遮罩與 Dialog，圖層順序為 Dialog、`Scrim`、BottomSheet、`Scrim`、`AppBar`…。程式文字照抄，包含半形逗號與英文（例如「無效的QrCode,請重新掃描」）。
 
----
-
-## 相機與簽名 BottomSheet
-
-第一個案例：師傅 2.7.3（掃 QR 碼）、2.7.7（簽名板）。
-
-- BottomSheet（hasHeader、右上 X、Footer=Inline、不放底部按鈕），高度照程式 `RoundedBottomSheet` 的 90%（767），貼底；內層 `Content` 與 Slot 內的內容框都設 Fill 高度，內建 HomeIndicator 才會貼在底部。從 2.4.3 的 BottomSheet 複製最快。
-- 相機預覽沒有素材：393×393 `Base/Black` 黑色方塊，圖層名稱「相機預覽（系統畫面，待補）」，不加程式沒有的掃描框（使用者確認）。標題到預覽空 `Spacing/48`，下方藍字 `Body/S`＋`Text/Link`。
-- 簽名區：虛線框（1px 虛線 4／4，`Text/Primary` 綁定）填滿剩餘高度，外層左右 24、上下 10；「清除」Button Secondary Outlined sm pill 靠左；送出鍵 Primary Filled lg，未簽名時 State=disabled 文字「請於上方虛線框中簽名」。簽完名的畫面（確認 Dialog 的底圖）放一條示意筆跡 Vector（`Text/Primary` 綁定 3px 圓端），圖層名稱註明「示意」，送出鍵換「送出簽名」。
-
----
-
-## 沒有 AppBar 的全頁（結果頁、評價表單）
-
-第一個案例：師傅 2.8.1、2.8.2（程式 `MasterOrderDetailFinishPage`、`ToClientComment`，Scaffold 沒有 appBar）。
-
-- 頂部只放 StatusBar（Dark Content），底部 HomeIndicator，內容置中（`Scroll Content` 副軸置中）。程式頂部空 150 → 兩層 `Spacing/48`（接在 StatusBar 之後）。
-- 插圖沒有向量：留粉紅佔位「插圖佔位（待補）」，尺寸照程式（2.8.1 為 233×233）。提醒框：1px `Border/Subtle`、`Radius/4`、內距 `Spacing/12`、左右邊距 `Spacing/32`。
-- 評分用 DS `Rating`（Size=lg，Rate 照預設值）、頭像用 DS `Avatar`；評論框用 DS Card（Inset／Standard）放 `TextField`（Multi、Empty，關閉 Label 與 Helper Row）。系統商店評分視窗屬外部邊界，不畫。
-
----
-
-## 證照／大張照片上傳頁
-
-第一個案例：師傅 4.3.1（程式 `AccountImageUpload`）。
-
-- 整寬白底帶用 Card Layout=Fill／Standard（見「卡片與資料列」）；照片格用 DS `PhotoUpload` Type=Certificate（16:9，已選 State=uploaded 帶刪除圖示、新增格 State=default），寬度 Fill 後高度手動設為寬的 9/16。畫已選兩張加新增格的狀態；上傳中不另畫。
-- 底部 `Sticky Footer`（Button only）「上傳證照」。程式為了避開底部按鈕留的大空白（110）不照抄，Scroll Content 底部用 `Spacing/16`。以內容為主，長頁面。
-
----
-
-## 底部可拖曳面板（程式的 `SlidingUpPanel`）
-
-第一個案例：師傅 3.1.1、3.1.3、3.2.1（我的收入頁的「訂單明細」面板）。
-
-- 面板做成 Frame 層級的浮層 `IncomePanel`（絕對定位、約束水平 Stretch、垂直 Bottom、背景綁 `Background/Page`、裁切），不放進 `Content`。圖層順序：BottomNavBar、`IncomePanel`、`AppBar`、`Content`，面板要在導覽列**之下**，否則會蓋住中央 Logo（使用者指出）。`float()` 之後要把面板放到第二層，用 `insertChild(2, panel)`，用 `insertChild(1, …)` 會留在最上層；放完立刻檢查 `frame.children` 順序。
-- 收合狀態高度照程式 `minHeight`（螢幕 25% ＝ 213），`y = 852 − 82 − 面板高`，貼在導覽列上緣。完全展開時面板填滿 AppBar 下緣到導覽列上緣（3.2.1：高 646），內容蓋住後方畫面。
-- 面板內：標題列（內距 `Spacing/8`）＋白底列表區（填滿剩餘高度、裁切）。面板內有資訊圖示時，面板的 `itemReverseZIndex = true`，泡泡才不會被後面的列表蓋住。
-- 後方 `Scroll Content` 底部 padding：程式在最後一張卡片下留的空白（例如 350）加導覽列 82，保證捲到底能看到被面板蓋住的內容；這高於 134 的最小值，結構檢查可接受。
-- 列表的列（`IncomeListItem`）用本機元件，欄寬照程式 flex 比例換成固定寬（361 切成 120／80／80／81）。
-- 空狀態：面板停在收合高度，`EmptyState`（Compact）放在標題列下方，沒有插圖時關 Has Illustration、Has Description。
-- 示意資料要符合真實商業規則（例如撥款週期），不要編出不可能的資料（例如今天 10/07 就有 11 月已入帳的收入）。
-
 ## 資訊提示（程式的 `InfoTooltip`、`TapTooltip`）
 
 第一個案例：師傅 3.1.1、3.1.2。
@@ -252,41 +90,6 @@
 - 畫面上所有資訊圖示一律用 DS `Tooltip`（Key 見 reference.md），內部圖示預設是 Question，換成 Phosphor Info（Outline／Regular）並綁 `Text/Link`；不要自己畫圖示。
 - 一般畫面用 Open=false（只有觸發圖示）；提示會遮住內容，所以另開一格展示（Open=true，使用者決定，師傅 3.1.2）。同一格可把該畫面所有提示並列（程式一次只出現一個，批次紀錄註明）。展示格從主畫面複製，把圖示換成 Open=true 的 Tooltip，Message 填程式文字（程式的 `\n` 照留）。
 - 泡泡是 instance 內超出範圍的子層，位置無法覆寫：要把外層 Card 與 Slot 的 `clipsContent` 關掉；泡泡所在欄的 `itemReverseZIndex = true`，同一排（含中央垂直分隔線）也要，否則會被後面的元素與分隔線蓋住；泡泡超出螢幕邊緣時，只能用 Message 手動換行縮窄（DS 泡泡不會自動貼齊邊界，程式左右各留 32）。
-
-## 日期時間選擇 BottomSheet
-
-第一個案例：師傅 5.1.7（程式 `DateSelectBottomSheet`，`CalendarDatePicker` 加 `CupertinoDatePicker`）。
-
-- DS 沒有日曆與時間滾輪，做成本機元件 `DatePickerPanel`（TEXT 屬性 Month），放進 BottomSheet 的 `Content` Slot，寬度 Fill；日後升級進 DS（DS 待辦 11）。BottomSheet 高度照程式 `RoundedBottomSheet` 比例（70% ＝ 596），`Content` 框與 Slot 設 Fill 高度並裁切。
-- 面板內結構：`Calendar`（月份標題列高 52：月份文字加下拉箭頭，右側上下月箭頭，可選範圍以外的箭頭用 `Icon/Subtle`；星期列與日期列都高 42，七欄等寬；日期 `Title/M`，今天以前停用用 `Text/Hint`，今天選取是 1px `Interactive/Action` 圓框加同色字）；日曆與時間列之間 `Spacing/16`；`Time Row`（高 70，「時間」`Heading/4`＋三欄滾輪）。
-- 時間滾輪：欄位順序**時、分、上下午（上下午在最右，使用者指定）**；每欄三項（上、選取、下），選取條 `Border/Default`＋`Radius/8`，外層裁切 70 高。
-- 標題列右側「完成」是文字按鈕：把 BottomSheet 標題列的 IconButton `swapComponent` 成 Button Ghost Action sm，再把該 instance 高度設 48 讓文字與標題垂直置中（實例內不能改座標；DS 待辦 12）。左側關閉 `leadingIcon`。
-- 底圖沿用打開前那一格（從展開的輸入列打開，複製 5.1.2）。
-
-## 約施工時間訊息（聊天室）
-
-第一個案例：師傅 5.1.8 至 5.1.10（程式 `TimeRequestMessage`、`chatroom.dart` 的 `replyTimeRequest`）。
-
-- 請求訊息文字格式「請問 yyyy年MM月dd日, HH:mm ，可以與您約定施工時間嗎?」，**自己送出的是黃底一般氣泡**（MessageBubble Text，Self）。**對方送來的**是白底卡：MessageBubble Type=Slot（氣泡內距改 0），Slot 放本機元件 `TimeRequestCard`（TEXT 屬性 Message；內容為訊息文字、1px 分隔線、「取消」Ghost Neutral 與「確認」Ghost Action 兩顆 Button md 並排填滿）。
-- **回覆是新增一則訊息**（後端不改原請求）：「同意更改施工時間至 …」或「拒絕更改施工時間至 …」，由回覆的人送出，所以原請求的白底卡按鈕仍在。**同意時同一方的 App 另外送出**一則一般文字「【系統訊息】施工時間更改至yyyy年MM月dd日，HH:mm」（日期後是全形逗號；拒絕不送）；師傅按確認它是自己的黃底氣泡，客戶按確認師傅看到白底氣泡。
-- 一個流程拆成多格：自己發起後對方的回覆（5.1.8）、師傅按確認（5.1.9）、師傅按取消（5.1.10），三格都只畫最新一屏。
-
-## 通知列表（程式的 `MasterNotificationList`、`OrderNotification`、`SystemNotification`）
-
-第一個案例：師傅 6.1.1 至 6.1.3。
-
-- 頂部同分頁列表頁（AppBar Standard／Slot／Brand＋`SegmentedControl`，開 Has Leading），沒有 BottomNavBar，底部放 HomeIndicator，頁面底色 `Background/Surface`（程式 Scaffold 白底）。
-- 列是整寬白底帶加底部 1px `Border/Default` 線，不用 DS `Card`，做成本機元件：`OrderNotificationItem`（Title、Content、Time）、`SystemNotificationItem`（variant Expanded，加 Has Image 布林）。左右上下內距 `Spacing/16`。
-- 系統通知的展開鈕是 48×48 點擊區、圖示 16 靠上置中（內文列最矮 48）；收合內文最多 3 行（設 `maxLines` 要在設完 `textTruncation` 之後，否則變成 1 行），展開全文；沒有縮圖時仍留 8 的空隙。示意資料涵蓋有縮圖、沒縮圖、展開。
-- 時間文字依 `TimeElapsedText`：N天前、N小時前、N分鐘前、剛剛。
-- 空狀態：`EmptyState` Compact（關說明、關按鈕），外包一層上方 `Spacing/48`，兩個分頁共用，畫第一個分頁。
-
-## 系統畫面邊界（手機系統自己的橫幅、對話框）
-
-第一個案例：師傅 6.1.4（推播橫幅）。
-
-- 使用者決定：只畫系統元素，底圖用灰色（`Icon/Subtle`），不畫任何 App 畫面，點擊後的目的地不畫。頂部 StatusBar（Dark Content），底部 HomeIndicator。
-- 推播橫幅自排：白底、`Radius/12`、內距 `Spacing/12`；左側 DS `Logo-AppIcon`（原 64，縮成 40 用 `rescale`，不能 `resize`），中間標題 `Title/S`＋內文 `Body/S`，右上「現在」`Body/XS`＋`Text/Hint`。文字用真實推播文案。
 
 ## 圖示
 

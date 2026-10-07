@@ -43,7 +43,7 @@ Flutter repo 本機路徑：`C:\Users\yode0\develop\source_code\android_app_2.6.
 
 ## 關聯
 
-- [階段 3：畫面填入](stage3/stage3.md)：決策與分批進度；同資料夾另有做法（method）、查表（reference）、元件（components）與各批紀錄（batches/）
+- [階段 3：畫面填入](stage3/stage3.md)：分批進度；同資料夾另有決策（decisions）、查表（reference、approximations）、元件（components）與各批紀錄（batches/），做法在 `/fill-figma-ssot` Skill
 - [Figma agent 建置交接包 r01](figma-build-r01.md)：階段 2 的依據，複製自 Flutter repo `docs/figma-ssot/handoff/`；來源有改版時以 Flutter repo 為準，再重新複製
 - Jira：[SCRUM-34](https://tigermaster.atlassian.net/browse/SCRUM-34)
 - [Figma 檔案整理與 Design Ops 方法論](../../completed/figma-organization/decision-summary.md)：本專案的前一步，建立了 File Handbook
