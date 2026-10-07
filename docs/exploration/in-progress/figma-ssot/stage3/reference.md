@@ -197,6 +197,12 @@
 | 掃描 BottomSheet 標題到相機空 50 | `Spacing/48` | 無 | | 師傅 2.7.3 |
 | 12 Medium 深藍 (31,40,111) 說明文字（「此評價不會對客戶公開」） | `Label/S`＋`Text/Brand` | 無 | | 師傅 2.8.2 |
 
+| 長條圖顏色 (255,217,108) #FFD96C | 原始色 `Yellow/300`（#FFDE7D，Key `2897ee3c248b9d8e4616b2fefce854bed0d2d7ac`） | `Yellow/400`（#FFD048） | | 師傅 3.1.1 |
+| 收入頁「訂單明細」資訊圖示（`info_outlined` 16，藍 #3A89F8） | Phosphor Info（Outline／Regular，元件組 Key `aff3f7b333137a5533dd3db6598642b6848795d8`），顏色 `Text/Link` | 無 | | 師傅 3.1.1 |
+| 收入明細列文字 12 Medium、表頭 14 Medium | `Label/S`、`Label/M`；狀態色紅綠用 `Status/Error`、`Status/Success` | 無 | | 師傅 3.1.1、3.2.1 |
+| 收入頁推薦獎勵紅字 18 Light (236,13,13) | `Title/M`＋`Status/Error` | 無 | | 師傅 3.1.1 |
+| 說明文字未設字級（Material 2 預設 14） | `Body/S`＋`Text/Primary` | 無 | | 師傅 3.3.1 |
+
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 
 **想換成另一個 token 時**：在「改為」欄填上想要的 token，或直接告訴 Claude。Claude 會把已畫好的 Frame 中綁到舊 token 的地方一次換掉，再把新值移到「選用」欄並清空「改為」。只在 Figma 手動改某一處的話，不會影響後續批次。

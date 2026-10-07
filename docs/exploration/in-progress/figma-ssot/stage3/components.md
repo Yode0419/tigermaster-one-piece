@@ -52,6 +52,8 @@
 | 首頁空狀態（`MasterHomeEmptyState`，圖示＋標題＋提示） | 師傅端 1.1.2、1.1.3；程式另有師傅收入頁、客戶端媒合失敗頁兩處空狀態 | 已改做成通用的 DS `EmptyState`（DS 升級，2026-10-06），Size=Compact 涵蓋師傅首頁與收入頁，Page 涵蓋客戶端媒合失敗頁，見 DS 待辦 8 |
 
 ---
+| 收入明細列（`IncomeListItem`，Status=Unpaid／Paid，TEXT 屬性 Item、Amount、Date；程式 `IncomeListItem`） | 師傅 3.1.1、3.2.1 | 本機元件（批次 14），只有收入頁用，暫不升級 |
+| 月收入長條圖（五根長條＋金額＋月份，程式 `fl_chart` 的 `BarChart`）：DS 沒有圖表元件，自排 | 師傅 3.1.1（客戶端、管理員端目前沒有圖表） | 自排（批次 14），只出現一處，暫不升級；若之後有第二個圖表再討論 |
 
 ## pattern 候選
 

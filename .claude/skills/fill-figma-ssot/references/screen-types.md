@@ -220,6 +220,26 @@
 
 ---
 
+## 底部可拖曳面板（程式的 `SlidingUpPanel`）
+
+第一個案例：師傅 3.1.1、3.1.3、3.2.1（我的收入頁的「訂單明細」面板）。
+
+- 面板做成 Frame 層級的浮層 `IncomePanel`（絕對定位、約束水平 Stretch、垂直 Bottom、背景綁 `Background/Page`、裁切），不放進 `Content`。圖層順序：BottomNavBar、`IncomePanel`、`AppBar`、`Content`，面板要在導覽列**之下**，否則會蓋住中央 Logo（使用者指出）。`float()` 之後要把面板放到第二層，用 `insertChild(2, panel)`，用 `insertChild(1, …)` 會留在最上層；放完立刻檢查 `frame.children` 順序。
+- 收合狀態高度照程式 `minHeight`（螢幕 25% ＝ 213），`y = 852 − 82 − 面板高`，貼在導覽列上緣。完全展開時面板填滿 AppBar 下緣到導覽列上緣（3.2.1：高 646），內容蓋住後方畫面。
+- 面板內：標題列（內距 `Spacing/8`）＋白底列表區（填滿剩餘高度、裁切）。面板內有資訊圖示時，面板的 `itemReverseZIndex = true`，泡泡才不會被後面的列表蓋住。
+- 後方 `Scroll Content` 底部 padding：程式在最後一張卡片下留的空白（例如 350）加導覽列 82，保證捲到底能看到被面板蓋住的內容；這高於 134 的最小值，結構檢查可接受。
+- 列表的列（`IncomeListItem`）用本機元件，欄寬照程式 flex 比例換成固定寬（361 切成 120／80／80／81）。
+- 空狀態：面板停在收合高度，`EmptyState`（Compact）放在標題列下方，沒有插圖時關 Has Illustration、Has Description。
+- 示意資料要符合真實商業規則（例如撥款週期），不要編出不可能的資料（例如今天 10/07 就有 11 月已入帳的收入）。
+
+## 資訊提示（程式的 `InfoTooltip`、`TapTooltip`）
+
+第一個案例：師傅 3.1.1、3.1.2。
+
+- 畫面上所有資訊圖示一律用 DS `Tooltip`（Key 見 reference.md），內部圖示預設是 Question，換成 Phosphor Info（Outline／Regular）並綁 `Text/Link`；不要自己畫圖示。
+- 一般畫面用 Open=false（只有觸發圖示）；提示會遮住內容，所以另開一格展示（Open=true，使用者決定，師傅 3.1.2）。同一格可把該畫面所有提示並列（程式一次只出現一個，批次紀錄註明）。展示格從主畫面複製，把圖示換成 Open=true 的 Tooltip，Message 填程式文字（程式的 `\n` 照留）。
+- 泡泡是 instance 內超出範圍的子層，位置無法覆寫：要把外層 Card 與 Slot 的 `clipsContent` 關掉；泡泡所在欄的 `itemReverseZIndex = true`，同一排（含中央垂直分隔線）也要，否則會被後面的元素與分隔線蓋住；泡泡超出螢幕邊緣時，只能用 Message 手動換行縮窄（DS 泡泡不會自動貼齊邊界，程式左右各留 32）。
+
 ## 圖示
 
 - **換圖示**：建立 icon 元件（Icon=Phosphor）的 instance（預設是 Smiley），用 `search_design_system` 限定 Phosphor 圖示庫（libraryKey 見 reference.md）以圖示名稱搜尋，拿元件組 Key，再用 `swapIcon()`（一律 Format=Outline，Weight 依程式：一般 Regular、實心 Fill）。需要白色時傳 `Icon/Inverse`。新查到的圖示 Key 補進 reference.md。

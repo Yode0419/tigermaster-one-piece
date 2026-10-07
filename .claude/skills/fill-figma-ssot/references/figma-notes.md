@@ -40,6 +40,11 @@
 - 漸層填色的色標也能綁變數：`gradientStops` 每一項加 `boundVariables: { color: figma.variables.createVariableAlias(variable) }`（`color` 仍要給解析後的色值）。
 - 重建 Frame 後背景綁定 `Background/Page` 卻顯示黑色（備援色未解析）時，把一個正常 Frame 的 `fills` 深拷貝過來。原因未查明。
 
+- `float()` 把節點插到最前面；要放在第二層（導覽列之下）時再 `frame.insertChild(2, node)`，`insertChild(1, …)` 對已在第 0 層的節點不會生效，事後一定檢查 `frame.children.map(c => c.name)`。
+- 用 `toLocaleString` 格式化金額在 Plugin 環境不會加千分位，要手動加逗號或直接寫字串。
+- `getMainComponentAsync` 之外，巢狀 instance 的 `parent.children.indexOf(node)` 可能回 -1（物件參照不同），改用 `findIndex(c => c.id === node.id)`。
+- DS `Tooltip` 展開與圖層順序做法見 `screen-types.md` 「資訊提示」。
+
 ## 照片
 
 - `use_figma` 不支援 `createImageAsync`，無法放入新照片，只能用 DS Image 元件內建的佔位照片。需要符合情境的照片時，在回報中請使用者手動換圖。

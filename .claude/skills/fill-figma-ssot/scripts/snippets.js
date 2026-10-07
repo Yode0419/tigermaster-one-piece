@@ -146,6 +146,8 @@ async function threeZone(frame, { top, bottom, bgKey, navBottom = false } = {}) 
 // Floating layer (Scrim, Dialog, BottomSheet, chat background) outside Auto Layout.
 // With "First on top", floating layers must be the FIRST children to draw on top
 // (stack them so the Dialog is first, then the Scrim: float the Scrim, then the Dialog).
+// A floating layer that must sit BELOW the floating BottomNavBar (e.g. the IncomePanel): after float(), call
+// frame.insertChild(2, node) (insertChild(1, ...) leaves it on top) and check frame.children order.
 function float(frame, node, { h = 'STRETCH', v = 'STRETCH' } = {}) {
   frame.insertChild(0, node);
   node.layoutPositioning = 'ABSOLUTE';
