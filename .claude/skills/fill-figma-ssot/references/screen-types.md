@@ -12,6 +12,8 @@
 | 沒有 AppBar 的全頁（結果頁、評價表單） | `types/pages.md` | 師傅 2.8.1 |
 | 底部可拖曳面板（`SlidingUpPanel`） | `types/pages.md` | 師傅 3.1.1 |
 | 系統畫面邊界（推播橫幅等系統畫面） | `types/pages.md` | 師傅 6.1.4 |
+| 啟動畫面（黃底 Logo、底部訊息列） | `types/pages.md` | 客戶端 1.1.1 |
+| 首次介紹頁（插圖、標題、說明、分頁圓點） | `types/pages.md` | 客戶端 1.2.1 |
 | 訂單詳情頁（AppBar 疊資訊卡、訂單階段內容） | `types/order-and-forms.md` | 師傅 2.2.1 |
 | 唯讀資料頁（價格與保固、客戶資訊） | `types/order-and-forms.md` | 師傅 2.2.2 |
 | 報價總覽頁（分類卡＋底部金額列） | `types/order-and-forms.md` | 師傅 2.4.2 |

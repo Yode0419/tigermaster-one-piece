@@ -63,3 +63,24 @@
 
 - 使用者決定：只畫系統元素，底圖用灰色（`Icon/Subtle`），不畫任何 App 畫面，點擊後的目的地不畫。頂部 StatusBar（Dark Content），底部 HomeIndicator。
 - 推播橫幅自排：白底、`Radius/12`、內距 `Spacing/12`；左側 DS `Logo-AppIcon`（原 64，縮成 40 用 `rescale`，不能 `resize`），中間標題 `Title/S`＋內文 `Body/S`，右上「現在」`Body/XS`＋`Text/Hint`。文字用真實推播文案。
+- 程式的外部頁面（例如點「立即更新」前往的 Google Play／App Store）不畫，也不留邊界 Frame（使用者決定，客戶端 1.1.6 已刪除）；去向寫在前一格的結構表去向。
+
+## 啟動畫面（程式的 `MainInitializer`）
+
+第一個案例：客戶端 1.1.1、1.1.3。
+
+- 背景綁 `Brand/TigerYellow`（`#FABF13`，與程式相同）。頂部 StatusBar（Dark Content），底部 HomeIndicator（Dark）。`Content` 的主軸置中，放 DS `logo`（key 見 reference.md，原 206×60，用 `rescale` 縮成高 68）。
+- 底部訊息列（程式 `bottomSheet`）：高 74（40＋底部安全區 34），`Status/Error` 底、`Body/S` 白字、水平置中、單行截斷、內距 `Spacing/8`。絕對定位浮在最底（約束左右 Stretch、垂直 Bottom，排在最前），HomeIndicator 仍留在自動排列，Logo 位置才與沒有訊息列的畫面一致（`bottomSheet` 不縮小 body）。
+- 疊 Dialog 的畫面：底圖複製對應的啟動畫面，加 `Scrim` 與 Dialog（見 `screen-types.md` 的 Dialog）。
+- 後端傳來的系統訊息沒有固定文案，示意文字用單行放得下的內容。
+
+## 首次介紹頁（程式的 `IntroductionScreen`，套件 `introduction_screen`）
+
+第一個案例：客戶端 1.2.1 至 1.2.5。
+
+- 白底，頂部 StatusBar（Dark Content）。版面照套件原始碼：圖片區與文字區 flex 1:1，頁面可用高度扣掉 `pageMargin` 下 60 與 `safeArea` 60；本檔案的 852 高下，插圖區固定高 280，插圖靠下置中、無內距。
+- 文字區內距 `Spacing/16`，標題上 `Spacing/16`、下 `Spacing/24`，標題 `Display/M`＋`Text/Primary`，內文 `Body/M`＋`Text/Primary`，皆置中。
+- 底部控制列內距 `Spacing/16`，三等分：左（沒有略過與返回時為空，高度固定 1，否則空框會撐到 100）、中間分頁圓點、右側 DS `Button`（Ghost Action、lg）。最後一頁標籤改「繼續」。最底 HomeIndicator。
+- 分頁圓點用本機元件 `IntroDots`（variant Page=1 至 5；10px `Icon/Subtle` 圓點，目前頁為 22×10 `Brand/TigerBlue` 藥丸，間距 `Spacing/12`）。使用者決定不升級 DS。
+- 插圖是圖檔，Figma 工具不能匯入：留粉紅佔位（235×280，命名「插圖佔位（pageN.png，待補）」），由使用者之後自己放入。
+- 改按鈕標籤時，要從 Button instance 內找文字（`findOne` 從外層框找不到），並先 `skipInvisibleInstanceChildren = false`。

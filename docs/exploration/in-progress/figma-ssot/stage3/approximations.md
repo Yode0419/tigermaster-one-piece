@@ -87,6 +87,9 @@
 | 通知列底線 `Colors.grey` 0.5px | `Border/Default` 1px | `Border/Subtle`（太深） | | 師傅 6.1.1、6.1.2 |
 | 通知列標題 16 Bold、內文與時間 14 Regular、時間灰 (114,114,118) | `Title/S`、`Body/S`、`Body/S`＋`Text/Hint`（數值相同） | 無 | | 師傅 6.1.1、6.1.2 |
 | 空狀態離頂部 120、插圖高 112（通知頁，`empty_notification_list.png` 無向量） | 兩層 `Spacing/48`，`EmptyState` Compact 的 Slot 佔位 | 無 | | 師傅 6.1.3 |
+| 首次介紹頁「下一步」「繼續」：16 w600 深藍 (31,40,111) 的 `TextButton` | DS `Button` Ghost Action（藍字，lg 高 48） | 自排文字＋`Text/Brand`（深藍相同但不是 DS 元件） | | 客戶端 1.2.1 |
+| 首次介紹頁標題 40 w700（預設文字色） | `Display/M`（40 Bold）＋`Text/Primary`，數值完全相同 | 無 | | 客戶端 1.2.1 |
+| 首次介紹頁分頁圓點：10px 灰 `Colors.grey`、選中 22×10 深藍 (31,40,111)、間距 6 | 自排：未選中 `Icon/Subtle`（#9E9E9E，與 `Colors.grey` 相同），選中 `Brand/TigerBlue`，間距 `Spacing/12`（兩側各 6） | DS `Carousel` 圓點（8px，規格不同） | | 客戶端 1.2.1 |
 | 系統推播橫幅（手機系統畫面） | 自排：白底、`Radius/12`、內距 `Spacing/12`，底圖 `Icon/Subtle` 灰（使用者指定只畫橫幅） | 無 | | 師傅 6.1.4 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。

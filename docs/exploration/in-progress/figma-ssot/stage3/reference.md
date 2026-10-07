@@ -117,6 +117,7 @@
 | Switch（整組，variant State × Selected）／Phosphor UserGear（元件組） | `725b56a0b9d2298034ea4f3f37db10201d0e2abb`／`5a6a2905efce7a71f92884d380d50ae1756388ea` | Switch 40×20，放 ListItem 的 Trailing Slot；UserGear 對應 `colored_user_gear.png`，帳號首頁用 Outline／Duotone |
 | Phosphor CaretLeft／CaretDown（元件組）／`Interactive/Action`／`Icon/Default`／`Icon/Subtle` | `6c0b7f857a2a3b761d5731c62f51295d3d1ca36d`／`3123b154077e5b1d2b261c04357275cde472901b`／`07aa36da7de6e8dbae477c2e8ab2e161f3ed5aaa`／`52b48f39822225eece13a42f85ca18095b6f4e60`／`0f2d615857bdcfc72b98bba019c0f5829e73ab8c` | 日期選擇面板（師傅 5.1.7）：月份箭頭、下拉箭頭，選取日的藍框與藍字，停用的上個月箭頭 |
 | Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
+| logo（單一元件，「師虎來了」字標） | `6d234a1db0e1d5654251e6a7b4630e94606700e7`（原 206×60；啟動畫面縮成高 68 用 `rescale(68/高)`，不用 `resize`） |
 | Logo-AppIcon（單一元件） | `e30102d71a06084634ef1f9aec8ac2cfe8bbdfd0`（師虎 App 圖示，原尺寸 64；縮小用 `rescale`，不能用 `resize`） |
 | Phosphor CaretUp（元件組） | `07ed6a8449b09a06f62c590259d38904bc91537d`（程式 `expand_less`，通知列展開；收合用既有 CaretDown） |
 | Phosphor House／Buildings（元件組） | `0408a611f7868ef34a9a0be470492f4070f9d742`／`6405940916f5c3c15b0baf6eaff7c52868153229` | 程式 `home`、`business`（保固膠囊） |
