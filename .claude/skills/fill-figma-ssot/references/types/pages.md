@@ -84,3 +84,28 @@
 - 分頁圓點用本機元件 `IntroDots`（variant Page=1 至 5；10px `Icon/Subtle` 圓點，目前頁為 22×10 `Brand/TigerBlue` 藥丸，間距 `Spacing/12`）。使用者決定不升級 DS。
 - 插圖是圖檔，Figma 工具不能匯入：留粉紅佔位（235×280，命名「插圖佔位（pageN.png，待補）」），由使用者之後自己放入。
 - 改按鈕標籤時，要從 Button instance 內找文字（`findOne` 從外層框找不到），並先 `skipInvisibleInstanceChildren = false`。
+
+## 啟動畫面加底部按鈕（程式的 `AuthNav`）
+
+第一個案例：客戶端 1.3.1。
+
+- 複製啟動畫面 1.1.1 當底圖，`Scroll Content` 內 Logo 下方 `Spacing/24` 加標語（`Heading/2`＋`Text/Primary`）。
+- 底部用 DS `Sticky Footer`（Content=Button only，已含 HomeIndicator），取代原本的 HomeIndicator；清掉它的填色與陰影（`fills = []`、`effects = []`）讓黃底透出，Button Label 改文字。
+
+## 登入表單頁（程式的 `PhoneInputSection`、`PasswordInputSection`、`VerifyInputSection`）
+
+第一個案例：客戶端 1.3.2 至 1.3.5、1.4.1 至 1.4.3（使用者已確認）。
+
+- 頂部 AppBar（Tall／Overlay／Brand），開 Has Leading、關 Has Action。總高 225、`Extension Content` 內的卡片頂在 y=193，與程式（狀態列 59＋工具列 56＋下緣 110，卡片 top 193）吻合。
+- `Title` Slot：刪掉 `Title Text`，放垂直 `box`：標題 `Heading/3`、副標 `Label/L`，皆 `Text/Primary`。`Extension Content` Slot：放 DS Card（Inset／Standard），寬度 Fill。
+- 卡片超出 AppBar 的高度不會撐開 AppBar：`Scroll Content` 上方 padding ＝ 卡片底緣超出量 ＋ `Spacing/16`（用 `absoluteBoundingBox` 計算）。左右 `Spacing/16`。
+- 欄位用 `TextField`（Single）或 `PasswordField`（Reveal=Hidden）；錯誤文字用元件 State=Error＋Helper Text，不另畫紅字。`PasswordField` 沒有 Show Helper Row，卡片底部會多一段空白（DS 待辦 13）。
+- 卡片下方 Button Primary Filled lg，寬度 Fill；其下的次要文字按鈕（忘記密碼、重新傳送）用 Ghost 的 md／sm Button 置中，間距 `Spacing/16`／`Spacing/8`；停用狀態用 Button 的 State=disabled。
+- 六格驗證碼輸入用本機元件 `PinInput`（Content=Empty／Filled，40×50 方框，1px `Border/Subtle`、`Radius/4`，主軸 SPACE_BETWEEN）。
+- 輸入焦點、按鈕載入中文字動畫不另建 Frame，只記錄。
+
+## 空白頁
+
+第一個案例：客戶端 1.3.6。
+
+- 程式沒有對應畫面（只回傳空 `Container()`）時，照現況畫空白頁：StatusBar、空的 `Content`、HomeIndicator，底色 `Background/Page`；不要發明設計。

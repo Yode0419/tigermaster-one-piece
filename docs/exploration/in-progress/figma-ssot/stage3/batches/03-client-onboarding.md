@@ -15,7 +15,21 @@
 - 啟動畫面 Logo：用 DS `logo` 元件（使用者指定，取代佔位）。
 - 介紹插圖（`app_intro/page1-5.png`）：Figma 工具不能匯入圖片，留命名清楚的佔位圖層，使用者之後自己拖入（使用者選 A）。
 
+**03b 示意資料**（2026-10-07）：
+- 手機號碼 0912345678（程式規定 09 開頭共 10 碼）；1.3.3 錯誤示範輸入 0912345，欄位紅字「手機號碼格式錯誤」。
+- 1.3.4、1.3.5 密碼欄用遮蔽圓點；1.4.1 驗證碼框留空，倒數文字「重新傳送驗證碼(287S)」（App 組字）；1.4.3 填入 123456，紅字「驗證碼錯誤，請重新輸入」。
+- 組字來源皆在 App 端（欄位檢查、`loginreg_bloc.dart` 的錯誤文字、`CountDownButton` 的秒數），沒有後端組字。
+- 按下一步後的「確認中...」「登入中...」只是按鈕文字動畫，只記不畫。
+
 **畫面類型**：
+
+| Frame | 類型 | 備註 |
+|---|---|---|
+| 1.3.1 開始頁 | 啟動畫面（沿用） | 黃底、DS `logo`、標語、底部「點擊開始」 |
+| 1.3.2 至 1.3.5、1.4.1 至 1.4.3 | 新類型：登入表單頁 | 黃色頂部加標題副標，白卡疊在頂部下緣 |
+| 1.3.6 停用帳號 | 新類型：空白頁 | 程式只回傳空 `Container()`，使用者確認畫空白頁（只有狀態列與 HomeIndicator） |
+
+**（以下為 03a 畫面類型）**
 
 | Frame | 類型 | 備註 |
 |---|---|---|
@@ -43,11 +57,21 @@
 | 1.2.3 專屬技術專案管理師 | 完成 |
 | 1.2.4 有保障的修繕過程 | 完成 |
 | 1.2.5 便利選擇多項服務 | 完成 |
+| 1.3.1 開始頁 | 完成 |
+| 1.3.2 輸入手機號碼 | 完成 |
+| 1.3.3 手機號碼錯誤 | 完成 |
+| 1.3.4 輸入密碼 | 完成 |
+| 1.3.5 密碼錯誤 | 完成 |
+| 1.3.6 停用帳號（現行空白） | 完成 |
+| 1.4.1 輸入簡訊驗證碼 | 完成 |
+| 1.4.2 可重新傳送驗證碼 | 完成 |
+| 1.4.3 簡訊驗證錯誤 | 完成 |
 
 ---
 
 ## 本機元件
 
+- **PinInput**（本機元件 Section）：variant Content=Empty／Filled，6 個 40×50 方框（1px `Border/Subtle`、`Radius/4`），Filled 固定顯示 1 至 6（`Heading/4`）。1.4.1 至 1.4.3 用 instance。
 - **IntroDots**（1 啟動與登入 Page 的「本機元件」Section）：variant Page=1 至 5，選中的圓點拉長成 22×10 藥丸。使用者決定不拆成 DS 元件，只做本機元件。1.2.1 至 1.2.5 都用 instance。
 
 ---
@@ -89,3 +113,43 @@
 - **底部控制列**：內距 16，三等分：左空、中間分頁圓點、右側按鈕（`skipFlex`、`dotsFlex`、`nextFlex` 都是 1）。圓點與按鈕的近似對應見 approximations.md。
 - **按鈕**：沒有略過、沒有返回，所以左側為空。
 - **插圖**：圖檔不能匯入，留粉紅佔位「插圖佔位（page1.png，待補）」。
+
+## 1.3.1 開始頁、1.3.6 停用帳號（2026-10-07）
+
+**程式**：`auth_nav.dart`、`authentication.dart`（無停用分支，回傳空 `Container()`）
+
+- **1.3.1**：複製 1.1.1 當底圖。標語「保障您的修繕服務」程式 28 Bold、色 (35,36,42)，用 `Heading/2`（28 SemiBold）加 `Text/Primary`，近似對應見 approximations.md。Logo 與標語間距 24。底部按鈕用 DS `Sticky Footer`（Content=Button only，已含 HomeIndicator），底色與陰影去掉讓黃底透出，Label 改「點擊開始」。程式按鈕左右 23、高 46、圓角 4，照 DS（左右 16、lg）。
+- **1.3.6**：只有 StatusBar、空的 `Content`、HomeIndicator。底色用 `Background/Page`（程式 Material 2 預設 #FAFAFA，沿用既有近似）。使用者確認畫空白頁。
+
+## 1.3.2 輸入手機號碼（2026-10-07）
+
+**程式**：`phone_input_section.dart`
+
+- **新類型：登入表單頁**（待使用者確認）。頂部用 AppBar（Tall／Overlay／Brand），總高 225、卡片頂在 y=193，與程式（狀態列 59＋工具列 56＋下緣 110、卡片 top 193）完全吻合。標題與副標放 `Title` Slot：標題 `Heading/3`、副標 `Label/L`。卡片放進 `Extension Content`，卡片超出 AppBar 的 58 由 `Scroll Content` 上方 padding 74（58＋16）補上。
+- 欄位用 DS `TextField`（Single、Filled、關 Helper Row），尾端圖示 Phosphor XCircle（程式 `cancel` 16）。「下一步」用 Button Primary Filled lg，寬度 Fill。
+- 底圖 `Background/Page`，底部 HomeIndicator。
+
+## 1.3.3 至 1.3.5（2026-10-07）
+
+**程式**：`phone_input_section.dart`、`password_input_section.dart`
+
+- **1.3.3**：欄位用 `TextField` State=Error，值 0912345，說明列紅字「手機號碼格式錯誤」（程式欄位檢核訊息）。另一種卡片內紅字「驗證流程失敗，請稍後再試」只記不畫（同位置、同樣式）。
+- **1.3.4**：密碼欄用 DS `PasswordField`（Reveal=Hidden、Filled，遮蔽圓點）。「忘記密碼?」程式是 `TextButton`，用 Button Ghost Action md 置中，與「下一步」間距 `Spacing/16`。`PasswordField` 沒有 Show Helper Row，卡片底部多一段空白，記 DS 待辦 13。
+- **1.3.5**：同 1.3.4，State=Error，說明列紅字「密碼錯誤，請重新輸入」。程式紅字在欄位下方卡片內，位置相同。
+
+## 1.4.1 至 1.4.3（2026-10-07）
+
+**程式**：`verify_input_section.dart`、`countdown_button.dart`
+
+- 卡片內：提示文字 `Body/M`、「驗證碼」`Body/S`（程式預設 14）、六格 `PinInput`。程式驗證碼框選中邊框為藍色，三格都畫未選中（輸入焦點不另建 Frame）。
+- **1.4.1**：「重新傳送驗證碼(287S)」用 Button Ghost Neutral sm、State=disabled（程式 12 灰 (179,172,162)，DS 沒有停用文字色 token，用元件停用樣式）。秒數格式「(287S)」是 `CountDownButton` 組字。
+- **1.4.2**：「沒有收到驗證碼嗎?」用 Button Ghost Action sm（程式 12 藍 (58,137,248)）。
+- **1.4.3**：驗證碼填 123456，紅字「驗證碼錯誤，請重新輸入」。重送失敗的「發送失敗。」「請輸入六位簡訊驗證碼」只記不畫（同位置）。底部重送列畫成可點擊狀態（1.4.2 之後）。
+- 兩個 Section 的按下一步後「確認中...」「登入中...」只記不畫。
+
+## 待寫規則（03b，已於 2026-10-07 寫入 `types/pages.md` 與 `screen-types.md` 索引）
+
+- 登入表單頁（使用者已確認 1.3.2）：頂部 AppBar（Tall／Overlay／Brand，開 Has Leading、關 Has Action）；`Title` Slot 放標題（`Heading/3`）加副標（`Label/L`），`Extension Content` 放 Card（Inset／Standard）；總高 225、卡片頂在 y=193，與程式吻合。卡片超出 AppBar 的高度由 `Scroll Content` 上方 padding 補（超出量加 16）。卡片下方依序是 Button Primary Filled lg 寬度 Fill，其下可接小按鈕（Ghost，sm 或 md，置中）。欄位用 `TextField`／`PasswordField`，驗證碼用本機 `PinInput`；欄位錯誤文字用元件的 Error 狀態。第一個案例：客戶端 1.3.2。
+- 空白頁：只有 StatusBar、空 `Content`、HomeIndicator，底色 `Background/Page`。第一個案例：客戶端 1.3.6。
+- 啟動畫面加底部按鈕：底部用 DS `Sticky Footer`（Button only），清掉填色與陰影讓底色透出。第一個案例：客戶端 1.3.1。
+

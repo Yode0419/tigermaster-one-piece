@@ -37,6 +37,7 @@
 | 訂單進度通知列（`OrderNotificationItem`，TEXT 屬性 Title、Content、Time；程式 `OrderNotification`）與系統通知列（`SystemNotificationItem`，variant Expanded，TEXT 屬性加 Has Image 布林；程式 `SystemNotification`） | 師傅 6.1.1、6.1.2；客戶端 4.1.1、4.1.2 用同一個程式 widget | 本機元件（批次 17），客戶端批次 06 畫到時再判斷是否升級進 DS |
 | 首次介紹頁分頁圓點（`IntroDots`，variant Page=1 至 5；10px 灰圓點，目前頁為 22×10 深藍藥丸；程式 `introduction_screen` 的 `DotsDecorator`） | 客戶端 1.2.1 至 1.2.5 | 本機元件（批次 03a，使用者決定：不拆成 DS 元件，只做本機元件）。與 DS `Carousel` 的 8px 圓點規格不同，不合併 |
 | 月收入長條圖（五根長條＋金額＋月份，程式 `fl_chart` 的 `BarChart`）：DS 沒有圖表元件，自排 | 師傅 3.1.1（客戶端、管理員端目前沒有圖表） | 自排（批次 14），只出現一處，暫不升級；若之後有第二個圖表再討論 |
+| 六格驗證碼輸入（`PinInput`，variant Content=Empty／Filled，6 個 40×50 方框；程式 `pin_code_fields` 的 `PinCodeTextField`） | 客戶端 1.4.1 至 1.4.3 | 本機元件（批次 03b）。DS 沒有驗證碼輸入元件；之後若有其他驗證碼畫面再討論是否升級 |
 
 ## pattern 候選
 
@@ -50,6 +51,7 @@
 | 全螢幕媒體 | 單一個撐滿 Frame 的 DS 元件（`PhotoViewer`、`VoiceCallScreen`），黑底或模糊照片背景、控制鍵疊在上方 | 沉浸式的全螢幕內容（看照片、傳照片前確認、通話） | 管理員 1.2.4、1.2.6、1.3.1、1.3.2 | 候選 |
 | 表單編輯頁 | 三區結構＋ DS `Card`（Standard）包 `TextField` 欄位組（標題列＋刪除 Button）＋全寬 Button Primary Filled lg「確認」 | 使用者一次填多筆有欄位的資料，確認後回上一頁 | 師傅 2.4.4、2.4.8、2.4.9 | 候選 |
 | 選項清單 BottomSheet | BottomSheet（有標題＋右上 X）＋ ListItem 選項，沒有底部按鈕，點選項即選定 | 從一組固定選項選一個，立即生效 | 師傅 2.4.3 | 候選，和動作選單同樣是 BottomSheet＋ListItem，差別在有標題、無取消，寫文件時可能合併 |
+| 登入表單頁 | AppBar（Tall／Overlay／Brand，標題加副標）＋ Card（Inset）放 `TextField`／`PasswordField`／驗證碼輸入＋全寬 Button Primary Filled lg「下一步」 | 登入流程中一步輸入一項資料，白卡疊在黃色頂部下緣 | 客戶端 1.3.2 至 1.3.5、1.4.1 至 1.4.3（1.5、1.6 預期也會用） | 候選 |
 | 空狀態 | 置中圖示＋一行標題＋一行提示文字（`Label/S`＋`Text/Hint`） | 清單區沒有資料時，說明原因與下一步 | 師傅 1.1.2、1.1.3 | 改做成 DS 元件 `EmptyState`（檢查點 2），不再列為 pattern |
 
 ---
@@ -64,3 +66,4 @@
 | 10 | `BottomSheet` 底部支援兩顆按鈕 | 師傅 2.4.5 單位選擇的底部是「取消」「確認」兩顆並排，但 DS `BottomSheet`（Footer=Sticky）內建的 Sticky Footer 只有一顆 Button。暫時把內層 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆並排 Button（Secondary Outlined lg、Primary Filled lg，間距 `Spacing/16`）。建議：BottomSheet 的 Footer 增加「雙按鈕」變體或布林，客戶端若有相同的取消／確認選擇器（例如日期時間選擇）也用得到。另外 BottomSheet 目前內容少於最大高度時是 Hug，這格為了貼近程式的 90% 高度手動設成 767 | 排進 DS 升級 2 |
 | 12 | `BottomSheet` 標題列右側支援文字按鈕 | 標題列右側 `TrailingIcon` 是 48×48、沒有 Auto Layout、會裁切的框，只放得下圖示按鈕。師傅 5.1.7 的「完成」是文字按鈕（寬 64），放進去貼在左上角、右側被裁，位置歪掉。暫時做法：把框內的 IconButton `swapComponent` 成 Button Ghost Action sm，再把按鈕高度設 48（實例內不能改座標，只能改尺寸），文字才與標題垂直置中；寬度仍是 64，比欄位寬 16，靠裁切邊界剛好露出。建議：`TrailingIcon` 改成有 Auto Layout、寬度 Hug 的框（或 Slot），標題置中不受影響；程式 `BottomSheetHeader` 的 `tailing` 本來就是任意 Widget | 排進 DS 升級 2 |
 | 11 | 日期時間選擇元件 | 師傅 5.1.7 的日期選擇面板沒有 DS 元件，自排成本機元件 `DatePickerPanel`（日曆格寬 Fill、列高 42、今天選取為藍框藍字、今天以前停用；時間三欄滾輪，選取條 `Border/Default`，上下午在最右）。建議升級進 DS：日曆與時間滾輪各自成元件，屬性有月份、選取日、選取時間；DS 還缺停用文字色 token（目前用 `Text/Hint`）。程式 `CalendarDatePicker` 範圍是今天起 30 天，停用日期規則要寫進規格 | 排進 DS 升級 2（客戶端批次 04 之前） |
+| 13 | `PasswordField` 加 Show Helper Row | 沒有說明文字或錯誤時，元件仍保留說明列的高度（隱藏文字但佔位），卡片底部多一段空白（客戶端 1.3.4 的卡片比程式高約 18）。`TextField` 已有 Show Helper Row，建議 `PasswordField` 同樣支援 | 待處理 |
