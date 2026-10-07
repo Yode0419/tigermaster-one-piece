@@ -1,7 +1,7 @@
 # 批次 13：師傅端／2 訂單與報價
 
 - **Figma**：[APP_師傅 → 2 訂單與報價](https://www.figma.com/design/m0yuXFZN2fkivzTOcwiKJ4/APP_師傅)
-- **Evidence**：Flutter repo `docs/figma-ssot/evidence/T-0102.md`（2.1 至 2.3，13a 共 9 格）、`T-0103.md`（2.4 至 2.6，13b 為 2.4 共 11 格）；2.7 以後各段開始時再補
+- **Evidence**：Flutter repo `docs/figma-ssot/evidence/T-0102.md`（2.1 至 2.3，13a 共 9 格）、`T-0103.md`（2.4 至 2.6，13b 為 2.4 共 12 格，其中 2.4.1 是 2026-10-07 新增、不在 T 檔內，原 2.4.1 至 2.4.11 在 Flutter repo 的證據文件與 `evidence/index.md` 裡仍是舊編號，對照時全部加 1）；2.7 以後各段開始時再補
 - **紀錄方式**：只記例外（見 fill-figma-ssot Skill「Recording」）
 
 本批切成四個對話：13a（2.1 至 2.3）、13b（2.4）、13c（2.5、2.6）、13d（2.7、2.8）。每段開始時把該段的 Frame 補進清單。
@@ -20,18 +20,26 @@
 | 2.2.2 客戶下單需求 | 已完成 |
 | 2.2.3 選擇導航 App | 已完成 |
 | 2.3.1 上傳施工前照片 | 已完成 |
-| 2.3.2 施工前照片上傳失敗 | 已完成 |
-| 2.4.1 標準報價總覽與編輯 | 已完成 |
-| 2.4.2 選擇標準報價工程分類 | 已完成 |
-| 2.4.3 標準報價分類／項目編輯 | 已完成 |
-| 2.4.4 單位選擇 | 已完成 |
-| 2.4.5 編輯標準報價分類描述 | 已完成 |
-| 2.4.6 簡易報價總覽與編輯 | 已完成 |
-| 2.4.7 編輯施工費／材料費 | 已完成 |
-| 2.4.8 編輯其他工程明細 | 已完成 |
-| 2.4.9 載入上次報價確認 | 已完成 |
-| 2.4.10 離開報價確認 | 已完成 |
-| 2.4.11 送出報價確認 | 已完成 |
+| 2.3.2 照片上傳失敗（原「施工前照片上傳失敗」，2.6.3 沿用） | 已完成 |
+| 2.3.3 刪除照片確認（2026-10-07 新增，2.6.3 沿用） | 已完成 |
+| 2.4.1 上傳報價單（2026-10-07 新增，13c 補畫） | 已完成 |
+| 2.4.2 標準報價總覽與編輯 | 已完成 |
+| 2.4.3 選擇標準報價工程分類 | 已完成 |
+| 2.4.4 標準報價分類／項目編輯 | 已完成 |
+| 2.4.5 單位選擇 | 已完成 |
+| 2.4.6 編輯標準報價分類描述 | 已完成 |
+| 2.4.7 簡易報價總覽與編輯 | 已完成 |
+| 2.4.8 編輯施工費／材料費 | 已完成 |
+| 2.4.9 編輯其他工程明細 | 已完成 |
+| 2.4.10 載入上次報價確認 | 已完成 |
+| 2.4.11 離開報價確認 | 已完成 |
+| 2.4.12 送出報價確認 | 已完成 |
+| 2.5.1 報價等待客戶確認 | 已完成 |
+| 2.5.2 報價總覽與各筆狀態 | 已完成 |
+| 2.5.3 報價分類項目明細 | 已完成 |
+| 2.6.1 施工進行中（2026-10-07 新增） | 已完成 |
+| 2.6.2 施工中有未同意報價（2026-10-07 新增） | 已完成 |
+| 2.6.3 施工／完工照片上傳 | 已完成 |
 
 ---
 
@@ -42,10 +50,12 @@
 | 元件 | 用在 | 屬性 |
 |---|---|---|
 | `OrderCategoryCard`（從師傅 1.2.1 複製過來，屬性 Category） | 2.2.2 | 與批次 12 同一個元件，兩個 Page 各一份。已用在 1.2.x 與 2.2.2，客戶端服務詳情若再出現，建議升級進 DS |
-| `QuotationCategoryRow`（variant Trailing=Arrow／Add） | 2.4.1、2.4.3、2.4.6、2.4.8 | TEXT：Title、Description（含括號，例如「(含配線)」）、Subtotal；BOOLEAN：Has Description、Has Subtotal。程式 `QuotationCategoryCard`（標題＋說明＋小計＋圖示）。只做列內容，外框用 DS `Card`（Inset／None）。列高 64（使用者指出 44 太矮：上下 8＋右側點擊區 48，箭頭與小計間距 14） |
-| `StandardFeeItemForm`（variant State=Expanded／Collapsed） | 2.4.3（展開、收合各一）、2.4.4、2.4.5 底圖 | TEXT：Subtotal（複價金額）、Item Name（只用在收合的細項名稱）。程式 `StandardFeeEditForm` 同一個 widget 的兩種狀態。內含 DS `Button`（刪除）與 `TextField`，值在巢狀 instance 上改。只做表單內容，外框用 DS `Card`（Inset／Standard）。因為屬性只有一組預設值，收合 variant 的預設複價顯示 $ 7,200，使用時改成實際金額 |
-| `QuotationAmountBar` | 2.4.1、2.4.2、2.4.6、2.4.9 至 2.4.11（放在 DS `Sticky Footer`（Button + Slot）的 Slot） | TEXT：Prepaid Note；BOOLEAN：Has Prepaid Note（預設關）。內含兩個 DS `Tag`（報價金額＝Info、師傅收入＝Emphasis Solid），金額在巢狀 Tag 的 Label 屬性上改（Figma 不能把巢狀 instance 的文字連到本元件屬性） |
-| `OtherFeeItemForm` | 2.4.8（兩個項目） | TEXT：Header。內含兩個 DS `TextField`（名稱、價格）與「刪除」Button，值在巢狀 TextField 的 Value Text 上改。只做表單內容，外框用 DS `Card`（Inset／Standard） |
+| `QuotationCategoryRow`（variant Trailing=Arrow／Add） | 2.4.2、2.4.4、2.4.7、2.4.9 | TEXT：Title、Description（含括號，例如「(含配線)」）、Subtotal；BOOLEAN：Has Description、Has Subtotal。程式 `QuotationCategoryCard`（標題＋說明＋小計＋圖示）。只做列內容，外框用 DS `Card`（Inset／None）。列高 64（使用者指出 44 太矮：上下 8＋右側點擊區 48，箭頭與小計間距 14） |
+| `StandardFeeItemForm`（variant State=Expanded／Collapsed） | 2.4.4（展開、收合各一）、2.4.5、2.4.6 底圖 | TEXT：Subtotal（複價金額）、Item Name（只用在收合的細項名稱）。程式 `StandardFeeEditForm` 同一個 widget 的兩種狀態。內含 DS `Button`（刪除）與 `TextField`，值在巢狀 instance 上改。只做表單內容，外框用 DS `Card`（Inset／Standard）。因為屬性只有一組預設值，收合 variant 的預設複價顯示 $ 7,200，使用時改成實際金額 |
+| `QuotationAmountBar` | 2.4.2、2.4.3、2.4.7、2.4.10 至 2.4.12（放在 DS `Sticky Footer`（Button + Slot）的 Slot） | TEXT：Prepaid Note；BOOLEAN：Has Prepaid Note（預設關）。內含兩個 DS `Tag`（報價金額＝Info、師傅收入＝Emphasis Solid），金額在巢狀 Tag 的 Label 屬性上改（Figma 不能把巢狀 instance 的文字連到本元件屬性） |
+| `OtherFeeItemForm` | 2.4.9（兩個項目） | TEXT：Header。內含兩個 DS `TextField`（名稱、價格）與「刪除」Button，值在巢狀 TextField 的 Value Text 上改。只做表單內容，外框用 DS `Card`（Inset／Standard） |
+| `OrderQuoteTimeSummary` | 2.4.1、2.5.1、2.6.1 至 2.6.3（2.7 可能也用） | TEXT：Hint（未含客戶端服務費）。程式 `MasterOrderQuoteAndTimeSection`：左「報價金額」右「預估工期」，中間分隔線。內含兩個 DS `Tag`（Info），金額與工期在巢狀 Tag 的 Label 屬性上改。只做內容，外框用 DS `Card`（Inset／Standard） |
+| `OrderBasicInfo` | 2.2.1、2.2.3、2.3.1、2.3.2、2.5.1（2.6.x、2.7、2.8 繼續用） | TEXT：Category、Date、Customer Name、Address；BOOLEAN：Has Unread（對話按鈕右上的未讀標記）。程式 `MasterOrderBasicInfoCard`：工項、場勘／施工時間、客戶資訊、導航、與客戶對話按鈕。放在 AppBar 延伸區的 DS `Card`（Inset／Standard）的 Slot 裡，只做內容。巢狀 Button 的 Label（「與 ○○ 對話」）與 Badge 數字在巢狀 instance 上改（Figma 不能把巢狀文字連到本元件屬性） |
 | `OrderListCardBody`（variant Type=OnGoing／Warranty） | 2.1.1、2.1.3 | TEXT：Category、Status、Value 1 至 3。標籤文字（叫修地址等）依 Type 固定；Status 顏色依 Type 綁 `Status/Error`／`Status/Success`。只做卡片內容（標題列＋資料框），外框用 DS `Card`（Inset／Standard）：Figma 不允許在元件裡把 Card 內部文字連到屬性，所以外框不放進本機元件，使用時 Card 的 Slot 放這個元件 |
 
 ---
@@ -56,6 +66,11 @@
 
 **13a 結束（2026-10-06）：下列規則除最後兩條（使用者決定舊畫面不回頭修）之外，都已寫入 Skill**：SKILL.md 的繪製原則（卡片與資料列、HomeIndicator 與長頁面高度、示意資料、捲動結構、省 token 的搜尋規則）、`screen-types.md`（三區結構補 HomeIndicator 與長頁面 +2、新增「卡片與資料列」「分頁列表頁」「訂單詳情頁」「唯讀資料頁」「上傳照片表單」，動作選單補「沒有標題、沒有取消的選項清單」）、`snippets.js`（`threeZone` 說明、結構檢查新增 HomeIndicator 與長頁面高度）、`figma-notes.md`（Card Slot 裁切、跨 Page 複製、instance 尺寸、失敗呼叫可重跑）。
 
+**13c 待寫規則（2026-10-07，已全部寫入 Skill：`screen-types.md` 的「卡片與資料列」三條、「訂單詳情頁」三條，`figma-notes.md` 新增「呼叫與元件操作」四條；使用者決定的項目已記進 `stage3.md` 決策）**：
+
+- 程式裡滿版（無左右邊距、無圓角）的白底區塊，Card 用 Layout=Fill 並填滿螢幕寬，有邊距的卡片才用 Inset。同頁混用時，`Scroll Content` 左右 padding 設 0，Inset 卡片各包一層左右 `Spacing/16` 的容器（2.5.1、2.5.3 使用者修正）。程式裡的整寬白底帶（報價項目表單、分類列）都這樣處理，2.4.4、2.4.8、2.4.9 回頭改過。
+- 同一組內容在三個以上畫面重複（例如訂單資訊卡）要做本機元件，不要每格複製（使用者提議，`OrderBasicInfo`）。
+
 **13b 待寫規則（2026-10-06，已全部寫入 Skill：SKILL.md 繪製原則三條、`screen-types.md` 新增報價總覽頁、表單編輯頁、底部兩顆按鈕的選擇器 BottomSheet 三節並補背景重綁說明；使用者決定的三項記進 `stage3.md` 決策）**：
 
 - 自排任何區塊前，先把 DS 的 Tag、TextField、Chip、Sticky Footer 這幾頁的元件清單對照一次：這次第一版自排了金額膠囊與工期欄位，Section 結束才發現 `Tag`、`TextField` 已涵蓋。「標籤加數值的膠囊」找 Tag，「有標籤的欄位」找 TextField（含 Readonly、尾端圖示）。
@@ -63,9 +78,9 @@
 - 本機元件裡放 DS 巢狀 instance（Tag、TextField）時，Figma 不能把巢狀文字連到本元件的屬性，值要在巢狀 instance 的屬性上改；本元件另外至少有一個自己的 TEXT 屬性，結構檢查才不會報「沒有文字屬性」。
 - Plugin API：這個環境 `parent.children.indexOf(node)` 回傳 -1，找位置要用 `children.findIndex(c => c.id === node.id)`。
 - 同一個畫面有多個狀態（例如單位選「台」與選「式」）時，不新增 Frame，畫資訊較多的那個狀態（選「式」，含提醒），其餘寫進紀錄；欄位錯誤同理只寫文字（2.4 使用者修正，依 `figma-build-r01.md` 暫緩表）。
-- 複製畫面後，Frame 背景若綁變數，要檢查存下來的顏色值：2.4.2 綁了 `Background/Page` 但存的是黑色，畫面顯示成黑底，重新綁一次才正常。結構檢查可加一項：Frame 填色與其綁定變數的值不一致。
+- 複製畫面後，Frame 背景若綁變數，要檢查存下來的顏色值：2.4.3 綁了 `Background/Page` 但存的是黑色，畫面顯示成黑底，重新綁一次才正常。結構檢查可加一項：Frame 填色與其綁定變數的值不一致。
 - 手排的列要對照程式的實際高度：Material 2 的 `IconButton` 最小 48，所以含圖示按鈕的列約 64，不是只算文字高。
-- DS `TextField` 新增 `Show Helper Row` 布林（預設開）：沒有說明文字、字數、錯誤訊息的欄位要關掉，否則每個欄位下方多一列空白（2.4.3 少算 104）。長頁面改完要重算高度。
+- DS `TextField` 新增 `Show Helper Row` 布林（預設開）：沒有說明文字、字數、錯誤訊息的欄位要關掉，否則每個欄位下方多一列空白（2.4.4 少算 104）。長頁面改完要重算高度。
 - 浮層畫面複製底圖：移除目標 Frame 的子層、設好三區屬性後，逐一 `clone()` 來源 Frame 的子層並寬度 Fill，`Content` 高度 Fill。來源是拉長的頁面時，浮層畫面仍是 852，內容被裁切。
 - 卡片外框一律用 DS `Card`（才有正確陰影），不自己畫底色圓角；本機元件只做卡片內容，放進 Card 的 Slot（2.1 使用者修正）。
 - 「標籤＋數值」的資料列，數值靠右端對齊（列用 SPACE_BETWEEN，長文字的值 Fill＋靠右＋單行截斷）（2.1 使用者修正）。
@@ -135,17 +150,57 @@
 只記例外：
 
 - **示意資料**：沿用監視系統安裝維修那筆。報價內容是示意，沒有真實來源：工種工程「水電工程」（描述「含配線」，攝影機安裝 4 台×1,800、電源與網路佈線 30 米×110，共 10,500）加其他工程 2,000，師傅收入 12,500。報價金額照程式 `calculateClientTaxPrice`：收入×(1＋平台服務費率 10%＋稅率 5%)，再×1.05 取整，得 15,094；簡易報價 3,600 得 4,347。**平台服務費率 10% 是程式在訂單沒有 payment 資料時的預設，實際訂單的費率沒有核對。**
-- **頂部共用**：AppBar（Standard／Slot／Brand）加 `SegmentedControl`（標準報價單、簡易報價單），標題「開始報價」，返回鍵，右上「讀檔」用 `IconLabelButton`＋Phosphor FloppyDisk（程式 `save_outlined`）。2.4.1 至 2.4.8 同一個頂部，只差分頁選中；浮層畫面（2.4.2、2.4.4、2.4.5、2.4.9 至 2.4.11）底圖沿用打開前的那一格。
+- **頂部共用**：AppBar（Standard／Slot／Brand）加 `SegmentedControl`（標準報價單、簡易報價單），標題「開始報價」，返回鍵，右上「讀檔」用 `IconLabelButton`＋Phosphor FloppyDisk（程式 `save_outlined`）。2.4.2 至 2.4.9 同一個頂部，只差分頁選中；浮層畫面（2.4.3、2.4.5、2.4.6、2.4.10 至 2.4.12）底圖沿用打開前的那一格。
 - **底部金額列**：DS `Sticky Footer`（Button + Slot），Slot 放本機元件 `QuotationAmountBar`；「送出報價單」是 Button Primary Filled lg（程式 `NORMAL_STYLE` #1F286F）。
-- **2.4.1**：畫已填寫的狀態（工期 1 天 2 時、一筆工種工程、其他工程有金額、送出鍵可按）。沒畫：沒填時送出鍵變半透明並顯示「請填寫工期」「請填寫報價單」，工期編輯模式（兩個輸入框加確認），載入中轉圈，上傳中文字「報價單上傳中...」。長頁面，高 1214（列高改 64 前是 1034）。運費列的小計為 0，所以不顯示小計。
-- **2.4.2**：程式的場地、工種、設備三種新增共用同一個 BottomSheet，只畫工種（標題「請選擇工種」，水電、泥作、木作、鋁門窗、油漆、冷氣安裝、漏水）。DS BottomSheet（有標題、右上 X、Footer=Inline、無底部按鈕）加 ListItem；程式選項字 18，依 DS。
-- **2.4.3**：畫「水電工程」編輯，第一個項目展開（程式預設展開第一項）、第二個收合。「代購材料」入口只在非正式環境顯示（`Config.env != PROD`），沒畫。欄位驗證的錯誤訊息沒畫（依暫緩表不拆新 Frame；程式按「確認」後空欄位一次顯示紅字「請輸入工程細項」「請選擇單位」「請輸入單價」，Figma 用 DS `TextField` 的 State=Error、Show Helper Row 開，單位欄原本 Readonly，出錯時改 Error）。TextField 都沒有說明文字與字數，Show Helper Row 一律關閉（DS 新增的布林，關掉整列才會移除），2.4.3 因此縮為 886。程式是底線輸入框，用 DS `TextField`；單位欄唯讀（State=Readonly）。長頁面，高 886（列高改 64 後加 20，關掉 TextField 空白列後減 124）。沒有底部按鈕列，底部放 HomeIndicator；「確認」在捲動內容的最下方（程式在 ListView 最後一項）。
-- **2.4.4**：程式一開始沒有選中任何單位、確認鍵半透明，選了才變色；選「式」時下方出現黃色提醒。原本畫已選「台」的狀態，使用者指出「式」的提醒沒有畫；依 `figma-build-r01.md` 暫緩表「相同版型的狀態變體不拆新 Frame」，改成同一格畫選「式」（確認可按，是選「台」的超集），提醒用 DS `Banner`（Notice 淡色、Leading=Icon、Closable 關，圖示換 Phosphor Warning），放在單位分類下方、左右 16。沒畫初始狀態（沒選單位、確認鍵半透明）。BottomSheet 高度用程式的 90%（767）。單位用 DS `Chip`（Tone=info）。底部「取消」「確認」兩顆按鈕：BottomSheet 內建的 Sticky Footer 只有一顆按鈕，把內層 Sticky Footer 換成 Flexible Slot 變體，再放兩顆 Button 並排（DS 待辦 10）。取消用 Secondary Outlined，確認用 Primary Filled。
-- **2.4.5**：程式的描述輸入框限制 5 個字（`maxLength: 5`）。Dialog（Standard）的內容放 DS `TextField`（不顯示標籤與說明），文字「含配線」，與 2.4.3 的描述相同。
-- **2.4.6**：程式 `quotationTotal >= 5000` 才擋送出，畫 3,600（報價金額 4,347）的可送出狀態。紅字提示「報價金額超過 $5,000 時，請改用【標準報價單】報價。」程式固定放在三張卡下方，不論金額；沒畫送出鍵停用時的文案「報價金額超過$5,000請用標準報價單」。證據文件已記：程式用 `< 5000` 判斷、提示卻寫「超過」，邊界不一致。
-- **2.4.7**：施工費與材料費同一個畫面，只差標題，畫施工費；價格欄值照程式顯示「2500」（沒有千分位）。
-- **2.4.8**：其他工程兩個項目（耗材補充 200、現場清潔 100，合計 300 與 2.4.6 相符，都是示意）；項目名稱欄沒有標籤，照程式。
-- **2.4.9 至 2.4.11**：程式用平台對話框（Android `AlertDialog`、iOS `CupertinoAlertDialog`），Figma 統一用 DS Dialog（Standard）。2.4.10 的「離開」程式是紅字，對應 Ghost Danger。2.4.11 標題三行（「您的案件收入是／NTD$12,500／確定上傳報價?」），金額是 `incomeTotal`（沒扣預扣材料費），與 2.4.1 的師傅收入相同。
+- **2.4.2**：畫已填寫的狀態（工期 1 天 2 時、一筆工種工程、其他工程有金額、送出鍵可按）。沒畫：沒填時送出鍵變半透明並顯示「請填寫工期」「請填寫報價單」，工期編輯模式（兩個輸入框加確認），載入中轉圈，上傳中文字「報價單上傳中...」。長頁面，高 1214（列高改 64 前是 1034）。運費列的小計為 0，所以不顯示小計。
+- **2.4.3**：程式的場地、工種、設備三種新增共用同一個 BottomSheet，只畫工種（標題「請選擇工種」，水電、泥作、木作、鋁門窗、油漆、冷氣安裝、漏水）。DS BottomSheet（有標題、右上 X、Footer=Inline、無底部按鈕）加 ListItem；程式選項字 18，依 DS。
+- **2.4.4**：畫「水電工程」編輯，第一個項目展開（程式預設展開第一項）、第二個收合。「代購材料」入口只在非正式環境顯示（`Config.env != PROD`），沒畫。欄位驗證的錯誤訊息沒畫（依暫緩表不拆新 Frame；程式按「確認」後空欄位一次顯示紅字「請輸入工程細項」「請選擇單位」「請輸入單價」，Figma 用 DS `TextField` 的 State=Error、Show Helper Row 開，單位欄原本 Readonly，出錯時改 Error）。TextField 都沒有說明文字與字數，Show Helper Row 一律關閉（DS 新增的布林，關掉整列才會移除），2.4.4 因此縮為 886。程式是底線輸入框，用 DS `TextField`；單位欄唯讀（State=Readonly）。長頁面，高 886（列高改 64 後加 20，關掉 TextField 空白列後減 124）。沒有底部按鈕列，底部放 HomeIndicator；「確認」在捲動內容的最下方（程式在 ListView 最後一項）。
+- **2.4.5**：程式一開始沒有選中任何單位、確認鍵半透明，選了才變色；選「式」時下方出現黃色提醒。原本畫已選「台」的狀態，使用者指出「式」的提醒沒有畫；依 `figma-build-r01.md` 暫緩表「相同版型的狀態變體不拆新 Frame」，改成同一格畫選「式」（確認可按，是選「台」的超集），提醒用 DS `Banner`（Notice 淡色、Leading=Icon、Closable 關，圖示換 Phosphor Warning），放在單位分類下方、左右 16。沒畫初始狀態（沒選單位、確認鍵半透明）。BottomSheet 高度用程式的 90%（767）。單位用 DS `Chip`（Tone=info）。底部「取消」「確認」兩顆按鈕：BottomSheet 內建的 Sticky Footer 只有一顆按鈕，把內層 Sticky Footer 換成 Flexible Slot 變體，再放兩顆 Button 並排（DS 待辦 10）。取消用 Secondary Outlined，確認用 Primary Filled。
+- **2.4.6**：程式的描述輸入框限制 5 個字（`maxLength: 5`）。Dialog（Standard）的內容放 DS `TextField`（不顯示標籤與說明），文字「含配線」，與 2.4.4 的描述相同。
+- **2.4.7**：程式 `quotationTotal >= 5000` 才擋送出，畫 3,600（報價金額 4,347）的可送出狀態。紅字提示「報價金額超過 $5,000 時，請改用【標準報價單】報價。」程式固定放在三張卡下方，不論金額；沒畫送出鍵停用時的文案「報價金額超過$5,000請用標準報價單」。證據文件已記：程式用 `< 5000` 判斷、提示卻寫「超過」，邊界不一致。
+- **2.4.8**：施工費與材料費同一個畫面，只差標題，畫施工費；價格欄值照程式顯示「2500」（沒有千分位）。
+- **2.4.9**：其他工程兩個項目（耗材補充 200、現場清潔 100，合計 300 與 2.4.7 相符，都是示意）；項目名稱欄沒有標籤，照程式。
+- **2.4.10 至 2.4.12**：程式用平台對話框（Android `AlertDialog`、iOS `CupertinoAlertDialog`），Figma 統一用 DS Dialog（Standard）。2.4.11 的「離開」程式是紅字，對應 Ghost Danger。2.4.12 標題三行（「您的案件收入是／NTD$12,500／確定上傳報價?」），金額是 `incomeTotal`（沒扣預扣材料費），與 2.4.2 的師傅收入相同。
 - **DS 取代自排**：第一版自排了「報價金額／師傅收入」膠囊與工期欄位，Section 結束前發現 DS 的 `Tag`（Info、Emphasis Solid）與 `TextField`（Readonly＋尾端圖示）已涵蓋，已換成 DS 元件並刪除自排的工期元件。膠囊裡原本金額加粗、標籤不加粗，Tag 只有單一文字，合併成一個 Label。
 - **自排（DS 沒有）**：`QuotationCategoryRow`（標題＋說明＋小計＋圖示的列）與工種工程那張卡裡的分隔線＋「新增一筆工種工程」按鈕（按鈕是 DS Button Secondary Outlined md pill）。單位選擇的「分類名稱＋Chip 換行排列」列，Chip 是 DS 的，列本身自排。
-- **使用者尚未確認的新畫面類型**：報價總覽頁（2.4.1、2.4.6）、表單編輯頁（2.4.3、2.4.7、2.4.8）、底部兩顆按鈕的選擇器 BottomSheet（2.4.4）。照 Skill 應該畫第一格就停下來確認，這次一次畫完，Section 結束一起請使用者確認；確認後再補進 `screen-types.md`。
+- **使用者尚未確認的新畫面類型**：報價總覽頁（2.4.2、2.4.7）、表單編輯頁（2.4.4、2.4.8、2.4.9）、底部兩顆按鈕的選擇器 BottomSheet（2.4.5）。照 Skill 應該畫第一格就停下來確認，這次一次畫完，Section 結束一起請使用者確認；確認後再補進 `screen-types.md`。
+
+## 2.5 報價資訊與等待確認（2026-10-07）
+
+**程式**：`master_order_quotation_accept_section.dart`、`master_order_quote_and_time_section.dart`、`master_quotation_overview_page.dart`、`master_quotation_overview_card.dart`、`quotation_items_view.dart`、`master_quotation_item_card.dart`、`quotation_submit_bottom_section.dart`、`quotation_status_map.dart`
+
+只記例外：
+
+- **2.5.1**：訂單沿用監視系統安裝維修那筆，頂部從 2.2.1 複製（標題「上傳報價單」是 `titleParser` 對狀態 45 的輸出，資訊卡內容與 2.2.1 相同）。報價金額 15,094、預估工期 1 天 2 時與 2.4 的報價一致。程式的兩個白底區塊（報價金額與工期、查看報價資訊與等待說明）外框都改用 DS `Card`，前者做成本機元件 `OrderQuoteTimeSummary`，後者用 `ListItem`（Trailing=Icon，有分隔線）加說明文字加 Button Secondary Filled md pill「先看其他案件」（程式 `PillButton` 160×40，寬度照 DS hug）。
+- **2.5.2 示意資料**：結構表要求各筆狀態，所以一筆訂單畫五筆報價，涵蓋程式 `quotationStatusMapping` 全部狀態：客戶已同意報價（藍，即 2.4 那筆：水電工程含配線 10,500＋其他工程 2,000）、等待客戶同意報價（綠）、待審核（綠）、退件（紅）、客戶已拒絕報價（紅）。後四筆的工種與金額是示意，沒有真實來源。彙總照程式排除退件與拒絕：工期 1 天 6 小時、報價金額 17,993、師傅收入 14,900（報價金額沿用 2.4 算法，收入×1.15×1.05 取整）。**工期照程式顯示「1天 6小時」（天與小時之間一個空格），與 2.4.2 的「1 天 2 時」格式不同。**
+- 2.5.2 底部是 DS `Sticky Footer`＋`QuotationAmountBar`，按鈕「已送出報價單」是 Button Primary Filled lg 的 State=disabled（DS 停用樣式）；程式是 `DISABLE_STYLE`（#1F286F 40%），照 DS。沒畫：載入中轉圈、清單為空時沒有空狀態文案。
+- **2.5.3**：程式第一筆工程細項預設展開、其餘收合，用 2.4.4 的 `StandardFeeItemForm`（Expanded／Collapsed），把「刪除」鈕隱藏（唯讀頁沒有），欄位改 State=Readonly。單價照程式 `toString()` 顯示「1800」（沒有千分位）。備註欄程式在沒有備註時顯示提示字「請輸入數量」（程式文案錯誤），這格改填示意備註「200 萬畫素紅外線攝影機，含支架」避開，**備註內容是示意**。頂部分類列程式 `icon: null` 沒有箭頭，隱藏列內的 Trailing Icon。工程細項攝影機 4 台×1,800＝7,200、佈線 30 米×110＝3,300，合計 10,500 與 2.4 相同，這個分類只有這兩項。
+- 2.5.2 為長頁面（高 1008）。2.5.2 五種報價狀態都是程式查詢會回傳的（查詢只排除 status -3，對照表有 -2、-1、0、1、2、3），顏色照 `_buildStatusText`。
+- **使用者修正（第二輪）**：2.5.3 第 2、3 張工程細項卡也改 Layout=Fill；2.4.4、2.4.8、2.4.9 的卡片同樣改 Fill 並填滿螢幕寬（連同 2.4.5、2.4.6 的底圖一起改，「確認」鈕外層容器補左右 `Spacing/16`），高度不變。2.4.2、2.4.3、2.4.7、2.4.10 至 2.4.12 沒有改（使用者沒有指出，程式的報價分類列本來是帶邊距的卡片）。
+- **本機元件 `OrderBasicInfo`**（使用者提議）：訂單資訊、客戶資訊、對話按鈕做成一個本機元件，已換進 2.2.1、2.2.3、2.3.1、2.3.2、2.5.1，各格原本的文字與未讀標記照舊。
+- **發現缺格**：訂單狀態 30（等待提交報價）的畫面，標題「上傳報價單」、下方是 `MasterOrderQuotationSubmitSection`（報價金額與工期摘要、「請點選下方按鍵以進行報價」、說明「報價請盡量符合價格區間，同時注意您的案件收入」、藍色膠囊鈕「開始報價」），在結構表與 T-0102、T-0103 都沒有收錄：2.2.1 只畫共用資訊區、2.4.2 是按「開始報價」之後。待使用者決定怎麼補。
+- **使用者修正**：程式裡滿版白底的區塊（2.5.1 的金額與工期區塊、查看報價資訊區塊，2.5.3 頂部的分類列）Card 用 Layout=Fill 並填滿螢幕寬，不用 Inset 留邊；同一頁其他 Inset 卡片改包一層左右 `Spacing/16` 的容器，頁面 `Scroll Content` 左右 padding 改為 0。2.5.2 的卡片在程式裡本來就有邊距（`Card` 預設 margin），維持 Inset。
+
+## 2.4.1 上傳報價單（2026-10-07，新增）
+
+**程式**：`master_order_detail.dart`（`titleParser`、狀態映射）、`master_order_detail_bloc.dart`、`master_order_quotation_submit_section.dart`、`master_order_quote_and_time_section.dart`
+
+只記例外：
+
+- **為什麼新增**：訂單狀態 ≤35（30 等待提交報價、35 報價被拒絕）顯示 `MasterOrderQuotationSubmitSection`，結構表沒收錄；2.2.1 只畫共用資訊區，2.4.2（原 2.4.1）是按「開始報價」之後。使用者決定新增一格編號 2.4.1，原 2.4.1 至 2.4.11 順移為 2.4.2 至 2.4.12，結構表（`figma-build-r01.md`）、本批紀錄、`reference.md`、`components.md`、`screen-types.md` 的師傅 2.4.x 編號已同步，Figma 的 Frame 名稱也已改。
+- 版面：從 2.5.1 複製，頂部沿用 `OrderBasicInfo`，金額與工期摘要用 `OrderQuoteTimeSummary`，下方 Card（Fill／Standard）放「請點選下方按鍵以進行報價」、說明「報價請盡量符合價格區間，同時注意您的案件收入」、Button Secondary Filled md pill「開始報價」（程式 `PillButton` 160×40）。
+- **金額與工期顯示 $ 0、0 天 0 時是推測**：程式用 `payment!.taxedQuotePrice!`（後端 `PriceCalculator` 對空值當 0），工期用 `?? 0`；第一次報價前後端是否一定帶出 `payment.taxedQuotePrice`，沒有核對。若是客戶拒絕報價後再進來，這裡會顯示上一筆報價的金額（`QuotationAccept` 會累加），這格畫的是第一次報價前。
+- 同一個畫面也是「客戶拒絕報價」（status 35）與「客服退回報價」之後師傅看到的畫面，程式沒有另外的畫面。
+
+## 2.6 施工與完工照片（2026-10-07）
+
+**程式**：`master_order_work_in_progress_section.dart`、`grid_image_view.dart`、`master_order_detail.dart`、`master_order_detail_bloc.dart`
+
+只記例外：
+
+- **新增 2.6.1 施工進行中**：狀態 55、58 顯示 `MasterOrderWorkInProgressSection` 的預設畫面（`showUpload=false`），原結構表漏了，使用者確認新增（編號最後定為：2.6.1 施工進行中、2.6.2 施工中有未同意報價、2.6.3 施工／完工照片上傳，原刪除確認與上傳失敗兩格改沿用 2.3.3、2.3.2，見下）。標題「施工進行中」（`titleParser` 對狀態 55、58 的輸出）。畫的是客戶已同意報價、沒有未同意旗標的狀態：「查看報價資訊」列、Button Secondary Filled md pill「新增一筆報價」（程式 `PillButton` 160×40）、提醒文字（12 Medium，`Label/S`＋`Text/Hint`）、Button Primary Filled lg「上傳施工照片並驗收」。長頁面，高 881。有未同意報價的狀態另畫成 2.6.2（見下）。
+- **新增 2.6.2 施工中有未同意報價**（使用者提議，後端查證）：施工中送出追加報價單後，後端把訂單標上 `UnAcceptQuotation`，客戶同意或拒絕才清除，所以只會出現在施工中。「新增一筆報價」與「上傳施工照片並驗收」都變成停用並顯示「有未同意報價」（Button 的 State=disabled，程式是淡藍 40% 與 `DISABLE_STYLE`，照 DS）。另有攔截旗標（大額訂單的追加報價，`InterceptedQuotation`）：只停用新增鈕、上傳鈕仍可按，沒畫。底部金額與工期只含已同意報價（15,094、1 天 2 時），與 2.5.2 第 2 筆「等待客戶同意報價」對應。從 2.6.1 複製，只換兩顆按鈕。
+- **2.6.3 畫哪個狀態**：結構表寫「初始顯示一個＋空格」，但刪除確認需要已有縮圖、上傳失敗需要按過送出，所以畫已選 3 張的狀態（沿用 2.3.1 的 `PhotoUpload` 區塊與 2.3.1 同一做法），沒畫初始空格與送出鍵半透明停用。狀態 58 補傳時送出鍵文字是「繼續上傳施工照片」，另有「開始驗收」鍵（屬 2.7），沒畫。
+- **送出鍵樣式**：程式這顆是透明底深藍框、深藍字的 `OutlinedButton`（不是 2.3.1 的實心深藍），用 Button Primary Outlined lg（DS 白底），文字「送出施工照片」。程式的上傳中文字「正在上傳照片...」沒畫。
+- **刪除確認與上傳失敗不在 2.6 另畫**（使用者決定：同一個 Page 內重複的 Dialog 只留最早出現的位置）：2.3 補 2.3.3 刪除照片確認（標題「刪除照片」、內文「請確認是否刪除選取照片」，「取消」Ghost Neutral、「確認」程式是紅字所以用 Ghost Danger，底圖是 2.3.1），2.3.2 原「施工前照片上傳失敗」改名「照片上傳失敗」，兩格都在 2.3，2.6.3 只引用。我原先畫過 2.6 的兩格 Dialog，已刪除。4.4（證照上傳，另一個 Page）自有一份刪除確認（原本就有 4.4.3），批次 15 也要有上傳失敗的對應處理。結構表「共用內容」表已加一列。
+- 2.6.1、2.6.2 頂部沿用 2.5.1（同一筆訂單，報價金額 15,094、工期 1 天 2 時），沿用本機元件 `OrderBasicInfo` 與 `OrderQuoteTimeSummary`。

@@ -22,7 +22,7 @@
 - **以內容為主的長頁面才拉長，其他一律 852**。以內容為主指頁面本身就是在讀或填一大段資訊且會捲動（案件詳情、訂單詳情、表單、說明頁、可能超過一屏的帳號頁）；首頁、列表、空狀態、聊天室、浮層畫面都不算。拉長的做法：Frame 寬 393、高度固定（`primaryAxisSizingMode=FIXED`）；`Content` 高度維持 **Fill**（與一般畫面相同），Frame 高度手動設成剛好容納整頁內容：`Frame 高度 = 頂部高度 + Scroll Content 高度 + 底部高度（含 HomeIndicator 的 34）+ 2`（Frame 外框的 1px 描邊算進排版，上下各 1，不加 2 的話 `Content` 會比 `Scroll Content` 少 2，捲動範圍被截），至少 852，之後驗證 `Content` 高度 ≥ `Scroll Content` 高度。這樣固定底部永遠貼在 Frame 最底，整頁內容完整可見。第一個案例：師傅 1.2.1（1140）。
 - **聊天室**維持只畫進入時看到的最後一屏，`Content` 高度 Fill 並裁切（見聊天室一節）。
 - **浮層畫面**（Dialog、BottomSheet）不是主要展示頁，不跟著底圖拉長：Frame 固定高度 852、`Content` 高度 Fill 並裁切，底圖內容被裁掉沒關係；`Scrim` 蓋滿整個 Frame；Dialog 置中（`y = (852 - Dialog 高度) / 2`）。底圖是拉長的內容頁（例如 1.2.1）時，也只顯示第一屏。
-- 重建或複製 Frame 後若背景綁定 `Background/Page` 卻顯示成黑色，是存下來的顏色值是黑的（師傅 2.4.2）：把一個正常 Frame 的 `fills` 複製過來，或用 `setBoundVariableForPaint` 重新綁一次。
+- 重建或複製 Frame 後若背景綁定 `Background/Page` 卻顯示成黑色，是存下來的顏色值是黑的（師傅 2.4.3）：把一個正常 Frame 的 `fills` 複製過來，或用 `setBoundVariableForPaint` 重新綁一次。
 - **浮層畫面的底圖**：沿用打開浮層前的那一格（例如從 1.2.2 點「傳送照片」打開，底圖複製 1.2.2）。
 - **沒有 AppBar、頂部跟著內容捲動的頁面**：頂部一樣放在固定頂部區，用 DS 對應的 AppBar variant；捲動行為只在批次紀錄用文字說明。放進 `Content` 會讓 AppBar 內嵌的狀態列一起捲走，與 App 不符。
 - **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，每個項目包一層寬度 Fill 的水平 Auto Layout（無底色），再設主軸對齊。
@@ -110,6 +110,9 @@
 - 卡片內容若重複出現要做本機元件：**只做內容，不含 Card 外框**（Figma 不允許在元件裡把 Card 內部的文字連到屬性），使用時 Card 的 Slot 放內容元件；內容元件的文字都做成 TEXT 屬性。
 - 「標籤＋數值」的資料列：列用水平 Auto Layout、主軸 SPACE_BETWEEN，**數值靠右端對齊**；很長的值（地址）設 Fill、靠右、單行截斷。列與列之間用 1px `Border/Default` 分隔線，間距 `Spacing/8`。
 - 卡片上的狀態文字照程式的狀態色（紅、綠），綁最接近的 `Status/*` token。
+- **整寬白底帶**（程式用沒有左右 margin、沒有圓角的 `Container`，例如訂單頁的金額與工期區塊、查看報價資訊區塊、報價分類列、報價明細卡）：Card 用 Layout=Fill 並填滿螢幕寬；有邊距的 `Card` 才用 Inset（使用者修正，師傅 2.4.4、2.4.8、2.4.9、2.5.1、2.5.3）。同一頁混用時，`Scroll Content` 左右 padding 設 0，Inset 卡片或按鈕各包一層左右 `Spacing/16` 的容器。判斷方法：看程式有沒有 `Card(margin: …)` 或外層 `Padding`，沒有就是整寬。
+- **同一組內容在三個以上畫面重複**（例如訂單資訊卡）：做成本機元件，不要每格複製貼上（使用者提議，`OrderBasicInfo`）。
+- **同一個 Page 內重複的共用 Dialog**（照片上傳失敗、刪除照片確認）：只畫最早出現的位置，其他畫面在結構表去向引用；不同 Page 因為是獨立畫面頁，各自有一份（使用者決定，師傅 2.3.2、2.3.3，2.6.3 引用）。
 
 ---
 
@@ -132,7 +135,9 @@
 - `Scroll Content` 上方 padding ＝ 卡片高 − 延伸列高（32）＋ 8 到 16，讓下方內容接在卡片之後。卡片下方的階段內容（報價、施工、驗收…）屬各自的 Section，這一格只畫共用資訊區時下方留灰底。
 - 標題用程式 `titleParser` 對該訂單狀態的輸出。
 - 未讀標記用 DS `Badge`（Count），絕對定位疊在目標右上角；要凸出 Card 的 Slot 時，把那個 instance 的 Slot `clipsContent` 關掉。該訂單沒有未讀就不放。
-- 同一訂單的不同 Frame（2.2.1、2.3.1）頂部從已畫好的那格 `clone()` 再改字，不重建。
+- 同一訂單的不同 Frame（2.2.1、2.3.1）頂部從已畫好的那格 `clone()` 再改字，不重建。資訊卡內容用本機元件 `OrderBasicInfo`（改 Category、Date、Customer Name、Address、Has Unread，巢狀按鈕的 Label 與未讀數字在巢狀 instance 上改）。
+- **訂單階段內容**（卡片下方，依訂單狀態映射，師傅端 `master_order_detail_bloc.dart`）：金額與工期摘要（`OrderQuoteTimeSummary`，放 Card Fill／Standard）加該階段的內容：等待提交報價（狀態 30、35，2.4.1）是「請點選下方按鍵以進行報價」加 Button Secondary Filled md pill「開始報價」；等待客戶確認（40、45、50，2.5.1）是 ListItem「查看報價資訊」加等待說明加「先看其他案件」；施工中（55、58，2.6.1）是「查看報價資訊」、「新增一筆報價」pill、完工提醒文字、Button Primary Filled lg「上傳施工照片並驗收」；有未同意報價時兩顆按鈕改 State=disabled，文字「有未同意報價」（2.6.2）。按下「上傳施工照片並驗收」後同一個區塊換成上傳表單（2.6.3）。
+- **畫階段內容的畫面前，先對照程式的狀態映射（bloc 的 `checkOrderStatus`）列出每個階段會看到的畫面，再核對結構表有沒有漏格**（13c 因為這樣查出漏了 2.4.1 上傳報價單與 2.6.1 施工進行中）；漏了就停下來回報使用者，由使用者決定編號。
 
 ---
 
@@ -158,7 +163,7 @@
 
 ## 報價總覽頁（頂部分頁＋多張分類卡＋底部金額列）
 
-第一個案例：師傅 2.4.1、2.4.6（程式 `StandardQuotationOverviewSection`、`SimpleQuotationOverviewSection`）。
+第一個案例：師傅 2.4.2、2.4.7（程式 `StandardQuotationOverviewSection`、`SimpleQuotationOverviewSection`）。
 
 - 頂部 AppBar（Standard／Slot／Brand）加 `SegmentedControl`，做法同分頁列表頁；浮層畫面的底圖沿用打開前那一格。
 - 每個分類是一張 DS `Card`（Inset／None）放本機元件 `QuotationCategoryRow`（標題＋小字說明＋小計＋箭頭或加號），列高 64（上下 8＋右側點擊區 48，程式用 Material 2 的 `IconButton`，最小 48）。展開的分類在列下方加 1px 分隔線與 Button Secondary Outlined md pill（例如「新增一筆工種工程」）。不要改用 `ListItem`：ListItem 只有單行標題，放不下小字說明。
@@ -167,7 +172,7 @@
 
 ## 表單編輯頁（卡片內多個欄位，確認後返回）
 
-第一個案例：師傅 2.4.3、2.4.7、2.4.8（程式 `StandardFeeEditSection`、`SimpleFeeEditSection`、`OtherFeeEditSection`）。
+第一個案例：師傅 2.4.4、2.4.8、2.4.9（程式 `StandardFeeEditSection`、`SimpleFeeEditSection`、`OtherFeeEditSection`）。
 
 - 每筆資料是一張 DS `Card`（Inset／Standard），Slot 放表單內容的本機元件（例如 `StandardFeeItemForm` 的展開、收合 variant，`OtherFeeItemForm`），欄位用 DS `TextField`。
 - **TextField 沒有說明文字、字數、錯誤訊息時，把 `Show Helper Row` 關掉**，整列才會移除；不關的話每個欄位下方多一列空白，長頁面高度也會算錯。
@@ -176,12 +181,12 @@
 
 ## 底部兩顆按鈕的選擇器 BottomSheet
 
-第一個案例：師傅 2.4.4（程式 `UnitPickerBottomSheet`）。
+第一個案例：師傅 2.4.5（程式 `UnitPickerBottomSheet`）。
 
 - BottomSheet 有標題與右上 X，高度照程式比例（90% 約 767）；內容用 Slot：分類名稱加一排 DS `Chip`（Tone=info，選中 Selected），列本身自排。
 - 底部「取消」「確認」兩顆並排：把 BottomSheet 內建的 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆 Button（取消 Secondary Outlined lg、確認 Primary Filled lg，間距 `Spacing/16`），DS 待辦 10 處理前的做法。
 - 同一格有多個狀態（例如選「台」與選「式」）時畫資訊較多的那個，不另開 Frame；選「式」的提醒用 DS `Banner`（Tone=Notice、Leading=Icon、Closable 關，圖示換 Phosphor Warning），放在內容下方、左右 `Spacing/16`。
-- 只有標題與選項、沒有底部按鈕、點選項即選定的選項清單（師傅 2.4.2）：BottomSheet Footer=Inline，右上 X，內容放 ListItem，做法同動作選單的「有標題的選項清單」。
+- 只有標題與選項、沒有底部按鈕、點選項即選定的選項清單（師傅 2.4.3）：BottomSheet Footer=Inline，右上 X，內容放 ListItem，做法同動作選單的「有標題的選項清單」。
 
 ---
 

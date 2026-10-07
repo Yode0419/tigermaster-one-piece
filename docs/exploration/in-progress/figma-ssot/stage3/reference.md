@@ -170,19 +170,19 @@
 | 價格與客戶資訊卡內距 20×16、16×12、12×16（`Card` padding） | 照 DS `Card` Standard（16） | 無 | | 師傅 2.2.2 |
 | 地圖 App 圖示（`map_launcher` 套件 SVG，28px） | ListItem 前方圖示留 Smiley 佔位，圖層名稱註明 App，待補 logo | 無 | | 師傅 2.2.3 |
 
-| 報價類別列（`QuotationCategoryCard`）：標題 20 Medium 深藍 (31,40,111)、說明 12 Medium 暖灰 (179,172,162)、「小計」16 Medium 灰 (79,79,84)、金額 20 Bold 深藍 | `Heading/4`＋`Text/Brand`、`Body/XS`＋`Text/Hint`、`Label/L`＋`Text/Secondary`、`Heading/4`＋`Text/Brand`（Bold 對 Medium） | 無 | | 師傅 2.4.1、2.4.3、2.4.6、2.4.8 |
+| 報價類別列（`QuotationCategoryCard`）：標題 20 Medium 深藍 (31,40,111)、說明 12 Medium 暖灰 (179,172,162)、「小計」16 Medium 灰 (79,79,84)、金額 20 Bold 深藍 | `Heading/4`＋`Text/Brand`、`Body/XS`＋`Text/Hint`、`Label/L`＋`Text/Secondary`、`Heading/4`＋`Text/Brand`（Bold 對 Medium） | 無 | | 師傅 2.4.2、2.4.4、2.4.7、2.4.9 |
 | 類別列內距 左 16 上下 8、卡片 `Card` margin 4 | 列左 `Spacing/16`、右 `Spacing/4`、上下 `Spacing/8`；卡片外框用 DS `Card`（Inset／None），頁面邊距 `Spacing/16` | 無 | | 師傅 2.4.x |
-| 「報價金額」膠囊底 (240,243,253) 深藍字、「師傅收入」膠囊紅底 (255,40,81) 白字，金額 14 Bold、標籤 14 Medium | DS `Tag`（Info／Emphasis Solid），兩段文字合併成一個 Label，不分粗細 | 自排膠囊（金額加粗） | | 師傅 2.4.1、2.4.6 |
-| 金額列上方「未含客戶端服務費」14 Regular 藍 (58,137,248)、「已預扣…材料費」12 Medium | `Body/S`＋`Text/Link`、`Label/S`＋`Text/Primary` | 無 | | 師傅 2.4.1 |
-| 底部金額列 `ScaffoldBottomSheet`（白底、陰影、上 16 下 28） | DS `Sticky Footer`（Button + Slot），內距照 DS | 無 | | 師傅 2.4.1、2.4.6 |
-| 輸入欄位（Material 底線 `TextFormField`，輸入字 18、提示字 #D1D1D1） | DS `TextField`（Default／Readonly），字級與色彩照 DS | 無 | | 師傅 2.4.3、2.4.5、2.4.7、2.4.8 |
-| 工期卡（標題＋值＋`create_outlined`＋底線） | DS `TextField`（Readonly）＋尾端 Phosphor PencilSimple | 無 | | 師傅 2.4.1、2.4.6 |
-| 單位 `ChoiceChip`（底 #EBF3FF、選中 #BFDAFF＋深藍框、字 20 深藍、間距 12／8） | DS `Chip`（Tone=info，Selected），間距 `Spacing/12`／`Spacing/8` | 無 | | 師傅 2.4.4 |
-| 單位選擇 BottomSheet 高度 90%（`RoundedBottomSheet` 預設） | 固定 767（852×0.9） | 無 | | 師傅 2.4.4 |
-| 底部兩顆按鈕：`OutlinedButton` 藍框、`NORMAL_STYLE` | Button Secondary Outlined lg、Primary Filled lg，間距 `Spacing/16` | 無 | | 師傅 2.4.4 |
-| 紅字提示 (255,40,81) 14 Medium（簡易報價 $5,000 提醒） | `Label/M`＋`Status/Error` | 無 | | 師傅 2.4.6 |
-| 刪除小按鈕 `PillButton` 高 24、藍框透明底 | Button Secondary Outlined sm pill | 無 | | 師傅 2.4.3、2.4.8 |
-| 工種項目名稱 18 Regular 灰 (79,79,84)、金額 18 Bold 深藍 | `Title/M`＋`Text/Secondary`、`Title/M`＋`Text/Brand` | 無 | | 師傅 2.4.3 |
+| 「報價金額」膠囊底 (240,243,253) 深藍字、「師傅收入」膠囊紅底 (255,40,81) 白字，金額 14 Bold、標籤 14 Medium | DS `Tag`（Info／Emphasis Solid），兩段文字合併成一個 Label，不分粗細 | 自排膠囊（金額加粗） | | 師傅 2.4.2、2.4.7 |
+| 金額列上方「未含客戶端服務費」14 Regular 藍 (58,137,248)、「已預扣…材料費」12 Medium | `Body/S`＋`Text/Link`、`Label/S`＋`Text/Primary` | 無 | | 師傅 2.4.2 |
+| 底部金額列 `ScaffoldBottomSheet`（白底、陰影、上 16 下 28） | DS `Sticky Footer`（Button + Slot），內距照 DS | 無 | | 師傅 2.4.2、2.4.7 |
+| 輸入欄位（Material 底線 `TextFormField`，輸入字 18、提示字 #D1D1D1） | DS `TextField`（Default／Readonly），字級與色彩照 DS | 無 | | 師傅 2.4.4、2.4.6、2.4.8、2.4.9 |
+| 工期卡（標題＋值＋`create_outlined`＋底線） | DS `TextField`（Readonly）＋尾端 Phosphor PencilSimple | 無 | | 師傅 2.4.2、2.4.7 |
+| 單位 `ChoiceChip`（底 #EBF3FF、選中 #BFDAFF＋深藍框、字 20 深藍、間距 12／8） | DS `Chip`（Tone=info，Selected），間距 `Spacing/12`／`Spacing/8` | 無 | | 師傅 2.4.5 |
+| 單位選擇 BottomSheet 高度 90%（`RoundedBottomSheet` 預設） | 固定 767（852×0.9） | 無 | | 師傅 2.4.5 |
+| 底部兩顆按鈕：`OutlinedButton` 藍框、`NORMAL_STYLE` | Button Secondary Outlined lg、Primary Filled lg，間距 `Spacing/16` | 無 | | 師傅 2.4.5 |
+| 紅字提示 (255,40,81) 14 Medium（簡易報價 $5,000 提醒） | `Label/M`＋`Status/Error` | 無 | | 師傅 2.4.7 |
+| 刪除小按鈕 `PillButton` 高 24、藍框透明底 | Button Secondary Outlined sm pill | 無 | | 師傅 2.4.4、2.4.9 |
+| 工種項目名稱 18 Regular 灰 (79,79,84)、金額 18 Bold 深藍 | `Title/M`＋`Text/Secondary`、`Title/M`＋`Text/Brand` | 無 | | 師傅 2.4.4 |
 | 18 Regular（`QuotationCategoryCard` 以外的輸入字、工期值） | `Title/M`（18 Medium） | 無 | | 師傅 2.4.x |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。

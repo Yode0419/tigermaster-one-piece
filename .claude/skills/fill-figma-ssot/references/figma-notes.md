@@ -43,3 +43,10 @@
 ## 照片
 
 - `use_figma` 不支援 `createImageAsync`，無法放入新照片，只能用 DS Image 元件內建的佔位照片。需要符合情境的照片時，在回報中請使用者手動換圖。
+
+## 呼叫與元件操作
+
+- 失敗的 `use_figma` 呼叫整段都會回復（不是做到一半），所以報錯後可以整段重跑，不必擔心重複改名或重複位移；但成功的呼叫不會回復，順移編號這類不能重複執行的操作要先確認上一次有沒有成功（13c）。
+- 對 Card instance 改 variant 屬性（例如 `Padding: 'None'` 改 `'Standard'`）會重建內部的 Slot，改完要重新 `findOne` 取得 Slot，舊的 Slot 參照會報「node does not exist」（13c）。
+- 複製整個 Frame（`clone()`）到同一個 Section 後，用 `section.insertChild(0, frame)` 可以放到第一個位置；Section 不會自動撐大，順移 Frame 後要用 `resizeWithoutConstraints` 調寬（13c）。
+- 隱藏元件內不需要的部分（例如表單裡的「刪除」鈕、列尾的箭頭圖示）可以直接把 instance 內該圖層設 `visible = false`，不必拆開 instance（13c）。

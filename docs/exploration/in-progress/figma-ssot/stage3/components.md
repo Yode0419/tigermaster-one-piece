@@ -42,10 +42,12 @@
 | 訂單列表卡內容（`OrderListCardBody`，標題列＋狀態＋三列資料框；Type=OnGoing／Warranty，程式 `MasterOnGoingOrderCard`、`MasterWarrantyOrderCard`），外框用 DS `Card` | 師傅端 2.1.1、2.1.3；程式的客戶端訂單列表（客戶端 3.1）可能有相似卡，客戶端批次再判斷 | 本機元件（批次 13a）。目前只有師傅訂單列表用，先不升級。若升級進 DS，需把外框一起做進元件並用 Slot 以外的方式帶文字屬性，因為 Figma 不允許在元件裡把 Card 內部文字連到屬性 |
 | 案件分類卡（`OrderCategoryCard`，黃色直條＋類別名＋保固徽章） | 師傅 1.2.1 至 1.2.5、2.2.2（批次 13a 複製進 2.x 的本機元件） | 維持本機元件（檢查點 2）；兩個師傅 Page 都在用，客戶端服務詳情若再出現就建議升級進 DS。客戶端服務詳情頁（`WorkingCategoryDetail`）頂部有類似版本但多一段描述，客戶端批次再判斷是否合併 |
 | 價格區間指示條（`PriceRangeIndicator`）、保固膠囊（`WarrantyPill`） | 師傅 1.2.1 至 1.2.5；程式另用在客戶端服務詳情（`WorkingCategoryDetail`，確認與查看工項兩頁），保固膠囊也用在客戶端保固訂單卡 | 已升級進 DS（DS 升級，2026-10-06），分成兩個元件放 DS 的 Service 頁，見 DS 待辦 6 |
-| 報價類別列（`QuotationCategoryRow`，標題＋說明＋小計＋箭頭／加號；程式 `QuotationCategoryCard`），外框用 DS `Card` | 師傅 2.4.1、2.4.3、2.4.6、2.4.8；師傅 2.5.2 報價總覽（`MasterQuotationOverviewCard`）、客戶端報價頁（`client_quotation_card`）可能相似，後續批次再判斷 | 本機元件（批次 13b）。2.5 也出現就建議升級進 DS（需決定與 `ListItem` 的關係：ListItem 只有單行標題與右側圖示）。使用者決定維持本機元件、不改用 `ListItem`（ListItem 放不下標題旁的小字說明，字級也不同）；列高改為 64（上下 8＋右側箭頭點擊區 48，程式用 Material 2 的 `IconButton`，最小 48），原本的 44 偏矮 |
-| 報價金額列（`QuotationAmountBar`，兩個 DS `Tag`＋提示文字＋分隔線，放進 DS `Sticky Footer`） | 師傅 2.4.1、2.4.6；程式的 `QuotationSubmitBottomSection` 只有送出報價用到，客戶端報價頁底部若有相同金額列再判斷 | 本機元件（批次 13b），暫不升級 |
-| 其他工程項目表單（`OtherFeeItemForm`，標題列＋刪除＋名稱、價格兩個 `TextField`） | 師傅 2.4.8（兩次） | 本機元件（批次 13b），暫不升級 |
-| 標準報價項目表單（`StandardFeeItemForm`，variant State=Expanded／Collapsed；展開：標題列＋刪除＋細項、數量、單位、單價、備註五個 `TextField`＋複價；收合：標題列＋刪除＋細項名稱＋複價；程式 `StandardFeeEditForm`），外框用 DS `Card` | 師傅 2.4.3（展開、收合各一）、2.4.4、2.4.5 的底圖；師傅 2.5.3 報價明細（`master_quotation_item_card`）可能有相同卡片，後續批次再判斷 | 本機元件（批次 13b 使用者確認後補做）。屬性：TEXT Subtotal、Item Name（只用在收合）。2.5 也出現就建議升級進 DS |
+| 報價類別列（`QuotationCategoryRow`，標題＋說明＋小計＋箭頭／加號；程式 `QuotationCategoryCard`），外框用 DS `Card` | 師傅 2.4.2、2.4.4、2.4.7、2.4.9；師傅 2.5.2 報價總覽（`MasterQuotationOverviewCard`）、客戶端報價頁（`client_quotation_card`）可能相似，後續批次再判斷 | 本機元件（批次 13b）。2.5 也出現就建議升級進 DS（需決定與 `ListItem` 的關係：ListItem 只有單行標題與右側圖示）。使用者決定維持本機元件、不改用 `ListItem`（ListItem 放不下標題旁的小字說明，字級也不同）；列高改為 64（上下 8＋右側箭頭點擊區 48，程式用 Material 2 的 `IconButton`，最小 48），原本的 44 偏矮 |
+| 訂單資訊卡內容（`OrderBasicInfo`：工項、場勘／施工時間＋查看需求、客戶資訊＋導航、與客戶對話按鈕＋未讀標記；程式 `MasterOrderBasicInfoCard`），放在 AppBar 延伸區的 DS `Card` | 師傅 2.2.1、2.2.3、2.3.1、2.3.2、2.3.3、2.4.1、2.5.1、2.6.x，2.7、2.8 繼續用 | 本機元件（批次 13c，使用者提議）。TEXT：Category、Date、Customer Name、Address；BOOLEAN：Has Unread。客戶端訂單資訊頁（批次 05）若有相似卡片再判斷 |
+| 報價金額與預估工期摘要（`OrderQuoteTimeSummary`，兩個 DS `Tag`＋提示文字＋分隔線；程式 `MasterOrderQuoteAndTimeSection`），外框用 DS `Card`（Fill／Standard） | 師傅 2.4.1、2.5.1、2.6.1、2.6.2、2.6.3，2.7 可能也用 | 本機元件（批次 13c），暫不升級。與 `QuotationAmountBar` 結構相近（左邊都是報價金額 Tag），差在右邊是預估工期 |
+| 報價金額列（`QuotationAmountBar`，兩個 DS `Tag`＋提示文字＋分隔線，放進 DS `Sticky Footer`） | 師傅 2.4.2、2.4.7；程式的 `QuotationSubmitBottomSection` 只有送出報價用到，客戶端報價頁底部若有相同金額列再判斷 | 本機元件（批次 13b），暫不升級 |
+| 其他工程項目表單（`OtherFeeItemForm`，標題列＋刪除＋名稱、價格兩個 `TextField`） | 師傅 2.4.9（兩次） | 本機元件（批次 13b），暫不升級 |
+| 標準報價項目表單（`StandardFeeItemForm`，variant State=Expanded／Collapsed；展開：標題列＋刪除＋細項、數量、單位、單價、備註五個 `TextField`＋複價；收合：標題列＋刪除＋細項名稱＋複價；程式 `StandardFeeEditForm`），外框用 DS `Card` | 師傅 2.4.4（展開、收合各一）、2.4.5、2.4.6 的底圖；師傅 2.5.3 報價明細（`master_quotation_item_card`）可能有相同卡片，後續批次再判斷 | 本機元件（批次 13b 使用者確認後補做）。屬性：TEXT Subtotal、Item Name（只用在收合）。2.5 也出現就建議升級進 DS |
 | 輪播 Banner（`CarouselBanner`） | 師傅 1.1.1 至 1.1.5、1.3.1；程式的 `CarouselBannerSwiper` 也用在客戶端首頁 | 已升級進 DS 為 `Carousel`（DS 升級，2026-10-06），放 DS 的 Carousel 頁，見 DS 待辦 7。DS 既有的 `Banner` 是通知提示框，不能取代 |
 | 首頁空狀態（`MasterHomeEmptyState`，圖示＋標題＋提示） | 師傅端 1.1.2、1.1.3；程式另有師傅收入頁、客戶端媒合失敗頁兩處空狀態 | 已改做成通用的 DS `EmptyState`（DS 升級，2026-10-06），Size=Compact 涵蓋師傅首頁與收入頁，Page 涵蓋客戶端媒合失敗頁，見 DS 待辦 8 |
 
@@ -61,8 +63,8 @@
 | 確認對話框 | Dialog（Standard）＋遮罩；次要按鈕在左、主要在右，破壞性動作用 Ghost Danger，只有告知時保留一顆主要按鈕 | 執行單一動作前的確認，或需要使用者知悉的提示 | 管理員 1.2.5、1.3.3、2.2.1、2.3.1；師傅 1.1.4、1.1.5、1.2.2 至 1.2.5、1.3.1 | 不寫成 pattern（檢查點 2）：只有單一元件，規則已補進 `docs/design-system/components/dialog.md` |
 | 一般資料頁 | 三區結構＋區段（`Heading/4` 標題＋ Card 包 ListItem 或全寬 Button lg），區段間 `Spacing/16` | 把設定入口與帳號操作分組呈現 | 管理員 2.1.1 | 候選 |
 | 全螢幕媒體 | 單一個撐滿 Frame 的 DS 元件（`PhotoViewer`、`VoiceCallScreen`），黑底或模糊照片背景、控制鍵疊在上方 | 沉浸式的全螢幕內容（看照片、傳照片前確認、通話） | 管理員 1.2.4、1.2.6、1.3.1、1.3.2 | 候選 |
-| 表單編輯頁 | 三區結構＋ DS `Card`（Standard）包 `TextField` 欄位組（標題列＋刪除 Button）＋全寬 Button Primary Filled lg「確認」 | 使用者一次填多筆有欄位的資料，確認後回上一頁 | 師傅 2.4.3、2.4.7、2.4.8 | 候選 |
-| 選項清單 BottomSheet | BottomSheet（有標題＋右上 X）＋ ListItem 選項，沒有底部按鈕，點選項即選定 | 從一組固定選項選一個，立即生效 | 師傅 2.4.2 | 候選，和動作選單同樣是 BottomSheet＋ListItem，差別在有標題、無取消，寫文件時可能合併 |
+| 表單編輯頁 | 三區結構＋ DS `Card`（Standard）包 `TextField` 欄位組（標題列＋刪除 Button）＋全寬 Button Primary Filled lg「確認」 | 使用者一次填多筆有欄位的資料，確認後回上一頁 | 師傅 2.4.4、2.4.8、2.4.9 | 候選 |
+| 選項清單 BottomSheet | BottomSheet（有標題＋右上 X）＋ ListItem 選項，沒有底部按鈕，點選項即選定 | 從一組固定選項選一個，立即生效 | 師傅 2.4.3 | 候選，和動作選單同樣是 BottomSheet＋ListItem，差別在有標題、無取消，寫文件時可能合併 |
 | 空狀態 | 置中圖示＋一行標題＋一行提示文字（`Label/S`＋`Text/Hint`） | 清單區沒有資料時，說明原因與下一步 | 師傅 1.1.2、1.1.3 | 改做成 DS 元件 `EmptyState`（檢查點 2），不再列為 pattern |
 
 ---
@@ -82,4 +84,4 @@
 | 7 | 輪播 Banner | 師傅 1.1.1 首頁已做成本機元件 `CarouselBanner`（Image 佔位照加三個分頁圓點）。**做法已定（檢查點 2）**：升級為 DS `Carousel`，放既有的 Carousel 頁；結構照本機元件（外露 Image、variant 決定選中第幾顆），圓點固定 3 顆，客戶端首次介紹頁若有相同圓點再拆成獨立元件。**結果**：已建 DS `Carousel`，師傅 1.1.1 至 1.1.5、1.3.1 已換成 DS 版本 | 已完成 |
 | 9 | `PhotoUpload` 支援寬度填滿 | 程式的照片格是 4 欄、格子填滿一列（隨螢幕寬度縮放），DS 的 `PhotoUpload` 固定 80×80，一列放 4 格會超出（4×80＋3×4＝332，頁面邊距加卡片內距後只有 329）。師傅 2.3.1 暫時用 `resize()` 把每格縮到約 78.75、間距 `Spacing/4`。建議：元件支援水平 Fill 並保持 1:1，圖片與刪除圖示跟著縮放。2026-10-06 使用者同意先用縮小格子，DS 之後處理 | 待處理 |
 | 8 | 通用空狀態 | 師傅 1.1.2、1.1.3 的 `MasterHomeEmptyState` 改做成通用的 DS `EmptyState`，放既有的 EmptyState 頁：插圖佔位（之後可從 Illustration 頁取用）＋標題＋說明＋可選按鈕。先看程式另外兩處空狀態（`master_income_page.dart`、`order_detail_match_fail_page.dart`），確認通用版能涵蓋。完成後師傅 1.1.2、1.1.3 改用 DS 版本。**結果**：已建 DS `EmptyState`（Size Compact／Page，插圖為 Slot），三處都能涵蓋；師傅 1.1.2、1.1.3 已換成 DS 版本，插圖沿用原本的向量 | 已完成 |
-| 10 | `BottomSheet` 底部支援兩顆按鈕 | 師傅 2.4.4 單位選擇的底部是「取消」「確認」兩顆並排，但 DS `BottomSheet`（Footer=Sticky）內建的 Sticky Footer 只有一顆 Button。暫時把內層 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆並排 Button（Secondary Outlined lg、Primary Filled lg，間距 `Spacing/16`）。建議：BottomSheet 的 Footer 增加「雙按鈕」變體或布林，客戶端若有相同的取消／確認選擇器（例如日期時間選擇）也用得到。另外 BottomSheet 目前內容少於最大高度時是 Hug，這格為了貼近程式的 90% 高度手動設成 767 | 待處理 |
+| 10 | `BottomSheet` 底部支援兩顆按鈕 | 師傅 2.4.5 單位選擇的底部是「取消」「確認」兩顆並排，但 DS `BottomSheet`（Footer=Sticky）內建的 Sticky Footer 只有一顆 Button。暫時把內層 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆並排 Button（Secondary Outlined lg、Primary Filled lg，間距 `Spacing/16`）。建議：BottomSheet 的 Footer 增加「雙按鈕」變體或布林，客戶端若有相同的取消／確認選擇器（例如日期時間選擇）也用得到。另外 BottomSheet 目前內容少於最大高度時是 Hug，這格為了貼近程式的 90% 高度手動設成 767 | 待處理 |
