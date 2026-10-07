@@ -271,6 +271,23 @@
 - **回覆是新增一則訊息**（後端不改原請求）：「同意更改施工時間至 …」或「拒絕更改施工時間至 …」，由回覆的人送出，所以原請求的白底卡按鈕仍在。**同意時同一方的 App 另外送出**一則一般文字「【系統訊息】施工時間更改至yyyy年MM月dd日，HH:mm」（日期後是全形逗號；拒絕不送）；師傅按確認它是自己的黃底氣泡，客戶按確認師傅看到白底氣泡。
 - 一個流程拆成多格：自己發起後對方的回覆（5.1.8）、師傅按確認（5.1.9）、師傅按取消（5.1.10），三格都只畫最新一屏。
 
+## 通知列表（程式的 `MasterNotificationList`、`OrderNotification`、`SystemNotification`）
+
+第一個案例：師傅 6.1.1 至 6.1.3。
+
+- 頂部同分頁列表頁（AppBar Standard／Slot／Brand＋`SegmentedControl`，開 Has Leading），沒有 BottomNavBar，底部放 HomeIndicator，頁面底色 `Background/Surface`（程式 Scaffold 白底）。
+- 列是整寬白底帶加底部 1px `Border/Default` 線，不用 DS `Card`，做成本機元件：`OrderNotificationItem`（Title、Content、Time）、`SystemNotificationItem`（variant Expanded，加 Has Image 布林）。左右上下內距 `Spacing/16`。
+- 系統通知的展開鈕是 48×48 點擊區、圖示 16 靠上置中（內文列最矮 48）；收合內文最多 3 行（設 `maxLines` 要在設完 `textTruncation` 之後，否則變成 1 行），展開全文；沒有縮圖時仍留 8 的空隙。示意資料涵蓋有縮圖、沒縮圖、展開。
+- 時間文字依 `TimeElapsedText`：N天前、N小時前、N分鐘前、剛剛。
+- 空狀態：`EmptyState` Compact（關說明、關按鈕），外包一層上方 `Spacing/48`，兩個分頁共用，畫第一個分頁。
+
+## 系統畫面邊界（手機系統自己的橫幅、對話框）
+
+第一個案例：師傅 6.1.4（推播橫幅）。
+
+- 使用者決定：只畫系統元素，底圖用灰色（`Icon/Subtle`），不畫任何 App 畫面，點擊後的目的地不畫。頂部 StatusBar（Dark Content），底部 HomeIndicator。
+- 推播橫幅自排：白底、`Radius/12`、內距 `Spacing/12`；左側 DS `Logo-AppIcon`（原 64，縮成 40 用 `rescale`，不能 `resize`），中間標題 `Title/S`＋內文 `Body/S`，右上「現在」`Body/XS`＋`Text/Hint`。文字用真實推播文案。
+
 ## 圖示
 
 - **換圖示**：建立 icon 元件（Icon=Phosphor）的 instance（預設是 Smiley），用 `search_design_system` 限定 Phosphor 圖示庫（libraryKey 見 reference.md）以圖示名稱搜尋，拿元件組 Key，再用 `swapIcon()`（一律 Format=Outline，Weight 依程式：一般 Regular、實心 Fill）。需要白色時傳 `Icon/Inverse`。新查到的圖示 Key 補進 reference.md。

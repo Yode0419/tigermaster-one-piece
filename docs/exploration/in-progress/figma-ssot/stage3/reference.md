@@ -117,6 +117,8 @@
 | Switch（整組，variant State × Selected）／Phosphor UserGear（元件組） | `725b56a0b9d2298034ea4f3f37db10201d0e2abb`／`5a6a2905efce7a71f92884d380d50ae1756388ea` | Switch 40×20，放 ListItem 的 Trailing Slot；UserGear 對應 `colored_user_gear.png`，帳號首頁用 Outline／Duotone |
 | Phosphor CaretLeft／CaretDown（元件組）／`Interactive/Action`／`Icon/Default`／`Icon/Subtle` | `6c0b7f857a2a3b761d5731c62f51295d3d1ca36d`／`3123b154077e5b1d2b261c04357275cde472901b`／`07aa36da7de6e8dbae477c2e8ab2e161f3ed5aaa`／`52b48f39822225eece13a42f85ca18095b6f4e60`／`0f2d615857bdcfc72b98bba019c0f5829e73ab8c` | 日期選擇面板（師傅 5.1.7）：月份箭頭、下拉箭頭，選取日的藍框與藍字，停用的上個月箭頭 |
 | Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
+| Logo-AppIcon（單一元件） | `e30102d71a06084634ef1f9aec8ac2cfe8bbdfd0`（師虎 App 圖示，原尺寸 64；縮小用 `rescale`，不能用 `resize`） |
+| Phosphor CaretUp（元件組） | `07ed6a8449b09a06f62c590259d38904bc91537d`（程式 `expand_less`，通知列展開；收合用既有 CaretDown） |
 
 ---
 
@@ -214,6 +216,11 @@
 | 日曆停用日 `Colors.black` 38% | `Text/Hint`（沒有停用色 token） | 無 | | 師傅 5.1.7 |
 | 時間滾輪選取條（`CupertinoDatePicker` 預設灰 12%） | `Border/Default`（#EDEDED），圓角 `Radius/8` | `Background/Page` | | 師傅 5.1.7 |
 | 日曆左側標題內距 16、「時間」列左內距 28、日曆列高 42、時間滾輪高 70 | `Spacing/16`、`Spacing/24`（28 無 token）、固定 42、固定 70 | `Spacing/32` | | 師傅 5.1.7 |
+
+| 通知列底線 `Colors.grey` 0.5px | `Border/Default` 1px | `Border/Subtle`（太深） | | 師傅 6.1.1、6.1.2 |
+| 通知列標題 16 Bold、內文與時間 14 Regular、時間灰 (114,114,118) | `Title/S`、`Body/S`、`Body/S`＋`Text/Hint`（數值相同） | 無 | | 師傅 6.1.1、6.1.2 |
+| 空狀態離頂部 120、插圖高 112（通知頁，`empty_notification_list.png` 無向量） | 兩層 `Spacing/48`，`EmptyState` Compact 的 Slot 佔位 | 無 | | 師傅 6.1.3 |
+| 系統推播橫幅（手機系統畫面） | 自排：白底、`Radius/12`、內距 `Spacing/12`，底圖 `Icon/Subtle` 灰（使用者指定只畫橫幅） | 無 | | 師傅 6.1.4 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 

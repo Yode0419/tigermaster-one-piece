@@ -54,6 +54,7 @@
 ---
 | 收入明細列（`IncomeListItem`，Status=Unpaid／Paid，TEXT 屬性 Item、Amount、Date；程式 `IncomeListItem`） | 師傅 3.1.1、3.2.1 | 本機元件（批次 14），只有收入頁用，暫不升級 |
 | 日期時間選擇面板（`DatePickerPanel`：月份標題與上下月箭頭、星期列、日期格，加「時間」標籤與三欄滾輪（時、分、上下午）；程式 `DateSelectBottomSheet`），放進 DS `BottomSheet` 的 Slot | 師傅 5.1.7；客戶端 6.1 對話的約施工時間（`ChatroomInputBar` 同一個元件）也會用到 | 本機元件（批次 16，使用者決定），之後升級進 DS，見 DS 待辦 11。TEXT 屬性：Month |
+| 訂單進度通知列（`OrderNotificationItem`，TEXT 屬性 Title、Content、Time；程式 `OrderNotification`）與系統通知列（`SystemNotificationItem`，variant Expanded，TEXT 屬性加 Has Image 布林；程式 `SystemNotification`） | 師傅 6.1.1、6.1.2；客戶端 4.1.1、4.1.2 用同一個程式 widget | 本機元件（批次 17），客戶端批次 06 畫到時再判斷是否升級進 DS |
 | 月收入長條圖（五根長條＋金額＋月份，程式 `fl_chart` 的 `BarChart`）：DS 沒有圖表元件，自排 | 師傅 3.1.1（客戶端、管理員端目前沒有圖表） | 自排（批次 14），只出現一處，暫不升級；若之後有第二個圖表再討論 |
 
 ## pattern 候選
