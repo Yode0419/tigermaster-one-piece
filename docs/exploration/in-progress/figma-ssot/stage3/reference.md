@@ -61,6 +61,9 @@
 | Banner（整組） | `81ff6287277357f06963f6f495aaba4e26b344ea`；Notice／Solid=false／Leading=Icon 變體 `69d811dc89fed5553e048e7308830b916840eab4` | variant Tone（Info／Notice／Error）、Solid、Leading（None／Icon／Slot）；Message（文字）、Closable／Has Action（布林）。單位選「式」的提醒用 Notice 淡色＋Icon，Closable 關，圖示 Smiley 換成 Phosphor Warning |
 | Chip（整組） | `501d1e123c4259e856c2bcb8913f02d5b0ce3bbd` | variant Tone（brand／info）、Selected、Disabled；hasIcon（布林）、Label。單位選擇用 info |
 | Tag（整組） | `77c8f1b0e4de0de8d003b30c8d6cbef61032ba93` | variant Tone（Info／Notice／Success／Emphasis）、Solid、Size（Default／Compact）；Label。Info 底 `Status/InfoContainer`＋`Text/Brand`，Emphasis＋Solid 底 `Status/Error`＋白字；14 Medium，內距 12×4，全圓角 |
+| Avatar（整組，Source×Size） | `1bc96b71ade9ad4185b9379223854dffe5863803` | 用 `importComponentSetByKeyAsync`，variant Source（default／custom）、Size（36／60／75／100／140）。師傅 2.8.2 用 Source=custom、Size=100 |
+| Rating（整組） | `4e42ab06db4ac4996a696be212d304310cc9ec44` | variant Size（lg／sm）、Rate（5、4.5、4…，半星）。lg 高 24、寬 136，對應程式 `RatingBar` itemSize 24 |
+| StatusBar（Dark Content）、HomeIndicator（Dark） | 見上表 | 沒有 AppBar 的全頁（師傅 2.8.1、2.8.2）：頂部只放 StatusBar，底部放 HomeIndicator |
 | Phosphor FloppyDisk／PlusCircle／PencilSimple／Warning／X（元件組） | `3cdafa3c1a777cc3f0f4d3a1e0828b0392a7444b`／`5f1f5f94bd1f88e1f4ca6599c7cc08f5e0343de6`／`953d0ad703b16697cdf551119e3206479c774c71`／`b627e5e07e748bdb388b5c66e915887b60a65485`／`e82a7a45eeb09f58f707fedee9b2f3de32df05de` | 程式 `save_outlined`、`add_circle_outline`、`create_outlined`、`warning_rounded`、`close`，Outline／Regular |
 | Button（BottomSheet 內） | 從 BottomSheet 的底部按鈕直接改 | Style 有 Primary Filled／Primary Outlined／Secondary Filled／Secondary Outlined／Brand Filled／Neutral Outlined／Ghost Action／Ghost Neutral／Ghost Danger；Size lg／md／sm；Label（文字）。動作選單的「取消」用 Ghost Neutral |
 
@@ -110,6 +113,7 @@
 | Phosphor CaretRight／ChatDots／Headset（元件組） | `d7f0bb51360e472eaf4688628e92d3165c0bab23`／`ae283edde49c40eeb524dac605576f04152679f5`／`76f4b9b91e5c44e4d33b67a308659db075aad011`（箭頭、對話氣泡 sms_outlined、客服耳機，Outline／Regular） |
 | `Status/InfoContainer`／`Status/ErrorContainer`／`Background/Notice` | `b7fa6fff58eadf3dc5b38f54bc83cbd3d3b2b7df`／`8a87dd88a3b35d3f4c1cf4daee615412d663aa5a`／`3d4813956348eb7235f2c9e1c545d34a5bc0c17b` | 淺藍、淺紅、淺黃底（Tag 與提醒框用） |
 | `Interactive/OnFilled`／`Chip/InfoSelected` | `cbf5078d3270c00fb293c07a635c65d66abf4ac7`／`318c7e9abe7107fa2279228b6c8724f12383c234` | 實心底上的字色／選中的 info Chip 底色 |
+| `Border/Subtle`（#9E9E9E） | `189f9120d0ad0cc3feff78704618c3b481d6a45b` | 與程式 `Colors.grey` 相同；提醒框外框（師傅 2.8.1） |
 | Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
 
 ---
@@ -184,6 +188,14 @@
 | 刪除小按鈕 `PillButton` 高 24、藍框透明底 | Button Secondary Outlined sm pill | 無 | | 師傅 2.4.4、2.4.9 |
 | 工種項目名稱 18 Regular 灰 (79,79,84)、金額 18 Bold 深藍 | `Title/M`＋`Text/Secondary`、`Title/M`＋`Text/Brand` | 無 | | 師傅 2.4.4 |
 | 18 Regular（`QuotationCategoryCard` 以外的輸入字、工期值） | `Title/M`（18 Medium） | 無 | | 師傅 2.4.x |
+
+| 無 AppBar 全頁頂部空 150（含狀態列，`SizedBox(150)`） | StatusBar 59＋兩層 `Spacing/48`（96） | 無 | | 師傅 2.8.1、2.8.2 |
+| 提醒框左右邊距 36 | `Spacing/32` | `Spacing/40` | | 師傅 2.8.1 |
+| 灰色邊框 `Colors.grey`（#9E9E9E） | `Border/Subtle` | `Border/Default`（太淺） | | 師傅 2.8.1 |
+| 簽名板虛線框 `DottedBorder` 預設黑 1px | `Text/Primary` 綁定 1px 虛線（4，4） | 無 | | 師傅 2.7.7 |
+| 簽名板底部空 50 | 內容底部 `Spacing/16`＋BottomSheet 內建 HomeIndicator | 無 | | 師傅 2.7.7 |
+| 掃描 BottomSheet 標題到相機空 50 | `Spacing/48` | 無 | | 師傅 2.7.3 |
+| 12 Medium 深藍 (31,40,111) 說明文字（「此評價不會對客戶公開」） | `Label/S`＋`Text/Brand` | 無 | | 師傅 2.8.2 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 

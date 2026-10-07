@@ -40,6 +40,18 @@
 | 2.6.1 施工進行中（2026-10-07 新增） | 已完成 |
 | 2.6.2 施工中有未同意報價（2026-10-07 新增） | 已完成 |
 | 2.6.3 施工／完工照片上傳 | 已完成 |
+| 2.6.4 開始驗收（2026-10-07 新增，13d） | 已完成 |
+| 2.7.1 完工驗收資訊 | 已完成 |
+| 2.7.2 進入提示：行動條碼驗收（新增） | 已完成 |
+| 2.7.3 掃描客戶驗收 QR 碼（原 2.7.2） | 已完成 |
+| 2.7.4 QR 碼無效提示（原 2.7.3） | 已完成 |
+| 2.7.5 QR 確認完成驗收（原 2.7.4） | 已完成 |
+| 2.7.6 進入提示：簽名驗收（新增） | 已完成 |
+| 2.7.7 簽名驗收（原 2.7.5） | 已完成 |
+| 2.7.8 簽名確認完成驗收（新增） | 已完成 |
+| 2.7.9 客戶選擇直接驗收提示（原 2.7.6） | 已完成 |
+| 2.8.1 訂單完成與評分入口 | 已完成 |
+| 2.8.2 評價客戶 | 已完成 |
 
 ---
 
@@ -65,6 +77,16 @@
 使用者修正中屬於通則的部分，每個對話結束時一次寫進 Skill，寫完標「已寫入」。
 
 **13a 結束（2026-10-06）：下列規則除最後兩條（使用者決定舊畫面不回頭修）之外，都已寫入 Skill**：SKILL.md 的繪製原則（卡片與資料列、HomeIndicator 與長頁面高度、示意資料、捲動結構、省 token 的搜尋規則）、`screen-types.md`（三區結構補 HomeIndicator 與長頁面 +2、新增「卡片與資料列」「分頁列表頁」「訂單詳情頁」「唯讀資料頁」「上傳照片表單」，動作選單補「沒有標題、沒有取消的選項清單」）、`snippets.js`（`threeZone` 說明、結構檢查新增 HomeIndicator 與長頁面高度）、`figma-notes.md`（Card Slot 裁切、跨 Page 複製、instance 尺寸、失敗呼叫可重跑）。
+
+**13d 待寫規則（2026-10-07，已全部寫入 `screen-types.md`：訂單詳情頁階段內容與「依流程拆 Frame」、新增「提示 Dialog」「相機與簽名 BottomSheet」「沒有 AppBar 的全頁」三節；Rating、Avatar、`Border/Subtle` 的 Key 已進 `reference.md`）**：
+
+- 使用者決定：同一個畫面入口依客戶選項會走不同流程（例如驗收方式 QR／簽名／直接）時，每個流程各自成 Frame，不用暫緩表合併；進入時自動跳出、只差文字的提示 Dialog 也各畫一格。
+- 「訂單階段內容」補：驗收中（狀態 60）是金額與工期摘要＋「查看報價資訊」列＋提示文字＋Button Secondary Filled md pill「完成驗收」＋代理人說明；施工中補傳階段（狀態 58）上傳表單多一顆深藍「開始驗收」（2.6.4）。
+- 只有標題與一顆按鈕的提示 Dialog（程式 `PlatformAlertDialog(title, 知道了)`）：複製 2.4.12 的 Dialog，內文槽隱藏、左側按鈕隱藏。疊在 BottomSheet 上的 Dialog，底圖保留原 BottomSheet 與遮罩，再疊第二層遮罩與 Dialog（順序：Dialog、Scrim、BottomSheet、Scrim…）。
+- 全頁沒有 AppBar（師傅 2.8.1、2.8.2）：頂部固定放 StatusBar（Dark Content），底部 HomeIndicator，內容置中；頂部空白用兩層 `Spacing/48`。
+- 相機預覽、簽名區這類系統輸入區沒有素材：用黑色方塊（相機）或虛線框（簽名）並在圖層名稱註明，不加程式沒有的掃描框。簽名完成的底圖用一條示意筆跡 Vector，圖層名稱註明「示意」。
+- 評分用 DS `Rating`、頭像用 DS `Avatar`；評論框用 DS Card 放 `TextField`（Multi、Empty、關閉 Label 與 Helper Row）。
+- BottomSheet 要貼滿 767 高時，把 BottomSheet 內層 `Content` 設 Fill、Slot 內的內容框 Fill，內建 HomeIndicator 才會貼底。
 
 **13c 待寫規則（2026-10-07，已全部寫入 Skill：`screen-types.md` 的「卡片與資料列」三條、「訂單詳情頁」三條，`figma-notes.md` 新增「呼叫與元件操作」四條；使用者決定的項目已記進 `stage3.md` 決策）**：
 
@@ -204,3 +226,28 @@
 - **送出鍵樣式**：程式這顆是透明底深藍框、深藍字的 `OutlinedButton`（不是 2.3.1 的實心深藍），用 Button Primary Outlined lg（DS 白底），文字「送出施工照片」。程式的上傳中文字「正在上傳照片...」沒畫。
 - **刪除確認與上傳失敗不在 2.6 另畫**（使用者決定：同一個 Page 內重複的 Dialog 只留最早出現的位置）：2.3 補 2.3.3 刪除照片確認（標題「刪除照片」、內文「請確認是否刪除選取照片」，「取消」Ghost Neutral、「確認」程式是紅字所以用 Ghost Danger，底圖是 2.3.1），2.3.2 原「施工前照片上傳失敗」改名「照片上傳失敗」，兩格都在 2.3，2.6.3 只引用。我原先畫過 2.6 的兩格 Dialog，已刪除。4.4（證照上傳，另一個 Page）自有一份刪除確認（原本就有 4.4.3），批次 15 也要有上傳失敗的對應處理。結構表「共用內容」表已加一列。
 - 2.6.1、2.6.2 頂部沿用 2.5.1（同一筆訂單，報價金額 15,094、工期 1 天 2 時），沿用本機元件 `OrderBasicInfo` 與 `OrderQuoteTimeSummary`。
+
+## 2.7 驗收（2026-10-07，13d）
+
+**程式**：`master_order_acceptance_section.dart`、`master_order_detail.dart`、`master_order_detail_bloc.dart`、`qr_code_bottom_sheet.dart`、`rounded_bottom_sheet.dart`、`bottom_sheet_header.dart`
+
+只記例外：
+
+- **2.7.1**：從 2.6.1 複製，標題「完工驗收」（`titleParser` 對狀態 60 的輸出），資訊卡與金額工期摘要沿用同一筆訂單。「查看報價資訊」列下方放提示區（程式 16 Medium 深藍 `Label/L`＋`Text/Brand`、12 灰說明 `Body/XS`＋`Text/Hint`，置中）與 Button Secondary Filled md pill「完成驗收」（程式藍底圓角 25，對應 DS pill），卡片下方 12 的說明文字沿用頁面間距 `Spacing/16`。畫的是進入驗收階段、客戶**還沒選驗收方式**的狀態：「完成驗收」按鈕停用（Secondary Filled md pill、State=disabled，實機是淡藍 40%，照 DS 停用樣式），沒有進入提示。使用者用實機確認過（2026-10-07）。我讀程式與後端時以為空值會被當成 0（直接驗收）而讓按鈕可按，實機並非如此，**我沒有查出停用的實際路徑**（程式 `acceptanceBy ?? 0` 與 `method != -1` 照字面看不會停用，後端也沒有寫入 -1 的地方，可能是 Firestore 預設值或我沒讀到的程式），以實機為準。客戶選定方式後的畫面是 2.7.2 以後的各格（按鈕可按，底圖是按鈕可按版本）。長頁面，高 863。
+- **狀態映射核對**（開始前）：程式在進入狀態 60 時，依客戶選的方法自動跳出提示（`master_order_detail.dart` 的 listener）：QR 碼「客戶選擇以行動條碼進行驗收」、簽名「客戶選擇以簽名方式進行驗收」、直接「客戶選擇直接驗收」，按鈕都是「知道了」；按下「完成驗收」時直接驗收會再跳一次同樣的提示。結構表 2.7.6 只收直接驗收這句，另兩句版型完全相同，依暫緩表原本只在 2.7.6 記文字，使用者看過後決定三種方式各自成流程、拆成獨立 Frame（見下方編號調整）。
+- **2.7.3（舊稱 2.7.2）**：BottomSheet（有標題「掃描行動條碼」、右上 X、Footer=Inline、不放底部按鈕），高度照程式 `RoundedBottomSheet` 的 90%（767）。標題下方 `Spacing/48`（程式 50）接相機預覽，預覽為 393×393 正方形（程式 `height = 螢幕寬`），下方藍字「請掃描客戶端行動條碼以完成驗收」（`Body/S`＋`Text/Link`）。相機畫面是系統鏡頭，沒有素材，用 `Base/Black` 黑色方塊，圖層名稱「相機預覽（系統畫面，待補）」。底圖沿用 2.7.1 第一屏（長頁面 863 的第一屏，Frame 852）。
+- **編號調整（使用者決定）**：三種驗收方式是各自的流程，所以 2.7 拆成 9 格：新增 2.7.2、2.7.6（進入提示的 QR 與簽名版）與 2.7.8（簽名確認，底圖是簽名板），原 2.7.2 至 2.7.6 順移（QR 掃描 2.7.3、無效 2.7.4、QR 確認 2.7.5、簽名 2.7.7、直接驗收 2.7.9）。Flutter repo 的 T-0104 與 `evidence/index.md` 仍是舊編號，對照時 2.7.2 起要對照新表。結構表 `figma-build-r01.md` 已同步。
+- **2.7.2、2.7.6、2.7.9 進入提示**：程式 `master_order_detail.dart` 的 listener，進入狀態 60 時用 `PlatformAlertDialog` 顯示（只有標題與「知道了」）。Dialog（Standard）隱藏內文與左側按鈕，底圖沿用 2.7.1。2.7.9 同時涵蓋按下「完成驗收」時的同文字提示。
+- **2.7.4、2.7.5**：底圖是 2.7.3 的掃描 BottomSheet 加遮罩，再疊第二層遮罩與 Dialog。無效提示標題照程式文字「無效的QrCode,請重新掃描」（含半形逗號與英文），按鈕「確認」。QR 確認按下後標題會變成「正在完成驗收...」（打字動畫），沒畫。
+- **2.7.7**：BottomSheet（標題「簽名驗收」、右上 X）高 767，內容：藍字「請客戶於下方虛線框中簽名」、簽名區（虛線框，1px 虛線 `Text/Primary` 綁定，程式 `DottedBorder` 預設黑色）、「清除」Button Secondary Outlined sm pill、下方送出鍵。畫的是開啟時的空白狀態：送出鍵 Primary Filled State=disabled，文字「請於上方虛線框中簽名」（程式半透明 `DISABLE_STYLE`，照 DS）。程式 `Expanded(flex: 5)` 讓簽名區吃掉剩餘高度，Figma 用 Fill。程式底部空 50，Figma 內容底部 `Spacing/16`＋BottomSheet 內建 HomeIndicator。
+- **2.7.8**：底圖是簽名完成的狀態：簽名區放一條示意筆跡（Vector，`Text/Primary` 綁定 3px 圓端，圖層名「簽名筆跡（示意）」，是示意不是真實簽名），送出鍵換成 Primary Filled「送出簽名」。程式按下後先開確認，確認後才上傳，處理中文字「正在完成驗收...」沒畫。
+- **簽名區與相機預覽都沒有素材**，相機預覽沿用 2.7.3 的黑色方塊（使用者確認維持）。
+- **2.6.4 開始驗收**（使用者提出，程式查證）：`MasterOrderWorkInProgressSection` 在 `showUpload` 且狀態為 `PENDING_START_ACCEPTANCE`（58）時，上傳表單多出「開始驗收」按鈕（`NORMAL_STYLE` 深藍），原送出鍵文字變成「繼續上傳施工照片」。從 2.6.3 複製，畫的是照片送出後（程式送出成功會清空已選照片）：照片格只剩「＋」新增格，「繼續上傳施工照片」Primary Outlined State=disabled（程式是淡藍框，照 DS 停用樣式），「開始驗收」Primary Filled lg，兩顆間距 `Spacing/8`。長頁面，高 923。程式沒有已選照片時「開始驗收」仍可按。
+- **2.8.1**：程式 `MasterOrderDetailFinishPage` 沒有 AppBar，Frame 頂部只放 StatusBar（Dark Content），底部 HomeIndicator。程式頂部空 150（含狀態列），Figma 用兩層 `Spacing/48`（96）加狀態列 59，近似。插圖 `acceptance_success.png`（633×633）程式左右各留 80，顯示 233×233，沒有向量，留粉紅佔位「插圖佔位（待補）」。提醒框（程式 1px 灰框圓角 5 內距 12 左右邊距 36）：邊線 `Border/Subtle`（#9E9E9E 與程式 Colors.grey 相同）、圓角 `Radius/4`、內距 `Spacing/12`、左右邊距 `Spacing/32`（36 沒有 token）。字級程式 12 預設色，用 `Body/XS`＋`Text/Primary`。按鈕「為客戶評分」Primary Filled lg、「暫時跳過」Secondary Outlined lg（程式白底藍框藍字）。標題 20 Medium 對 `Heading/4`。系統商店評分視窗屬外部邊界，不畫。
+- **2.8.2**：同樣沒有 AppBar，用 StatusBar。頭像 DS Avatar 100（Source=custom，程式 `HeadshotImage` 100，無頭像時是預設頭像）、姓名「王先生」（`clientUserObscureName`，與 2.2.1 一致，**組法沒有核對**）`Title/M`、DS `Rating`（Size=lg、Rate=5，程式 itemSize 24，Figma 元件高 24 相同）。評論框程式是 `Card` 內無框 `TextField`，Figma 用 DS Card（Inset／Standard）放 `TextField`（Multi、Empty，關閉 Label 與 Helper Row，提示字「寫點評論吧...」）：DS TextField 自帶底線，程式沒有。程式 maxLines 5，DS TextField Multi 高 80。「此評價不會對客戶公開」12 Medium 深藍 `Label/S`＋`Text/Brand`，靠右。送出鍵 Primary Filled lg（評分為 0 時才半透明，預設 5 星所以可按）。送出中文字「正在上傳評論...」沒畫；半星評分只記文字（最低 1 星）。鍵盤沒畫。
+
+## 批次 13d 驗收（2026-10-07）
+
+- 結構檢查：2.6.4、2.7.1 至 2.7.9、2.8.1、2.8.2 共 12 格通過（Frame 缺漏、尺寸、三區結構、HomeIndicator、浮層順序、文字覆寫、佔位字都沒有問題）；只剩 Frame 自己的描邊與插圖佔位色未綁變數，沿用既有慣例。
+- 內容核對：每格的文字傾印與畫之前列的內容清單一致。2.7.1 的停用按鈕經使用者實機確認。
+- 使用者確認：12 格畫面都沒問題。

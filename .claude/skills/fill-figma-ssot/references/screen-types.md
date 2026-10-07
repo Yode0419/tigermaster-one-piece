@@ -136,7 +136,8 @@
 - 標題用程式 `titleParser` 對該訂單狀態的輸出。
 - 未讀標記用 DS `Badge`（Count），絕對定位疊在目標右上角；要凸出 Card 的 Slot 時，把那個 instance 的 Slot `clipsContent` 關掉。該訂單沒有未讀就不放。
 - 同一訂單的不同 Frame（2.2.1、2.3.1）頂部從已畫好的那格 `clone()` 再改字，不重建。資訊卡內容用本機元件 `OrderBasicInfo`（改 Category、Date、Customer Name、Address、Has Unread，巢狀按鈕的 Label 與未讀數字在巢狀 instance 上改）。
-- **訂單階段內容**（卡片下方，依訂單狀態映射，師傅端 `master_order_detail_bloc.dart`）：金額與工期摘要（`OrderQuoteTimeSummary`，放 Card Fill／Standard）加該階段的內容：等待提交報價（狀態 30、35，2.4.1）是「請點選下方按鍵以進行報價」加 Button Secondary Filled md pill「開始報價」；等待客戶確認（40、45、50，2.5.1）是 ListItem「查看報價資訊」加等待說明加「先看其他案件」；施工中（55、58，2.6.1）是「查看報價資訊」、「新增一筆報價」pill、完工提醒文字、Button Primary Filled lg「上傳施工照片並驗收」；有未同意報價時兩顆按鈕改 State=disabled，文字「有未同意報價」（2.6.2）。按下「上傳施工照片並驗收」後同一個區塊換成上傳表單（2.6.3）。
+- **訂單階段內容**（卡片下方，依訂單狀態映射，師傅端 `master_order_detail_bloc.dart`）：金額與工期摘要（`OrderQuoteTimeSummary`，放 Card Fill／Standard）加該階段的內容：等待提交報價（狀態 30、35，2.4.1）是「請點選下方按鍵以進行報價」加 Button Secondary Filled md pill「開始報價」；等待客戶確認（40、45、50，2.5.1）是 ListItem「查看報價資訊」加等待說明加「先看其他案件」；施工中（55、58，2.6.1）是「查看報價資訊」、「新增一筆報價」pill、完工提醒文字、Button Primary Filled lg「上傳施工照片並驗收」；有未同意報價時兩顆按鈕改 State=disabled，文字「有未同意報價」（2.6.2）。按下「上傳施工照片並驗收」後同一個區塊換成上傳表單（2.6.3）；照片送出後狀態變 58，再進上傳表單會多一顆 Primary Filled lg「開始驗收」，送出鍵文字變「繼續上傳施工照片」並停用、照片格只剩「＋」（2.6.4）。驗收中（狀態 60，2.7.1）是金額與工期摘要＋「查看報價資訊」列＋提示文字（`Label/L`＋`Text/Brand`、`Body/XS`＋`Text/Hint`，置中）＋Button Secondary Filled md pill「完成驗收」（客戶還沒選驗收方式時停用，實機確認）＋代理人說明文字。
+- **同一入口依客戶選項走不同流程**（例如驗收方式 QR、簽名、直接）時，每個流程各自成 Frame，包括進入時自動跳出、只差文字的提示 Dialog（使用者決定，師傅 2.7.2、2.7.6、2.7.9）。與「同一畫面多個狀態不拆 Frame」的差別：後者是同一版型的內容變體，前者是不同的後續畫面與去向。
 - **畫階段內容的畫面前，先對照程式的狀態映射（bloc 的 `checkOrderStatus`）列出每個階段會看到的畫面，再核對結構表有沒有漏格**（13c 因為這樣查出漏了 2.4.1 上傳報價單與 2.6.1 施工進行中）；漏了就停下來回報使用者，由使用者決定編號。
 
 ---
@@ -187,6 +188,35 @@
 - 底部「取消」「確認」兩顆並排：把 BottomSheet 內建的 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆 Button（取消 Secondary Outlined lg、確認 Primary Filled lg，間距 `Spacing/16`），DS 待辦 10 處理前的做法。
 - 同一格有多個狀態（例如選「台」與選「式」）時畫資訊較多的那個，不另開 Frame；選「式」的提醒用 DS `Banner`（Tone=Notice、Leading=Icon、Closable 關，圖示換 Phosphor Warning），放在內容下方、左右 `Spacing/16`。
 - 只有標題與選項、沒有底部按鈕、點選項即選定的選項清單（師傅 2.4.3）：BottomSheet Footer=Inline，右上 X，內容放 ListItem，做法同動作選單的「有標題的選項清單」。
+
+---
+
+## 提示 Dialog（只有標題與一顆按鈕）
+
+第一個案例：師傅 2.7.2、2.7.6、2.7.9（程式 `PlatformAlertDialog(title, 知道了)`）。
+
+- 複製已畫好的 Dialog（例如 2.4.12）與它的 `Scrim`：改 `Title` 文字，內文槽維持隱藏，左側按鈕隱藏，右側 Label 改「知道了」；Dialog 置中，`y = (852 − 高) / 2`。底圖沿用打開前那一格。
+- 疊在 BottomSheet 上的 Dialog（師傅 2.7.4、2.7.5、2.7.8）：底圖保留 BottomSheet 與它的遮罩，再疊第二層遮罩與 Dialog，圖層順序為 Dialog、`Scrim`、BottomSheet、`Scrim`、`AppBar`…。程式文字照抄，包含半形逗號與英文（例如「無效的QrCode,請重新掃描」）。
+
+---
+
+## 相機與簽名 BottomSheet
+
+第一個案例：師傅 2.7.3（掃 QR 碼）、2.7.7（簽名板）。
+
+- BottomSheet（hasHeader、右上 X、Footer=Inline、不放底部按鈕），高度照程式 `RoundedBottomSheet` 的 90%（767），貼底；內層 `Content` 與 Slot 內的內容框都設 Fill 高度，內建 HomeIndicator 才會貼在底部。從 2.4.3 的 BottomSheet 複製最快。
+- 相機預覽沒有素材：393×393 `Base/Black` 黑色方塊，圖層名稱「相機預覽（系統畫面，待補）」，不加程式沒有的掃描框（使用者確認）。標題到預覽空 `Spacing/48`，下方藍字 `Body/S`＋`Text/Link`。
+- 簽名區：虛線框（1px 虛線 4／4，`Text/Primary` 綁定）填滿剩餘高度，外層左右 24、上下 10；「清除」Button Secondary Outlined sm pill 靠左；送出鍵 Primary Filled lg，未簽名時 State=disabled 文字「請於上方虛線框中簽名」。簽完名的畫面（確認 Dialog 的底圖）放一條示意筆跡 Vector（`Text/Primary` 綁定 3px 圓端），圖層名稱註明「示意」，送出鍵換「送出簽名」。
+
+---
+
+## 沒有 AppBar 的全頁（結果頁、評價表單）
+
+第一個案例：師傅 2.8.1、2.8.2（程式 `MasterOrderDetailFinishPage`、`ToClientComment`，Scaffold 沒有 appBar）。
+
+- 頂部只放 StatusBar（Dark Content），底部 HomeIndicator，內容置中（`Scroll Content` 副軸置中）。程式頂部空 150 → 兩層 `Spacing/48`（接在 StatusBar 之後）。
+- 插圖沒有向量：留粉紅佔位「插圖佔位（待補）」，尺寸照程式（2.8.1 為 233×233）。提醒框：1px `Border/Subtle`、`Radius/4`、內距 `Spacing/12`、左右邊距 `Spacing/32`。
+- 評分用 DS `Rating`（Size=lg，Rate 照預設值）、頭像用 DS `Avatar`；評論框用 DS Card（Inset／Standard）放 `TextField`（Multi、Empty，關閉 Label 與 Helper Row）。系統商店評分視窗屬外部邊界，不畫。
 
 ---
 
