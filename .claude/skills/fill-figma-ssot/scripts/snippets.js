@@ -155,6 +155,24 @@ function float(frame, node, { h = 'STRETCH', v = 'STRETCH' } = {}) {
   return node;
 }
 
+// Copy every child (and the frame-level layout settings) of `src` into the placeholder Frame `dst`,
+// keeping dst's id, name and position. Floating layers keep their constraints and position.
+// Use it for "same base screen, different state" Frames (chat rooms, dialogs over a base).
+// Bind the page background yourself afterwards if the frame fill is not Background/Page.
+async function cloneInto(src, dst, bgKey = 'c2ad73f62adb2d8740ca6993cf4e7107ec7f8486') {
+  for (const n of [...dst.children]) n.remove();
+  for (const k of ['layoutMode', 'primaryAxisSizingMode', 'counterAxisSizingMode', 'itemSpacing', 'itemReverseZIndex',
+    'paddingTop', 'paddingBottom', 'paddingLeft', 'paddingRight', 'clipsContent']) dst[k] = src[k];
+  dst.resize(src.width, src.height);
+  await bindFill(dst, bgKey);
+  for (const c of src.children) {
+    const k = c.clone(); dst.appendChild(k);
+    if (c.layoutPositioning === 'ABSOLUTE') {
+      k.layoutPositioning = 'ABSOLUTE'; k.constraints = c.constraints; k.x = c.x; k.y = c.y; k.resize(c.width, c.height);
+    } else { k.layoutSizingHorizontal = c.layoutSizingHorizontal; k.layoutSizingVertical = c.layoutSizingVertical; }
+  }
+}
+
 // Scrim covering the whole Frame (status bar included), bound to Background/Overlay.
 async function scrim(frame) {
   const s = figma.createFrame();

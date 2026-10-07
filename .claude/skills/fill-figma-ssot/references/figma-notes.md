@@ -51,7 +51,12 @@
 
 ## 呼叫與元件操作
 
-- 失敗的 `use_figma` 呼叫整段都會回復（不是做到一半），所以報錯後可以整段重跑，不必擔心重複改名或重複位移；但成功的呼叫不會回復，順移編號這類不能重複執行的操作要先確認上一次有沒有成功（13c）。
+- 失敗的 `use_figma` 呼叫**不保證**整段回復：批次 13c 看起來有回復，但批次 16 的一次失敗（程式在最後一行才報錯）留下了已建好的本機元件與新 Frame，重跑就產生重複。報錯後先檢查有沒有半成品，重跑的腳本開頭先刪掉同名的 Frame 與元件（批次 16）；順移編號這類不能重複執行的操作要先確認上一次有沒有成功。
 - 對 Card instance 改 variant 屬性（例如 `Padding: 'None'` 改 `'Standard'`）會重建內部的 Slot，改完要重新 `findOne` 取得 Slot，舊的 Slot 參照會報「node does not exist」（13c）。
 - 複製整個 Frame（`clone()`）到同一個 Section 後，用 `section.insertChild(0, frame)` 可以放到第一個位置；Section 不會自動撐大，順移 Frame 後要用 `resizeWithoutConstraints` 調寬（13c）。
 - 隱藏元件內不需要的部分（例如表單裡的「刪除」鈕、列尾的箭頭圖示）可以直接把 instance 內該圖層設 `visible = false`，不必拆開 instance（13c）。
+- 實例內的子層不能改座標（報錯 `relative-transform`），只能改尺寸、可見度與屬性；例如 BottomSheet 標題列右側 48×48 的框，換進比它寬的按鈕只能把按鈕高度設 48 讓文字垂直置中，要根治得改 DS（批次 16）。只有實例的 Slot 內可以新增或刪除子層。
+- 在實例內的節點上用 `parent === node` 比較可能失敗（`findOne` 的條件拿不到預期的節點），改比 `id` 或名稱；先 `clone()` 到一般位置再整理結構最穩（批次 16）。
+- `figma.createComponentFromNode()` 不能用在實例內的節點：把節點 `clone()` 到本機元件 Section 再轉成元件，然後用該元件的 instance 換回原處（批次 16，日期選擇面板）。
+- 元件加文字屬性：`comp.addComponentProperty('Month', 'TEXT', '預設文字')` 取得 key，再 `textNode.componentPropertyReferences = { characters: key }`（批次 16）。
+- Pattern 填色（DS 的 `ChatBackground` Watermark）靠另一個來源節點，經函式庫引用後 API 截圖畫不出來，DS 已改成不依賴來源節點的做法（批次 16，使用者自行修正）；新增 DS 元件時避免用 Pattern 填色。

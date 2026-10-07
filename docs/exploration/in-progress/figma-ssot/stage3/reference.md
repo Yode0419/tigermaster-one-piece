@@ -115,6 +115,7 @@
 | `Interactive/OnFilled`／`Chip/InfoSelected` | `cbf5078d3270c00fb293c07a635c65d66abf4ac7`／`318c7e9abe7107fa2279228b6c8724f12383c234` | 實心底上的字色／選中的 info Chip 底色 |
 | `Border/Subtle`（#9E9E9E） | `189f9120d0ad0cc3feff78704618c3b481d6a45b` | 與程式 `Colors.grey` 相同；提醒框外框（師傅 2.8.1） |
 | Switch（整組，variant State × Selected）／Phosphor UserGear（元件組） | `725b56a0b9d2298034ea4f3f37db10201d0e2abb`／`5a6a2905efce7a71f92884d380d50ae1756388ea` | Switch 40×20，放 ListItem 的 Trailing Slot；UserGear 對應 `colored_user_gear.png`，帳號首頁用 Outline／Duotone |
+| Phosphor CaretLeft／CaretDown（元件組）／`Interactive/Action`／`Icon/Default`／`Icon/Subtle` | `6c0b7f857a2a3b761d5731c62f51295d3d1ca36d`／`3123b154077e5b1d2b261c04357275cde472901b`／`07aa36da7de6e8dbae477c2e8ab2e161f3ed5aaa`／`52b48f39822225eece13a42f85ca18095b6f4e60`／`0f2d615857bdcfc72b98bba019c0f5829e73ab8c` | 日期選擇面板（師傅 5.1.7）：月份箭頭、下拉箭頭，選取日的藍框與藍字，停用的上個月箭頭 |
 | Phosphor Bell（元件組） | `ebde5899bf4833b05b2ede5d9bb7389d21c0c092`（鈴鐺，程式 `notifications_outlined`，Outline／Regular） |
 
 ---
@@ -207,6 +208,12 @@
 | 師傅資料總分 48 Bold 深藍 (31,40,111) | `Heading/2`（28 SemiBold）＋`Text/Brand` | 無 | | 師傅 4.1.2 |
 | 評分星星 30／20（`RatingBarIndicator`） | `Rating` lg（24）／sm（16），只有半星刻度，4.8 顯示 5 顆 | 無 | | 師傅 4.1.2 |
 | 帳號頁 `colored_user_gear.png`、`colored_bell.png`（自家彩色圖片） | Phosphor UserGear、Bell（Outline／**Duotone**，淡色層綁 `Brand/TigerYellow` 且不透明，使用者指定） | 無 | | 師傅 4.1.1 |
+
+| 提醒文字 `Colors.grey`（#9E9E9E，14 Regular，對話最上方「師虎提醒您」） | `Body/S`＋`Text/Hint`（#727276） | `Icon/Subtle`（#9E9E9E，非文字 token） | | 師傅 5.1.1、5.2.1 |
+| 18 w700（日曆日期）、21 Regular（時間滾輪）、20 w600（「時間」標籤） | `Title/M`（18 Medium）、`Title/L`（20 Medium）、`Heading/4`（20 Medium） | 無 | | 師傅 5.1.7 |
+| 日曆停用日 `Colors.black` 38% | `Text/Hint`（沒有停用色 token） | 無 | | 師傅 5.1.7 |
+| 時間滾輪選取條（`CupertinoDatePicker` 預設灰 12%） | `Border/Default`（#EDEDED），圓角 `Radius/8` | `Background/Page` | | 師傅 5.1.7 |
+| 日曆左側標題內距 16、「時間」列左內距 28、日曆列高 42、時間滾輪高 70 | `Spacing/16`、`Spacing/24`（28 無 token）、固定 42、固定 70 | `Spacing/32` | | 師傅 5.1.7 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 

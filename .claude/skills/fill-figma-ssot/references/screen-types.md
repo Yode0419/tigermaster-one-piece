@@ -53,6 +53,10 @@
 - `Scroll Content` 左右 padding `Spacing/16`、訊息間距 `Spacing/8`、上方 padding `Spacing/8`（底部 padding 見三區結構）。
 - 每則訊息包一層寬度 Fill 的水平 Auto Layout：對方的訊息靠左、自己的訊息靠右、日期分隔置中。
 - 同一聊天室的不同狀態（例如展開輸入列），複製上一格的子圖層，只換有變化的部分。
+- **客戶聊天室**（師傅 5.1，程式 `ToClientChatroom`）頂部多一條可關閉的提醒：DS `Banner`（Tone=Error、Solid=false、Leading=None、Closable 開），**文字與關閉圖示綁 `Status/Error`**（使用者指定），放在 ChatAppBar 與 `Content` 之間（固定區，不隨訊息捲動），左右 `Spacing/8`。ChatAppBar 用 To Client variant，姓名改 `Name` 框裡的文字（後端 `obscureName`，姓氏加先生／小姐）。客服聊天室（To Admin variant）沒有這條提醒，背景用 ChatBackground（Watermark）。
+- 對話最上方的說明文字（程式 `topInsert`，`Body/S`＋`Text/Hint`，左右 `Spacing/32` 合計）放在 `Scroll Content` 第一項。訊息超出一屏時它會被捲出畫面，該狀態省略它，只畫最新一屏。
+- **每個狀態都要驗證**：展開輸入列後內容區縮短 64，最後一則訊息不能被切到（必要時把示意訊息縮成一行）；`Content` 高度與 `Scroll Content` 高度要比對。
+- 失敗狀態的自己訊息：`Status` 子實例的 `State` 屬性設 Failed（Meta 內名為 `Status` 的 instance）。
 
 ---
 
@@ -248,6 +252,24 @@
 - 畫面上所有資訊圖示一律用 DS `Tooltip`（Key 見 reference.md），內部圖示預設是 Question，換成 Phosphor Info（Outline／Regular）並綁 `Text/Link`；不要自己畫圖示。
 - 一般畫面用 Open=false（只有觸發圖示）；提示會遮住內容，所以另開一格展示（Open=true，使用者決定，師傅 3.1.2）。同一格可把該畫面所有提示並列（程式一次只出現一個，批次紀錄註明）。展示格從主畫面複製，把圖示換成 Open=true 的 Tooltip，Message 填程式文字（程式的 `\n` 照留）。
 - 泡泡是 instance 內超出範圍的子層，位置無法覆寫：要把外層 Card 與 Slot 的 `clipsContent` 關掉；泡泡所在欄的 `itemReverseZIndex = true`，同一排（含中央垂直分隔線）也要，否則會被後面的元素與分隔線蓋住；泡泡超出螢幕邊緣時，只能用 Message 手動換行縮窄（DS 泡泡不會自動貼齊邊界，程式左右各留 32）。
+
+## 日期時間選擇 BottomSheet
+
+第一個案例：師傅 5.1.7（程式 `DateSelectBottomSheet`，`CalendarDatePicker` 加 `CupertinoDatePicker`）。
+
+- DS 沒有日曆與時間滾輪，做成本機元件 `DatePickerPanel`（TEXT 屬性 Month），放進 BottomSheet 的 `Content` Slot，寬度 Fill；日後升級進 DS（DS 待辦 11）。BottomSheet 高度照程式 `RoundedBottomSheet` 比例（70% ＝ 596），`Content` 框與 Slot 設 Fill 高度並裁切。
+- 面板內結構：`Calendar`（月份標題列高 52：月份文字加下拉箭頭，右側上下月箭頭，可選範圍以外的箭頭用 `Icon/Subtle`；星期列與日期列都高 42，七欄等寬；日期 `Title/M`，今天以前停用用 `Text/Hint`，今天選取是 1px `Interactive/Action` 圓框加同色字）；日曆與時間列之間 `Spacing/16`；`Time Row`（高 70，「時間」`Heading/4`＋三欄滾輪）。
+- 時間滾輪：欄位順序**時、分、上下午（上下午在最右，使用者指定）**；每欄三項（上、選取、下），選取條 `Border/Default`＋`Radius/8`，外層裁切 70 高。
+- 標題列右側「完成」是文字按鈕：把 BottomSheet 標題列的 IconButton `swapComponent` 成 Button Ghost Action sm，再把該 instance 高度設 48 讓文字與標題垂直置中（實例內不能改座標；DS 待辦 12）。左側關閉 `leadingIcon`。
+- 底圖沿用打開前那一格（從展開的輸入列打開，複製 5.1.2）。
+
+## 約施工時間訊息（聊天室）
+
+第一個案例：師傅 5.1.8 至 5.1.10（程式 `TimeRequestMessage`、`chatroom.dart` 的 `replyTimeRequest`）。
+
+- 請求訊息文字格式「請問 yyyy年MM月dd日, HH:mm ，可以與您約定施工時間嗎?」，**自己送出的是黃底一般氣泡**（MessageBubble Text，Self）。**對方送來的**是白底卡：MessageBubble Type=Slot（氣泡內距改 0），Slot 放本機元件 `TimeRequestCard`（TEXT 屬性 Message；內容為訊息文字、1px 分隔線、「取消」Ghost Neutral 與「確認」Ghost Action 兩顆 Button md 並排填滿）。
+- **回覆是新增一則訊息**（後端不改原請求）：「同意更改施工時間至 …」或「拒絕更改施工時間至 …」，由回覆的人送出，所以原請求的白底卡按鈕仍在。**同意時同一方的 App 另外送出**一則一般文字「【系統訊息】施工時間更改至yyyy年MM月dd日，HH:mm」（日期後是全形逗號；拒絕不送）；師傅按確認它是自己的黃底氣泡，客戶按確認師傅看到白底氣泡。
+- 一個流程拆成多格：自己發起後對方的回覆（5.1.8）、師傅按確認（5.1.9）、師傅按取消（5.1.10），三格都只畫最新一屏。
 
 ## 圖示
 

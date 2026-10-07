@@ -148,6 +148,7 @@ Write right after each Frame, not at the end of the session.
 - **screen-types.md**: a new recipe after the user confirms it.
 - Do not write to the root `DECISIONS.md`; stage 3 decisions go in `stage3.md` (only when the user makes or confirms a decision).
 - Do not collect Figma links in the docs.
+- **Renumbering Frames** (new Frame inserted, order changed): rename and reposition in Figma, update `figma-build-r01.md` (rows, totals, 去向 references), the batch record, components.md and reference.md, then grep the old numbers to make sure no reference was missed. The user decides the numbers; report and wait.
 
 ---
 
