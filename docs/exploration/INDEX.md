@@ -2,7 +2,7 @@
 
 _功能規劃文件、設計決策紀錄與互動原型。先依狀態分區，區內再依功能分類。_
 
-_Last updated: 2026-10-01_
+_Last updated: 2026-10-07_
 
 ---
 
@@ -39,9 +39,13 @@ _Last updated: 2026-10-01_
 
 - **[師傅材料採購：與振宇五金合作構想](in-progress/hardware-store-partnership/hardware-store-partnership-idea.md)**：台中為主的連鎖五金行振宇五金想合作讓師傅向其採購；方向是不再自建商城（舊商城開發一半不可用），改為平台當入口導流到對方商城或門市自取；含訂單內採購與純導流兩種模式、待釐清事項，純初步構想 _(2026-09-23)_
 
-### web-ordering/：客戶端網頁版下單
+### b2b2c-integration/：B2B2C 串接（企業串接與師虎 Web 下單）
 
-- **[客戶端網頁版下單構想](in-progress/web-ordering/web-ordering-idea.md)**：合作夥伴反映要客人下載 App 會造成導流斷層，構想把客戶端註冊、下單、訂單查看、聊天室搬到網頁，後台共用；已釐清客戶端不需手機定位，純初步構想 _(2026-09-23)_
+- **[B2B2C 串接專案：總覽](in-progress/b2b2c-integration/overview.md)**：合作企業與師虎 Web 共用標準收單 API 建單，走既有媒合，消費者到 App 付款不用重新下單；第一版含收單、網頁訂單頁聊天、後台欄位，限制是不改 App、沒有簡訊；年底上線 _(2026-10-07)_
+- **[設計 Backlog](in-progress/b2b2c-integration/backlog.md)**：設計端 4 項工作（現況流程、企業串接流程、師虎 Web 下單與訂單追蹤、後台欄位），之後轉 Jira _(2026-10-07)_
+- **[決策記錄](in-progress/b2b2c-integration/decisions.md)**：10/07 討論定下的範圍與做法 _(2026-10-07)_
+- **[待確認問題](in-progress/b2b2c-integration/open-questions.md)**：帶到 10/14 會議的問題，含付款時限、不改 App 的認領方式、聊天開放 _(2026-10-07)_
+- **[客戶端網頁版下單構想](in-progress/b2b2c-integration/web-ordering-idea.md)**：本專案前身，把客戶端註冊、下單、訂單查看、聊天室搬到網頁的初步構想 _(2026-09-23)_
 
 ### pro360-partnership/ — Pro360 合作案生命週期整理
 
