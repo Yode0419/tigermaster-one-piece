@@ -109,3 +109,24 @@
 第一個案例：客戶端 1.3.6。
 
 - 程式沒有對應畫面（只回傳空 `Container()`）時，照現況畫空白頁：StatusBar、空的 `Content`、HomeIndicator，底色 `Background/Page`；不要發明設計。
+
+## 登入表單頁：多卡片長表單（程式的 `UserCreateInputSection`）
+
+第一個案例：客戶端 1.5.1、1.5.3 至 1.5.5。
+
+- 沿用「登入表單頁」的 AppBar（Tall／Overlay／Brand）與卡片。標題兩行時 AppBar 高 239（Tall 預設 225），卡片頂在 y=207，記在批次紀錄。第一張卡片放進 `Extension Content`，其餘卡片（複製第一張再換 Slot 內容）與小標題放在 `Scroll Content`。
+- 小標題 `Heading/4`＋`Text/Primary`，上下內距 `Spacing/8`；卡片內欄位間距 `Spacing/24`（程式欄位沒有預留說明列，所以欄位的 Show Helper Row 只在有錯誤或字數時開）。
+- 欄位每次用元件組建新 instance，不改複製來的 instance 的 variant。唯讀欄（已驗證手機）用 `TextField` State=Disabled，尾端圖示換 Phosphor PencilSlash。
+- `TextField` 尾端圖示預設是 Smiley：要換成 XCircle，要把 `input-row` 內名為 Smiley 的內層 instance 用 `swapComponent` 換掉；改 `Suffix Icon` 屬性值不會生效。
+- 內文裡的連結（條款）：一段 `Body/S` 文字，連結範圍用 `setRangeFills` 綁 `Text/Link` 並加底線。
+- 欄位下方的紅字（建立失敗）：`Body/S`＋`Status/Error`，包一層上、左 `Spacing/4` 內距的框。
+- 長表單拉長：Frame 高 ＝ AppBar ＋ `Scroll Content` ＋ 34 ＋ 2，`Scroll Content` 底部 padding 28（程式 28）。
+- 全空白送出的錯誤畫面：每個必填欄位 State=Error，顯示程式的檢核文字，不為單一錯誤另開 Frame。
+
+## 系統權限對話框（Android 樣式）
+
+第一個案例：客戶端 1.7.1、1.7.2（使用者已確認 1.7.1）。
+
+- 屬於「系統畫面邊界」：底色 `Icon/Subtle`，只畫系統元素，StatusBar 與 HomeIndicator 保留，不畫 App 畫面。複製空白頁當底。
+- 對話框自排：白底 `Background/Surface`、內距 `Spacing/24`、圓角 `Radius/12`（Android 實際約 28，見 approximations.md）、寬 312、置中，內容垂直置中對齊、間距 `Spacing/16`：Phosphor 圖示（24）、標題 `Title/S` 置中、按鈕（DS Button Secondary Outlined lg，寬度 Fill）垂直堆疊。
+- 通知：Bell，按鈕「允許」「不允許」。麥克風：Microphone，按鈕「使用應用程式時允許」「僅限這一次」「不允許」。系統文案沒有實機查證，批次紀錄要註明。

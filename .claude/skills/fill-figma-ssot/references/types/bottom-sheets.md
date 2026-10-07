@@ -26,6 +26,7 @@
 - BottomSheet 有標題與右上 X，高度照程式比例（90% 約 767）；內容用 Slot：分類名稱加一排 DS `Chip`（Tone=info，選中 Selected），列本身自排。
 - 底部「取消」「確認」兩顆並排：把 BottomSheet 內建的 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆 Button（取消 Secondary Outlined lg、確認 Primary Filled lg，間距 `Spacing/16`），DS 待辦 10 處理前的做法。
 - 同一格有多個狀態（例如選「台」與選「式」）時畫資訊較多的那個，不另開 Frame；選「式」的提醒用 DS `Banner`（Tone=Notice、Leading=Icon、Closable 關，圖示換 Phosphor Warning），放在內容下方、左右 `Spacing/16`。
+- 單選清單加底部「取消」「確認」（程式 `PickerBottomSheet` 的滾輪，客戶端 1.5.2，使用者決定不畫滾輪）：BottomSheet hasHeader=false、開 hasDragHandle、高 596；`Content` 框與 Slot 設 Fill 高度並裁切，Slot 內垂直放 ListItem（Trailing=None、關 Has Leading Icon、開 Has Divider），超出的選項被裁切表示可捲動；底部 Sticky Footer 換成 Flexible Slot，放兩顆 Button（Secondary Outlined「取消」、Primary Filled「確認」，寬度 Fill，間距 `Spacing/16`）。
 - 只有標題與選項、沒有底部按鈕、點選項即選定的選項清單（師傅 2.4.3）：BottomSheet Footer=Inline，右上 X，內容放 ListItem，做法同動作選單的「有標題的選項清單」。
 
 ## 相機與簽名 BottomSheet

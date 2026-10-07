@@ -91,6 +91,8 @@
 | 首次介紹頁標題 40 w700（預設文字色） | `Display/M`（40 Bold）＋`Text/Primary`，數值完全相同 | 無 | | 客戶端 1.2.1 |
 | 首次介紹頁分頁圓點：10px 灰 `Colors.grey`、選中 22×10 深藍 (31,40,111)、間距 6 | 自排：未選中 `Icon/Subtle`（#9E9E9E，與 `Colors.grey` 相同），選中 `Brand/TigerBlue`，間距 `Spacing/12`（兩側各 6） | DS `Carousel` 圓點（8px，規格不同） | | 客戶端 1.2.1 |
 | 開始頁標語（28 Bold，色 (35,36,42) #23242A） | `Heading/2`（28 SemiBold）＋`Text/Primary` | 無 | | 客戶端 1.3.1 |
+| 註冊頁標題（24 Bold）、寄送說明文字（16 Bold） | `Heading/3`（24 Medium）、`Title/S`（16 Medium） | 無 | | 客戶端 1.5.1、1.6.3 |
+| Android 系統權限對話框圓角 28 | `Radius/12` | `Radius/Full` | | 客戶端 1.7.1 |
 | 系統推播橫幅（手機系統畫面） | 自排：白底、`Radius/12`、內距 `Spacing/12`，底圖 `Icon/Subtle` 灰（使用者指定只畫橫幅） | 無 | | 師傅 6.1.4 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。

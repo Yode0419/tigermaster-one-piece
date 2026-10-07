@@ -122,5 +122,6 @@
 | Phosphor CaretUp（元件組） | `07ed6a8449b09a06f62c590259d38904bc91537d`（程式 `expand_less`，通知列展開；收合用既有 CaretDown） |
 | Phosphor House／Buildings（元件組） | `0408a611f7868ef34a9a0be470492f4070f9d742`／`6405940916f5c3c15b0baf6eaff7c52868153229` | 程式 `home`、`business`（保固膠囊） |
 | Phosphor XCircle／Eye／EyeSlash（元件組） | `997b8a8219ac3e43540cdfb1982b330ee014aed7`／`76cf682ef7692e44fae98814f459ac233e5230cc`／`e8581bef72d81910eafd74fc4b41d878eaf328fc` | 程式 `cancel`（輸入框清除）、`visibility`、`visibility_off`，Outline／Regular |
+| Phosphor PaperPlaneTilt／PencilSlash／Microphone（元件組） | `191227f529380b5ce6c3f1732e016ad1b3c5f67b`／`734454e737fede1b83429b6ba1649eb2d943fed9`／`b953b98588b2c4f37df4e5e35bdec4cac56d049b` | 程式 `send_outlined`（寄送說明）、`edit_off`（唯讀手機欄）、麥克風權限，Outline／Regular |
 | PasswordField（整組） | `0e9ad408b351837f924ab660e6b06b3a833f882e` | 密碼輸入欄，客戶端 1.3.4 用 |
 | AppBar（Tall／Overlay／Brand）登入表單頁 | 同 AppBar 整組，variant Type=Tall、Extension=Overlay、Background=Brand | 總高 225；`Title` Slot 放標題加副標，`Extension Content` 放卡片 |
