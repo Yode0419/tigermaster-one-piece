@@ -121,12 +121,14 @@
 - 2026-10-08：（批次 03c）系統權限對話框自排：白底、圓角 `Radius/12`、Phosphor 圖示、標題、DS Secondary Outlined 按鈕垂直堆疊，底圖 `Icon/Subtle`，不畫 App 畫面。Why：使用者同意；系統對話框不在 DS 範圍，圓角 28 沒有 token，用最接近的 12。
 - 2026-10-08：（DS 升級 2）日期時間選擇拆成 `Calendar` 與 `WheelPicker` 兩個 DS 元件，不做成單一 `DateTimePicker`，結構保持簡單（Calendar 只有 Month、Show Week 6，日期格用 State 切換）。Why：使用者同意；客戶端生日欄等其他滾輪選擇也能共用 `WheelPicker`，使用者要求不要做得太複雜。
 - 2026-10-08：（DS 升級 2）停用狀態不新增顏色 token，沿用 DS 慣例整個元件 40% 透明度（日曆停用日期、上個月箭頭）。Why：使用者指出 `Text/` 系列是給靜態文字用的，停用屬於互動元件的狀態；40% 透明度的效果與程式的黑色 38% 幾乎相同。
-- 2026-10-08：（DS 升級 2）底部雙按鈕做成 Sticky Footer 的新變體 `Content=Button pair`，不在 BottomSheet 上加變體；BottomSheet 標題列兩側固定 64 寬、右側用 Instance swap 換文字按鈕。Why：使用者同意；一般頁面底部也可能用到雙按鈕；兩側等寬才能維持標題置中，64 接近程式 1:3:1 分欄。
+- 2026-10-08：（DS 升級 2）底部雙按鈕做成 Sticky Footer 的新變體 `Content=Button pair`，不在 BottomSheet 上加變體；BottomSheet 標題列兩側固定 64 寬、右側用 Instance swap 換文字按鈕。Why：使用者同意；一般頁面底部也可能用到雙按鈕；兩側等寬才能維持標題置中，64 接近程式 1:3:1 分欄。（`Content=Button pair` 的命名已由下一條取代）
 - 2026-10-08：（DS 升級 2）Sticky Footer 改成 Buttons（Single／Pair／None）× Has Slot 的變體矩陣，雙按鈕加 Slot 先做起來備用。Why：使用者指定；目前程式沒有雙按鈕加上方內容的底部列，但做成矩陣後單、雙按鈕都能自由搭配 Slot。
 - 2026-10-08：（DS 升級 2）`_CalendarDay` 參考 Material 3、iOS 簡化為 State（Default／Selected／Disabled）× Today；選取改實心藍圓白字，今天未選取為藍框藍字，不照程式的黃字與無底色選取。Why：使用者決定；黃字在白底上看不清楚，程式這段顏色是為了繞過選取標記消失的問題，不是設計意圖；業界做法是選取、停用為狀態，今天為疊加標記。
 - 2026-10-08：（DS 升級 2）Sticky Footer 一定帶 Home Indicator（移除 `Reserve Home Indicator`）；BottomSheet 的 Footer 新增 `None`（沒有按鈕列，Home Indicator 由 BottomSheet 自己放），移除 `hasFooter`。Sticky 與 Inline 只差排列方式，都用 Sticky Footer 內建的 Home Indicator。日期選擇、沒有取消的選項清單用 Footer=None。Why：使用者指出 Inline 另放一條 Home Indicator 再隱藏 Sticky Footer 內那條的結構不合理；Sticky Footer 與 BottomSheet 都一定有 Home Indicator，「沒有按鈕」應該是 BottomSheet 自己的型態。
 - 2026-10-08：（DS 升級 2）BottomSheet 高度規則：只有 Footer=Sticky 是固定高度（Content 填滿並裁切、按鈕列貼底），Inline、None 一律隨內容；程式是固定比例高度但沒有按鈕列時，由 Slot 裡的內容設固定高度撐出 Sheet 高度（師傅 2.7.3 至 2.7.8、4.1.2、4.5.1 已改）。Why：使用者要求簡化，不另加 Height 屬性；Content 設填滿但 Sheet 隨內容的組合在 Figma 面板上看起來矛盾，實例改回隨內容時也不會縮回。
 - 2026-10-08：（DS 升級 2）DS 升級時，新元件與既有元件的規格變動都要先跑 `/sanji` 備料，再用 `/write-doc`、`/archive-doc` 寫進 `docs/design-system/`，不直接手寫規格。Why：使用者指正；DS 升級 2 的 date-picker.md 跳過了 /sanji 直接寫成。
+- 2026-10-08：（DS 升級 2 補跑 /sanji）程式標題列左「取消」右「確認」的滾輪面板（例如生日）改用 BottomSheet Footer=Inline、Sticky Footer Buttons=Pair，標題列不新增 Leading 替換屬性。Why：使用者選擇；與批次 03c 得知渠道面板做法一致，不必為單一用法擴充元件。
+- 2026-10-08：（DS 升級 2 補跑 /sanji）`_CalendarDay` 的 Today=true 與 State=Disabled 可同時成立（晚上 10 點後今天不可選），照停用慣例整格 40% 透明度、保留藍框藍字；Selected 與 Disabled 為無效組合。Why：使用者選擇；沿用既有停用規則，不另立樣式。
 
 ---
 

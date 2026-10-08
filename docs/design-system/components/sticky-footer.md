@@ -5,7 +5,7 @@
 > **元件邊界**：與 BottomSheet（模態、變暗背景、可關閉的置底容器）明確區分；Sticky Footer 不阻斷頁面互動，也不具備開關/關閉行為。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`ScaffoldBottomSheet`（`lib/component/bottom_sheet/scaffold_bottom_sheet.dart`）為主容器，`QuotationSubmitBottomSection` 為 `Buttons=Single, Has Slot=true` 代表案例（3 個報價相關畫面共用）；Figma Component 已建立_
-_最後更新：2026-10-08 — Variant 改為 Buttons（Single／Pair／None）× Has Slot 矩陣，新增雙按鈕_
+_最後更新：2026-10-08 — Variant 改為 Buttons（Single／Pair／None）× Has Slot 矩陣，新增雙按鈕；補跑 /sanji：按鈕樣式依 Buttons 區分、補 Single／Pair 使用時機_
 
 ---
 
@@ -15,7 +15,7 @@ _最後更新：2026-10-08 — Variant 改為 Buttons（Single／Pair／None）�
 |------|-----|
 | Buttons | `Single`（一顆主按鈕）／`Pair`（兩顆並排等寬，左 `Secondary Outlined`、右 `Primary Filled`，間距 `Spacing/16`，用於「取消」「確認」）／`None`（不含按鈕） |
 | Has Slot | `true`／`false`。按鈕上方的彈性 slot，放輔助內容（如金額摘要 Pill），與按鈕間距 `Spacing/16`。`Buttons=None` 只有 `Has Slot=true`（完全自訂內容，例外情況逃生艙） |
-| Button | 固定滿版寬度，複用 [Button](button.md) `primary filled` variant |
+| Button | 固定滿版寬度，複用 [Button](button.md)。Single 用 `Primary Filled`；Pair 左邊 `Secondary Outlined`、右邊 `Primary Filled` |
 | Home Indicator | 固定內嵌 [HomeIndicator](home-indicator.md) instance，不可關閉（2026-10-08 移除 `Reserve Home Indicator` Boolean：置底列一定在螢幕最底部） |
 
 ## Design Tokens
@@ -31,6 +31,8 @@ _最後更新：2026-10-08 — Variant 改為 Buttons（Single／Pair／None）�
 **用於：**
 - 頁面主要 CTA 置底常駐、需要保持頁面其餘互動的情境
 - 嵌入 BottomSheet 內當底部操作列（combo 用法）
+- `Buttons=Single`：頁面上單一主要行動（送出報價、確認付款）
+- `Buttons=Pair`：放在 BottomSheet 裡，給「取消」「確認」這類成對的行動；目前程式沒有獨立頁面使用雙按鈕
 
 **避免：**
 - 需要阻斷頁面互動並變暗背景的情境 → 改用 [BottomSheet](bottom-sheet.md) 或 Dialog

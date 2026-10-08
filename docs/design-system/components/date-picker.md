@@ -3,7 +3,7 @@
 日期與時間選擇。分成兩個元件：`Calendar`（月曆）與 `WheelPicker`（滾輪），放進 [BottomSheet](bottom-sheet.md) 的 Content 組合使用。
 
 _來源：Flutter codebase（`fdtigermaster_app` v2.6.1）審查，`DateSelectBottomSheet`（`lib/component/bottom_sheet/date_select_bottom_sheet.dart`，內含 `CalendarDatePicker` 與 `CupertinoDatePicker`）；由 figma-ssot 階段 3 師傅檔案的本機元件 `DatePickerPanel` 升級_
-_最後更新：2026-10-08_
+_最後更新：2026-10-08（補跑 /sanji：Today 與 Disabled 並存、生日滾輪改用 Footer 雙按鈕、Flutter 對照更正）_
 
 ---
 
@@ -27,6 +27,8 @@ _最後更新：2026-10-08_
 | Today | true／false | true 加 1px 藍框 `Interactive/Action`；未選取時字也是藍色 |
 | Day | 文字 | 月初、月末的空格把文字清空 |
 
+Today=true 可以和 State=Disabled 同時成立（晚上 10 點後今天不可選），整格 40% 透明度、保留藍框藍字。Selected 與 Disabled 不會同時出現。
+
 **與程式不同的地方**：程式的選取只有藍字、沒有底色，今天未選取時是黃字（`Colors.amber`）。程式碼註解說明這段顏色設定是為了繞過選取標記消失的問題，黃字在白底上也看不清楚，所以 DS 改用業界常見的實心圓與藍框。
 
 **WheelPicker**
@@ -43,7 +45,7 @@ _最後更新：2026-10-08_
 | 部位 | 做法 | 備註 |
 |------|------|------|
 | Calendar 外框 | 寬 393，左右 `Spacing/8` | |
-| 月份列 | 高 52，左 `Spacing/16`、右 `Spacing/4`；月份 `Label/M`＋下拉箭頭，上下月箭頭各 48×48 | 上個月箭頭停用時 40% 透明度 |
+| 月份列 | 高 52，左 `Spacing/16`、右 `Spacing/4`；月份 `Label/M`＋下拉箭頭，上下月箭頭各 48×48 | 上、下個月箭頭超出可選範圍時停用，40% 透明度 |
 | 星期列 | `Body/XS`、`Text/Hint`，每格高 42 | |
 | 日期格 | 寬度平分、高 42，圓圈 42×42 `Radius/Full`；數字 `Title/M` | 程式 18 Bold，沿用近似 |
 | WheelPicker 外框 | 左右 `Spacing/32`，標籤與滾輪間距 `Spacing/24`；標籤 `Heading/4` | |
@@ -54,10 +56,10 @@ _最後更新：2026-10-08_
 
 **用於：**
 - 選擇預約日期與時間（打開時預設選今天：State=Selected、Today=true）：BottomSheet（hasHeader、Footer=None），右側 Trailing 換成 Ghost Action sm 的「完成」，Content 依序放 Calendar、WheelPicker，間距 `Spacing/32`。時間的欄位順序為時、分、上午／下午
-- 只需要滾輪的選擇（例如生日）：只放 WheelPicker，關 Has Label
+- 只需要滾輪的選擇（例如生日）：BottomSheet（hasHeader=true、Footer=Inline），內層 [Sticky Footer](sticky-footer.md) 切成 `Buttons=Pair`（取消／確認），Content 放 WheelPicker，關 Has Label
 
 **避免：**
-- 選項是一般文字清單時，用 BottomSheet＋[ListItem](list-item.md)，不用滾輪
+- 選項是一般文字清單時（例如性別、得知渠道），用 BottomSheet＋[ListItem](list-item.md)，不用滾輪
 
 ## 邊界情況
 
@@ -65,6 +67,7 @@ _最後更新：2026-10-08_
 - 預設時間：現在加 2 小時，分鐘進位到 00 或 30（分鐘間隔 30）
 - 停用沿用 DS 慣例（整個元件 40% 透明度），不另設停用色 token
 - 按「完成」後標題列的按鈕文字變成打字動畫「確認中」，屬互動行為，不做 variant
+- 點月份標題時程式會切換成年份選擇；可選範圍只有 30 天，不畫
 
 ## 給工程的待辦
 
@@ -76,10 +79,17 @@ _最後更新：2026-10-08_
 |--------------|---------|------|
 | `CalendarDatePicker` | Calendar | 在 `DateSelectBottomSheet` 內，以 Theme 覆寫日期顏色 |
 | `CupertinoDatePicker`（time 模式） | WheelPicker | 同上 |
-| `CupertinoPicker`／`CupertinoDatePicker`（date 模式） | WheelPicker | `PickerBottomSheet`、`DatePickerBottomSheet`（標題列兩側為「取消」「確認」文字鍵） |
+| `CupertinoDatePicker`（date 模式） | WheelPicker | `DatePickerBottomSheet`（生日）。程式的標題列兩側是「取消」「確認」文字鍵，DS 改用 Footer 雙按鈕 |
+| `CupertinoPicker` | 不對應，改用 BottomSheet＋ListItem | `PickerBottomSheet`（性別、得知渠道） |
 
 `DateSelectBottomSheet` 用在客戶端叫修選時間、客戶端訂單修改期望施工時間、聊天室約施工時間（客戶與師傅共用）。
 
 ## Figma 元件
 
-**位置**：TigerMaster-Design-System → DatePicker 頁
+**位置**：[TigerMaster-Design-System → DatePicker](https://www.figma.com/design/X00A5f1Ohj9BhgbMXwzNuM/TigerMaster-Design-System?node-id=1185-76)
+
+---
+
+## 待釐清事項（TBD）
+
+- 無
