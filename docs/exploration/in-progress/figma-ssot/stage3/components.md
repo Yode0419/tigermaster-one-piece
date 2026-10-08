@@ -58,7 +58,7 @@
 
 ## DS 待辦
 
-階段 3 畫圖時發現、要回 DS 檔案處理的事，由 Opus 在檢查點或 DS 升級時處理。完成的項目移到 [decisions.md](decisions.md)。
+階段 3 畫圖時發現、要回 DS 檔案處理的事，由 Opus 在檢查點或 DS 升級時處理；新元件或規格變動要先跑 `/sanji` 備料，再用 `/write-doc`、`/archive-doc` 寫進 `docs/design-system/`。完成的項目移到 [decisions.md](decisions.md)。
 
 | # | 項目 | 內容 | 狀態 |
 |---|---|---|---|

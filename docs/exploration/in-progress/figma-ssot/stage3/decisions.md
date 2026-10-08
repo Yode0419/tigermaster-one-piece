@@ -126,6 +126,7 @@
 - 2026-10-08：（DS 升級 2）`_CalendarDay` 參考 Material 3、iOS 簡化為 State（Default／Selected／Disabled）× Today；選取改實心藍圓白字，今天未選取為藍框藍字，不照程式的黃字與無底色選取。Why：使用者決定；黃字在白底上看不清楚，程式這段顏色是為了繞過選取標記消失的問題，不是設計意圖；業界做法是選取、停用為狀態，今天為疊加標記。
 - 2026-10-08：（DS 升級 2）Sticky Footer 一定帶 Home Indicator（移除 `Reserve Home Indicator`）；BottomSheet 的 Footer 新增 `None`（沒有按鈕列，Home Indicator 由 BottomSheet 自己放），移除 `hasFooter`。Sticky 與 Inline 只差排列方式，都用 Sticky Footer 內建的 Home Indicator。日期選擇、沒有取消的選項清單用 Footer=None。Why：使用者指出 Inline 另放一條 Home Indicator 再隱藏 Sticky Footer 內那條的結構不合理；Sticky Footer 與 BottomSheet 都一定有 Home Indicator，「沒有按鈕」應該是 BottomSheet 自己的型態。
 - 2026-10-08：（DS 升級 2）BottomSheet 高度規則：只有 Footer=Sticky 是固定高度（Content 填滿並裁切、按鈕列貼底），Inline、None 一律隨內容；程式是固定比例高度但沒有按鈕列時，由 Slot 裡的內容設固定高度撐出 Sheet 高度（師傅 2.7.3 至 2.7.8、4.1.2、4.5.1 已改）。Why：使用者要求簡化，不另加 Height 屬性；Content 設填滿但 Sheet 隨內容的組合在 Figma 面板上看起來矛盾，實例改回隨內容時也不會縮回。
+- 2026-10-08：（DS 升級 2）DS 升級時，新元件與既有元件的規格變動都要先跑 `/sanji` 備料，再用 `/write-doc`、`/archive-doc` 寫進 `docs/design-system/`，不直接手寫規格。Why：使用者指正；DS 升級 2 的 date-picker.md 跳過了 /sanji 直接寫成。
 
 ---
 
