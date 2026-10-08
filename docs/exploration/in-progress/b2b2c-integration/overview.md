@@ -6,7 +6,7 @@
 
 師虎自己的網頁下單（師虎 Web）和企業串接是同一件事：兩者共用同一套收單 API，用訂單編號前綴區分來源（例如智生活 ROZH、師虎 Web ROWE）。第一家合作企業是智生活。
 
-來源：[董事長 10/07 簡報](師虎來了_B2B2C.WEB串接方案_1014pdf.pdf)、[10/07 會議逐字稿](2026-10-07討論企業串接逐字稿.txt)。前身構想見 [客戶端網頁版下單構想](web-ordering-idea.md)。
+來源：[董事長 10/07 簡報](sources/師虎來了_B2B2C.WEB串接方案_1014pdf.pdf)、[10/07 會議逐字稿](sources/2026-10-07-meeting-transcript.txt)。前身構想見 [客戶端網頁版下單構想](sources/web-ordering-idea.md)。
 
 ## 第一版範圍
 
@@ -37,6 +37,7 @@
 | [backlog.md](backlog.md) | 設計端工作清單，之後轉 Jira |
 | [decisions.md](decisions.md) | 本專案的決定，一行一則 |
 | [open-questions.md](open-questions.md) | 帶到會議的待確認問題 |
+| [sources/](sources/) | 來源資料：董事長簡報、會議逐字稿、前身構想，只讀不改 |
 
 某個 backlog 項目開始發想時，再建立子資料夾放草圖與探索文件。
 

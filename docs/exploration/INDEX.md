@@ -43,9 +43,9 @@ _Last updated: 2026-10-07_
 
 - **[B2B2C 串接專案：總覽](in-progress/b2b2c-integration/overview.md)**：合作企業與師虎 Web 共用標準收單 API 建單，走既有媒合，消費者到 App 付款不用重新下單；第一版含收單、網頁訂單頁聊天、後台欄位，限制是不改 App、沒有簡訊；年底上線 _(2026-10-07)_
 - **[設計 Backlog](in-progress/b2b2c-integration/backlog.md)**：設計端 4 項工作（現況流程、企業串接流程、師虎 Web 下單與訂單追蹤、後台欄位），之後轉 Jira _(2026-10-07)_
-- **[決策記錄](in-progress/b2b2c-integration/decisions.md)**：10/07 討論定下的範圍與做法 _(2026-10-07)_
-- **[待確認問題](in-progress/b2b2c-integration/open-questions.md)**：帶到 10/14 會議的問題，含付款時限、不改 App 的認領方式、聊天開放 _(2026-10-07)_
-- **[客戶端網頁版下單構想](in-progress/b2b2c-integration/web-ordering-idea.md)**：本專案前身，把客戶端註冊、下單、訂單查看、聊天室搬到網頁的初步構想 _(2026-09-23)_
+- **[決策記錄](in-progress/b2b2c-integration/decisions.md)**：10/07 會議與 10/08 review 定下的範圍與做法 _(2026-10-08)_
+- **[待確認問題](in-progress/b2b2c-integration/open-questions.md)**：帶到 10/14 會議的問題，含派遣費與付款時限、預建帳號的密碼告知、外部訂單編號、服務時間 _(2026-10-08)_
+- **[客戶端網頁版下單構想](in-progress/b2b2c-integration/sources/web-ordering-idea.md)**：本專案前身，把客戶端註冊、下單、訂單查看、聊天室搬到網頁的初步構想 _(2026-09-23)_
 
 ### pro360-partnership/ — Pro360 合作案生命週期整理
 
