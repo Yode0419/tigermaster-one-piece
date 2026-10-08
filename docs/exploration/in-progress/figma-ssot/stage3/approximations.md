@@ -94,6 +94,8 @@
 | 註冊頁標題（24 Bold）、寄送說明文字（16 Bold） | `Heading/3`（24 Medium）、`Title/S`（16 Medium） | 無 | | 客戶端 1.5.1、1.6.3 |
 | Android 系統權限對話框圓角 28 | `Radius/12` | `Radius/Full` | | 客戶端 1.7.1 |
 | 系統推播橫幅（手機系統畫面） | 自排：白底、`Radius/12`、內距 `Spacing/12`，底圖 `Icon/Subtle` 灰（使用者指定只畫橫幅） | 無 | | 師傅 6.1.4 |
+| `Colors.amber`（#FFC107，日曆「今天但未選取」的字色）、選取日只有藍字無底色 | DS `_CalendarDay` 不照程式：Today=true 為藍框藍字 `Interactive/Action`，Selected 為實心圓 `Interactive/Action`＋白字（使用者決定，黃字看不清楚，參考 Material 3、iOS） | 原始色 `Yellow/450` | | DS `_CalendarDay`（DS 升級 2） |
+| `Colors.black` 38%（日曆停用日期） | `Text/Primary`＋整格 40% 透明度（DS 停用慣例，不新增 token） | `Text/Hint` | | DS `_CalendarDay` State=Disabled（DS 升級 2；取代師傅 5.1.7 原本的 `Text/Hint`） |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 

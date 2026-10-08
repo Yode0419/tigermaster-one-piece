@@ -33,7 +33,7 @@
 
 - 頂部 AppBar（Standard／Slot／Brand）加 `SegmentedControl`，做法同 `pages.md` 的分頁列表頁；浮層畫面的底圖沿用打開前那一格。
 - 每個分類是一張 DS `Card`（Inset／None）放本機元件 `QuotationCategoryRow`（標題＋小字說明＋小計＋箭頭或加號），列高 64（上下 8＋右側點擊區 48，程式用 Material 2 的 `IconButton`，最小 48）。展開的分類在列下方加 1px 分隔線與 Button Secondary Outlined md pill（例如「新增一筆工種工程」）。不要改用 `ListItem`：ListItem 只有單行標題，放不下小字說明。
-- 底部用 DS `Sticky Footer`（Button + Slot），Slot 放本機元件 `QuotationAmountBar`（兩個 DS `Tag` 加提示文字），送出鍵 Button Primary Filled lg。
+- 底部用 DS `Sticky Footer`（Buttons=Single、Has Slot=true），Slot 放本機元件 `QuotationAmountBar`（兩個 DS `Tag` 加提示文字），送出鍵 Button Primary Filled lg。
 - 以內容為主，長頁面高度見三區結構。
 
 ## 表單編輯頁（卡片內多個欄位，確認後返回）
@@ -58,4 +58,4 @@
 第一個案例：師傅 4.3.1（程式 `AccountImageUpload`）。
 
 - 整寬白底帶用 Card Layout=Fill／Standard（見通則的「卡片與資料列」）；照片格用 DS `PhotoUpload` Type=Certificate（16:9，已選 State=uploaded 帶刪除圖示、新增格 State=default），寬度 Fill 後高度手動設為寬的 9/16。畫已選兩張加新增格的狀態；上傳中不另畫。
-- 底部 `Sticky Footer`（Button only）「上傳證照」。程式為了避開底部按鈕留的大空白（110）不照抄，Scroll Content 底部用 `Spacing/16`。以內容為主，長頁面。
+- 底部 `Sticky Footer`（Buttons=Single、Has Slot=false）「上傳證照」。程式為了避開底部按鈕留的大空白（110）不照抄，Scroll Content 底部用 `Spacing/16`。以內容為主，長頁面。

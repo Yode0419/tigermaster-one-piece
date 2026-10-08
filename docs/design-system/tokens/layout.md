@@ -37,4 +37,4 @@ _最後更新：2026-09-24：既有 375 畫面改由 figma-ssot 統一以 393 �
 - 既有 375×812 畫面不逐一遷移。App 正式主檔的畫面由 [figma-ssot](../../exploration/in-progress/figma-ssot/figma-ssot-overview.md) 統一以 393×852 重畫，舊畫面移入 Archive；完成前兩種尺寸暫時並存
 - 元件本身（Button／Card／TextField 等）多為 auto-layout、寬度隨容器彈性調整，不綁定特定 frame 寬度，遷移 Frame 尺寸對元件庫本身影響有限；真正需要跟著畫面尺寸分開定義的是 StatusBar／HomeIndicator 這類直接代表螢幕尺寸的元件
 - StatusBar／HomeIndicator 只保留 393 版本（2026-10-05 淘汰 375 變體），Archive 裡的 375 舊畫面不再有對應的系統列元件
-- [AppBar](../components/app-bar.md)、[Sticky Footer](../components/sticky-footer.md)、[BottomNavBar](../components/bottom-nav-bar.md) 透過 `Reserve Status Bar`／`Reserve Home Indicator` Boolean 直接內嵌 [StatusBar](../components/status-bar.md)／[HomeIndicator](../components/home-indicator.md) instance
+- [AppBar](../components/app-bar.md)、[BottomNavBar](../components/bottom-nav-bar.md) 透過 `Reserve Status Bar`／`Reserve Home Indicator` Boolean 直接內嵌（[Sticky Footer](../components/sticky-footer.md) 固定內嵌 HomeIndicator，不可關閉） [StatusBar](../components/status-bar.md)／[HomeIndicator](../components/home-indicator.md) instance

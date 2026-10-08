@@ -90,7 +90,7 @@
 第一個案例：客戶端 1.3.1。
 
 - 複製啟動畫面 1.1.1 當底圖，`Scroll Content` 內 Logo 下方 `Spacing/24` 加標語（`Heading/2`＋`Text/Primary`）。
-- 底部用 DS `Sticky Footer`（Content=Button only，已含 HomeIndicator），取代原本的 HomeIndicator；清掉它的填色與陰影（`fills = []`、`effects = []`）讓黃底透出，Button Label 改文字。
+- 底部用 DS `Sticky Footer`（Buttons=Single、Has Slot=false，已含 HomeIndicator），取代原本的 HomeIndicator；清掉它的填色與陰影（`fills = []`、`effects = []`）讓黃底透出，Button Label 改文字。
 
 ## 登入表單頁（程式的 `PhoneInputSection`、`PasswordInputSection`、`VerifyInputSection`）
 

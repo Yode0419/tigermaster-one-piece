@@ -37,7 +37,7 @@ _最後更新：2026-10-05：元件寬度由 375 改為 393_
 
 ## 組裝規則
 
-- HomeIndicator 直接作為置底元件（[Sticky Footer](sticky-footer.md)／[BottomNavBar](bottom-nav-bar.md)）的**內嵌 instance**，由各自的 `Reserve Home Indicator` Boolean 控制顯示／隱藏；[ChatInputBar](chat-input-bar.md) 同樣直接內嵌 HomeIndicator，用自己的 `Reserve Home Indicator` Boolean 控制
+- HomeIndicator 直接作為置底元件（[Sticky Footer](sticky-footer.md)／[BottomNavBar](bottom-nav-bar.md)）的**內嵌 instance**（Sticky Footer 固定內嵌、不可關閉；BottomNavBar 由 `Reserve Home Indicator` Boolean 控制顯示／隱藏）；[ChatInputBar](chat-input-bar.md) 同樣直接內嵌 HomeIndicator，用自己的 `Reserve Home Indicator` Boolean 控制
 - Style 判斷邏輯與 StatusBar 一致：置底元件為 Image 背景時，由暗化遮罩保證用 `Light`；Solid／Brand 依實際底色人工挑選
 
 ## 邊界情況

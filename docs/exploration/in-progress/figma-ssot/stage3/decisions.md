@@ -119,6 +119,13 @@
 - 2026-10-08：（批次 03c）客戶端 1.7.1、1.7.2 系統權限提示畫 Android 樣式（灰底、只畫系統對話框），文字為系統預設文案，未實機查證。Why：使用者決定。
 - 2026-10-08：（批次 03c）多卡片長表單（客戶端 1.5.1、1.5.3 至 1.5.5）Frame 拉長到容納整頁；標題兩行、無副標時 AppBar 高 239（Tall 預設 225），卡片頂在 y=207，不為了對齊程式的 193 去改 DS 元件。Why：使用者同意；程式的 AppBar 是固定高度加絕對定位卡片，DS 元件以標題實際高度撐開，差 14 不影響內容。
 - 2026-10-08：（批次 03c）系統權限對話框自排：白底、圓角 `Radius/12`、Phosphor 圖示、標題、DS Secondary Outlined 按鈕垂直堆疊，底圖 `Icon/Subtle`，不畫 App 畫面。Why：使用者同意；系統對話框不在 DS 範圍，圓角 28 沒有 token，用最接近的 12。
+- 2026-10-08：（DS 升級 2）日期時間選擇拆成 `Calendar` 與 `WheelPicker` 兩個 DS 元件，不做成單一 `DateTimePicker`，結構保持簡單（Calendar 只有 Month、Show Week 6，日期格用 State 切換）。Why：使用者同意；客戶端生日欄等其他滾輪選擇也能共用 `WheelPicker`，使用者要求不要做得太複雜。
+- 2026-10-08：（DS 升級 2）停用狀態不新增顏色 token，沿用 DS 慣例整個元件 40% 透明度（日曆停用日期、上個月箭頭）。Why：使用者指出 `Text/` 系列是給靜態文字用的，停用屬於互動元件的狀態；40% 透明度的效果與程式的黑色 38% 幾乎相同。
+- 2026-10-08：（DS 升級 2）底部雙按鈕做成 Sticky Footer 的新變體 `Content=Button pair`，不在 BottomSheet 上加變體；BottomSheet 標題列兩側固定 64 寬、右側用 Instance swap 換文字按鈕。Why：使用者同意；一般頁面底部也可能用到雙按鈕；兩側等寬才能維持標題置中，64 接近程式 1:3:1 分欄。
+- 2026-10-08：（DS 升級 2）Sticky Footer 改成 Buttons（Single／Pair／None）× Has Slot 的變體矩陣，雙按鈕加 Slot 先做起來備用。Why：使用者指定；目前程式沒有雙按鈕加上方內容的底部列，但做成矩陣後單、雙按鈕都能自由搭配 Slot。
+- 2026-10-08：（DS 升級 2）`_CalendarDay` 參考 Material 3、iOS 簡化為 State（Default／Selected／Disabled）× Today；選取改實心藍圓白字，今天未選取為藍框藍字，不照程式的黃字與無底色選取。Why：使用者決定；黃字在白底上看不清楚，程式這段顏色是為了繞過選取標記消失的問題，不是設計意圖；業界做法是選取、停用為狀態，今天為疊加標記。
+- 2026-10-08：（DS 升級 2）Sticky Footer 一定帶 Home Indicator（移除 `Reserve Home Indicator`）；BottomSheet 的 Footer 新增 `None`（沒有按鈕列，Home Indicator 由 BottomSheet 自己放），移除 `hasFooter`。Sticky 與 Inline 只差排列方式，都用 Sticky Footer 內建的 Home Indicator。日期選擇、沒有取消的選項清單用 Footer=None。Why：使用者指出 Inline 另放一條 Home Indicator 再隱藏 Sticky Footer 內那條的結構不合理；Sticky Footer 與 BottomSheet 都一定有 Home Indicator，「沒有按鈕」應該是 BottomSheet 自己的型態。
+- 2026-10-08：（DS 升級 2）BottomSheet 高度規則：只有 Footer=Sticky 是固定高度（Content 填滿並裁切、按鈕列貼底），Inline、None 一律隨內容；程式是固定比例高度但沒有按鈕列時，由 Slot 裡的內容設固定高度撐出 Sheet 高度（師傅 2.7.3 至 2.7.8、4.1.2、4.5.1 已改）。Why：使用者要求簡化，不另加 Height 屬性；Content 設填滿但 Sheet 隨內容的組合在 Figma 面板上看起來矛盾，實例改回隨內容時也不會縮回。
 
 ---
 
@@ -131,6 +138,13 @@
 **Design System 檔案中的空白頁**：只剩 StepIndicator 頁沒有元件，訂單進度相關畫面可能需要用到，輪到這些 Page 之前要先確認是否補建。EmptyState、Carousel 兩頁已在 DS 升級補建（2026-10-06）。
 
 **DS 升級（2026-10-06）**：`Carousel`、`EmptyState`、`PriceRangeIndicator`、`WarrantyPill` 升級進 DS（後兩者放新增的 Service 頁），新增原始色 `PriceGradient/Light`、`PriceGradient/Deep`。師傅 1.1.x、1.2.x、1.3.1 已換成 DS 版本，舊的本機元件已刪除。規格見 `docs/design-system/components/` 的 carousel.md、empty-state.md、price-range-indicator.md、warranty-pill.md。
+
+**DS 升級 2（2026-10-08）**：處理 DS 待辦 10、11、12。
+- 10：Sticky Footer 改為 Buttons（Single／Pair／None）× Has Slot 的變體矩陣（原 Button only、Button + Slot、Flexible Slot 改名沿用，新增 Pair 兩格；Pair 左 Secondary Outlined、右 Primary Filled，等寬，間距 `Spacing/16`），BottomSheet 要雙按鈕時把內層 Sticky Footer 切成 Buttons=Pair。
+- 11：本機元件 `DatePickerPanel` 升級為 `Calendar`（日期格子元件 `_CalendarDay`，State（Default／Selected／Disabled）× Today）與 `WheelPicker`（最多 3 欄，欄是外露的 `_WheelColumn`），放新增的 DatePicker 頁。
+- 12：BottomSheet 標題列兩側改為 64 寬的 Auto Layout（左靠左、右靠右），新增 `Trailing`（Instance swap，可換 Button Ghost Action sm）。
+- BottomSheet 的 Footer 改為 Sticky／Inline／None，移除 `hasFooter`；Sticky Footer 移除 `Reserve Home Indicator`（使用者調整），固定內含 Home Indicator。師傅端 11 個原本關掉 hasFooter 的 BottomSheet 改為 Footer=None。
+- 規格見 `docs/design-system/components/` 的 date-picker.md、bottom-sheet.md、sticky-footer.md。
 
 **BottomSheet 已擴充（2026-10-05）**：原本底部按鈕區只能絕對定位貼底，內容短時會蓋住內容。已新增 Footer variant（Sticky／Inline）與 hasDragHandle，`hasStickyFooter` 改名為 `hasFooter`，規格見 `docs/design-system/components/bottom-sheet.md`。
 

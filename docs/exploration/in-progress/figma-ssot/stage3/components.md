@@ -6,7 +6,7 @@
 
 ## 元件狀況
 
-- 檢查點 1、2 與 DS 升級已把 `PhotoViewer`、`VoiceCallScreen`、`Carousel`、`EmptyState`、`PriceRangeIndicator`、`WarrantyPill` 升級進 DS，並擴充了 BottomSheet、ListItem、Button，淘汰 375 系統列。經過與原文見 [decisions.md](decisions.md) 最後一節。
+- 檢查點 1、2 與兩次 DS 升級已把 `PhotoViewer`、`VoiceCallScreen`、`Carousel`、`EmptyState`、`PriceRangeIndicator`、`WarrantyPill`、`Calendar`、`WheelPicker` 升級進 DS，並擴充了 BottomSheet、Sticky Footer、ListItem、Button，淘汰 375 系統列。經過與原文見 [decisions.md](decisions.md) 最後一節。
 - DS 檔案只剩 StepIndicator 頁沒有元件；訂單進度畫面若需要，記 DS 待辦。
 - `docs/design-system/INDEX.md` 寫 ChatAppBar、ChatBackground「Figma 尚未建立正式 Component」，但 Figma Chatroom 頁已有這兩個元件組，待確認並更新索引。
 
@@ -33,7 +33,7 @@
 | 輪播 Banner（`CarouselBanner`） | 師傅 1.1.1 至 1.1.5、1.3.1；程式的 `CarouselBannerSwiper` 也用在客戶端首頁 | 已升級進 DS 為 `Carousel`（DS 升級，2026-10-06），放 DS 的 Carousel 頁，見 DS 待辦 7。DS 既有的 `Banner` 是通知提示框，不能取代 |
 | 首頁空狀態（`MasterHomeEmptyState`，圖示＋標題＋提示） | 師傅端 1.1.2、1.1.3；程式另有師傅收入頁、客戶端媒合失敗頁兩處空狀態 | 已改做成通用的 DS `EmptyState`（DS 升級，2026-10-06），Size=Compact 涵蓋師傅首頁與收入頁，Page 涵蓋客戶端媒合失敗頁，見 DS 待辦 8 |
 | 收入明細列（`IncomeListItem`，Status=Unpaid／Paid，TEXT 屬性 Item、Amount、Date；程式 `IncomeListItem`） | 師傅 3.1.1、3.2.1 | 本機元件（批次 14），只有收入頁用，暫不升級 |
-| 日期時間選擇面板（`DatePickerPanel`：月份標題與上下月箭頭、星期列、日期格，加「時間」標籤與三欄滾輪（時、分、上下午）；程式 `DateSelectBottomSheet`），放進 DS `BottomSheet` 的 Slot | 師傅 5.1.7；客戶端 6.1 對話的約施工時間（`ChatroomInputBar` 同一個元件）也會用到 | 本機元件（批次 16，使用者決定），之後升級進 DS，見 DS 待辦 11。TEXT 屬性：Month |
+| 日期時間選擇面板（`DatePickerPanel`：月份標題與上下月箭頭、星期列、日期格，加「時間」標籤與三欄滾輪（時、分、上下午）；程式 `DateSelectBottomSheet`），放進 DS `BottomSheet` 的 Slot | 師傅 5.1.7；客戶端 6.1 對話的約施工時間（`ChatroomInputBar` 同一個元件）也會用到 | 已升級進 DS 為 `Calendar`＋`WheelPicker`（DS 升級 2，2026-10-08），放 DS 的 DatePicker 頁，見 decisions.md |
 | 訂單進度通知列（`OrderNotificationItem`，TEXT 屬性 Title、Content、Time；程式 `OrderNotification`）與系統通知列（`SystemNotificationItem`，variant Expanded，TEXT 屬性加 Has Image 布林；程式 `SystemNotification`） | 師傅 6.1.1、6.1.2；客戶端 4.1.1、4.1.2 用同一個程式 widget | 本機元件（批次 17），客戶端批次 06 畫到時再判斷是否升級進 DS |
 | 首次介紹頁分頁圓點（`IntroDots`，variant Page=1 至 5；10px 灰圓點，目前頁為 22×10 深藍藥丸；程式 `introduction_screen` 的 `DotsDecorator`） | 客戶端 1.2.1 至 1.2.5 | 本機元件（批次 03a，使用者決定：不拆成 DS 元件，只做本機元件）。與 DS `Carousel` 的 8px 圓點規格不同，不合併 |
 | 月收入長條圖（五根長條＋金額＋月份，程式 `fl_chart` 的 `BarChart`）：DS 沒有圖表元件，自排 | 師傅 3.1.1（客戶端、管理員端目前沒有圖表） | 自排（批次 14），只出現一處，暫不升級；若之後有第二個圖表再討論 |
@@ -63,7 +63,4 @@
 | # | 項目 | 內容 | 狀態 |
 |---|---|---|---|
 | 9 | `PhotoUpload` 支援寬度填滿 | 程式的照片格是 4 欄、格子填滿一列（隨螢幕寬度縮放），DS 的 `PhotoUpload` 固定 80×80，一列放 4 格會超出（4×80＋3×4＝332，頁面邊距加卡片內距後只有 329）。師傅 2.3.1 暫時用 `resize()` 把每格縮到約 78.75、間距 `Spacing/4`。建議：元件支援水平 Fill 並保持 1:1，圖片與刪除圖示跟著縮放。2026-10-06 使用者同意先用縮小格子，DS 之後處理 | 待處理 |
-| 10 | `BottomSheet` 底部支援兩顆按鈕 | 師傅 2.4.5 單位選擇的底部是「取消」「確認」兩顆並排，但 DS `BottomSheet`（Footer=Sticky）內建的 Sticky Footer 只有一顆 Button。暫時把內層 Sticky Footer 換成 Flexible Slot 變體，Slot 放兩顆並排 Button（Secondary Outlined lg、Primary Filled lg，間距 `Spacing/16`）。建議：BottomSheet 的 Footer 增加「雙按鈕」變體或布林，客戶端若有相同的取消／確認選擇器（例如日期時間選擇）也用得到。另外 BottomSheet 目前內容少於最大高度時是 Hug，這格為了貼近程式的 90% 高度手動設成 767 | 排進 DS 升級 2 |
-| 12 | `BottomSheet` 標題列右側支援文字按鈕 | 標題列右側 `TrailingIcon` 是 48×48、沒有 Auto Layout、會裁切的框，只放得下圖示按鈕。師傅 5.1.7 的「完成」是文字按鈕（寬 64），放進去貼在左上角、右側被裁，位置歪掉。暫時做法：把框內的 IconButton `swapComponent` 成 Button Ghost Action sm，再把按鈕高度設 48（實例內不能改座標，只能改尺寸），文字才與標題垂直置中；寬度仍是 64，比欄位寬 16，靠裁切邊界剛好露出。建議：`TrailingIcon` 改成有 Auto Layout、寬度 Hug 的框（或 Slot），標題置中不受影響；程式 `BottomSheetHeader` 的 `tailing` 本來就是任意 Widget | 排進 DS 升級 2 |
-| 11 | 日期時間選擇元件 | 師傅 5.1.7 的日期選擇面板沒有 DS 元件，自排成本機元件 `DatePickerPanel`（日曆格寬 Fill、列高 42、今天選取為藍框藍字、今天以前停用；時間三欄滾輪，選取條 `Border/Default`，上下午在最右）。建議升級進 DS：日曆與時間滾輪各自成元件，屬性有月份、選取日、選取時間；DS 還缺停用文字色 token（目前用 `Text/Hint`）。程式 `CalendarDatePicker` 範圍是今天起 30 天，停用日期規則要寫進規格 | 排進 DS 升級 2（客戶端批次 04 之前） |
 | 13 | `PasswordField` 加 Show Helper Row | 沒有說明文字或錯誤時，元件仍保留說明列的高度（隱藏文字但佔位），卡片底部多一段空白（客戶端 1.3.4 的卡片比程式高約 18）。`TextField` 已有 Show Helper Row，建議 `PasswordField` 同樣支援 | 待處理 |
