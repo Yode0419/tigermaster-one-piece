@@ -37,6 +37,8 @@
 | [backlog.md](backlog.md) | 設計端工作清單，之後轉 Jira |
 | [decisions.md](decisions.md) | 本專案的決定，一行一則 |
 | [open-questions.md](open-questions.md) | 帶到會議的待確認問題 |
+| [d01-current-flow/](d01-current-flow/) | D01 現況服務流程表（註冊到保固） |
+| [diagrams/](diagrams/) | 流程圖 tldraw 檔，一個 page 一張圖（D01 現況，之後加 D02） |
 | [sources/](sources/) | 來源資料：董事長簡報、會議逐字稿、前身構想，只讀不改 |
 
 某個 backlog 項目開始發想時，再建立子資料夾放草圖與探索文件。

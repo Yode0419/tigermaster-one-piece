@@ -45,6 +45,8 @@ _Last updated: 2026-10-07_
 - **[設計 Backlog](in-progress/b2b2c-integration/backlog.md)**：設計端 4 項工作（現況流程、企業串接流程、師虎 Web 下單與訂單追蹤、後台欄位），之後轉 Jira _(2026-10-07)_
 - **[決策記錄](in-progress/b2b2c-integration/decisions.md)**：10/07 會議與 10/08 review 定下的範圍與做法 _(2026-10-08)_
 - **[待確認問題](in-progress/b2b2c-integration/open-questions.md)**：帶到 10/14 會議的問題，含派遣費與付款時限、預建帳號的密碼告知、外部訂單編號、服務時間 _(2026-10-08)_
+- **[D01 現況服務流程表](in-progress/b2b2c-integration/d01-current-flow/service-flow-table-20261008.md)**：現況訂單流程從註冊到保固，15 步主幹加岔路、分支、帳號限制，標出條款同意、期限與發票的時點 _(2026-10-08)_
+- **[服務流程圖](in-progress/b2b2c-integration/diagrams/b2b2c-service-flow.tldraw)**：tldraw 檔，page「D01 現況服務流程圖」三條泳道（客戶、系統與後台、師傅），D02 之後加在同一檔 _(2026-10-08)_
 - **[客戶端網頁版下單構想](in-progress/b2b2c-integration/sources/web-ordering-idea.md)**：本專案前身，把客戶端註冊、下單、訂單查看、聊天室搬到網頁的初步構想 _(2026-09-23)_
 
 ### pro360-partnership/ — Pro360 合作案生命週期整理
