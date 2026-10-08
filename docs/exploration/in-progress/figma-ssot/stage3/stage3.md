@@ -3,11 +3,11 @@
 ## 概述
 
 - **上層專案**：[Figma SSOT 專案總覽](../figma-ssot-overview.md)
-- **狀態**：進行中。管理員端、師傅端全部完成並驗收；檢查點 3（流程精簡、客戶端切批次）已完成；客戶端批次 03a、03b、03c 已完成並驗收；DS 升級 2 已完成；下一步為 04a
+- **狀態**：進行中。管理員端、師傅端全部完成並驗收；檢查點 3（流程精簡、客戶端切批次）已完成；客戶端批次 03a、03b、03c、04a 已完成並驗收；DS 升級 2 已完成；下一步為 04b
 - **開始**：2026-10-05
 - **結構依據**：[建置交接包 r01](../figma-build-r01.md) 的完整結構表
 - **Figma 檔案**：
-  - [客戶端](https://www.figma.com/design/G3tNva2zGzIi74Aujg3cLB/APP_Client)：41 個 Section、178 個 Frame
+  - [客戶端](https://www.figma.com/design/G3tNva2zGzIi74Aujg3cLB/APP_Client)：41 個 Section、179 個 Frame
   - [師傅端](https://www.figma.com/design/m0yuXFZN2fkivzTOcwiKJ4/APP_師傅)：23 個 Section、88 個 Frame
   - [管理員端](https://www.figma.com/design/M5DWva58qmX9Xx3V2O3c3x/APP_管理員)：6 個 Section、13 個 Frame
 
@@ -51,7 +51,7 @@
 | 03b | 客戶端 | 1 啟動與登入：1.3 開始與登入、1.4 簡訊驗證 | 9 | 已完成（已驗收） | 同上 |
 | 03c | 客戶端 | 1 啟動與登入：1.5 註冊、1.6 忘記與重設密碼、1.7 進入 App | 13 | 已完成（已驗收） | 同上 |
 | ▶ | DS 升級 2 | `DatePickerPanel` 升級進 DS（DS 待辦 11）、BottomSheet 底部雙按鈕（10）、標題列文字按鈕（12）；客戶端 2.5.3、6.1.3 會用到 | — | 已完成 | |
-| 04a | 客戶端 | 2 首頁與叫修：2.1 首頁、2.2 搜尋服務、2.3 依修繕項目叫修、2.4 工項詳情 | 16 | 未開始 | |
+| 04a | 客戶端 | 2 首頁與叫修：2.1 首頁、2.2 搜尋服務、2.3 依修繕項目叫修、2.4 工項詳情 | 17 | 已完成（已驗收） | [04-client-order-create](batches/04-client-order-create.md) |
 | 04b | 客戶端 | 2 首頁與叫修：2.5 填寫叫修資訊 | 14 | 未開始 | 同上 |
 | 04c | 客戶端 | 2 首頁與叫修：2.6 地址選用、2.7 確認與送出、2.8 內嵌網頁 | 8 | 未開始 | 同上 |
 | 05a | 客戶端 | 3 訂單：3.1 訂單列表、3.2 媒合 | 14 | 未開始 | |
@@ -74,7 +74,6 @@
 師傅端畫圖時留下「客戶端畫到再判斷」的事項，依批次列出。畫到該批時先看這裡；需要使用者決定的，畫那一格前先問。
 
 - **全部批次**：本機元件不能跨檔案使用。師傅端檔案的本機元件（`OrderBasicInfo`、`OrderListCardBody`、`QuotationCategoryRow` 等）在客戶端檔案用不到；客戶端遇到相同內容時，停下來回報，由使用者決定在客戶端檔案重建本機元件，或排進 DS 升級。
-- **04a（2.4 工項詳情）**：程式 `WorkingCategoryDetail` 頂部和師傅端的 `OrderCategoryCard` 相似但多一段描述，決定是否合併並升級進 DS。價格區間與保固直接用 DS `PriceRangeIndicator`、`WarrantyPill`。
 - **04b（2.5.3）**、**08（6.1.3）**：日期時間選擇用 DS `Calendar`、`WheelPicker`，BottomSheet 用 Footer=None，做法見 Skill `types/bottom-sheets.md`。
 - **05a（3.1 訂單列表）**：比較師傅端 `OrderListCardBody`（訂單卡）；客戶端保固訂單卡用 DS `WarrantyPill`。
 - **05b（3.4、3.5）**：比較師傅端 `OrderBasicInfo`（訂單資訊卡）、`QuotationCategoryRow`、`StandardFeeItemForm`、`QuotationAmountBar`；兩個檔案都出現的，建議升級進 DS。訂單進度若需要步驟條，DS 的 StepIndicator 頁還是空的，記 DS 待辦。

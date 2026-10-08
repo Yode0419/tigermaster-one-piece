@@ -38,6 +38,11 @@
 | 首次介紹頁分頁圓點（`IntroDots`，variant Page=1 至 5；10px 灰圓點，目前頁為 22×10 深藍藥丸；程式 `introduction_screen` 的 `DotsDecorator`） | 客戶端 1.2.1 至 1.2.5 | 本機元件（批次 03a，使用者決定：不拆成 DS 元件，只做本機元件）。與 DS `Carousel` 的 8px 圓點規格不同，不合併 |
 | 月收入長條圖（五根長條＋金額＋月份，程式 `fl_chart` 的 `BarChart`）：DS 沒有圖表元件，自排 | 師傅 3.1.1（客戶端、管理員端目前沒有圖表） | 自排（批次 14），只出現一處，暫不升級；若之後有第二個圖表再討論 |
 | 六格驗證碼輸入（`PinInput`，variant Content=Empty／Filled，6 個 40×50 方框；程式 `pin_code_fields` 的 `PinCodeTextField`） | 客戶端 1.4.1 至 1.4.3 | 本機元件（批次 03b）。DS 沒有驗證碼輸入元件；之後若有其他驗證碼畫面再討論是否升級 |
+| 中類列表列（`CategoryRow`，TEXT 屬性 Name、Count，右側圖片；程式 `L2Card`） | 客戶端 2.3.1（同畫面 5 次） | 本機元件（批次 04a），只有分類瀏覽用，暫不升級 |
+| 工項卡內容（`L3CardContent`，圖片＋左下保固徽章＋名稱＋說明；TEXT 屬性 Name、Description，徽章在巢狀 `CornerBadge` 上改 Label；程式 `L3Card`），外框用 DS `Card` | 客戶端 2.2.3、2.3.2、2.3.3 | 本機元件（批次 04a） |
+| 工項詳情頂部卡內容（`CategoryInfo`，TEXT 屬性 Name、Description，右下絕對定位 `CornerBadge`；程式 `WorkingCategoryDetail` 的 `StackSliverAppBar`），放在 AppBar（Tall／Overlay／Image）延伸區的 DS `Card` | 客戶端 2.4.1、2.4.2 | 本機元件（批次 04a，使用者選 A 並要求做成本機元件）。與師傅端 `OrderCategoryCard`（黃色直條）版型不同，客戶端沒有直條，名稱用 `Heading/3`、多一段說明，不合併；是否升級進 DS 檢查點再決定 |
+| 首頁訂單摘要列（`HomeOrderSummary`，variant State=Collapsed／Expanded，TEXT Count、BOOLEAN Has Important）、訂單列（`HomeOrderRow`，TEXT 屬性 Name、Status，BOOLEAN Has Divider；程式 `_buildOrder`）、下單流程步驟內容（`ProcedureStepContent`，TEXT Description，插圖佔位） | 客戶端 2.1.2、2.1.3 | 本機元件（批次 04a）。另有依使用者要求拆出的靜態內容區塊：`HomeSearch`、`HomeServiceEntry`、`HomeArticles`、`HomeGuarantees`、`ProcedureList`、`SearchRow`、`HotKeywords`、`PriceWarranty`、`FeeDescription`，用來讓多個畫面共用同一份內容 |
+| 可橫向捲動的頁籤列（大類頁籤，選中為藍字加 3px 底線；程式 `SelectL1L2DisplaySection`） | 客戶端 2.3.1 | 自排（批次 04a），DS 沒有可捲動的頁籤元件，見 DS 待辦 14 |
 
 ## pattern 候選
 
@@ -64,3 +69,5 @@
 |---|---|---|---|
 | 9 | `PhotoUpload` 支援寬度填滿 | 程式的照片格是 4 欄、格子填滿一列（隨螢幕寬度縮放），DS 的 `PhotoUpload` 固定 80×80，一列放 4 格會超出（4×80＋3×4＝332，頁面邊距加卡片內距後只有 329）。師傅 2.3.1 暫時用 `resize()` 把每格縮到約 78.75、間距 `Spacing/4`。建議：元件支援水平 Fill 並保持 1:1，圖片與刪除圖示跟著縮放。2026-10-06 使用者同意先用縮小格子，DS 之後處理 | 待處理 |
 | 13 | `PasswordField` 加 Show Helper Row | 沒有說明文字或錯誤時，元件仍保留說明列的高度（隱藏文字但佔位），卡片底部多一段空白（客戶端 1.3.4 的卡片比程式高約 18）。`TextField` 已有 Show Helper Row，建議 `PasswordField` 同樣支援 | 待處理 |
+| 14 | 可橫向捲動的頁籤列（Tabs） | 客戶端 2.3.1 的大類頁籤項目數不固定、可橫向捲動，選中項文字與 3px 底線為藍色。DS 只有 2 至 3 格的 `SegmentedControl`，沒有頁籤列。本批自排（`L1 Tabs`）。建議新增 `Tabs` 元件：項目為 TEXT、Selected 狀態、可橫向溢出 | 待處理 |
+| 15 | `Card` 支援滿版背景圖 | 客戶端 2.1.1「我們如何提供您可靠的服務？」卡片有滿版背景圖 `provider_reliable_service_bg.png`。DS `Card` 的 Slot 只覆蓋內距以內，不是整張卡，所以本批改做成本機元件 `HomeBrandCard`（不套 Card）。若之後有第二處需要背景圖卡片，建議 Card 加 `Background Image` 外露圖層 | 暫不處理（本機元件已解決，使用者決定，批次 04a） |

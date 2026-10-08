@@ -130,3 +130,47 @@
 - 屬於「系統畫面邊界」：底色 `Icon/Subtle`，只畫系統元素，StatusBar 與 HomeIndicator 保留，不畫 App 畫面。複製空白頁當底。
 - 對話框自排：白底 `Background/Surface`、內距 `Spacing/24`、圓角 `Radius/12`（Android 實際約 28，見 approximations.md）、寬 312、置中，內容垂直置中對齊、間距 `Spacing/16`：Phosphor 圖示（24）、標題 `Title/S` 置中、按鈕（DS Button Secondary Outlined lg，寬度 Fill）垂直堆疊。
 - 通知：Bell，按鈕「允許」「不允許」。麥克風：Microphone，按鈕「使用應用程式時允許」「僅限這一次」「不允許」。系統文案沒有實機查證，批次紀錄要註明。
+
+## 客戶首頁（程式的 `ClientHomePage`、`ClientMainPage`）
+
+第一個案例：客戶端 2.1.1（2.1.2、2.1.4、2.1.5 與 2.1.3 的底圖複製它）。
+
+- 頂部：黃色底（`Brand/TigerYellow`）的 DS StatusBar（Dark Content）加 30 高色條；底部 `BottomNavBar`（Role=Client）浮層，Scroll Content 底部 padding 134。
+- 首頁是長頁：Frame 拉長到完整內容（`頂部＋Scroll Content＋2`）；其中 2.1.2（展開）、2.1.5（新版提示）、浮層底圖維持 852。內容區垂直間距 `Spacing/12`，卡片左右邊距照 DS 16。
+- 進行中訂單卡：程式是 Stack 疊在最上層，畫成浮層 DS `Card`（Padding=None，x=16、y=59、寬 361），內部摘要列用本機元件組（State=Collapsed／Expanded，TEXT 數量、BOOLEAN 紅點），展開時下方放訂單列元件。
+- 區塊（搜尋列、入口、品牌卡、文章、保障）各做成本機元件，所有首頁相關畫面放 instance。品牌卡有滿版背景圖時，做成不套 `Card` 的本機元件（圓角與陰影沿用 Card），內含滿版命名佔位圖層。
+- 自家彩色圖示（`colored_*`、`light_bulb.png` 等）換 Phosphor Duotone；插圖、Banner、文章圖沒有素材時留命名佔位。
+
+## 搜尋頁（程式的 `SearchWorkingCategories`）
+
+第一個案例：客戶端 2.2.1 至 2.2.4。
+
+- 頂部：AppBar（Standard／Slot／Brand），隱藏標題，延伸區放搜尋列（DS `SearchBar` Boxed＋Button Ghost Neutral sm「取消」，左右 padding 縮小避免文字超出）；搜尋列做成本機元件，輸入中的畫面把巢狀 SearchBar 換成 Content=Filled。
+- 內容：搜尋紀錄用 `ListItem`（Leading 圖示、Has Divider）加 Button Ghost Action sm「清除搜尋紀錄」；熱門關鍵字用 `Chip`（Tone=info）自動換行（水平 `Spacing/8`、列 `Spacing/12`）；輸入提示用 `ListItem`；結果列表的工項卡用整寬 `Card`（見「圖片頁首加整寬卡片列表」）。
+- 查詢中的轉圈不畫；系統鍵盤不畫。
+
+## 大類頁籤加中類列表（程式的 `SelectL1L2DisplaySection`）
+
+第一個案例：客戶端 2.3.1。
+
+- 頂部：AppBar（Tall／None／Brand），標題寫在 `Title Text`。
+- 大類頁籤列：DS 沒有可橫向捲動的頁籤，自排：白底，每項藍字（選中）加 3px 底線，其餘黑字，列容器裁切。
+- 中類列：白底容器包住全部列（列間不透出灰底），列用本機元件（名稱、數量、右側圖片）。頁籤區與項目區是兩個區塊，中間 `Spacing/4` 露出頁面底色。
+
+## 圖片頁首加整寬卡片列表（程式的 `SelectL3DisplaySection`）
+
+第一個案例：客戶端 2.3.2（2.3.3、2.2.3 沿用）。
+
+- 頂部：AppBar（Tall／None／Image），`Title Text` 放中類名稱（保留元件字級），上方加一行大類小字（`Body/XS`＋`Text/Inverse`）。
+- 內容：`Scroll Content` 左右 padding 0，標題列左右 `Spacing/16`；工項卡用 DS `Card` Layout=Fill（填滿螢幕寬），內容用本機元件（圖片、左下 `CornerBadge`、名稱、說明）。
+- 無結果：同位置標題改成程式文字，不畫卡片。
+
+## 工項詳情（程式的 `ConfirmWorkingCategory`、`WorkingCategoryDetail`）
+
+第一個案例：客戶端 2.4.1（2.4.2 沿用，2.4.3、2.4.4、2.4.5 以它為底圖）。
+
+- 頂部：AppBar（Tall／Overlay／Image），返回鍵換 IconButton Filled（白圓）加 Phosphor X；延伸區放 DS `Card`，內容用本機元件（名稱 `Heading/3`、說明、右下 `CornerBadge`）。卡片比 Overlay 預留的高，Scroll Content 上方 padding 要手動加到卡片底緣下方再加 `Spacing/16`（不是 token）。
+- 內容：價格區間（DS `PriceRangeIndicator`）與保固（DS `WarrantyPill`）各放進 `Card`，兩區加標題做成一個本機元件。
+- 底部：DS `Sticky Footer`（Buttons=Single）；唯讀版（2.4.2）拿掉按鈕，改 HomeIndicator。
+- 長內容 BottomSheet（派遣費說明）：BottomSheet（hasHeader、Footer=Sticky），Sticky Footer 切 Has Slot 放提示文字；右上 X；第一屏 767，旁邊加「（完整內容）」一格。
+

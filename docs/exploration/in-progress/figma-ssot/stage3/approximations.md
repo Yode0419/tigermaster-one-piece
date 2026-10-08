@@ -96,6 +96,13 @@
 | 系統推播橫幅（手機系統畫面） | 自排：白底、`Radius/12`、內距 `Spacing/12`，底圖 `Icon/Subtle` 灰（使用者指定只畫橫幅） | 無 | | 師傅 6.1.4 |
 | `Colors.amber`（#FFC107，日曆「今天但未選取」的字色）、選取日只有藍字無底色 | DS `_CalendarDay` 不照程式：Today=true 為藍框藍字 `Interactive/Action`，Selected 為實心圓 `Interactive/Action`＋白字（使用者決定，黃字看不清楚，參考 Material 3、iOS） | 原始色 `Yellow/450` | | DS `_CalendarDay`（DS 升級 2） |
 | `Colors.black` 38%（日曆停用日期） | `Text/Primary`＋整格 40% 透明度（DS 停用慣例，不新增 token） | `Text/Hint` | | DS `_CalendarDay` State=Disabled（DS 升級 2；取代師傅 5.1.7 原本的 `Text/Hint`） |
+| `#F8F8F9`（客戶首頁頁面背景） | `Background/Page`（#F5F5F5） | `Background/Surface`（#FFFFFF） | | 客戶 2.1.1 |
+| `BorderRadius.circular(10)`（首頁文章圖圓角） | `Radius/8` | `Radius/12` | | 客戶 2.1.1 |
+| `BorderRadius.circular(5)`（文章徽章右側圓角） | `Radius/4` | `Radius/8` | | 客戶 2.1.1 |
+| 18 Bold（區段標題、中類名稱、保障標題） | `Title/M`（18 Medium） | 無 | | 客戶 2.1.1、2.3.1、2.4.1 |
+| 24 Bold（品牌卡標題、工項名稱） | `Heading/3`（24 Medium） | 無 | | 客戶 2.1.1、2.4.1 |
+| `Color.fromRGBO(31,40,111)`（大類頁籤選中色，深藍） | `Brand/TigerBlue`（原始色） | 無 | | 客戶 2.3.1 |
+| 大類頁籤列的底部陰影（`BoxShadow` 0.15、模糊 2） | 不畫陰影 | 無 | | 客戶 2.3.1 |
 
 使用者指定的對應即使有數值完全相同的樣式，也照指定的套用。
 

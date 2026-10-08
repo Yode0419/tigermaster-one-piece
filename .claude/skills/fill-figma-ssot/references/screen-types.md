@@ -18,6 +18,11 @@
 | 空白頁（程式回傳空 `Container()`） | `types/pages.md` | 客戶端 1.3.6 |
 | 登入表單頁：多卡片長表單（註冊） | `types/pages.md` | 客戶端 1.5.1 |
 | 系統權限對話框（Android 樣式） | `types/pages.md` | 客戶端 1.7.1 |
+| 客戶首頁（黃色細頂部、輪播、搜尋列、區塊、浮層訂單卡） | `types/pages.md` | 客戶端 2.1.1 |
+| 搜尋頁（AppBar 內搜尋框、搜尋紀錄、熱門關鍵字、提示） | `types/pages.md` | 客戶端 2.2.1 |
+| 大類頁籤加中類列表 | `types/pages.md` | 客戶端 2.3.1 |
+| 圖片頁首加整寬卡片列表 | `types/pages.md` | 客戶端 2.3.2 |
+| 工項詳情（圖片頁首疊卡、價格與保固、底部按鈕） | `types/pages.md` | 客戶端 2.4.1 |
 | 訂單詳情頁（AppBar 疊資訊卡、訂單階段內容） | `types/order-and-forms.md` | 師傅 2.2.1 |
 | 唯讀資料頁（價格與保固、客戶資訊） | `types/order-and-forms.md` | 師傅 2.2.2 |
 | 報價總覽頁（分類卡＋底部金額列） | `types/order-and-forms.md` | 師傅 2.4.2 |
@@ -50,6 +55,7 @@
 
 - 圖層順序（First on top，由上到下）：Dialog、`Scrim`、BottomNavBar（如有）、`AppBar`、`Content`、其他固定底部。
 - **以內容為主的長頁面才拉長，其他一律 852**。以內容為主指頁面本身就是在讀或填一大段資訊且會捲動（案件詳情、訂單詳情、表單、說明頁、可能超過一屏的帳號頁）；首頁、列表、空狀態、聊天室、浮層畫面都不算。拉長的做法：Frame 寬 393、高度固定（`primaryAxisSizingMode=FIXED`）；`Content` 高度維持 **Fill**（與一般畫面相同），Frame 高度手動設成剛好容納整頁內容：`Frame 高度 = 頂部高度 + Scroll Content 高度 + 底部高度（含 HomeIndicator 的 34）+ 2`（Frame 外框的 1px 描邊算進排版，上下各 1，不加 2 的話 `Content` 會比 `Scroll Content` 少 2，捲動範圍被截），至少 852，之後驗證 `Content` 高度 ≥ `Scroll Content` 高度。這樣固定底部永遠貼在 Frame 最底，整頁內容完整可見。第一個案例：師傅 1.2.1（1140）。
+- **「（完整內容）」Frame 與長頁讓 Section 變高**：每批畫完，依最高的 Frame 重排 Section 高度，並由上而下重排各 Section 的垂直位置（間距 200），免得 Frame 被下一個 Section 遮住。
 - **聊天室**維持只畫進入時看到的最後一屏，`Content` 高度 Fill 並裁切（見 `types/chat.md`）。
 - **浮層畫面**（Dialog、BottomSheet）不是主要展示頁，不跟著底圖拉長：Frame 固定高度 852、`Content` 高度 Fill 並裁切，底圖內容被裁掉沒關係；`Scrim` 蓋滿整個 Frame；Dialog 置中（`y = (852 - Dialog 高度) / 2`）。底圖是拉長的內容頁（例如 1.2.1）時，也只顯示第一屏。
 - 重建或複製 Frame 後若背景綁定 `Background/Page` 卻顯示成黑色，是存下來的顏色值是黑的（師傅 2.4.3）：把一個正常 Frame 的 `fills` 複製過來，或用 `setBoundVariableForPaint` 重新綁一次。
@@ -58,6 +64,14 @@
 - **靠左／靠右的項目**：Auto Layout 不能單獨指定某個子項目的對齊，每個項目包一層寬度 Fill 的水平 Auto Layout（無底色），再設主軸對齊。
 
 ---
+
+## AppBar 與頁首（通則）
+
+第一個案例：客戶端 2.3.1、2.3.2、2.4.1。
+
+- 頁首在黃色（或圖片）底下方左側有大標題時，AppBar 用 Type=Tall，標題寫進 `Title Text`（保留元件字級）：純色用 Tall／None／Brand，圖片用 Tall／None／Image，疊卡用 Tall／Overlay／Image。不要用 Standard＋Slot 自己放標題文字。
+- 搜尋框、頁籤等放進 Standard／Slot 的延伸區。
+- 標題上方還有小字時，把小字放進 `Title` Slot，排在 `Title Text` 之前。
 
 ## 卡片與資料列（通則）
 
@@ -68,6 +82,9 @@
 - 「標籤＋數值」的資料列：列用水平 Auto Layout、主軸 SPACE_BETWEEN，**數值靠右端對齊**；很長的值（地址）設 Fill、靠右、單行截斷。列與列之間用 1px `Border/Default` 分隔線，間距 `Spacing/8`。
 - 卡片上的狀態文字照程式的狀態色（紅、綠），綁最接近的 `Status/*` token。
 - **整寬白底帶**（程式用沒有左右 margin、沒有圓角的 `Container`，例如訂單頁的金額與工期區塊、查看報價資訊區塊、報價分類列、報價明細卡）：Card 用 Layout=Fill 並填滿螢幕寬；有邊距的 `Card` 才用 Inset（使用者修正，師傅 2.4.4、2.4.8、2.4.9、2.5.1、2.5.3）。同一頁混用時，`Scroll Content` 左右 padding 設 0，Inset 卡片或按鈕各包一層左右 `Spacing/16` 的容器。判斷方法：看程式有沒有 `Card(margin: …)` 或外層 `Padding`，沒有就是整寬。
+- **白底列表**（每列白底、列間沒有灰縫）：用一個白底容器包住所有列，列內自己帶上下 padding，分隔線放在列的最底端；頁面底色只出現在容器之外（客戶端 2.3.1、2.1.2）。
+- **卡片右下或左下的徽章**（例如保固標籤）：做成本機元件，徽章絕對定位（約束右下或左下），元件底部留 `Spacing/32` 避免蓋到文字。Slot 可以放絕對定位圖層，但會裁切超出 Slot 的部分，徽章不能超出 Slot 邊界。
+- **同一個 Page 內多個畫面重複出現的區塊**（使用者要求，客戶端 2.1 至 2.4）：做成本機元件，各畫面放 instance，不要每格複製貼上。純靜態內容的區塊（程式固定文字）不加 TEXT 屬性，結構檢查的 `localNoTextProps` 會列出，屬預期。本機元件總表依使用的 Frame 編號排列（同編號依畫面由上到下）。清理舊元件時不要用名稱前綴的規則批次刪除，會誤刪其他元件（客戶端 `HomeOrderRow` 曾被誤刪）。
 - **同一組內容在三個以上畫面重複**（例如訂單資訊卡）：做成本機元件，不要每格複製貼上（使用者提議，`OrderBasicInfo`）。
 - **同一個 Page 內重複的共用 Dialog**（照片上傳失敗、刪除照片確認）：只畫最早出現的位置，其他畫面在結構表去向引用；不同 Page 因為是獨立畫面頁，各自有一份（使用者決定，師傅 2.3.2、2.3.3，2.6.3 引用）。
 

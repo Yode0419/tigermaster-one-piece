@@ -129,6 +129,9 @@
 - 2026-10-08：（DS 升級 2）DS 升級時，新元件與既有元件的規格變動都要先跑 `/sanji` 備料，再用 `/write-doc`、`/archive-doc` 寫進 `docs/design-system/`，不直接手寫規格。Why：使用者指正；DS 升級 2 的 date-picker.md 跳過了 /sanji 直接寫成。
 - 2026-10-08：（DS 升級 2 補跑 /sanji）程式標題列左「取消」右「確認」的滾輪面板（例如生日）改用 BottomSheet Footer=Inline、Sticky Footer Buttons=Pair，標題列不新增 Leading 替換屬性。Why：使用者選擇；與批次 03c 得知渠道面板做法一致，不必為單一用法擴充元件。
 - 2026-10-08：（DS 升級 2 補跑 /sanji）`_CalendarDay` 的 Today=true 與 State=Disabled 可同時成立（晚上 10 點後今天不可選），照停用慣例整格 40% 透明度、保留藍框藍字；Selected 與 Disabled 為無效組合。Why：使用者選擇；沿用既有停用規則，不另立樣式。
+- 2026-10-08：（客戶端 04a）頁首有大標題（標題在黃色或圖片底下方左側）的畫面，AppBar 一律用 Type=Tall，標題寫進 `Title Text`，不用 Standard＋Slot 自己放文字。Why：使用者修正（2.3.1、2.3.2、2.4.1），保留元件自己的字級與位置。
+- 2026-10-08：（客戶端 04a）同一個 Page 內多個畫面重複出現的區塊，一律做成本機元件，各畫面放 instance，不重複貼上。Why：使用者要求；改一處就能同步，也方便驗收。
+- 2026-10-08：（客戶端 04a）首頁新版提示卡獨立編為 2.1.5，排在 2.1 最後免重新編號；結構表與 Frame 數同步更新（客戶端 179、全部 280）。Why：使用者要求這個條件內容也要有一格。
 
 ---
 
